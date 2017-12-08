@@ -1,0 +1,9 @@
+<xml>
+	<Module name="GWApp" />
+	<Plugins>
+		<plugin id="1" name="gwBase" />
+		<plugin id="2" name="gwEarth" />
+	</Plugins>
+	<GeoModelPath>D:/GeologicalModel/model3-2(120m)/ive</GeoModelPath>
+	<ScaleBarImage>2.jpg</ScaleBarImage>
+</xml>
