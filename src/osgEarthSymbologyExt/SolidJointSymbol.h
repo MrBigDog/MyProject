@@ -13,6 +13,8 @@ namespace oeSymbologyExt
 	{
 	public:
 		META_Object(osgEarthSymbologyExt, SolidJointSymbol);
+		SolidJointSymbol(const SolidJointSymbol& rhs, const osg::CopyOp& copyop = osg::CopyOp::SHALLOW_COPY);
+		SolidJointSymbol(const osgEarth::Config& conf = osgEarth::Config());
 
 		virtual ~SolidJointSymbol() { }
 
