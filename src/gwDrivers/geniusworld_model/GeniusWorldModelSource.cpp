@@ -195,15 +195,13 @@ namespace
 	REGISTER_OSGPLUGIN(SQUARE_PL_EXTENSION, SquarePseudoLoader)
 
 
-	osg::PagedLOD* createPagedLod(const osg::Vec3d& pos, double radius, const std::string& filepath)
+		osg::PagedLOD* createPagedLod(const osg::Vec3d& pos, double radius, const std::string& filepath)
 	{
 		osg::ref_ptr<osg::PagedLOD> pg = new osg::PagedLOD;
 		pg->setFileName(0, filepath);
 		pg->setCenter(pos);
 		pg->setRadius(radius);
 		pg->setRange(0, 0, s_range);
-		//pg->setDatabaseOptions()
-		//pg->setset
 
 		return pg.release();
 	}

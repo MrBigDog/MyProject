@@ -2,55 +2,40 @@
 #define GWEARTH_VIDEOSYSTEM_H 1
 
 #include <compiler.h>
-#include <gwEarth/Export.h>
-#include <gwBase/SubsystemMgr.h>
-#include <gwBase/Exception.h>
-#include <gwBase/LogStream.h>
-
-#include <osgEarth/MapNode>
-#include <osgEarth/VideoLayer>
-
-namespace gwApp { class Application; };
 
 namespace gwEarth
 {
-	typedef std::vector<osgEarth::VideoLayer> VideoLayerVec;
-
+	template<typename VIDEO_CLASS>
 	class VideoSystem :public gwBase::Subsystem
 	{
 	public:
-		class Callback :public osg::Referenced
+		VideoSystem(const std::string& name, gwApp::IApplication* app)
+			:_name, _app(app), _map(0L), _mapNode(0L)
 		{
-		public:
-			virtual void onLayerAdded(osgEarth::VideoLayer* layer) {}
-			virtual void onLayerRemoved(osgEarth::VideoLayer* layer) {}
-		};
+			if (_app)
+			{
+				_map = _app->getMap();
+				_mapNode = _app->getMapNode();
+			}
+		}
 
-	public:
-		VideoSystem(const std::string& name, gwApp::Application* app);
-		~VideoSystem();
+		void addLayer(VIDEO_CLASS* layer)
+		{
 
-		void init();
-		void shutdown();
-		void update(double delta_t);
+		}
 
-		osgEarth::VideoLayer* getLayer(const std::string& layername) const;
-		void getLayers(VideoLayerVec& out_layers) const;
 
-		void addLayer(osgEarth::VideoLayer* layer);
-		bool addLayer(const osgEarth::Config& conf);
 
-		bool removeLayer(osgEarth::VideoLayer* layer);
-		bool removeLayer(const std::string& layername);
-		void removeAllLayers();
 
-		void addCallback(Callback* cb);
-		void removeCallback(Callback* cb);
+
+
 
 	private:
+		std::string _name;
+		osgEarth::UID _uid;
 		osg::ref_ptr<osgEarth::Map> _map;
 		osg::ref_ptr<osgEarth::MapNode> _mapNode;
-		osg::ref_ptr<gwApp::Application> _app;
+		osg::ref_ptr<gwApp::IApplication> _app;
 	};
 }
 

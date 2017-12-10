@@ -5,14 +5,15 @@
 #include <compiler.h>
 #include <osgEarthSymbology/Symbol>
 
+using namespace osgEarth::Symbology;
+
 namespace oeSymbologyExt
 {
-	using namespace osgEarth::Symbology;
-
 	class OSGEARTHSYMBOLOGYEXT_EXPORT SolidJointSymbol : public Symbol
 	{
 	public:
-		//META_Object(gwEarth, SolidJointSymbol);
+		META_Object(osgEarthSymbologyExt, SolidJointSymbol);
+
 		virtual ~SolidJointSymbol() { }
 
 		//public:

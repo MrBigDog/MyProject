@@ -126,6 +126,7 @@ namespace gwApp
 	};
 
 	typedef osg::ref_ptr<Application> ApplicationPtr;
+	//static Application* makeNewApplication() { return new Application; }
 }
 
 #endif // GWAPP_APPLICATION_H
