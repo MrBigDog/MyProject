@@ -6,7 +6,6 @@
 #include <gwEarth/ModelSystem.h>
 #include <gwDrivers/modelConfig/WjhConfigOptions.h>
 #include <gwDrivers/model/WjhModelOptions.h>
-//#include <gwDBConnection/MongoDB.h>
 
 #include <osgEarthUtil/Sky>
 #include <osgEarthUtil/EarthManipulator>
@@ -279,7 +278,8 @@ std::string baiduUrl = "http://shangetu[012356789].map.bdimg.com/it/u=x={x-Math.
 std::string tianditu = "http://t3.tianditu.cn/img_c/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=img&tileMatrixSet=c&TileMatrix={z}&TileRow={y}&TileCol={x}&style=default&format=tiles";
 
 //#include <gwDrivers/geniusworld_model/GeniusWorldModelOptions.h>
-
+std::string qiaofengurl = "http://127.0.0.1:9080/type=1&x={x}&y={y}&z={z}";
+std::string qiaofengurl1 = "http://127.0.0.1:9080/type=30&x={x}&y={y}&z={z}";
 int main()
 {
 	gwBase::SubsystemMgr::GroupType earthType = gwBase::SubsystemMgr::EARTH;
@@ -287,7 +287,10 @@ int main()
 	gwApp::ApplicationPtr app = gwApp::Application::instance();
 
 	TerrainSystemPtr terrainSys = app->getOrCreateSubsystem<TerrainSystem>("TerrainSystem", earthType);
-	terrainSys->addImageLayer(TerrainUtil::createTMSImageLayer("ReadyMapImg", readyMapImageUrl));
+	terrainSys->addImageLayer(TerrainUtil::createXYZImageLayer("qiaofeng", qiaofengurl, "global-geodetic", false));
+	terrainSys->addImageLayer(TerrainUtil::createXYZImageLayer("qiaofeng1", qiaofengurl1, "global-geodetic", false));
+
+	//terrainSys->addImageLayer(TerrainUtil::createTMSImageLayer("ReadyMapImg", readyMapImageUrl));
 	//terrainSys->addImageLayer(TerrainUtil::createGDALImageLayer("WeiHai", "E:/DATA/weihai_images/weihai_wgs84.tif"));
 	//terrainSys->addImageLayer(TerrainUtil::createArcgisImageLayer("ArcGisImage", arcgisImage));
 	//terrainSys->addImageLayer(TerrainUtil::createXYZImageLayer("OSM", osmImageUrl, "spherical-mercator"));
@@ -296,7 +299,7 @@ int main()
 	//terrainSys->addImageLayer(TerrainUtil::createXYZImageLayer("GoaDe", gaodeUrl, "global-mercator", false));
 	//terrainSys->addImageLayer(TerrainUtil::createXYZImageLayer("baidu", baiduUrl, "global-mercator", false));
 	//terrainSys->addImageLayer(TerrainUtil::createXYZImageLayer("TianDiTu", tianditu, "spherical-mercator", false));
-	terrainSys->addElevationLayer(TerrainUtil::createTMSElevationLayer("ReadyMapEle", elevationUrl));
+	//terrainSys->addElevationLayer(TerrainUtil::createTMSElevationLayer("ReadyMapEle", elevationUrl));
 	//terrainSys->addElevationLayer(TerrainUtil::createFeatureElevationLayer("dd", ""));
 
 	ModelSystemPtr modelSys = app->getOrCreateSubsystem<ModelSystem>("TiledModelSystem", earthType);
