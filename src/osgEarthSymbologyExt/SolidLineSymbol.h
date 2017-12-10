@@ -13,7 +13,7 @@ namespace oeSymbologyExt
 	class OSGEARTHSYMBOLOGYEXT_EXPORT SolidLineSymbol : public Symbol
 	{
 	public:
-		META_Object(SolidLineSymbol, SolidLineSymbol);
+		META_Object(osgEarthSymbologyExt, SolidLineSymbol);
 
 		SolidLineSymbol(const SolidLineSymbol& rhs, const osg::CopyOp& copyop = osg::CopyOp::SHALLOW_COPY);
 		SolidLineSymbol(const osgEarth::Config& conf = osgEarth::Config());
