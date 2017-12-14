@@ -1,17 +1,18 @@
-#include <osgGA/StateSetManipulator>
-#include <osgViewer/Viewer>
-#include <osgViewer/CompositeViewer>
-#include <osgViewer/ViewerEventHandlers>
-
-#include <osgUtil/Simplifier>
-
 #include <osg/io_utils>
+#include <osg/ShapeDrawable>
+
 #include <osgDB/ReadFile>
 #include <osgDB/WriteFile>
 #include <osgDB/FileUtils>
 #include <osgDB/FileNameUtils>
 
-#include <osg/ShapeDrawable>
+#include <osgGA/StateSetManipulator>
+
+#include <osgUtil/Simplifier>
+
+#include <osgViewer/Viewer>
+#include <osgViewer/CompositeViewer>
+#include <osgViewer/ViewerEventHandlers>
 
 
 int main()
