@@ -264,7 +264,13 @@ private:
 			gwUtil::makeDirectoryForFile(filename);
 		}
 
-		osgDB::writeNodeFile(*node, filename);
+		osg::ref_ptr<osgDB::Options> opts = 0L;
+		if (ext == "3ds" || ext == ".3ds")
+		{
+			opts = new osgDB::Options("extended3dsFilePaths");
+		}
+
+		osgDB::writeNodeFile(*node, filename, opts);
 		if (ext == ".obj" || ext == "obj")
 		{
 			TextureAndImageVisitor tv(path);
@@ -288,7 +294,13 @@ private:
 		{
 			gwUtil::makeDirectoryForFile(newName);
 		}
-		osgDB::writeNodeFile(*node, newName);
+		osg::ref_ptr<osgDB::Options> opts = 0L;
+		if (ext == "3ds" || ext == ".3ds")
+		{
+			opts = new osgDB::Options("extended3dsFilePaths");
+		}
+
+		osgDB::writeNodeFile(*node, newName, opts);
 		if (ext == ".obj" || ext == "obj")
 		{
 			TextureAndImageVisitor tv(newPath);
@@ -309,28 +321,28 @@ private:
 //"E:/DATA/qxmx/qxmx/Tile_132102312010120213/Tile_132102312010120213/,E:/DATA/qxmx/qxmx/Tile_132102312010120213/test,3ds,18,1"
 int main(int argc, char ** argv)
 {
-	//osg::ArgumentParser arguments(&argc, argv);
+	osg::ArgumentParser arguments(&argc, argv);
 
-	//std::string parasStr;// = argv[3];
-	//arguments.read("-f", parasStr);
-	//gwUtil::StringVector paras;
-	//gwUtil::StringTokenizer stk(parasStr, paras, ",");
+	std::string parasStr;// = argv[3];
+	arguments.read("-f", parasStr);
+	gwUtil::StringVector paras;
+	gwUtil::StringTokenizer stk(parasStr, paras, ",");
 
-	//if (paras.size() < 3)
-	//{
-	//	MessageBox(NULL, "参数的数量不对, 请检查输入的参数", "错误", 1);
-	//	return 0;
-	//}
+	if (paras.size() < 3)
+	{
+		MessageBox(NULL, "参数的数量不对, 请检查输入的参数", "错误", 1);
+		return 0;
+	}
 
-	//std::string inPath = paras[0];
-	//std::string outPath = paras[1];
-	//std::string outExt = osgDB::convertToLowerCase(gwUtil::replaceIn(paras[2], " ", ""));
-	//int lodLevel = gwUtil::as(gwUtil::replaceIn(paras[3], " ", ""), -1);
-	//int maxDirNum = gwUtil::as(gwUtil::replaceIn(paras[4], " ", ""), 1);
+	std::string inPath = paras[0];
+	std::string outPath = paras[1];
+	std::string outExt = osgDB::convertToLowerCase(gwUtil::replaceIn(paras[2], " ", ""));
+	int lodLevel = gwUtil::as(gwUtil::replaceIn(paras[3], " ", ""), -1);
+	int maxDirNum = gwUtil::as(gwUtil::replaceIn(paras[4], " ", ""), 1);
 
-	//DirectoryVisitor dv(inPath, outPath, outExt, lodLevel, maxDirNum);
+	DirectoryVisitor dv(inPath, outPath, outExt, lodLevel, maxDirNum);
 
-	DirectoryVisitor dv("E:/DATA/qxmx/qxmx/osgb", "E:/DATA/qxmx/qxmx/test111", "3ds", 22, 1);
+	//DirectoryVisitor dv("E:/DATA/qxmx/qxmx/osgb", "E:/DATA/qxmx/qxmx/test111", "3ds", 22, 1);
 
 	return 0;
 }
