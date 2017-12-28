@@ -13,16 +13,20 @@ namespace gwEarth
 		//ico->setMinimumTimeAvailableForGLCompileAndDeletePerFrame(0.005);
 		//ico->setThreadSafeRefUnref(true);
 		osg::DisplaySettings::instance().get()->setVertexBufferHint(osg::DisplaySettings::VERTEX_BUFFER_OBJECT);
+		osg::ref_ptr<osg::DisplaySettings> ds = osg::DisplaySettings::instance().get();
+		ds->setVertexBufferHint(osg::DisplaySettings::VERTEX_BUFFER_OBJECT);
 
 		_viewer = new osgViewer::Viewer;
+		_viewer->setDisplaySettings(osg::DisplaySettings::instance().get());
+		//_viewer->getDisplaySettings()->setVertexBufferHint(osg::DisplaySettings::VERTEX_BUFFER_OBJECT);
 		_viewer->getCamera()->setNearFarRatio(0.00002);
 		_viewer->addEventHandler(new osgGA::StateSetManipulator(_viewer->getCamera()->getOrCreateStateSet()));
 		_viewer->addEventHandler(new osgViewer::StatsHandler());
 		_viewer->addEventHandler(new osgViewer::WindowSizeHandler());
 		_viewer->addEventHandler(new osgViewer::ThreadingHandler());
 		_viewer->addEventHandler(new osgViewer::LODScaleHandler());
-		_viewer->addEventHandler(new osgViewer::RecordCameraPathHandler());
-		_viewer->addEventHandler(new osgViewer::ScreenCaptureHandler());
+		//_viewer->addEventHandler(new osgViewer::RecordCameraPathHandler());
+		//_viewer->addEventHandler(new osgViewer::ScreenCaptureHandler());
 		_viewer->getDatabasePager()->setUnrefImageDataAfterApplyPolicy(true, true);
 		//_viewer->getDatabasePager()->setDeleteRemovedSubgraphsInDatabaseThread(false);
 		_viewer->getDatabasePager()->setTargetMaximumNumberOfPageLOD(100);

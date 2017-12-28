@@ -17,7 +17,7 @@ namespace gwEarth
 		{
 			_root = new osg::Group;
 			_root->setName("ROOT");
-			osgDB::SharedStateManager* ssm = osgDB::Registry::instance()->getSharedStateManager();
+			osgDB::SharedStateManager* ssm = osgDB::Registry::instance()->getOrCreateSharedStateManager();
 			if (ssm)
 			{
 				ssm->share(_root.get());
