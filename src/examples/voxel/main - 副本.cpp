@@ -108,7 +108,15 @@ static osg::Node* makeNodeFromMesh(vx_mesh* mesh, const osg::Vec4& color)
 	assert(mesh->nindices % 36 == 0);
 	assert(mesh->nnormals == 6);
 
-	//int normalsize = mesh->normalindices;
+	//osg::ref_ptr<osg::Vec3Array> va = new osg::Vec3Array; va->reserve(mesh->nvertices);
+	//for (unsigned int i = 0; i < mesh->nvertices; ++i)
+	//{
+	//	osg::Vec3 v(mesh->vertices[i].x, mesh->vertices[i].y, mesh->vertices[i].z);
+	//	va->push_back(v);
+	//}
+
+	//osg::ref_ptr<osg::Vec4Array> ca = new osg::Vec4Array;
+	//ca->push_back(color);
 
 	osg::ref_ptr<osg::Geode> geode = new osg::Geode;
 	for (int i = 0; i < mesh->nindices; ++i)
@@ -117,16 +125,18 @@ static osg::Node* makeNodeFromMesh(vx_mesh* mesh, const osg::Vec4& color)
 		{
 			osg::ref_ptr<osg::Vec3Array> subVa = new osg::Vec3Array; subVa->reserve(36);
 			osg::ref_ptr<osg::Vec3Array> subNa = new osg::Vec3Array; subNa->reserve(36);
+			//osg::ref_ptr<osg::DrawElementsUShort> de = new osg::DrawElementsUShort(GL_TRIANGLES);
+			//de->reserve(36);
 			for (int subi = 35; subi >= 0; --subi)
 			{
 				int ii = i - subi;
 				int vi = mesh->indices[ii];
+				//de->push_back(vi);
 
 				osg::Vec3 v(mesh->vertices[vi].x, mesh->vertices[vi].y, mesh->vertices[vi].z);
 				subVa->push_back(v);
 
-				//int ni = (35 - subi) / 6;
-				int ni = mesh->normalindices[ii];
+				int ni = (35 - subi) / 6;
 				osg::Vec3 normal(mesh->normals[ni].x, mesh->normals[ni].y, mesh->normals[ni].z);
 				subNa->push_back(normal);
 			}
@@ -149,10 +159,10 @@ static osg::Node* makeNodeFromMesh(vx_mesh* mesh, const osg::Vec4& color)
 
 int main(int argc, char** argv)
 {
-	float res = 1.50;
+	float res = 1.0;
 	float precision = 0.01;
 
-	std::string filePath = "E:/DATA/GeoData/ALLmodel/5dxq_171110_dxf/dxq_dxf_171110/5dxq_171110_osgb/4.osgb";
+	std::string filePath = "E:/DATA/GeoData/ALLmodel/5dxq_171110_dxf/dxq_dxf_171110/5dxq_171110_osgb/1.osgb";
 
 	osg::ref_ptr<osg::Node> onode = osgDB::readNodeFile(filePath);
 	if (!onode) return EXIT_FAILURE;
@@ -180,10 +190,10 @@ int main(int argc, char** argv)
 	std::string fpath = osgDB::getFilePath(filePath);
 	std::string sname = osgDB::getSimpleFileName(filePath);
 	std::string ssname = osgDB::getNameLessExtension(sname);
-	std::string newname = ssname + "_voxel.osg";
+	std::string newname = ssname + "_voxel.osgb";
 	std::string newfilepath = osgDB::concatPaths(fpath, newname);
 
-	osgDB::writeNodeFile(*root, newfilepath/*, new osgDB::Options("WriteImageHint=WriteOut Compressor=zlib")*/);
+	osgDB::writeNodeFile(*root, newfilepath, new osgDB::Options("WriteImageHint=WriteOut Compressor=zlib"));
 
 	osgViewer::Viewer viewer;
 	viewer.addEventHandler(new osgViewer::StatsHandler());
