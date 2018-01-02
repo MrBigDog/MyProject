@@ -12,9 +12,9 @@ namespace gwEarth
 		//ico->setMaximumNumOfObjectsToCompilePerFrame(1);
 		//ico->setMinimumTimeAvailableForGLCompileAndDeletePerFrame(0.005);
 		//ico->setThreadSafeRefUnref(true);
-		osg::DisplaySettings::instance().get()->setVertexBufferHint(osg::DisplaySettings::VERTEX_BUFFER_OBJECT);
-		osg::ref_ptr<osg::DisplaySettings> ds = osg::DisplaySettings::instance().get();
-		ds->setVertexBufferHint(osg::DisplaySettings::VERTEX_BUFFER_OBJECT);
+		//osg::DisplaySettings::instance().get()->setVertexBufferHint(osg::DisplaySettings::VERTEX_BUFFER_OBJECT);
+		//osg::ref_ptr<osg::DisplaySettings> ds = osg::DisplaySettings::instance().get();
+		//ds->setVertexBufferHint(osg::DisplaySettings::VERTEX_BUFFER_OBJECT);
 
 		_viewer = new osgViewer::Viewer;
 		_viewer->setDisplaySettings(osg::DisplaySettings::instance().get());

@@ -323,6 +323,8 @@ int main(int argc, char ** argv)
 {
 	osg::ArgumentParser arguments(&argc, argv);
 
+	//system("pause");
+
 	std::string parasStr;// = argv[3];
 	arguments.read("-f", parasStr);
 	gwUtil::StringVector paras;
@@ -336,13 +338,14 @@ int main(int argc, char ** argv)
 
 	std::string inPath = paras[0];
 	std::string outPath = paras[1];
-	std::string outExt = osgDB::convertToLowerCase(gwUtil::replaceIn(paras[2], " ", ""));
-	int lodLevel = gwUtil::as(gwUtil::replaceIn(paras[3], " ", ""), -1);
-	int maxDirNum = gwUtil::as(gwUtil::replaceIn(paras[4], " ", ""), 1);
+	std::string outExt = osgDB::convertToLowerCase(paras[2]);
+	int lodLevel = 0;// gwUtil::as(gwUtil::replaceIn(paras[3], " ", ""), -1);
+	int maxDirNum = 1;// gwUtil::as(gwUtil::replaceIn(paras[4], " ", ""), 1);
 
 	DirectoryVisitor dv(inPath, outPath, outExt, lodLevel, maxDirNum);
 
-	//DirectoryVisitor dv("E:/DATA/qxmx/qxmx/osgb", "E:/DATA/qxmx/qxmx/test111", "3ds", 22, 1);
+	//DirectoryVisitor dv("E:/DATA/qxmx/qxmx/osgb", "E:/DATA/qxmx/qxmx/test111/ttt/tt", "3ds", 22, 1);
+	//system("pause");
 
 	return 0;
 }

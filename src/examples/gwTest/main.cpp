@@ -272,7 +272,7 @@ std::string weihaiImageUrl = "E:/DATA/weihai_images/weihai/tms.xml";
 std::string arcgisImage = "http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/";
 std::string osmImageUrl = "http://[abc].tile.openstreetmap.org/{z}/{x}/{y}.png";
 std::string googleImageUrl = "http://mt[0123].google.cn/vt/lyrs=m&amp;hl=zh-CN&amp;gl=cn&amp;x={x}&amp;y={y}&amp;z={z}";
-std::string modelUrl = "D:/Data/OSGB8CM/Production_3/Data"; // "D:/BYL/ive/ZZZ8CM/Production_3/Data";
+std::string modelUrl = /*"D:/Data/OSGB8CM/Production_3/Data"; //*/ "D:/BYL/ive/ZZZ8CM/Production_3/Data";
 std::string gaodeUrl = "http://webrd0[1234].is.autonavi.com/appmaptile?lang=zh_cn&amp;size=1&amp;scale=1&amp;style=7&amp;x={x}&amp;y={y}&amp;z={z}";
 std::string baiduUrl = "http://shangetu[012356789].map.bdimg.com/it/u=x={x-Math.floor(Math.pow(2,z)/2.0)};y={y-Math.floor(Math.pow(2,z)/2.0)};z={z+1};v=009;type=sate&amp;fm=46&amp;app=webearth2&amp;v=009&amp;udt=20171031";
 std::string tianditu = "http://t3.tianditu.cn/img_c/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=img&tileMatrixSet=c&TileMatrix={z}&TileRow={y}&TileCol={x}&style=default&format=tiles";
