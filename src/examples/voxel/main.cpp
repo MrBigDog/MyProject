@@ -149,10 +149,10 @@ static osg::Node* makeNodeFromMesh(vx_mesh* mesh, const osg::Vec4& color)
 
 int main(int argc, char** argv)
 {
-	float res = 0.150;
+	float res = 1.50;
 	float precision = 0.01;
 
-	std::string filePath = "C:/COMMON_LIBRARY/3rdparty/share/osgWorks/data/lz.osg";// "E:/DATA/GeoData/ALLmodel/5dxq_171110_dxf/dxq_dxf_171110/5dxq_171110_osgb/4.osgb";
+	std::string filePath = "E:/DATA/GeoData/ALLmodel/5dxq_171110_dxf/dxq_dxf_171110/5dxq_171110_osgb/4.osgb";
 
 	osg::ref_ptr<osg::Node> onode = osgDB::readNodeFile(filePath);
 	if (!onode) return EXIT_FAILURE;
@@ -167,6 +167,15 @@ int main(int argc, char** argv)
 	{
 		vx_mesh* mesh = meshlist[i]._mesh;
 		vx_mesh_t* result = vx_voxelize(mesh, res, res, res, precision);
+		vx_point_cloud_t* pc = vx_voxelize_pc(mesh, res, res, res, precision);
+
+		unsigned int* gridres = vx_voxelize_snap_3dgrid(mesh, 50, 50, 5);
+		//std::ofstream out("voxel_out.txt"/*, std::ios::in | std::ios::out*/);
+		//for (unsigned int j = 0; j < 1200; ++j)
+		//{
+		//	out << gridres[j] << std::endl;
+		//}
+		//out.close();
 
 		osg::ref_ptr<osg::Node> subnode = makeNodeFromMesh(result, meshlist[i]._color);
 		if (!subnode.valid()) continue;
