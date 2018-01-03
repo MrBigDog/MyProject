@@ -149,10 +149,10 @@ static osg::Node* makeNodeFromMesh(vx_mesh* mesh, const osg::Vec4& color)
 
 int main(int argc, char** argv)
 {
-	float res = 1.50;
+	float res = 0.150;
 	float precision = 0.01;
 
-	std::string filePath = "E:/DATA/GeoData/ALLmodel/5dxq_171110_dxf/dxq_dxf_171110/5dxq_171110_osgb/4.osgb";
+	std::string filePath = "C:/COMMON_LIBRARY/3rdparty/share/osgWorks/data/lz.osg";// "E:/DATA/GeoData/ALLmodel/5dxq_171110_dxf/dxq_dxf_171110/5dxq_171110_osgb/4.osgb";
 
 	osg::ref_ptr<osg::Node> onode = osgDB::readNodeFile(filePath);
 	if (!onode) return EXIT_FAILURE;

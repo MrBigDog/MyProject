@@ -50,6 +50,13 @@ public:
 
 int main()
 {
+	osg::ref_ptr<osg::Node> node1 = osgDB::readNodeFile("E:/DATA/GeoData/ALLmodel/5dxq_171110_dxf/dxq_dxf_171110/1.dxf");
+	osgDB::writeNodeFile(*node1, "E:/DATA/GeoData/ALLmodel/5dxq_171110_dxf/dxq_dxf_171110/1.stl");
+
+
+
+
+
 	std::string fname = "E:/DATA/GeoData/ALLmodel/5dxq_171110_dxf/dxq_dxf_171110/5dxq_171110_osgb/1.osgb";
 	osg::ref_ptr<osg::Node> node = osgDB::readNodeFile(fname);
 	std::string newname = osgDB::getNameLessExtension(fname) + ".obj";
