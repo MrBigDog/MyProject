@@ -29,7 +29,7 @@ struct ReaderWriterT : public osgDB::ReaderWriter
 
 	ReadResult readImage(const std::string& filename, const osgDB::Options* options) const
 	{
-		if (!acceptsExtension(osgDB::getFileExtension(filename)))
+		if (!acceptsExtension(osgDB::getLowerCaseFileExtension(filename)))
 			return ReadResult::FILE_NOT_HANDLED;
 
 

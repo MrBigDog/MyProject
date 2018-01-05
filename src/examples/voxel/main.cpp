@@ -169,13 +169,13 @@ int main(int argc, char** argv)
 		vx_mesh_t* result = vx_voxelize(mesh, res, res, res, precision);
 		vx_point_cloud_t* pc = vx_voxelize_pc(mesh, res, res, res, precision);
 
-		unsigned int* gridres = vx_voxelize_snap_3dgrid(mesh, 50, 50, 5);
-		//std::ofstream out("voxel_out.txt"/*, std::ios::in | std::ios::out*/);
-		//for (unsigned int j = 0; j < 1200; ++j)
-		//{
-		//	out << gridres[j] << std::endl;
-		//}
-		//out.close();
+		unsigned int* gridres = vx_voxelize_snap_3dgrid(result, 50, 50, 5);
+		std::ofstream out("voxel_out.txt"/*, std::ios::in | std::ios::out*/);
+		for (unsigned int j = 0; j < 1200; ++j)
+		{
+			out << gridres[j] << std::endl;
+		}
+		out.close();
 
 		osg::ref_ptr<osg::Node> subnode = makeNodeFromMesh(result, meshlist[i]._color);
 		if (!subnode.valid()) continue;
