@@ -323,8 +323,6 @@ int main(int argc, char ** argv)
 {
 	osg::ArgumentParser arguments(&argc, argv);
 
-	//system("pause");
-
 	std::string parasStr;// = argv[3];
 	arguments.read("-f", parasStr);
 	gwUtil::StringVector paras;
@@ -339,8 +337,8 @@ int main(int argc, char ** argv)
 	std::string inPath = paras[0];
 	std::string outPath = paras[1];
 	std::string outExt = osgDB::convertToLowerCase(paras[2]);
-	int lodLevel = 0;// gwUtil::as(gwUtil::replaceIn(paras[3], " ", ""), -1);
-	int maxDirNum = 1;// gwUtil::as(gwUtil::replaceIn(paras[4], " ", ""), 1);
+	int lodLevel = 0;
+	int maxDirNum = 1;
 
 	DirectoryVisitor dv(inPath, outPath, outExt, lodLevel, maxDirNum);
 
