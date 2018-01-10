@@ -21,6 +21,7 @@ SET(LIB_PUBLIC_HEADERS
 		#Math.h
 		NodeUtils.h
 		ShapeUtils.h
+		osgdebug.hpp
 		#SolidLineSymbol.h
 		#BuildSolidGeometryFilter.h
 		#SolidGeometryCompiler.h
