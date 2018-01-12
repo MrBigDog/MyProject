@@ -22,6 +22,7 @@ SET(LIB_PUBLIC_HEADERS
 		NodeUtils.h
 		ShapeUtils.h
 		osgdebug.hpp
+		clipper.hpp
 		#SolidLineSymbol.h
 		#BuildSolidGeometryFilter.h
 		#SolidGeometryCompiler.h
@@ -30,6 +31,7 @@ SET(LIB_PUBLIC_HEADERS
 SET(TARGET_SRC
 		NodeUtils.cpp
 		ShapeUtils.cpp
+		clipper.cpp
 		#SolidLineSymbol.cpp
 		#BuildSolidGeometryFilter.cpp
 		#SolidGeometryCompiler.cpp
