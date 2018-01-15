@@ -26,6 +26,38 @@ namespace gwUtil
 
 	inline GWUTIL_EXPORT bool glDumpWindow(const char *filename, int win_width, int win_height);
 
+	class BFSNodeVisitor : public osg::NodeVisitor
+	{
+	public:
+		BFSNodeVisitor(osg::NodeVisitor::TraversalMode tm = osg::NodeVisitor::TRAVERSE_ALL_CHILDREN)
+			: osg::NodeVisitor(tm)
+		{}
+
+		virtual void reset() { _pendingNodes.clear(); }
+		virtual void apply(osg::Node& node) { traverseBFS(node); }
+
+	protected:
+		virtual ~BFSNodeVisitor() {}
+
+		virtual void traverseBFS(osg::Node& node)
+		{
+			osg::Group* group = node.asGroup();
+			if (!group) return;
+
+			for (unsigned int i = 0; i < group->getNumChildren(); ++i)
+			{
+				_pendingNodes.push_back(group->getChild(i));
+			}
+			while (_pendingNodes.size() > 0)
+			{
+				osg::Node* node = _pendingNodes.front();
+				_pendingNodes.pop_front();
+				node->accept(*this);
+			}
+		}
+		std::deque<osg::Node*> _pendingNodes;
+	};
+
 	/////跟osg::ClipNode类似，但是用的方式不同.
 	//class ClipGroup : public osg::Group
 	//{
