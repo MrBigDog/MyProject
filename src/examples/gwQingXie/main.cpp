@@ -100,7 +100,8 @@ public:
 		if (geode.getStateSet())
 			apply(*geode.getStateSet());
 
-		for (unsigned i = 0; i < geode.getNumDrawables(); ++i) {
+		for (unsigned i = 0; i < geode.getNumDrawables(); ++i)
+		{
 			apply(*geode.getDrawable(i));
 			//if (geode.getDrawable(i) && geode.getDrawable(i)->getStateSet())
 			//    apply(*geode.getDrawable(i)->getStateSet());
