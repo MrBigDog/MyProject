@@ -626,6 +626,34 @@ namespace gwBase
 		result(2, 2) = OSG_INNER_PRODUCT_3X3(lhs, rhs, 2, 2);
 	}
 
+
+	struct LineSegmentd
+	{
+		LineSegmentd(const osg::Vec3d& s, const osg::Vec3d& e)
+			:_s(s), _e(e)
+		{}
+		osg::Vec3d _s, _e;
+	};
+	typedef std::vector<LineSegmentd> LineSegmentVec;
+
+
+	double distPointToSegment(const osg::Vec3d& P, LineSegmentd S)
+	{
+		osg::Vec3d v = S._e - S._s;
+		osg::Vec3d w = P - S._s;
+
+		double c1 = w*v;
+		if (c1 <= 0) return (P - S._s).length();
+
+		double c2 = v* v;
+		if (c2 <= c1) return (P - S._e).length();
+
+		double b = c1 / c2;
+		osg::Vec3d Pb = S._s + v*b;
+
+		return (P - Pb).length();
+	}
+
 	//inline bool isPointInLineSegment(const osg::Vec3d& s, const osg::Vec3d& e, const osg::Vec3d& p)
 	//{
 	//	if (isVec3Equal(s, p) || isVec3Equal(e, p))
