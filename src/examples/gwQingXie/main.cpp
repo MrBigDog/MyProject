@@ -78,12 +78,15 @@ public:
 
 	virtual void apply(osg::Image& image)
 	{
-		std::string filename = osgDB::concatPaths(_outpath, image.getFileName());
+		std::string imageName = image.getFileName();
+		std::string sname = osgDB::getSimpleFileName(imageName);
+		image.setFileName(sname);
+		std::string filename = osgDB::concatPaths(_outpath, sname);
 		if (!osgDB::fileExists(filename))
 		{
 			gwUtil::makeDirectoryForFile(filename);
+			osgDB::writeImageFile(image, filename);
 		}
-		osgDB::writeImageFile(image, filename);
 	}
 
 public:
@@ -298,7 +301,7 @@ private:
 		osg::ref_ptr<osgDB::Options> opts = 0L;
 		if (ext == "3ds" || ext == ".3ds")
 		{
-			opts = new osgDB::Options("extended3dsFilePaths");
+			//opts = new osgDB::Options("extended3dsFilePaths");
 		}
 
 		osgDB::writeNodeFile(*node, newName, opts);
@@ -343,7 +346,7 @@ int main(int argc, char ** argv)
 
 	DirectoryVisitor dv(inPath, outPath, outExt, lodLevel, maxDirNum);
 
-	//DirectoryVisitor dv("E:/DATA/qxmx/qxmx/osgb", "E:/DATA/qxmx/qxmx/test111/ttt/tt", "3ds", 22, 1);
+	//DirectoryVisitor dv("E:/DATA/qstt", "E:/DATA/qxmx/qxmx/test111/ttt/tt", "3ds", 22, 1);
 	//system("pause");
 
 	return 0;
