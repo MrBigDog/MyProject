@@ -303,13 +303,12 @@ private:
 		{
 			//opts = new osgDB::Options("extended3dsFilePaths");
 		}
-
-		osgDB::writeNodeFile(*node, newName, opts);
 		if (ext == ".obj" || ext == "obj")
 		{
 			TextureAndImageVisitor tv(newPath);
 			node->accept(tv);
 		}
+		osgDB::writeNodeFile(*node, newName, opts);
 	}
 
 private:

@@ -6,13 +6,13 @@
 #include <osgDB/FileUtils>
 #include <osgDB/FileNameUtils>
 
-#include <osgGA/StateSetManipulator>
 
 #include <osgUtil/Simplifier>
 
 #include <osgViewer/Viewer>
 #include <osgViewer/CompositeViewer>
 #include <osgViewer/ViewerEventHandlers>
+#include <osgGA/StateSetManipulator>
 
 //
 //class NodeToUsxmesh :public osg::NodeVisitor
