@@ -6,197 +6,104 @@
 #include <osg/NodeVisitor>
 #include <osg/ShapeDrawable>
 #include <osg/MatrixTransform>
-
+#include <osg/ComputeBoundsVisitor>
+#include <osgGA/StateSetManipulator>
 #include <osgDB/ReadFile>
 #include <osgDB/WriteFile>
 #include <osgDB/FileUtils>
 #include <osgDB/FileNameUtils>
-
 #include <osgViewer/Viewer>
-
-class NodeAndDrawableVisitor : public osg::NodeVisitor
-{
-public:
-	NodeAndDrawableVisitor(osg::NodeVisitor::TraversalMode tm) : osg::NodeVisitor(tm)
-	{
-		_geodeNum = 0;
-		_geometryNum = 0;
-	}
-	NodeAndDrawableVisitor(osg::NodeVisitor::VisitorType type, osg::NodeVisitor::TraversalMode tm)
-		: osg::NodeVisitor(type, tm)
-	{
-		_geodeNum = 0;
-		_geometryNum = 0;
-	}
-
-	virtual ~NodeAndDrawableVisitor() {}
-
-	using osg::NodeVisitor::apply;
-	virtual void apply(osg::Node& node)
-	{
-		traverse(node);
-	}
-
-	virtual void apply(osg::Drawable& drawable)
-	{
-		_geometryNum++;
-		std::string path = "D:/gwV1/0P3dModules/model/split";
-		std::stringstream ss;
-		ss << _geometryNum;
-		std::string name = ss.str() + ".ive";
-		std::string fullname = osgDB::concatPaths(path, name);
-
-		osg::ref_ptr<osg::Geode> geode = new osg::Geode;
-		geode->addDrawable(&drawable);
-		//osgDB::writeNodeFile(*geode, fullname);
-
-		osg::Geometry* geom = drawable.asGeometry();
-		if (geom)
-		{
-			int ps = geom->getNumPrimitiveSets();
-			std::cout << ps << std::endl;
-		}
-
-	}
-
-	void traverse(osg::Node& node)
-	{
-		TraversalMode tm = getTraversalMode();
-		if (tm == TRAVERSE_NONE)
-		{
-			return;
-		}
-		else if (tm == TRAVERSE_PARENTS)
-		{
-			osg::NodeVisitor::traverse(node);
-			return;
-		}
-		osg::Geode* geode = dynamic_cast<osg::Geode*>(&node);
-		if (geode)
-		{
-			_geodeNum++;
-			std::string name = geode->getName() + ".ive";
-			std::string path = "D:/gwV1/0P3dModules/model/split";
-			std::string fullname = osgDB::concatPaths(path, name);
-			//osgDB::writeNodeFile(*geode, fullname);
-
-			unsigned numDrawables = geode->getNumDrawables();
-			for (unsigned i = 0; i < numDrawables; ++i)
-			{
-				apply(*geode->getDrawable(i));
-			}
-		}
-		else
-		{
-			osg::NodeVisitor::traverse(node);
-		}
-	}
-
-	int getGeodeNum() { return _geodeNum; }
-	int getGeometryNum() { return _geometryNum; }
-
-
-private:
-	int _geodeNum;
-	int _geometryNum;
-};
-
-
+#include <osgViewer/ViewerEventHandlers>
 //
-//class TextureAndImageVisitor : public osg::NodeVisitor
+//class NodeAndDrawableVisitor : public osg::NodeVisitor
 //{
 //public:
-//	TextureAndImageVisitor(const std::string& rootPath)
-//		: osg::NodeVisitor()
-//		, _outpath(rootPath)
+//	NodeAndDrawableVisitor(osg::NodeVisitor::TraversalMode tm) : osg::NodeVisitor(tm)
 //	{
-//		setNodeMaskOverride(~0L);
-//		setTraversalMode(TRAVERSE_ALL_CHILDREN);
+//		_geodeNum = 0;
+//		_geometryNum = 0;
 //	}
-//	virtual ~TextureAndImageVisitor() { }
-//
-//public:
-//	virtual void apply(osg::Texture& texture)
+//	NodeAndDrawableVisitor(osg::NodeVisitor::VisitorType type, osg::NodeVisitor::TraversalMode tm)
+//		: osg::NodeVisitor(type, tm)
 //	{
-//		for (unsigned k = 0; k < texture.getNumImages(); ++k)
-//		{
-//			osg::Image* image = texture.getImage(k);
-//			if (image)
-//			{
-//				apply(*image);
-//			}
-//		}
+//		_geodeNum = 0;
+//		_geometryNum = 0;
 //	}
 //
-//	virtual void apply(osg::Image& image)
-//	{
-//		std::string imageName = image.getFileName();
-//		std::string sname = osgDB::getSimpleFileName(imageName);
-//		image.setFileName(sname);
-//		std::string filename = osgDB::concatPaths(_outpath, sname);
-//		if (!osgDB::fileExists(filename))
-//		{
-//			//gwUtil::makeDirectoryForFile(filename);
-//			osgDB::writeImageFile(image, filename);
-//		}
-//	}
+//	virtual ~NodeAndDrawableVisitor() {}
 //
-//public:
+//	using osg::NodeVisitor::apply;
 //	virtual void apply(osg::Node& node)
 //	{
-//		if (node.getStateSet())
-//			apply(*node.getStateSet());
-//
 //		traverse(node);
-//	}
-//
-//	virtual void apply(osg::Geode& geode)
-//	{
-//		if (geode.getStateSet())
-//			apply(*geode.getStateSet());
-//
-//		for (unsigned i = 0; i < geode.getNumDrawables(); ++i)
-//		{
-//			apply(*geode.getDrawable(i));
-//			//if (geode.getDrawable(i) && geode.getDrawable(i)->getStateSet())
-//			//    apply(*geode.getDrawable(i)->getStateSet());
-//		}
-//		//traverse(geode);
 //	}
 //
 //	virtual void apply(osg::Drawable& drawable)
 //	{
-//		if (drawable.getStateSet())
-//			apply(*drawable.getStateSet());
-//		//traverse(drawable);
+//		_geometryNum++;
+//		std::string path = "D:/gwV1/0P3dModules/model/split";
+//		std::stringstream ss;
+//		ss << _geometryNum;
+//		std::string name = ss.str() + ".ive";
+//		std::string fullname = osgDB::concatPaths(path, name);
+//
+//		osg::ref_ptr<osg::Geode> geode = new osg::Geode;
+//		geode->addDrawable(&drawable);
+//		//osgDB::writeNodeFile(*geode, fullname);
+//
+//		osg::Geometry* geom = drawable.asGeometry();
+//		if (geom)
+//		{
+//			int ps = geom->getNumPrimitiveSets();
+//			std::cout << ps << std::endl;
+//		}
+//
 //	}
 //
-//	virtual void apply(osg::StateSet& stateSet)
+//	void traverse(osg::Node& node)
 //	{
-//		osg::StateSet::TextureAttributeList& a = stateSet.getTextureAttributeList();
-//		for (osg::StateSet::TextureAttributeList::iterator i = a.begin(); i != a.end(); ++i)
+//		TraversalMode tm = getTraversalMode();
+//		if (tm == TRAVERSE_NONE)
 //		{
-//			osg::StateSet::AttributeList& b = *i;
-//			for (osg::StateSet::AttributeList::iterator j = b.begin(); j != b.end(); ++j)
+//			return;
+//		}
+//		else if (tm == TRAVERSE_PARENTS)
+//		{
+//			osg::NodeVisitor::traverse(node);
+//			return;
+//		}
+//		osg::Geode* geode = dynamic_cast<osg::Geode*>(&node);
+//		if (geode)
+//		{
+//			_geodeNum++;
+//			std::string name = geode->getName() + ".ive";
+//			std::string path = "D:/gwV1/0P3dModules/model/split";
+//			std::string fullname = osgDB::concatPaths(path, name);
+//			//osgDB::writeNodeFile(*geode, fullname);
+//
+//			unsigned numDrawables = geode->getNumDrawables();
+//			for (unsigned i = 0; i < numDrawables; ++i)
 //			{
-//				osg::StateAttribute* sa = j->second.first.get();
-//				if (sa)
-//				{
-//					osg::Texture* tex = dynamic_cast<osg::Texture*>(sa);
-//					if (tex)
-//					{
-//						apply(*tex);
-//					}
-//				}
+//				apply(*geode->getDrawable(i));
 //			}
+//		}
+//		else
+//		{
+//			osg::NodeVisitor::traverse(node);
 //		}
 //	}
 //
+//	int getGeodeNum() { return _geodeNum; }
+//	int getGeometryNum() { return _geometryNum; }
+//
+//
 //private:
-//	std::string _outpath;
+//	int _geodeNum;
+//	int _geometryNum;
 //};
 
-osg::Node* createLine(osg::Vec3Array* va, const osg::Vec4& color)
+
+static osg::Node* createLine(osg::Vec3Array* va, const osg::Vec4& color)
 {
 	if (!va) return 0L;
 
@@ -214,7 +121,7 @@ osg::Node* createLine(osg::Vec3Array* va, const osg::Vec4& color)
 	return geode.release();
 }
 
-osg::Node* createPoint(const osg::Vec3& pos, const osg::Vec4& color)
+static osg::Node* createPoint(const osg::Vec3& pos, const osg::Vec4& color)
 {
 	osg::ref_ptr<osg::Vec3Array> va = new osg::Vec3Array;
 	va->push_back(pos);
@@ -229,7 +136,7 @@ osg::Node* createPoint(const osg::Vec3& pos, const osg::Vec4& color)
 	geom->setVertexArray(va);
 	geom->setColorArray(ca, osg::Array::BIND_OVERALL);
 	geom->addPrimitiveSet(new osg::DrawArrays(osg::PrimitiveSet::POINTS, 0, va->size()));
-	geom->getOrCreateStateSet()->setAttributeAndModes(point, 1);
+	geom->getOrCreateStateSet()->setAttributeAndModes(point);
 
 	osg::ref_ptr<osg::Geode> geode = new osg::Geode;
 	geode->addDrawable(geom);
@@ -237,7 +144,7 @@ osg::Node* createPoint(const osg::Vec3& pos, const osg::Vec4& color)
 	return geode.release();
 }
 
-osg::Node* createUnitPipe(const osg::Vec4& color)
+static osg::Node* createUnitPipe(const osg::Vec4& color)
 {
 	osg::ref_ptr<osg::Cylinder> cylin = new osg::Cylinder;
 	osg::ref_ptr <osg::ShapeDrawable> sd = new osg::ShapeDrawable(cylin);
@@ -249,7 +156,7 @@ osg::Node* createUnitPipe(const osg::Vec4& color)
 	return geode.release();
 }
 
-osg::Node* creatPipeline(osg::Vec3Array* va, const osg::Vec4& color, float radius)
+static osg::Node* creatPipeline(osg::Vec3Array* va, const osg::Vec4& color, float radius)
 {
 	osg::ref_ptr<osg::Node> node = createUnitPipe(color);
 
@@ -279,18 +186,25 @@ osg::Node* creatPipeline(osg::Vec3Array* va, const osg::Vec4& color, float radiu
 }
 
 
-#include <osg/ComputeBoundsVisitor>
-#include <osg/MatrixTransform>
-#include <osgViewer/ViewerEventHandlers>
-#include <osgGA/StateSetManipulator>
-
-// class to handle events with a pick
 class PickHandler : public osgGA::GUIEventHandler
 {
 public:
-	PickHandler() { _va = new osg::Vec3Array; _root = new osg::Group; }
+	PickHandler()
+	{
+		_radius = 15.0f;
+		_depth = 500.0f;
+		_va = new osg::Vec3Array;
+		//_root = new osg::Group;
+		_color = osg::Vec4(1, 1, 0, 1);
+	}
 	~PickHandler() {}
 
+	//osg::Node* getRoot() { return _root.get(); }
+	void setRadius(float radius) { _radius = radius; }
+	void setDepth(float depth) { _depth = depth; }
+	void setColor(const osg::Vec4& color) { _color = color; }
+
+private:
 	bool handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa)
 	{
 		switch (ea.getEventType())
@@ -305,8 +219,12 @@ public:
 		{
 			if (ea.getKey() == 'c' || ea.getKey() == 'C')
 			{
-				osg::ref_ptr<osg::Node> nn = creatPipeline(_va, osg::Vec4(1, 1, 0, 1), 14.40);
+				osg::ref_ptr<osg::Node> nn = creatPipeline(_va, _color, _radius);
 				osgDB::writeNodeFile(*nn, "tunel.ive");
+			}
+			if (ea.getKey() == 'r' || ea.getKey() == 'R')
+			{
+				reset();
 			}
 			return false;
 		}
@@ -321,48 +239,34 @@ public:
 		if (view->computeIntersections(ea, intersections))
 		{
 			osg::Vec3d p = intersections.begin()->getWorldIntersectPoint();
-			_va->push_back(p);
-
+			_va->push_back(p - osg::Vec3(0, 0, _depth));
 			std::cout << p[0] << " " << p[1] << " " << p[2] << std::endl;
 
-			_root->addChild(createPoint(p, osg::Vec4(1, 1, 0, 1)));
+			//_root->addChild(createPoint(p, osg::Vec4(1, 1, 0, 1)));
 		}
 	}
 
-	osg::Node* getRoot() { return _root.get(); }
+	void reset() { _va->clear(); }
+
 
 protected:
+	float _radius, _depth;
+	osg::Vec4 _color;
 	osg::ref_ptr<osg::Vec3Array> _va;
-	osg::ref_ptr<osg::Group> _root;
+	//osg::ref_ptr<osg::Group> _root;
 };
 
 
 int main(int argc, char** argv)
 {
-	//osg::ref_ptr<osg::Node> node = osgDB::readNodeFile("D:/gwV1/0P3dModules/model/split/dm_-290zdjx001-GEODE.ive");
 	osg::ref_ptr<osg::Node> node = osgDB::readNodeFile("E:\\DATA\\GeoData\\Workspace\\geoModel-800.osg");
-	//osg::ref_ptr<osg::Node> node1 = osgDB::readNodeFile("E:\\DATA\\GeoData\\Workspace\\22.osgb");
-
-	//osg::ref_ptr<osg::MatrixTransform> mt = new osg::MatrixTransform;
-	//mt->addChild(node1);
-	//mt->setMatrix(osg::Matrixd::scale(100, 100, 100));
 
 	osg::ref_ptr<osg::Group> root = new osg::Group;
 	root->addChild(node);
 
 	osg::ref_ptr<PickHandler> pickhandler = new PickHandler;
-	root->addChild(pickhandler->getRoot());
-	//root->addChild(mt);
-
-	//osg::ComputeBoundsVisitor cbv;
-	//node->accept(cbv);
-
-	//osg::ComputeBoundsVisitor cbv1;
-	//node1->accept(cbv1);
-
-	//const osg::BoundingBox& bb = cbv.getBoundingBox();
-	//const osg::BoundingBox& bb1 = cbv1.getBoundingBox();
-
+	//root->addChild(pickhandler->getRoot());
+	
 	osgViewer::Viewer viewer;
 	viewer.addEventHandler(new osgGA::StateSetManipulator(viewer.getCamera()->getOrCreateStateSet()));
 	viewer.addEventHandler(new osgViewer::StatsHandler());
