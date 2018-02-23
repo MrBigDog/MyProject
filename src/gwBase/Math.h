@@ -97,6 +97,23 @@ namespace gwBase
 			return a + b;
 		}
 
+		bool floatAreEqual(float v1, float v2, double epsilon)
+		{
+			return static_cast<double>(fabs(v2 - v1)) <= epsilon;
+		}
+
+		bool doubleAreEqual(double v1, double v2, double epsilon)
+		{
+			return fabs(v2 - v1) <= epsilon;
+		}
+
+		bool systemIsLittleEndian()
+		{
+			// : https://stackoverflow.com/questions/4181951
+			int n = 1;
+			return (*(char*)&n == 1);
+		}
+
 		/// Add two (integer) values in place, taking care of overflows.
 		static T& addClipOverflowInplace(T& a, T b)
 		{
