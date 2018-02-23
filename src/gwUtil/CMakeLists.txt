@@ -19,6 +19,7 @@ INCLUDE_DIRECTORIES(AFTER ${OSGEARTH_INCLUDE_DIR})
 SET(LIB_PUBLIC_HEADERS
 		Export.h
 		#Math.h
+		Cutter.h
 		NodeUtils.h
 		ShapeUtils.h
 		osgdebug.hpp
