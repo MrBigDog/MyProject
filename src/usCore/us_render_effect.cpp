@@ -1,0 +1,22 @@
+//////////////////////////////////////////////////////////////////////////
+//
+//  This source file is part of Uniscope Virtual Globe
+//  Copyright (c) 2008-2009 by The Uniscope Team . All Rights Reserved
+//
+//////////////////////////////////////////////////////////////////////////
+//
+//  Filename: us_render_effect.cpp
+//  Author  : Uniscope Team 
+//  Modifier: Uniscope Team  
+//  Created : 
+//  Purpose : render_effect class
+//	Reference : 
+//
+//////////////////////////////////////////////////////////////////////////
+#include "stdafx.h"
+#include "us_render_effect.h"
+
+namespace uniscope_globe
+{
+
+}
