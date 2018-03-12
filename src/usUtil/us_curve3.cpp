@@ -13,7 +13,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+
 #include "us_curve3.h"
 
 namespace uniscope_globe
@@ -101,10 +101,10 @@ namespace uniscope_globe
 	//----------------------------------------------------------------------------
 	template <class real>
 	void curve3<real>::get_frame(	real t, 
-									OUT vector3<real>& in_position,
-									OUT vector3<real>& in_tangent,
-									OUT vector3<real>& in_normal,
-									OUT vector3<real>& in_binormal ) const
+									/*OUT*/ vector3<real>& in_position,
+									/*OUT*/ vector3<real>& in_tangent,
+									/*OUT*/ vector3<real>& in_normal,
+									/*OUT*/ vector3<real>& in_binormal ) const
 	{
 		in_position = get_position(t);
 		vector3<real> v_velocity = get_first_derivative(t);
@@ -215,8 +215,8 @@ namespace uniscope_globe
 	}
 	//----------------------------------------------------------------------------
 	template <class real>
-	void curve3<real>::subdivide_by_variation ( IN real min_variation, IN int max_level,
-												 OUT int& out_points_count, OUT vector3<real>*& out_point_array ) const
+	void curve3<real>::subdivide_by_variation ( /*IN*/ real min_variation, /*IN*/ int max_level,
+												 /*OUT*/ int& out_points_count, /*OUT*/ vector3<real>*& out_point_array ) const
 	{
 		// compute end points of curve
 		vector3<real> v_min_pos = get_position(m_min_t);

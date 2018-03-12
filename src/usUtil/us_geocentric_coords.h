@@ -18,6 +18,9 @@
 
 #include <usUtil\Export.h>
 
+#include <usUtil/us_vector3.h>
+#include <usUtil/us_matrix4.h>
+
 namespace uniscope_globe
 {
 	class USUTIL_EXPORT geocentric_coords

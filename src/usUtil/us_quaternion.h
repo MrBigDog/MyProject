@@ -14,8 +14,8 @@
 //				http://mathworld.wolfram.com/Quaternion.html
 //
 //////////////////////////////////////////////////////////////////////////
-#ifndef _US_QUATERNION_H_
-#define _US_QUATERNION_H_
+#ifndef US_QUATERNION_H
+#define US_QUATERNION_H
 
 #include <usUtil\Export.h>
 

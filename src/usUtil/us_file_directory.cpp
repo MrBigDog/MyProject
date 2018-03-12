@@ -13,28 +13,27 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+
 #include "us_file_directory.h"
+#include <Shlwapi.h>
 
 namespace uniscope_globe
 {
 	file_directory::file_directory( void )
 	{
-
 	}
 
 	file_directory::~file_directory( void )
 	{
-
 	}
 
 	void file_directory::get_files( cpstr str_path, cpstr str_ext, file_list& out_files )
 	{
 		ustring str_dir = ustring( str_path );
-		if ( str_dir.rfind( L"\\" ) != ( str_dir.size() - 1 ) ) 
-			str_dir += L"\\";
+		if ( str_dir.rfind( /*L*/"\\" ) != ( str_dir.size() - 1 ) ) 
+			str_dir += /*L*/"\\";
 
-		ustring str_file = str_dir + L"*." + str_ext;
+		ustring str_file = str_dir + /*L*/"*." + str_ext;
 
 		WIN32_FIND_DATA fd;
 		HANDLE h_file = NULL;
@@ -45,7 +44,7 @@ namespace uniscope_globe
 			if ( !v_working )
 				break;
 
-			if ( 0 == wcscmp( fd.cFileName, TEXT(".") ) || 0 == wcscmp(fd.cFileName, TEXT("..")) ) 
+			if ( 0 == /*wcscmp*/strcmp( fd.cFileName, TEXT(".") ) || 0 == /*wcscmp*/strcmp(fd.cFileName, TEXT("..")) )
 			{
 				continue;
 			}
@@ -73,7 +72,7 @@ namespace uniscope_globe
 		h_file = FindFirstFile( str_file.c_str(), &fd );
 		if ( h_file != INVALID_HANDLE_VALUE )
 		{
-			if ( wcscmp( fd.cFileName, _gstr(".") ) != 0 && wcscmp(fd.cFileName, _gstr("..")) != 0 ) 
+			if ( /*wcscmp*/strcmp( fd.cFileName, _gstr(".") ) != 0 && /*wcscmp*/strcmp(fd.cFileName, _gstr("..")) != 0 )
 			{
 				ustring str_file_path;
 				str_file_path = str_directory + fd.cFileName;
@@ -90,7 +89,7 @@ namespace uniscope_globe
 				break;
 			}
 
-			if ( 0 == wcscmp( fd.cFileName, TEXT(".") ) || 0 == wcscmp(fd.cFileName, _gstr("..")) ) 
+			if ( 0 == /*wcscmp*/strcmp( fd.cFileName, TEXT(".") ) || 0 == /*wcscmp*/strcmp(fd.cFileName, _gstr("..")) )
 			{
 				continue;
 			}
@@ -154,7 +153,7 @@ namespace uniscope_globe
 		h_file = FindFirstFile( str_file.c_str(), &fd );
 		if ( h_file != INVALID_HANDLE_VALUE )
 		{
-			if ( wcscmp( fd.cFileName, _gstr(".") ) != 0 && wcscmp(fd.cFileName, _gstr("..")) != 0 ) 
+			if ( /*wcscmp*/strcmp( fd.cFileName, _gstr(".") ) != 0 && /*wcscmp*/strcmp(fd.cFileName, _gstr("..")) != 0 )
 			{
 				if ( fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY )
 				{
@@ -176,7 +175,7 @@ namespace uniscope_globe
 				break;
 			}
 
-			if ( 0 == wcscmp( fd.cFileName, TEXT(".") ) || 0 == wcscmp(fd.cFileName, _gstr("..")) ) 
+			if ( 0 == /*wcscmp*/strcmp( fd.cFileName, TEXT(".") ) || 0 == /*wcscmp*/strcmp(fd.cFileName, _gstr("..")) )
 			{
 				continue;
 			}
@@ -201,7 +200,7 @@ namespace uniscope_globe
 	ustring file_directory::get_file_ext( const LPCTSTR str_in_path )
 	{
 		ustring str_in = str_in_path;
-		int v_pos = (int)str_in.rfind( L"." );
+		int v_pos = (int)str_in.rfind( /*L*/"." );
 		if ( v_pos > 0 )
 			return str_in.substr( v_pos+1, str_in.size() - v_pos  );
 
@@ -212,7 +211,7 @@ namespace uniscope_globe
 	ustring file_directory::get_path_without_ext( const LPCTSTR str_in_path )
 	{
 		ustring str_in = str_in_path;
-		int v_pos = (int)str_in.rfind( L"." );
+		int v_pos = (int)str_in.rfind( /*L*/"." );
 		if ( v_pos > 0 )
 			return str_in.substr( 0, v_pos );
 
@@ -223,7 +222,7 @@ namespace uniscope_globe
 	ustring file_directory::get_file_name_without_ext( const LPCTSTR str_in_path )
 	{
 		ustring str_in = file_directory::get_file_name( str_in_path );
-		int v_pos = (int)str_in.rfind( L"." );
+		int v_pos = (int)str_in.rfind( /*L*/"." );
 		if ( v_pos > 0 )
 			return str_in.substr( 0, v_pos );
 
@@ -251,7 +250,7 @@ namespace uniscope_globe
 	ustring file_directory::get_file_name( const LPCTSTR str_in_path )
 	{
 		if ( str_in_path == NULL )
-			return L"";
+			return /*L*/"";
 
 		ustring str_file = str_in_path;
 
@@ -286,10 +285,10 @@ namespace uniscope_globe
 	bool file_directory::is_local_file( cpstr in_file_name )
 	{
 		ustring src_link = in_file_name;
-		ustring::size_type v_pos1 = src_link.find( L"http://" );
-		ustring::size_type v_pos2 = src_link.find( L"db://" );
-		ustring::size_type v_pos3 = src_link.find( L"root://" );
-		ustring::size_type v_pos4 = src_link.find( L"uds://" );
+		ustring::size_type v_pos1 = src_link.find( /*L*/"http://" );
+		ustring::size_type v_pos2 = src_link.find( /*L*/"db://" );
+		ustring::size_type v_pos3 = src_link.find( /*L*/"root://" );
+		ustring::size_type v_pos4 = src_link.find( /*L*/"uds://" );
 
 		if( v_pos1 != ustring::npos ||
 			v_pos2 != ustring::npos ||
@@ -311,7 +310,7 @@ namespace uniscope_globe
 		int v_pos = str_path.find( str_trim );
 		if ( v_pos == 0 )
 		{
-			int trim_len = wcslen( str_trim );
+			int trim_len = /*wcslen*/strlen( str_trim );
 			str_path = str_path.substr( trim_len, str_path.size() - trim_len ); 
 		}
 
@@ -330,10 +329,10 @@ namespace uniscope_globe
 
 	ustring file_directory::get_absolute_path( const LPCTSTR str_file_path, const LPCTSTR base_path )
 	{
-		ustring absolute_path = L"";
+		ustring absolute_path = /*L*/"";
 		if ( PathIsRelative(str_file_path) )
 		{
-			ustring str_base = file_directory::trim_start( base_path, L"file://" );
+			ustring str_base = file_directory::trim_start( base_path, /*L*/"file://" );
 			absolute_path = file_directory::get_directory( str_base.c_str() ) + str_file_path;
 		}
 		else
@@ -348,10 +347,10 @@ namespace uniscope_globe
 
 	ustring file_directory::get_relative_path( const LPCTSTR str_file_path, const LPCTSTR base_path)
 	{
-		ustring relative_path = L"";
+		ustring relative_path = /*L*/"";
 
-		ustring file_path = file_directory::trim_start( str_file_path, L"file://" );
-		ustring str_base = file_directory::trim_start( base_path, L"file://" );
+		ustring file_path = file_directory::trim_start( str_file_path, /*L*/"file://" );
+		ustring str_base = file_directory::trim_start( base_path, /*L*/"file://" );
 		str_base = file_directory::get_directory( str_base.c_str() );
 
 		int pos = file_path.find(str_base);

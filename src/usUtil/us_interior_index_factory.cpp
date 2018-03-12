@@ -13,7 +13,6 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
 #include "us_interior_index_factory.h"
 
 namespace uniscope_globe

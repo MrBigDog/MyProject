@@ -17,7 +17,10 @@
 #define _US_DBF_FILE_H_
 
 #include <usUtil\Export.h>
+#include <usUtil\shapefil.h>
+
 #include <vector>
+#include <wtypes.h>
 
 using namespace std;
 

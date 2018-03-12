@@ -15,8 +15,8 @@
 //				http://mathworld.wolfram.com/Matrix.html
 //
 //////////////////////////////////////////////////////////////////////////
-#ifndef _US_MATRIX4_H_
-#define _US_MATRIX4_H_
+#ifndef US_MATRIX4_H
+#define US_MATRIX4_H
 
 #include <usUtil\Export.h>
 #include <usUtil\us_vector3.h>

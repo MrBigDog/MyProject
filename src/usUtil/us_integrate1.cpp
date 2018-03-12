@@ -13,8 +13,8 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
 #include "us_integrate1.h"
+#include <assert.h>
 
 namespace uniscope_globe
 {

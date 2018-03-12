@@ -18,6 +18,8 @@
 #ifndef _US_RAY_H_
 #define _US_RAY_H_
 
+#include <usUtil/us_matrix4.h>
+
 namespace uniscope_globe
 {
 	template<class real>

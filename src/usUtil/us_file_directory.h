@@ -20,6 +20,7 @@
 #include <usUtil/us_common_file.h>
 
 #include <vector>
+#include <wtypes.h>
 
 namespace uniscope_globe
 {

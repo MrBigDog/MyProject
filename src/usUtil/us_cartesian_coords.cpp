@@ -20,7 +20,6 @@
 namespace uniscope_globe
 {
 	vector3<double> cartesian_coords::s_reference_position_geo = vector3<double>::s_zero;
-
 	vector3<double> cartesian_coords::s_reference_position_sphr = vector3<double>::s_zero;
 
 	cartesian_coords::cartesian_coords(void)

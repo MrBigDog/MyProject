@@ -16,19 +16,16 @@
 
 #include "us_geocentric_coords.h"
 #include <usUtil/us_math.h>
-#include <usUtil/us_vector3.h>
 #include <usUtil/us_cartesian_coords.h>
 
 namespace uniscope_globe
 {
 	geocentric_coords::geocentric_coords(void)
 	{
-
 	}
 
 	geocentric_coords::~geocentric_coords(void)
 	{
-
 	}
 
 	vector3<double> geocentric_coords::from_spherical_d(double longitude, double latitude, double altitude)

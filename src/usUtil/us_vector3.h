@@ -15,10 +15,13 @@
 //				http://mathworld.wolfram.com/Matrix.html
 //
 //////////////////////////////////////////////////////////////////////////
-#ifndef _US_VECTOR3_H_
-#define _US_VECTOR3_H_
+#ifndef US_VECTOR3_H
+#define US_VECTOR3_H
+
+#include <usUtil/us_math.h>
 
 #include <vector>
+#include <assert.h>
 
 namespace uniscope_globe
 {
@@ -139,11 +142,11 @@ namespace uniscope_globe
 	{
 		return vector_3f(rhs.x, rhs.y, rhs.z);
 	}
-	typedef std::vector<vector_3d> coordinates_array;
-	typedef std::vector<coordinates_array> coordinates_part_array;
+	typedef std::vector< vector_3d > coordinates_array;
+	typedef std::vector< coordinates_array > coordinates_part_array;
 
-	typedef std::vector<vector_3f> coordinates_array_f;
-	typedef std::vector<vector_3d> coordinates_array_d;
+	typedef std::vector< vector_3f > coordinates_array_f;
+	typedef std::vector< vector_3d > coordinates_array_d;
 
 #ifdef WIN32
 	template<> const vector3<float> vector3<float>::s_zero(0.0f, 0.0f, 0.0f);

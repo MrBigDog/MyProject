@@ -13,11 +13,11 @@
 //	Reference : http://mathworld.wolfram.com/CartesianCoordinates.html
 //
 //////////////////////////////////////////////////////////////////////////
-#ifndef _US_CARTESIAN_COORDS_H_
-#define _US_CARTESIAN_COORDS_H_
+#ifndef US_CARTESIAN_COORDS_H
+#define US_CARTESIAN_COORDS_H 1
 
 #include <usUtil\Export.h>
-#include <usUtil\us_vector3.h>
+//#include <usUtil\us_vector3.h>
 #include <usUtil\us_matrix4.h>
 
 namespace uniscope_globe
@@ -26,7 +26,6 @@ namespace uniscope_globe
 	{
 	public:
 		cartesian_coords(void);
-
 		~cartesian_coords(void);
 
 	public:
