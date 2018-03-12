@@ -1,15 +1,14 @@
 #include <osg/Group>
+#include <osg/PagedLOD>
 #include <osgDB/ReadFile>
 #include <osgDB/WriteFile>
 #include <osgDB/FileUtils>
 #include <osgDB/FileNameUtils>
-#include "FileUtils.h"
-#include "StringUtils.h"
-
 #include <windows.h>
 
-#include <osg/PagedLOD>
 #include "st_tree.h"
+#include "FileUtils.h"
+#include "StringUtils.h"
 
 class PagedLodVisitor : public osg::NodeVisitor
 {
@@ -69,10 +68,7 @@ public:
 		for (unsigned k = 0; k < texture.getNumImages(); ++k)
 		{
 			osg::Image* image = texture.getImage(k);
-			if (image)
-			{
-				apply(*image);
-			}
+			if (image) apply(*image);
 		}
 	}
 
@@ -152,7 +148,6 @@ public:
 		: _inPath(inPath)
 		, _outPath(outPath)
 		, _ext(ext)
-		//, _isCombine(true)
 	{
 		if (!gwUtil::startsWith(_ext, "."))
 		{

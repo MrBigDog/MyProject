@@ -4,7 +4,6 @@
 #include <osgEarth/GeoData>
 #include <osgEarth/StringUtils>
 
-
 #include <osg/Node>
 #include <osg/Array>
 #include <osg/MatrixTransform>
@@ -21,8 +20,7 @@ namespace
 	class TiledDirectoryVisitor
 	{
 	public:
-		TiledDirectoryVisitor()
-		{}
+		TiledDirectoryVisitor() {}
 
 		virtual void traverse(const std::string& path)
 		{
@@ -52,7 +50,7 @@ namespace
 							osg::ComputeBoundsVisitor cbv;
 							node->accept(cbv);
 
-							const osg::BoundingBox& bb = cbv.getBoundingBox();
+							osg::BoundingBox bb = cbv.getBoundingBox();
 
 							std::string tileUrl = filename;
 
@@ -65,7 +63,6 @@ namespace
 
 							cs.push_back(tileConfig);
 							//layerConfig.add("tiles", tileConfig);
-
 							_bbox.expandBy(bb);
 						}
 					}
