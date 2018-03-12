@@ -19,6 +19,17 @@ ADD_SUBDIRECTORY(${coreLib})
 SET_PROPERTY(TARGET ${coreLib} PROPERTY FOLDER "Core")
 ENDFOREACH( coreLib )
 
+#uniscope
+FOREACH( uniscope
+		usXml
+		usCore
+		usUtil
+		usFilter
+		 )
+ADD_SUBDIRECTORY(${uniscope})
+SET_PROPERTY(TARGET ${uniscope} PROPERTY FOLDER "Uniscope")
+ENDFOREACH( uniscope )
+
 
 ADD_SUBDIRECTORY( gwDrivers )#插件
 ADD_SUBDIRECTORY( examples ) #例子
