@@ -16,6 +16,8 @@
 #ifndef _US_TRIANGULATION3_H_
 #define _US_TRIANGULATION3_H_
 
+#include <usUtil/us_base_algorithm_lh.h>
+
 namespace uniscope_globe
 {
 	template< typename T >

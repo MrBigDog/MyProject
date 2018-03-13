@@ -15,7 +15,12 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_CARTESIAN_OBJECT_H_
 #define _US_CARTESIAN_OBJECT_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_spatial_object.h>
+#include <usCore\us_shared_data.h>
+#include <usUtil\us_cartesian_transform.h>
+
 namespace uniscope_globe
 {
 #define US_OCTREE_NODE_FLAG_DEFAULT			0
@@ -27,14 +32,14 @@ namespace uniscope_globe
 		, virtual public shared_data
 	{
 	public:
-		cartesian_object( void );
+		cartesian_object(void);
 
-		virtual ~cartesian_object( void );
+		virtual ~cartesian_object(void);
 
 	public:
-		virtual void release( void );
+		virtual void release(void);
 
-		virtual matrix_4d get_matrix_cart2geo( void );
+		virtual matrix_4d get_matrix_cart2geo(void);
 
 	};
 }

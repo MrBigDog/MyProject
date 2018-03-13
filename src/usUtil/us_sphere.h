@@ -18,8 +18,12 @@
 #ifndef _US_SPHERE_H_
 #define _US_SPHERE_H_
 
+#include <usUtil\us_ray.h>
+
 namespace uniscope_globe
 {
+	//class ray;
+
 	template <class real>
 	class sphere
 	{

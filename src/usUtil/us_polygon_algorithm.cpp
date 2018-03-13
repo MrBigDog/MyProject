@@ -4,6 +4,8 @@
 #include <usUtil\us_common_file.h>
 #include <usUtil\us_base_algorithm.h>
 
+#include <winerror.h>
+
 namespace uniscope_globe
 {
 	struct vector_with_relationship_ex

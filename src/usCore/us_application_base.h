@@ -15,35 +15,42 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_APPLICATION_BASE_H_
 #define _US_APPLICATION_BASE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_object_base.h>
+#include <usCore\us_view_base.h>
+#include <usCore\us_common_manager_group.h>
+#include <usCore\us_render_manager_base.h>
+#include <wtypes.h>
+
 namespace uniscope_globe
 {
 	class document_base;
-	
+
 	class USCORE_EXPORT application_base
 	{
 	protected:
-		application_base(){}
+		application_base() {}
 
 	public:
-		application_base( HWND hwnd, HWND parent_hwnd, HINSTANCE hinstance );
+		application_base(HWND hwnd, HWND parent_hwnd, HINSTANCE hinstance);
 
-		virtual ~application_base( void );
+		virtual ~application_base(void);
 
 	public:
-		virtual bool initialize( void ){ return true; }
+		virtual bool initialize(void) { return true; }
 
-		virtual bool finalize( void ){ return true; }
+		virtual bool finalize(void) { return true; }
 
-		HWND get_hwnd( void ) { return m_hwnd; }
+		HWND get_hwnd(void) { return m_hwnd; }
 
-		HWND get_parent_hwnd( void ) { return m_parent_hwnd; }
+		HWND get_parent_hwnd(void) { return m_parent_hwnd; }
 
-		common_manager_group* get_manager_group(void){ return m_manager_group; }
+		common_manager_group* get_manager_group(void) { return m_manager_group; }
 
-		render_manager_base* get_render_manager(void){ return m_view->get_render_manager(); }
+		render_manager_base* get_render_manager(void) { return m_view->get_render_manager(); }
 
-		virtual object_base* get_animation_manager( void ) { return NULL; }
+		virtual object_base* get_animation_manager(void) { return NULL; }
 
 	protected:
 		document_base* m_document;

@@ -18,9 +18,14 @@
 
 #include <usUtil\Export.h>
 #include <usUtil\us_lon_lat_geometry.h>
+//#include <usUtil\us_vector3.h>
+#include <usUtil/us_lon_lat_rect.h>
+#include <vector>
 
 namespace uniscope_globe
 {
+	//class lon_lat_rect;
+
 	class USUTIL_EXPORT lon_lat_region : public lon_lat_geometry
 	{
 	public:

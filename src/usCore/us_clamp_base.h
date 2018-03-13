@@ -15,23 +15,26 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_CLAMP_BASE_H_
 #define _US_CLAMP_BASE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_vector3.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT clamp_base
 	{
 	public:
-		clamp_base( void );
+		clamp_base(void);
 
-		virtual ~clamp_base( void );
-
-	public:
-		virtual void clamp_to_ground( void );
+		virtual ~clamp_base(void);
 
 	public:
-		double get_clamp_factor( void ) { return m_clamp_factor; }
+		virtual void clamp_to_ground(void);
 
-		vector3<double> get_clamp_pivot_sphr( void ) { return m_clamp_pivot_sphr; }
+	public:
+		double get_clamp_factor(void) { return m_clamp_factor; }
+
+		vector3<double> get_clamp_pivot_sphr(void) { return m_clamp_pivot_sphr; }
 
 	protected:
 		vector3<double> m_clamp_pivot_sphr;

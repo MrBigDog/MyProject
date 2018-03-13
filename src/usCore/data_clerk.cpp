@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "data_clerk.h"
 
 using namespace uniscope_globe;

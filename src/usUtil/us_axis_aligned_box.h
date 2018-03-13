@@ -16,9 +16,7 @@
 #define _US_AXIS_ALIGNED_BOX_H_
 
 #include <usUtil\Export.h>
-//#include <usUtil\us_vector3.h>
-#include <usUtil\us_ray.h>
-#include <usUtil\us_matrix4.h>
+#include <usUtil\us_sphere.h>
 
 namespace uniscope_globe
 {

@@ -15,8 +15,10 @@
 //				http://mathworld.wolfram.com/Matrix.html
 //
 //////////////////////////////////////////////////////////////////////////
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "us_event_base.h"
+#include <usCore\us_event_handle.h>
+#include <usCore\us_event_argument.h>
 
 namespace uniscope_globe
 {
@@ -35,24 +37,24 @@ namespace uniscope_globe
 		handle_array.clear();
 	}
 
-	int event_base::get_event_type( void )
+	int event_base::get_event_type(void)
 	{
 		return m_event_type;
 	}
 
-	void event_base::operator () ( event_argument* event_args )
+	void event_base::operator () (event_argument* event_args)
 	{
 		event_handle_array::iterator itr;
-		
-		for ( itr = handle_array.begin(); itr != handle_array.end(); ++itr )
+
+		for (itr = handle_array.begin(); itr != handle_array.end(); ++itr)
 		{
-			(*itr)( (event_argument*)event_args );
+			(*itr)((event_argument*)event_args);
 		}
 	}
 
 	event_base& event_base::operator += (const event_handle& handler)
 	{
-		register_handle( handler) ;
+		register_handle(handler);
 		return *this;
 	}
 
@@ -62,13 +64,13 @@ namespace uniscope_globe
 		return *this;
 	}
 
-	void event_base::register_handle( const event_handle& handler )
+	void event_base::register_handle(const event_handle& handler)
 	{
 		event_handle_array::iterator itr;
-		for ( itr = handle_array.begin(); itr != handle_array.end(); ++itr )
+		for (itr = handle_array.begin(); itr != handle_array.end(); ++itr)
 		{
-			if ( *itr == handler )
-			{				
+			if (*itr == handler)
+			{
 				return;
 			}
 		}
@@ -76,20 +78,20 @@ namespace uniscope_globe
 		handle_array.push_back(handler);
 	}
 
-	void event_base::unregister_handle( const event_handle& handler )
+	void event_base::unregister_handle(const event_handle& handler)
 	{
 		event_handle_array::iterator itr;
-		for ( itr = handle_array.begin(); itr != handle_array.end(); ++itr )
+		for (itr = handle_array.begin(); itr != handle_array.end(); ++itr)
 		{
-			if ( *itr == handler )
+			if (*itr == handler)
 			{
-				handle_array.erase( itr );
+				handle_array.erase(itr);
 				break;
 			}
 		}
 	}
 
-	void event_base::clear( void )
+	void event_base::clear(void)
 	{
 		handle_array.clear();
 	}

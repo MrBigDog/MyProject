@@ -17,9 +17,16 @@
 //////////////////////////////////////////////////////////////////////////
 #ifndef _US_EVENT_BASE_H_
 #define _US_EVENT_BASE_H_
+
 #include <usCore\Export.h>
+
+#include <vector>
+
 namespace uniscope_globe
 {
+	class event_handle;
+	class event_argument;
+
 	enum USCORE_EXPORT event_type
 	{
 		US_EVENT_REQUEST = 0,
@@ -36,19 +43,19 @@ namespace uniscope_globe
 		typedef std::vector<event_handle> event_handle_array;
 
 	public:
-		int get_event_type( void );
+		int get_event_type(void);
 
-		virtual void operator () ( event_argument* event_args );
+		virtual void operator () (event_argument* event_args);
 
 		// register
 		event_base& operator += (const event_handle& handler);
 
-		void register_handle( const event_handle& handler );
+		void register_handle(const event_handle& handler);
 
 		// unregister
 		event_base& operator -= (const event_handle& handler);
 
-		void unregister_handle( const event_handle& handler );
+		void unregister_handle(const event_handle& handler);
 
 		void clear();
 

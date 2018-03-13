@@ -2,6 +2,7 @@
 #define US_POLYLINE_SPLINE3_H_
 
 //#include <usUtil\Export.h>
+#include <usUtil/us_tcb_spline3.h>
 
 namespace uniscope_globe
 {

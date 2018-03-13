@@ -12,7 +12,7 @@
 //  Purpose : 
 //
 //////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_math.h"
 
 namespace uniscope_globe

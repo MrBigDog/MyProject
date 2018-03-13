@@ -3,6 +3,7 @@
 */
 #ifndef SIMPLESYMBOLENGINE_H
 #define SIMPLESYMBOLENGINE_H
+
 #include <usCore\Export.h>
 #include <iosfwd>
 #include <string>

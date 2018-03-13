@@ -15,6 +15,9 @@
 #ifndef _US_BASE_ALGORITHM_LH_H_
 #define _US_BASE_ALGORITHM_LH_H_
 
+#include <usUtil\us_vector3.h>
+#include <usUtil\us_base_algorithm.h>
+
 namespace uniscope_globe
 {
 	template<typename T>

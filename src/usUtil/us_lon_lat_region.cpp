@@ -13,47 +13,48 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_lon_lat_region.h"
+
 
 namespace uniscope_globe
 {
-	lon_lat_region::lon_lat_region( void )
+	lon_lat_region::lon_lat_region(void)
 	{
 
 	}
 
-	lon_lat_region::~lon_lat_region( void )
+	lon_lat_region::~lon_lat_region(void)
 	{
 
 	}
 
-	void lon_lat_region::push_back( vector3<double>& vert )
+	void lon_lat_region::push_back(vector3<double>& vert)
 	{
-		m_vertex_array.push_back( vert );
+		m_vertex_array.push_back(vert);
 
-		m_bound.combine( vert );
+		m_bound.combine(vert);
 	}
 
-	void lon_lat_region::clear( void )
+	void lon_lat_region::clear(void)
 	{
 		m_vertex_array.clear();
 	}
 
 
-	vector3<double> lon_lat_region::operator[] ( ulong index ) const
+	vector3<double> lon_lat_region::operator[] (ulong index) const
 	{
-		if ( index >= m_vertex_array.size() )
+		if (index >= m_vertex_array.size())
 			return vector3<double>::s_zero;
 
 		return m_vertex_array[index];
 	}
 
-	ulong lon_lat_region::get_count( void ) const
+	ulong lon_lat_region::get_count(void) const
 	{
 		return m_vertex_array.size();
 	}
-	
+
 	//bool lon_lat_region::contain( lon_lat_rect& in_rect )
 	//{
 	//	//
@@ -85,31 +86,31 @@ namespace uniscope_globe
 	//	return true;
 	//}
 
-	bool lon_lat_region::contain( vector3<double> pos_sphr ) const
+	bool lon_lat_region::contain(vector3<double> pos_sphr) const
 	{
 		bool inside = false;
 
 		int size = m_vertex_array.size();
-		for ( int i = 0; i < size; i++ )
+		for (int i = 0; i < size; i++)
 		{
-			vector3<double> p1 = m_vertex_array[ ( i + size) % size ];
-			vector3<double> p2 = m_vertex_array[ ( i+1 + size ) % size ];
+			vector3<double> p1 = m_vertex_array[(i + size) % size];
+			vector3<double> p2 = m_vertex_array[(i + 1 + size) % size];
 
-			if ( pos_sphr.y < p2.y )
+			if (pos_sphr.y < p2.y)
 			{
 				//p1 above ray
-				if ( pos_sphr.y >= p1.y )
+				if (pos_sphr.y >= p1.y)
 				{
 					//p1 on or blew ray
-					if (  ( pos_sphr.y - p1.y ) * ( p2.x - p1.x ) > ( pos_sphr.x - p1.x ) * ( p2.y - p1.y ) )
+					if ((pos_sphr.y - p1.y) * (p2.x - p1.x) > (pos_sphr.x - p1.x) * (p2.y - p1.y))
 					{
 						inside = !inside;
 					}
 				}
 			}
-			else if ( pos_sphr.y < p1.y )
+			else if (pos_sphr.y < p1.y)
 			{
-				if( ( pos_sphr.y - p1.y ) * ( p2.x - p1.x )  < ( pos_sphr.x - p1.x ) * ( p2.y - p1.y ) )
+				if ((pos_sphr.y - p1.y) * (p2.x - p1.x) < (pos_sphr.x - p1.x) * (p2.y - p1.y))
 				{
 					inside = !inside;
 				}
@@ -118,22 +119,22 @@ namespace uniscope_globe
 		return inside;
 	}
 
-	lon_lat_rect lon_lat_region::get_bound( void )
+	lon_lat_rect lon_lat_region::get_bound(void)
 	{
 		return m_bound;
 	}
 
-	bool lon_lat_region::intersect( const lon_lat_rect& in_rect )
+	bool lon_lat_region::intersect(const lon_lat_rect& in_rect)
 	{
-		for( int ni = 0; ni < 4; ni++)
+		for (int ni = 0; ni < 4; ni++)
 		{
-			if(this->contain(in_rect.get_conner(ni)))
+			if (this->contain(in_rect.get_conner(ni)))
 				return true;
 		}
 
-		for ( int ni = 0; ni < (int)(m_vertex_array.size()); ni++ )
+		for (int ni = 0; ni < (int)(m_vertex_array.size()); ni++)
 		{
-			if ( in_rect.contain( m_vertex_array[ni] ) )
+			if (in_rect.contain(m_vertex_array[ni]))
 				return true;
 		}
 

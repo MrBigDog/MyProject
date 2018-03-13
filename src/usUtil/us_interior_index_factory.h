@@ -85,7 +85,7 @@ namespace uniscope_globe
 
 		static double	get_bound_size(int level);
 
-		static void get_int_rect(IN lon_lat_rect& rect, IN int level, OUT int& north_index, OUT int& south_index, OUT int& east_index, OUT int& west_index);
+		static void get_int_rect(/*IN*/ lon_lat_rect& rect, /*IN*/ int level, /*OUT*/ int& north_index, /*OUT*/ int& south_index, /*OUT*/ int& east_index, /*OUT*/ int& west_index);
 
 	public:
 		static ustring to_encrypt_string(interior_index index);
@@ -151,7 +151,7 @@ namespace uniscope_globe
 
 		double	get_bound_size(int level);
 
-		void get_int_rect(IN lon_lat_rect& rect, IN int level, OUT int& north_index, OUT int& south_index, OUT int& east_index, OUT int& west_index);
+		void get_int_rect(/*IN*/ lon_lat_rect& rect, /*IN*/ int level, /*OUT*/ int& north_index, /*OUT*/ int& south_index, /*OUT*/ int& east_index, /*OUT*/ int& west_index);
 
 	public:
 		ustring to_encrypt_string(interior_index index);

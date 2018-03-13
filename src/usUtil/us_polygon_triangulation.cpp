@@ -22,6 +22,7 @@
 #include <usUtil/us_base_algorithm.h>
 #include <usUtil/TriangleX.h>
 #include <usUtil/us_triangulation.h>
+#include <usUtil/us_triangulation3.h>
 #include <usUtil/us_xml_parser_ext.h>
 #include <assert.h>
 

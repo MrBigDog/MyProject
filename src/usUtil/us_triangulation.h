@@ -17,6 +17,8 @@
 #define _US_TRIANGULATION_H_
 
 #include <usUtil\Export.h>
+#include <usUtil\us_vector2.h>
+#include <usUtil\us_math.h>
 
 namespace uniscope_globe
 {

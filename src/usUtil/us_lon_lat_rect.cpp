@@ -303,14 +303,14 @@ namespace uniscope_globe
 
 		vector_3d v_nearest_pos = in_pt;
 
-		v_nearest_pos.x = max(vec_min.x, v_nearest_pos.x);
-		v_nearest_pos.x = min(vec_max.x, v_nearest_pos.x);
+		v_nearest_pos.x = (std::max)(vec_min.x, v_nearest_pos.x);
+		v_nearest_pos.x = (std::min)(vec_max.x, v_nearest_pos.x);
 
-		v_nearest_pos.y = max(vec_min.y, v_nearest_pos.y);
-		v_nearest_pos.y = min(vec_max.y, v_nearest_pos.y);
+		v_nearest_pos.y = (std::max)(vec_min.y, v_nearest_pos.y);
+		v_nearest_pos.y = (std::min)(vec_max.y, v_nearest_pos.y);
 
-		v_nearest_pos.z = max(vec_min.z, v_nearest_pos.z);
-		v_nearest_pos.z = min(vec_max.z, v_nearest_pos.z);
+		v_nearest_pos.z = (std::max)(vec_min.z, v_nearest_pos.z);
+		v_nearest_pos.z = (std::min)(vec_max.z, v_nearest_pos.z);
 
 		return v_nearest_pos;
 	}

@@ -17,6 +17,7 @@
 #define _US_SPHERICAL_COORDS_H_
 
 #include <usUtil\Export.h>
+#include <usUtil\us_vector3.h>
 
 namespace uniscope_globe
 {

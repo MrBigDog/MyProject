@@ -15,15 +15,19 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_BRUSH_STYLE_H_
 #define _US_BRUSH_STYLE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_style_base.h>
+#include <usUtil\us_common_file.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT brush_style : public style_base
 	{
 	public:
-		brush_style( void );
-		brush_style( const brush_style& v_style );
-		virtual ~brush_style( void );
+		brush_style(void);
+		brush_style(const brush_style& v_style);
+		virtual ~brush_style(void);
 
 	public:
 		ulong m_line_width;
@@ -34,9 +38,9 @@ namespace uniscope_globe
 	class USCORE_EXPORT simple_polygon_style : public style_base
 	{
 	public:
-		simple_polygon_style( void );
-		simple_polygon_style( const simple_polygon_style& v_style );
-		virtual ~simple_polygon_style( void );
+		simple_polygon_style(void);
+		simple_polygon_style(const simple_polygon_style& v_style);
+		virtual ~simple_polygon_style(void);
 
 	public:
 		float m_line_width;

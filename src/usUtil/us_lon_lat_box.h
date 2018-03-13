@@ -19,10 +19,11 @@
 #define _US_LON_LAT_BOX_H_
 
 #include <usUtil\Export.h>
-#include <usUtil\us_vector3.h>
-#include <usUtil\us_matrix4.h>
+//#include <usUtil\us_vector3.h>
+//#include <usUtil\us_matrix4.h>
 #include <usUtil\us_lon_lat_rect.h>
 #include <usUtil\us_lon_lat_geometry.h>
+#include "us_axis_aligned_box.h"
 
 namespace uniscope_globe
 {

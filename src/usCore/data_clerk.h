@@ -5,8 +5,12 @@
  */
 #ifndef data_clerk_h__
 #define data_clerk_h__
+
 #include <usCore\Export.h>
 #include "data_bank.h"
+#include <usUtil/us_singleton.h>
+#include <map>
+
 namespace uniscope_globe
 {
 	/**@brief 数据状态，分永久性数据、临时数据、进程数据、机器数据、业务流程数据、角色数据、用户数据等等*/
@@ -29,13 +33,13 @@ namespace uniscope_globe
 
 	public:
 		///创建缓存实例
-		void get_or_create_bank_instance(const ustring& path );
+		void get_or_create_bank_instance(const ustring& path);
 
-		bool attach_entry( const std::string& key, const leveldb::Slice& value );
+		bool attach_entry(const std::string& key, const leveldb::Slice& value);
 
-		bool query_entry_value( const std::string& key, std::string& value );
+		bool query_entry_value(const std::string& key, std::string& value);
 
-		bool delete_entry( const std::string& key );
+		bool delete_entry(const std::string& key);
 
 	protected:
 		void final();
@@ -45,11 +49,11 @@ namespace uniscope_globe
 	};
 
 
-	class USCORE_EXPORT singleton_data_clerk: public singleton<data_clerk>
+	class USCORE_EXPORT singleton_data_clerk : public singleton<data_clerk>
 	{
 	public:
-		singleton_data_clerk(){}
-		virtual ~singleton_data_clerk(){}
+		singleton_data_clerk() {}
+		virtual ~singleton_data_clerk() {}
 	};
 }
 

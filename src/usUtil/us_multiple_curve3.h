@@ -17,6 +17,7 @@
 #define _US_MULTIPLE_CURVE3_H_
 
 #include <usUtil\Export.h>
+#include <usUtil\us_curve3.h>
 
 namespace uniscope_globe
 {

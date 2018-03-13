@@ -17,6 +17,8 @@
 #define _US_RENDER_STYLE_H_
 
 #include <usCore\Export.h>
+#include <usUtil\us_object_base.h>
+
 #include <vector>
 
 namespace uniscope_globe

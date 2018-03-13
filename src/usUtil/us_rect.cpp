@@ -16,6 +16,7 @@
 //
 //////////////////////////////////////////////////////////////////////////
 #include "us_rect.h"
+#include <usUtil/us_region.h>
 #include <usUtil/us_point.h>
 #include <usUtil/us_common_file.h>
 

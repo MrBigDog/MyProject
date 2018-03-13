@@ -15,26 +15,34 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_COLLISION_NODE_H_
 #define _US_COLLISION_NODE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_mutex.h>
+#include <vector>
+
 namespace uniscope_globe
 {
+	template<class real> class ray;
+	class intersect_base;
+	class intersect_result;
+
 	class USCORE_EXPORT collision_node
 	{
 	public:
 		typedef std::vector< intersect_base* > intersect_object_array;
 
 	public:
-		collision_node( void );
+		collision_node(void);
 
-		virtual ~collision_node( void );
+		virtual ~collision_node(void);
 
-		virtual void push( intersect_base* in_obj );
+		virtual void push(intersect_base* in_obj);
 
-		virtual void flush( void );
+		virtual void flush(void);
 
 		// override
 	public:
-		virtual bool collision( ray<double>& a_ray, intersect_result& result );
+		virtual bool collision(ray<double>& a_ray, intersect_result& result);
 
 	protected:
 		intersect_object_array* m_back_array;

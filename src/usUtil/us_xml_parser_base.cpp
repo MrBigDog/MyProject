@@ -16,6 +16,7 @@
 
 #include "us_xml_parser_base.h"
 #include <usUtil/us_common_file.h>
+#include <usUtil/us_xml_parser_manager.h>
 #include <usXml/tinyxml.h>
 
 namespace uniscope_globe

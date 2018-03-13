@@ -18,7 +18,6 @@
 
 #include <usUtil\Export.h>
 #include "us_circle.h"
-#include "us_vector3.h"
 #include "us_axis_aligned_box.h"
 
 namespace uniscope_globe

@@ -15,28 +15,34 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_COMMON_LOADER_H_
 #define _US_COMMON_LOADER_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <wtypes.h>
+
 namespace uniscope_globe
 {
+	class link_base;
 	class downloader;
+
 	class USCORE_EXPORT common_loader
 	{
 	protected:
-		common_loader( void ) { m_link = 0; }
+		common_loader(void) { m_link = 0; }
 
 	public:
-		common_loader( const LPCTSTR str_url, downloader* v_downloader );
+		common_loader(const LPCTSTR str_url, downloader* v_downloader);
 
-		virtual ~common_loader( void );
+		virtual ~common_loader(void);
 
 	public:
-		int load( byte* &data_stream, int& v_size );
+		int load(byte* &data_stream, int& v_size);
 
 	private:
 		link_base*	m_link;
 
 		downloader* m_downloader;
-				 
+
 	};
 }
 

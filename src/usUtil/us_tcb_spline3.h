@@ -17,6 +17,7 @@
 #define _US_TCB_SPLINE3_H_
 
 #include <usUtil\Export.h>
+#include <usUtil\us_multiple_curve3.h>
 
 namespace uniscope_globe
 {

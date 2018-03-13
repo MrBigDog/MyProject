@@ -16,6 +16,7 @@
 
 #include "us_projection.h"
 #include <usUtil\us_math.h>
+#include <usUtil\us_lon_lat_rect.h>
 
 namespace uniscope_globe
 {

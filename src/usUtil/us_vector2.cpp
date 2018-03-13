@@ -15,7 +15,7 @@
 //				http://mathworld.wolfram.com/Matrix.html
 //
 //////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_vector2.h"
 
 namespace uniscope_globe

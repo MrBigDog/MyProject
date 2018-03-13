@@ -18,7 +18,7 @@
 
 #include <usUtil/Export.h>
 #include <usUtil/us_transform_base.h>
-#include <usUtil/us_quaternion.h>
+//#include <usUtil/us_quaternion.h>
 
 namespace uniscope_globe
 {

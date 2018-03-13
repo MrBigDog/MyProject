@@ -15,7 +15,6 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #include "us_shp_file.h"
-#include <usUtil/us_lon_lat_rect.h>
 #include <usUtil/us_string_ext.h>
 #include <usUtil/us_file_directory.h>
 
@@ -39,13 +38,13 @@ namespace uniscope_globe
 		m_str_path = str_path;
 
 		// open shape file
-		m_handle = SHPOpen(string_ext::from_wstring(m_str_path).data(), "rb");
+		m_handle = SHPOpen(/*string_ext::from_wstring*/(m_str_path).data(), "rb");
 		if (m_handle == NULL)
 		{
 			return false;
 		}
 
-		ustring str_dbf_file = file_directory::get_path_without_ext(str_path) + L".dbf";
+		ustring str_dbf_file = file_directory::get_path_without_ext(str_path) + /*L*/".dbf";
 		if (!m_dbf_file->init_dbf_file(str_dbf_file.c_str()))
 		{
 			SHPClose(m_handle);
@@ -73,7 +72,7 @@ namespace uniscope_globe
 		{
 			if (get_field_info(i, ptr_text, field_type, field_width, n_decimal))
 			{
-				m_field_map.insert(make_pair(string_ext::to_wstring(ptr_text), i));
+				m_field_map.insert(make_pair(/*string_ext::to_wstring*/(ptr_text), i));
 			}
 		}
 		return true;

@@ -2,7 +2,7 @@
  *  @author Felix
  *  @date 2018/01/11
  */
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "data_bank.h"
 
 using namespace uniscope_globe;

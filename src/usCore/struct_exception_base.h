@@ -8,6 +8,7 @@
 
 #ifndef struct_exception_base_h__
 #define struct_exception_base_h__
+
 #include <usCore\Export.h>
 #include "exception_base.h"
 #include <windows.h>

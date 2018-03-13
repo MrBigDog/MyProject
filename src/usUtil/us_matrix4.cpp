@@ -15,7 +15,7 @@
 //				http://mathworld.wolfram.com/Matrix.html
 //
 //////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_matrix4.h"
 
 namespace uniscope_globe
@@ -49,7 +49,7 @@ namespace uniscope_globe
 #endif //LINUX26
 
 #ifndef WIN64
-	void LIB_UTIL_API multiply_matrix_4f_sse2( matrix_4f* pOut, const matrix_4f* pIn1, const matrix_4f* pIn2 )
+	void /*LIB_UTIL_API*/ multiply_matrix_4f_sse2( matrix_4f* pOut, const matrix_4f* pIn1, const matrix_4f* pIn2 )
 	{
 		_asm
 		{
@@ -146,7 +146,7 @@ LOOPIT:						        // 开始循环
 	#endif
 
 	*/
-	void LIB_UTIL_API multiply_matrix_4f_sse2( matrix_4f* pOut, const matrix_4f* pIn1, const matrix_4f* pIn2 )
+	void /*LIB_UTIL_API*/ multiply_matrix_4f_sse2( matrix_4f* pOut, const matrix_4f* pIn1, const matrix_4f* pIn2 )
 	{
 
 		__m128 m1_row_0 = _mm_setr_ps(pIn1->m[0], pIn1->m[1], pIn1->m[2], pIn1->m[3]);
@@ -189,37 +189,12 @@ LOOPIT:						        // 开始循环
 
 
 
-	void LIB_UTIL_API multiply_matrix_4d_sse2( matrix_4d* out_mat, matrix_4d* mat1, matrix_4d* mat2 )
+	void /*LIB_UTIL_API*/ multiply_matrix_4d_sse2( matrix_4d* out_mat, matrix_4d* mat1, matrix_4d* mat2 )
 	{
 
 	}
 
-	void LIB_UTIL_API multiply_matrix_4f_c(matrix4<float>* pOut, const matrix4<float>* pIn1, const matrix4<float>* pIn2)
-	{
-		// [edx]   =   xmm0   *   xmm4    +    xmm1   *   xmm5    +    xmm2  *   xmm6   +    xmm3   *   xmm7
-		pOut->m11 = pIn1->m11*pIn2->m11 + pIn1->m12*pIn2->m21 + pIn1->m13*pIn2->m31 + pIn1->m14*pIn2->m41;
-		pOut->m12 = pIn1->m11*pIn2->m12 + pIn1->m12*pIn2->m22 + pIn1->m13*pIn2->m32 + pIn1->m14*pIn2->m42;
-		pOut->m13 = pIn1->m11*pIn2->m13 + pIn1->m12*pIn2->m23 + pIn1->m13*pIn2->m33 + pIn1->m14*pIn2->m43;
-		pOut->m14 = pIn1->m11*pIn2->m14 + pIn1->m12*pIn2->m24 + pIn1->m13*pIn2->m34 + pIn1->m14*pIn2->m44;
-
-		pOut->m21 = pIn1->m21*pIn2->m11 + pIn1->m22*pIn2->m21 + pIn1->m23*pIn2->m31 + pIn1->m24*pIn2->m41;
-		pOut->m22 = pIn1->m21*pIn2->m12 + pIn1->m22*pIn2->m22 + pIn1->m23*pIn2->m32 + pIn1->m24*pIn2->m42;
-		pOut->m23 = pIn1->m21*pIn2->m13 + pIn1->m22*pIn2->m23 + pIn1->m23*pIn2->m33 + pIn1->m24*pIn2->m43;
-		pOut->m24 = pIn1->m21*pIn2->m14 + pIn1->m22*pIn2->m24 + pIn1->m23*pIn2->m34 + pIn1->m24*pIn2->m44;
-
-		pOut->m31 = pIn1->m31*pIn2->m11 + pIn1->m32*pIn2->m21 + pIn1->m33*pIn2->m31 + pIn1->m34*pIn2->m41;
-		pOut->m32 = pIn1->m31*pIn2->m12 + pIn1->m32*pIn2->m22 + pIn1->m33*pIn2->m32 + pIn1->m34*pIn2->m42;
-		pOut->m33 = pIn1->m31*pIn2->m13 + pIn1->m32*pIn2->m23 + pIn1->m33*pIn2->m33 + pIn1->m34*pIn2->m43;
-		pOut->m34 = pIn1->m31*pIn2->m14 + pIn1->m32*pIn2->m24 + pIn1->m33*pIn2->m34 + pIn1->m34*pIn2->m44;
-
-		pOut->m41 = pIn1->m41*pIn2->m11 + pIn1->m42*pIn2->m21 + pIn1->m43*pIn2->m31 + pIn1->m44*pIn2->m41;
-		pOut->m42 = pIn1->m41*pIn2->m12 + pIn1->m42*pIn2->m22 + pIn1->m43*pIn2->m32 + pIn1->m44*pIn2->m42;
-		pOut->m43 = pIn1->m41*pIn2->m13 + pIn1->m42*pIn2->m23 + pIn1->m43*pIn2->m33 + pIn1->m44*pIn2->m43;
-		pOut->m44 = pIn1->m41*pIn2->m14 + pIn1->m42*pIn2->m24 + pIn1->m43*pIn2->m34 + pIn1->m44*pIn2->m44;
-
-	}
-
-	void LIB_UTIL_API multiply_matrix_4d_c(matrix4<double>* pOut, const matrix4<double>* pIn1, const matrix4<double>* pIn2)
+	void /*LIB_UTIL_API*/ multiply_matrix_4f_c(matrix4<float>* pOut, const matrix4<float>* pIn1, const matrix4<float>* pIn2)
 	{
 		// [edx]   =   xmm0   *   xmm4    +    xmm1   *   xmm5    +    xmm2  *   xmm6   +    xmm3   *   xmm7
 		pOut->m11 = pIn1->m11*pIn2->m11 + pIn1->m12*pIn2->m21 + pIn1->m13*pIn2->m31 + pIn1->m14*pIn2->m41;
@@ -244,14 +219,39 @@ LOOPIT:						        // 开始循环
 
 	}
 
-	void LIB_UTIL_API multiply_vector3_matrix_4f_c( vector_3f* pOut, const vector_3f* pVec, const matrix_4f* pMat )
+	void /*LIB_UTIL_API*/ multiply_matrix_4d_c(matrix4<double>* pOut, const matrix4<double>* pIn1, const matrix4<double>* pIn2)
+	{
+		// [edx]   =   xmm0   *   xmm4    +    xmm1   *   xmm5    +    xmm2  *   xmm6   +    xmm3   *   xmm7
+		pOut->m11 = pIn1->m11*pIn2->m11 + pIn1->m12*pIn2->m21 + pIn1->m13*pIn2->m31 + pIn1->m14*pIn2->m41;
+		pOut->m12 = pIn1->m11*pIn2->m12 + pIn1->m12*pIn2->m22 + pIn1->m13*pIn2->m32 + pIn1->m14*pIn2->m42;
+		pOut->m13 = pIn1->m11*pIn2->m13 + pIn1->m12*pIn2->m23 + pIn1->m13*pIn2->m33 + pIn1->m14*pIn2->m43;
+		pOut->m14 = pIn1->m11*pIn2->m14 + pIn1->m12*pIn2->m24 + pIn1->m13*pIn2->m34 + pIn1->m14*pIn2->m44;
+
+		pOut->m21 = pIn1->m21*pIn2->m11 + pIn1->m22*pIn2->m21 + pIn1->m23*pIn2->m31 + pIn1->m24*pIn2->m41;
+		pOut->m22 = pIn1->m21*pIn2->m12 + pIn1->m22*pIn2->m22 + pIn1->m23*pIn2->m32 + pIn1->m24*pIn2->m42;
+		pOut->m23 = pIn1->m21*pIn2->m13 + pIn1->m22*pIn2->m23 + pIn1->m23*pIn2->m33 + pIn1->m24*pIn2->m43;
+		pOut->m24 = pIn1->m21*pIn2->m14 + pIn1->m22*pIn2->m24 + pIn1->m23*pIn2->m34 + pIn1->m24*pIn2->m44;
+
+		pOut->m31 = pIn1->m31*pIn2->m11 + pIn1->m32*pIn2->m21 + pIn1->m33*pIn2->m31 + pIn1->m34*pIn2->m41;
+		pOut->m32 = pIn1->m31*pIn2->m12 + pIn1->m32*pIn2->m22 + pIn1->m33*pIn2->m32 + pIn1->m34*pIn2->m42;
+		pOut->m33 = pIn1->m31*pIn2->m13 + pIn1->m32*pIn2->m23 + pIn1->m33*pIn2->m33 + pIn1->m34*pIn2->m43;
+		pOut->m34 = pIn1->m31*pIn2->m14 + pIn1->m32*pIn2->m24 + pIn1->m33*pIn2->m34 + pIn1->m34*pIn2->m44;
+
+		pOut->m41 = pIn1->m41*pIn2->m11 + pIn1->m42*pIn2->m21 + pIn1->m43*pIn2->m31 + pIn1->m44*pIn2->m41;
+		pOut->m42 = pIn1->m41*pIn2->m12 + pIn1->m42*pIn2->m22 + pIn1->m43*pIn2->m32 + pIn1->m44*pIn2->m42;
+		pOut->m43 = pIn1->m41*pIn2->m13 + pIn1->m42*pIn2->m23 + pIn1->m43*pIn2->m33 + pIn1->m44*pIn2->m43;
+		pOut->m44 = pIn1->m41*pIn2->m14 + pIn1->m42*pIn2->m24 + pIn1->m43*pIn2->m34 + pIn1->m44*pIn2->m44;
+
+	}
+
+	void /*LIB_UTIL_API*/ multiply_vector3_matrix_4f_c( vector_3f* pOut, const vector_3f* pVec, const matrix_4f* pMat )
 	{
 		pOut->x = pVec->x * pMat->m[0] + pVec->y * pMat->m[4] + pVec->z * pMat->m[8] +  pMat->m[12];
 		pOut->y = pVec->x * pMat->m[1] + pVec->y * pMat->m[5] + pVec->z * pMat->m[9] +  pMat->m[13];
 		pOut->z = pVec->x * pMat->m[2] + pVec->y * pMat->m[6] + pVec->z * pMat->m[10] + pMat->m[14];
 	}
 
-	void LIB_UTIL_API multiply_vector3_matrix_4d_c( vector_3d* pOut, const vector_3d* pVec, const matrix_4d* pMat )
+	void /*LIB_UTIL_API*/ multiply_vector3_matrix_4d_c( vector_3d* pOut, const vector_3d* pVec, const matrix_4d* pMat )
 	{
 		pOut->x = pVec->x * pMat->m[0] + pVec->y * pMat->m[4] + pVec->z * pMat->m[8] +  pMat->m[12];
 		pOut->y = pVec->x * pMat->m[1] + pVec->y * pMat->m[5] + pVec->z * pMat->m[9] +  pMat->m[13];

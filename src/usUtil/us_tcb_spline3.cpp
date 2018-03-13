@@ -13,8 +13,9 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_tcb_spline3.h"
+#include <usUtil/us_integrate1.h>
 
 namespace uniscope_globe
 {

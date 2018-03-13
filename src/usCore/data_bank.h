@@ -7,39 +7,41 @@
 #include <usCore\Export.h>
 #include <leveldb/db.h>
 
+#include <usUtil/us_common_file.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT data_bank
 	{
 	private:
-		explicit data_bank( const ustring& bank_path );
+		explicit data_bank(const ustring& bank_path);
 	public:
 		~data_bank(void);
-		friend data_bank* create_data_bank( const ustring& bank_path );
+		friend data_bank* create_data_bank(const ustring& bank_path);
 
 		bool create_data_system();
 
-		bool attach_entry( const leveldb::Slice& key, const leveldb::Slice& value );
+		bool attach_entry(const leveldb::Slice& key, const leveldb::Slice& value);
 
-		bool query_entry_value( const leveldb::Slice& key, std::string& value );
+		bool query_entry_value(const leveldb::Slice& key, std::string& value);
 
-		bool delete_entry( const leveldb::Slice& key );
+		bool delete_entry(const leveldb::Slice& key);
 
 	protected:
-		void set_options_create_if_missing( bool flag );
+		void set_options_create_if_missing(bool flag);
 
 		void close();
 
 	private:
-		leveldb::DB * m_bank ;
+		leveldb::DB * m_bank;
 		leveldb::Options m_op;
 		ustring m_bank_address;
 	};
 
-	inline data_bank* USCORE_EXPORT create_data_bank( const ustring& bank_path )
+	inline data_bank* USCORE_EXPORT create_data_bank(const ustring& bank_path)
 	{
-		data_bank* db = new data_bank( bank_path );
-		if( true != db->create_data_system() ) return NULL;
+		data_bank* db = new data_bank(bank_path);
+		if (true != db->create_data_system()) return NULL;
 
 		return db;
 	}

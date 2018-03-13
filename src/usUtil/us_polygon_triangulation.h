@@ -17,7 +17,7 @@
 #define _US_POLYGON_TRIANGULATION_H_
 
 #include <usUtil\Export.h>
-
+#include <usUtil\us_vector3.h>
 #include <map>
 #include <vector>
 
@@ -25,7 +25,7 @@ using namespace std;
 
 namespace uniscope_globe
 {
-	class coordinates_array;
+	//class coordinates_array;
 
 	class USUTIL_EXPORT edge_key
 	{

@@ -15,53 +15,54 @@
 //				http://mathworld.wolfram.com/Matrix.html
 //
 //////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_mutex.h"
+#include <assert.h>
 
 namespace uniscope_globe
-{	
+{
 	//
 	// win_mutex
 	//
-	win_mutex::win_mutex( void ) 
+	win_mutex::win_mutex(void)
 	{
-		InitializeCriticalSection( &critical_section );
+		InitializeCriticalSection(&critical_section);
 	}
 
-	win_mutex::~win_mutex( void ) 
+	win_mutex::~win_mutex(void)
 	{
-		DeleteCriticalSection( &critical_section );
+		DeleteCriticalSection(&critical_section);
 	}
 
 	void win_mutex::lock()
 	{
-		EnterCriticalSection( &critical_section );
+		EnterCriticalSection(&critical_section);
 	}
 
 	void win_mutex::unlock()
 	{
-		LeaveCriticalSection( &critical_section );
+		LeaveCriticalSection(&critical_section);
 	}
 
 
 	//
 	// lock
 	//
-	unique_lock::unique_lock( win_mutex& mutex )
-		: mutex_pointer( &mutex )
-		, is_locked( false )
+	unique_lock::unique_lock(win_mutex& mutex)
+		: mutex_pointer(&mutex)
+		, is_locked(false)
 	{
 		lock();
 	}
 
-	unique_lock::unique_lock( win_mutex* mutex )
-		: mutex_pointer( mutex )
-		, is_locked( false )
+	unique_lock::unique_lock(win_mutex* mutex)
+		: mutex_pointer(mutex)
+		, is_locked(false)
 	{
 		lock();
 	}
 
-	unique_lock::~unique_lock( void )
+	unique_lock::~unique_lock(void)
 	{
 		unlock();
 	}
@@ -69,9 +70,9 @@ namespace uniscope_globe
 
 	void unique_lock::lock()
 	{
-		if ( owns_lock() )
+		if (owns_lock())
 		{
-			assert( false );
+			assert(false);
 			return;
 		}
 		mutex_pointer->lock();
@@ -80,9 +81,9 @@ namespace uniscope_globe
 
 	void unique_lock::unlock()
 	{
-		if ( !owns_lock() )
+		if (!owns_lock())
 		{
-			assert( false );
+			assert(false);
 			return;
 		}
 		mutex_pointer->unlock();

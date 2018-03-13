@@ -21,6 +21,7 @@
 #include <usUtil\us_dbf_file.h>
 #include <usUtil\us_vector3.h>
 #include <usUtil\us_common_file.h>
+#include <usUtil/us_lon_lat_rect.h>
 #include <map>
 #include <wtypes.h>
 
@@ -28,7 +29,8 @@ using namespace std;
 
 namespace uniscope_globe
 {
-	class lon_lat_rect;
+	//class lon_lat_rect;
+	//class ustring;
 
 	typedef map<ustring, int> field_index_map;
 
