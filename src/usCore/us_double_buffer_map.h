@@ -15,18 +15,20 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_DOUBLE_BUFFER_MAP_H_
 #define _US_DOUBLE_BUFFER_MAP_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT double_buffer_map
 	{
 	public:
-		double_buffer_map( void );
+		double_buffer_map(void);
 
-		virtual ~double_buffer_map( void );
+		virtual ~double_buffer_map(void);
 
 	public:
-		 
+
 	};
 }
 

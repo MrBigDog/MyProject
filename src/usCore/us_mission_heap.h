@@ -15,7 +15,16 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_MISSION_HEAP_H_
 #define _US_MISSION_HEAP_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_mission_executant.h>
+#include <usUtil\us_mutex.h>
+#include <usUtil\us_heap.h>
+#include <usUtil\us_common_file.h>
+
+#include <vector>
+#include <deque>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT mission_heap : public mission_executant

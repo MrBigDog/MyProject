@@ -15,9 +15,15 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_NETWORK_LINK_H_
 #define _US_NETWORK_LINK_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+
 namespace uniscope_globe
 {
+	class event_argument;
+	class download_mission;
+
 	class USCORE_EXPORT network_link
 	{
 	public:

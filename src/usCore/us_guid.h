@@ -15,7 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_GUID_H_
 #define _US_GUID_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <guiddef.h>
 
 namespace uniscope_globe
 {
@@ -23,19 +26,19 @@ namespace uniscope_globe
 	class USCORE_EXPORT guid
 	{
 	private:
-		guid( void );
+		guid(void);
 
 	public:
-		virtual ~guid( void );
+		virtual ~guid(void);
 
 	public:
-		static ustring create( void );
+		static ustring create(void);
 
-		static GUID create( cpstr str_guid );
+		static GUID create(cpstr str_guid);
 
-		static ustring create( GUID& in_guid );
+		static ustring create(GUID& in_guid);
 
-		static void guid_string_to_int64( cpstr str_guid, __int64& out_first, __int64& out_second );
+		static void guid_string_to_int64(cpstr str_guid, __int64& out_first, __int64& out_second);
 	};
 }
 

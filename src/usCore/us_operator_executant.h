@@ -15,7 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_OPERATOR_EXECUTANT_H_
 #define _US_OPERATOR_EXECUTANT_H_
+
 #include <usCore\Export.h>
+#include <deque>
+
 namespace uniscope_globe
 {
 	class operator_base;

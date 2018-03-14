@@ -13,7 +13,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_hardware_occlusion_query.h"
 
 namespace uniscope_globe

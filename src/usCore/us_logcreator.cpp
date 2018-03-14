@@ -1,4 +1,4 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 
 #ifdef GW_DEBUG_LOG///debug
 log4cplus::Logger singleton_gw_log::_logger = Logger::getInstance(LOG4CPLUS_TEXT("GeniusWorld"));

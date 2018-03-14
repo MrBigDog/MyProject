@@ -15,7 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_OPERATOR_INSTANT_EXECUTANT_H_
 #define _US_OPERATOR_INSTANT_EXECUTANT_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_operator_base.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT operator_instant_executant : public operator_base

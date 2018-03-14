@@ -15,20 +15,28 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_ICON_STYLE_H_
 #define _US_ICON_STYLE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_style_base.h>
+#include <usCore\us_common_resource_container.h>
+#include <usUtil\us_rect.h>
+
 namespace uniscope_globe
 {
+	class hardware_texture;
+	//class rect;
+
 	class USCORE_EXPORT icon_style : public style_base
 	{
 	public:
-		icon_style( void );
-		icon_style( const icon_style& v_style );
-		virtual ~icon_style( void );
+		icon_style(void);
+		icon_style(const icon_style& v_style);
+		virtual ~icon_style(void);
 
 	public:
-		void set_icon( cpstr str );
+		void set_icon(cpstr str);
 
-		hardware_texture* get_texture( void );
+		hardware_texture* get_texture(void);
 
 	public:
 		dword	m_blend_color;

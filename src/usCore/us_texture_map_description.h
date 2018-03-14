@@ -18,6 +18,8 @@
 #define _US_TEXTURE_MAP_DESCRIPTION_H_
 
 #include <usCore\Export.h>
+#include <usUtil\us_matrix4.h>
+#include <usCore\us_event_argument.h>
 
 namespace uniscope_globe
 {

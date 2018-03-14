@@ -13,7 +13,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_extended_material.h"
 
 namespace uniscope_globe

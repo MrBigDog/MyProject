@@ -15,7 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_TEXTUE_STATE_H_
 #define _US_TEXTUE_STATE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <stack>
 namespace uniscope_globe
 {
 #ifndef WIN64

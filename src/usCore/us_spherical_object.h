@@ -17,6 +17,14 @@
 #define _US_SPHERICAL_OBJECT_H_
 
 #include <usCore\Export.h>
+#include <usCore\us_styling_object.h>
+#include <usCore\us_rigid_body.h>
+#include <usCore\us_spatial_object.h>
+#include <usCore\us_editable_object.h>
+
+#include <usUtil/us_spherical_transform.h>
+#include <usUtil/us_spatial_reference.h>
+#include <usUtil/us_lon_lat_rect.h>
 
 namespace uniscope_globe
 {

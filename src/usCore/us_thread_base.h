@@ -15,7 +15,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_THREAD_BASE_H_
 #define _US_THREAD_BASE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <usCore\us_thread_data.h>
+
 namespace uniscope_globe
 {
 

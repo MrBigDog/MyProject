@@ -15,19 +15,24 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_INTERSECT_RESULT_H_
 #define _US_INTERSECT_RESULT_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_vector3.h>
+
 namespace uniscope_globe
 {
 	class hardware_mesh;
+	class object_base;
+
 	class USCORE_EXPORT intersect_result
 	{
 	public:
 		typedef std::vector<object_base*> object_array;
 
 	public:
-		intersect_result( void );
+		intersect_result(void);
 
-		virtual ~intersect_result( void );
+		virtual ~intersect_result(void);
 
 	public:
 		double			m_distance;

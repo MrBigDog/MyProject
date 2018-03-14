@@ -15,19 +15,22 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_INTERSECT_ARGUMENT_H_
 #define _US_INTERSECT_ARGUMENT_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
+	class object_base;
 	class USCORE_EXPORT intersect_argument
 	{
 	public:
-		intersect_argument( void );
+		intersect_argument(void);
 
-		virtual ~intersect_argument( void );
+		virtual ~intersect_argument(void);
 
 	public:
 		object_base* m_observer;
-		 
+
 	};
 }
 

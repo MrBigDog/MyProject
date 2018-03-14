@@ -15,24 +15,29 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_COMMON_MISSION_QUEUE_H_
 #define _US_COMMON_MISSION_QUEUE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_mission_queue.h>
+#include <usUtil\us_singleton.h>
+#include <vector>
+
 namespace uniscope_globe
 {
-	
-	class USCORE_EXPORT common_mission_queue
-		: public mission_queue
+	class mission_base;
+
+	class USCORE_EXPORT common_mission_queue : public mission_queue
 	{
 	public:
-		common_mission_queue( void );
+		common_mission_queue(void);
 
-		virtual ~common_mission_queue( void );
+		virtual ~common_mission_queue(void);
 
 		typedef std::vector<mission_base*> remove_mission_array;
 
 	public:
-		void remove_mission( mission_base* v_mission );
-		
-		void clean( void );
+		void remove_mission(mission_base* v_mission);
+
+		void clean(void);
 
 	protected:
 		remove_mission_array m_mission_array;
@@ -43,11 +48,11 @@ namespace uniscope_globe
 		: public singleton<common_mission_queue>
 	{
 	public:
-		singleton_common_mission_queue( void )
+		singleton_common_mission_queue(void)
 		{
 		}
 
-		virtual ~singleton_common_mission_queue( void )
+		virtual ~singleton_common_mission_queue(void)
 		{
 
 		}

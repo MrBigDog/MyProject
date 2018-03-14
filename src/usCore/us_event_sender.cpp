@@ -13,31 +13,32 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "Stdafx.h"
+//#include "Stdafx.h"
 #include "us_event_sender.h"
+#include <usCore/us_event_base.h>
 
 namespace uniscope_globe
 {
-	event_sender::event_sender( void )
+	event_sender::event_sender(void)
 	{
 
 	}
 
-	event_sender::event_sender( event_sender_ptr v_sender, event_base* v_event )
+	event_sender::event_sender(event_sender_ptr v_sender, event_base* v_event)
 	{
 		m_sender = v_sender;
 		m_event = v_event;
 	}
 
-	event_sender::~event_sender( void )
+	event_sender::~event_sender(void)
 	{
 
 	}
 
-	void event_sender::terminate_event( void )
+	void event_sender::terminate_event(void)
 	{
 
 	}
 
-	
+
 }

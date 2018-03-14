@@ -15,7 +15,9 @@
 //////////////////////////////////////////////////////////////////////////
 #ifndef _US_TLS_SINGLETON_H_
 #define _US_TLS_SINGLETON_H_
+
 //#include <usCore\Export.h>
+
 namespace uniscope_globe
 {
 	template <class T>

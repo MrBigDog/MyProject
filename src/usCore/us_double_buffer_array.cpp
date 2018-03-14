@@ -13,7 +13,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_double_buffer_array.h"
 
 namespace uniscope_globe

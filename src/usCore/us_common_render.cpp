@@ -13,12 +13,14 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_common_render.h"
+//#include <usCore/us_render_object.h>
+#include <usUtil/us_common_file.h>
 
 namespace uniscope_globe
 {
-	common_render::common_render( void )
+	common_render::common_render(void)
 	{
 		m_current_render_array = new render_object_array;
 
@@ -27,33 +29,33 @@ namespace uniscope_globe
 		m_qid = US_DEFAULT_RENDER_NODE;
 	}
 
-	common_render::~common_render( void )
+	common_render::~common_render(void)
 	{
 		clear();
 	}
 
-	void common_render::draw( render_argument* args )
+	void common_render::draw(render_argument* args)
 	{
 		{
 			US_LOCK_AUTO_MUTEX
 
-			render_object_array::iterator itr = m_current_render_array->begin();
-			for( ; itr != m_current_render_array->end(); itr ++ )
+				render_object_array::iterator itr = m_current_render_array->begin();
+			for (; itr != m_current_render_array->end(); itr++)
 			{
-				(*itr)->draw( args );
+				(*itr)->draw(args);
 			}
 
 		}
-		render_node::draw( args );
+		render_node::draw(args);
 	}
 
-	void common_render::flush( void )
+	void common_render::flush(void)
 	{
 		// begin flip render_object
 		{
 			US_LOCK_AUTO_MUTEX
 
-			render_object_array* temp_array = m_current_render_array;
+				render_object_array* temp_array = m_current_render_array;
 
 			m_current_render_array = m_background_render_array;
 
@@ -65,47 +67,47 @@ namespace uniscope_globe
 		render_node::flush();
 	}
 
-	void common_render::push( render_object* in_object )
+	void common_render::push(render_object* in_object)
 	{
 		in_object->add_ref();
-		m_background_render_array->push_back( in_object );
+		m_background_render_array->push_back(in_object);
 	}
 
-	void common_render::clear_background( void )
+	void common_render::clear_background(void)
 	{
 		render_object_array::iterator itr = m_background_render_array->begin();
-		for( ; itr != m_background_render_array->end(); itr ++ )
+		for (; itr != m_background_render_array->end(); itr++)
 		{
-			AUTO_RELEASE_SHARED_DATA( *itr );
+			AUTO_RELEASE_SHARED_DATA(*itr);
 		}
 
 		m_background_render_array->clear();
 	}
 
-	void common_render::clear( void )
+	void common_render::clear(void)
 	{
 		render_object_array::iterator itr = m_current_render_array->begin();
-		for( ; itr != m_current_render_array->end(); itr ++ )
+		for (; itr != m_current_render_array->end(); itr++)
 		{
-			AUTO_RELEASE_SHARED_DATA( *itr );
+			AUTO_RELEASE_SHARED_DATA(*itr);
 		}
-		AUTO_DELETE( m_current_render_array );
+		AUTO_DELETE(m_current_render_array);
 
 		itr = m_background_render_array->begin();
-		for( ; itr != m_background_render_array->end(); itr ++ )
+		for (; itr != m_background_render_array->end(); itr++)
 		{
-			AUTO_RELEASE_SHARED_DATA( *itr );
+			AUTO_RELEASE_SHARED_DATA(*itr);
 		}
 
-		AUTO_DELETE( m_background_render_array );
+		AUTO_DELETE(m_background_render_array);
 	}
 
-	int common_render::get_count( void ) 
-	{ 
+	int common_render::get_count(void)
+	{
 		return m_current_render_array->size();
 	}
 
 
 
-	
+
 }

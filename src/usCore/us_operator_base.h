@@ -15,7 +15,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_OPERATOR_BASE_H_
 #define _US_OPERATOR_BASE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_object_base.h>
+#include <usCore\us_event_base.h>
+
 namespace uniscope_globe
 {
 	class render_device;
@@ -24,34 +28,34 @@ namespace uniscope_globe
 	class USCORE_EXPORT operator_base : public object_base
 	{
 	protected:
-		operator_base( void );
+		operator_base(void);
 
 	public:
-		virtual ~operator_base( void );
+		virtual ~operator_base(void);
 
 	public:
-		virtual void on_begin( time_value current_time );
+		virtual void on_begin(time_value current_time);
 
-		virtual void on_execute( time_value current_time );
+		virtual void on_execute(time_value current_time);
 
-		virtual	void on_draw( render_device* device );
+		virtual	void on_draw(render_device* device);
 
-		virtual void on_end( time_value current_time );
+		virtual void on_end(time_value current_time);
 
-		virtual void unregister_operator( void );
+		virtual void unregister_operator(void);
 
 	public:
-		bool is_end( void ) { return m_is_end; }
+		bool is_end(void) { return m_is_end; }
 
-		void finish_operator( void ) { m_is_end = true; }
+		void finish_operator(void) { m_is_end = true; }
 
-		void set_enable( bool is_enable ) {	m_is_enable = is_enable; }
+		void set_enable(bool is_enable) { m_is_enable = is_enable; }
 
-		bool get_enable( void ){ return m_is_enable; }
+		bool get_enable(void) { return m_is_enable; }
 
-		void set_target_object( object_base* object );
+		void set_target_object(object_base* object);
 
-		object_base* get_target_object( void );
+		object_base* get_target_object(void);
 
 	protected:
 		operator_executant* m_executant;

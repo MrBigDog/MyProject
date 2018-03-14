@@ -15,7 +15,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_EXTENDED_MATERIAL_H_
 #define _US_EXTENDED_MATERIAL_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <vector>
+
 namespace uniscope_globe
 {
 	struct texture_file
@@ -44,7 +48,7 @@ namespace uniscope_globe
 			r = g = b = a = 1.0;
 		}
 
-		color_value( float* p )
+		color_value(float* p)
 		{
 			r = p[0];
 			g = p[1];
@@ -52,23 +56,23 @@ namespace uniscope_globe
 			a = p[3];
 		}
 
-		bool operator == ( const color_value& cv ) const
+		bool operator == (const color_value& cv) const
 		{
-			return !( *this != cv );
+			return !(*this != cv);
 		}
 
-		bool operator != ( const color_value& cv ) const
+		bool operator != (const color_value& cv) const
 		{
-			return ( this->a != cv.a || this->r != cv.r || this->g != cv.g || this->b != cv.b );
+			return (this->a != cv.a || this->r != cv.r || this->g != cv.g || this->b != cv.b);
 		}
 	};
 
 	class USCORE_EXPORT material
 	{
 	public:
-		material( void ){}
+		material(void) {}
 
-		material( const material& v_mat )
+		material(const material& v_mat)
 		{
 			m_diffuse_rgba = v_mat.m_diffuse_rgba;
 			m_ambient_rgb = v_mat.m_ambient_rgb;
@@ -78,8 +82,8 @@ namespace uniscope_globe
 			m_name = v_mat.m_name;
 		}
 
-		~material( void ){}
-		
+		~material(void) {}
+
 	public:
 		color_value	m_diffuse_rgba;
 		color_value m_ambient_rgb;
@@ -93,9 +97,9 @@ namespace uniscope_globe
 	class USCORE_EXPORT material_set
 	{
 	public:
-		material_set( void );
+		material_set(void);
 
-		~material_set( void );
+		~material_set(void);
 
 		typedef std::vector<texture_file> texture_file_array;
 		typedef std::vector<material> material_array;
@@ -103,7 +107,7 @@ namespace uniscope_globe
 	public:
 		material_array m_materials;
 
-		texture_file_array m_texture_files;		
+		texture_file_array m_texture_files;
 	};
 }
 

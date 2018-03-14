@@ -18,7 +18,7 @@
 
 #include <usCore\Export.h>
 #include <usUtil\us_object_base.h>
-
+#include <usCore\us_event_base.h>
 #include <vector>
 
 namespace uniscope_globe

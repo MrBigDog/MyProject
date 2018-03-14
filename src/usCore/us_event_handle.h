@@ -17,7 +17,10 @@
 //////////////////////////////////////////////////////////////////////////
 #ifndef _US_EVENT_HANDLE_H_
 #define _US_EVENT_HANDLE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_function_base.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT event_handle
@@ -26,15 +29,15 @@ namespace uniscope_globe
 		event_handle(void);
 
 	public:
-		event_handle( const event_handle& fun_value )
+		event_handle(const event_handle& fun_value)
 		{
-			if ( fun_value.callback_function )
+			if (fun_value.callback_function)
 			{
 				callback_function = fun_value.callback_function->clone();
 			}
 		}
 
-		virtual ~event_handle( void );
+		virtual ~event_handle(void);
 
 		// 普通函数
 		//template <class fun>
@@ -52,22 +55,22 @@ namespace uniscope_globe
 
 		// 成员函数
 		template <typename object_pointer, typename member_function_pointer>
-		event_handle( const object_pointer& p_obj, const member_function_pointer& p_mem_fun )
+		event_handle(const object_pointer& p_obj, const member_function_pointer& p_mem_fun)
 		{
-			callback_function = ( new member_function<object_pointer, member_function_pointer>( p_obj, p_mem_fun ) );
+			callback_function = (new member_function<object_pointer, member_function_pointer>(p_obj, p_mem_fun));
 		}
 
-		event_handle& operator = (const event_handle& fun_value );
+		event_handle& operator = (const event_handle& fun_value);
 
-		void operator() ( event_argument* e )
+		void operator() (event_argument* e)
 		{
-			if ( callback_function )
+			if (callback_function)
 			{
-				(*callback_function)( e );
+				(*callback_function)(e);
 			}
 		}
 
-		bool operator == ( const event_handle& handler );
+		bool operator == (const event_handle& handler);
 
 	public:
 		void clear();

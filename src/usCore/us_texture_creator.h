@@ -15,9 +15,16 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_TEXTURE_CREATOR_H_
 #define _US_TEXTURE_CREATOR_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_mutex.h>
+#include <vector>
+
 namespace uniscope_globe
 {
+	class hardware_base;
+	class render_device;
+
 	class USCORE_EXPORT texture_creator
 	{
 	public:

@@ -15,24 +15,27 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_TIME_STYLE_H_
 #define _US_TIME_STYLE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT time_style
 	{
 	public:
-		time_style( void );
+		time_style(void);
 
-		time_style( time_style& st );
+		time_style(time_style& st);
 
-		~time_style( void );
+		~time_style(void);
 
 	public:
-		void start( double v_start );
+		void start(double v_start);
 
-		void set_parameter( double v_duration, double v_interval );
+		void set_parameter(double v_duration, double v_interval);
 
-		bool valid_cursor( double v_cur_time );
+		bool valid_cursor(double v_cur_time);
 
 	public:
 		double m_start_time;

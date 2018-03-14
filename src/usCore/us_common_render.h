@@ -15,39 +15,48 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_COMMON_RENDER_H_
 #define _US_COMMON_RENDER_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_render_node.h>
+#include <usCore/us_render_object.h>
+#include <usUtil\us_mutex.h>
+#include <vector>
+
 namespace uniscope_globe
 {
+	class render_object;
+	class render_argument;
+
 	class USCORE_EXPORT common_render : public render_node
 	{
 	public:
 		typedef std::vector<render_object*> render_object_array;
 
 	public:
-		common_render( void );
+		common_render(void);
 
-		virtual ~common_render( void );
+		virtual ~common_render(void);
 
 		// override from render_object
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
-		virtual void flush( void );
+		virtual void flush(void);
 
-		virtual void push( render_object* v_obj );
+		virtual void push(render_object* v_obj);
 
-		virtual void clear( void );	
+		virtual void clear(void);
 
 	public:
-		virtual int get_count( void );
+		virtual int get_count(void);
 
 	protected:
-		virtual void clear_background( void );
+		virtual void clear_background(void);
 
 	protected:
 		render_object_array* m_current_render_array;
 
-		render_object_array* m_background_render_array;	
+		render_object_array* m_background_render_array;
 
 		US_AUTO_MUTEX
 	};

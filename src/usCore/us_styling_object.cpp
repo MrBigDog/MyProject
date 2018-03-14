@@ -13,29 +13,30 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_styling_object.h"
+#include <usCore/us_style_base.h>
 
 namespace uniscope_globe
 {
-	styling_object::styling_object( void )
+	styling_object::styling_object(void)
 	{
 		m_render_style = NULL;
 	}
 
-	styling_object::~styling_object( void )
+	styling_object::~styling_object(void)
 	{
-		AUTO_DELETE( m_render_style );
+		AUTO_DELETE(m_render_style);
 	}
 
-	void styling_object::set_render_style( style_base* v_style )
+	void styling_object::set_render_style(style_base* v_style)
 	{
-		if ( m_render_style != NULL )
+		if (m_render_style != NULL)
 		{
-			AUTO_DELETE( m_render_style );
+			AUTO_DELETE(m_render_style);
 		}
 
 		m_render_style = v_style;
 	}
-	
+
 }

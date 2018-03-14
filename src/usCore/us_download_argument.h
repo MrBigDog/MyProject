@@ -15,9 +15,16 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_DOWNLOAD_ARGUMENT_H_
 #define _US_DOWNLOAD_ARGUMENT_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_event_argument.h>
+#include <usUtil\us_common_file.h>
+#include <wtypes.h>
+
 namespace uniscope_globe
 {
+	class raw_buffer;
+
 	enum donwload_status
 	{
 		US_DOWNLOAD_SUCCEED = 0,
@@ -27,15 +34,14 @@ namespace uniscope_globe
 		US_DOWNLOAD_RESET
 	};
 
-	class USCORE_EXPORT download_argument
-		: public event_argument
+	class USCORE_EXPORT download_argument : public event_argument
 	{
 	public:
-		download_argument( void );
+		download_argument(void);
 
-		download_argument( raw_buffer* v_stream, int v_status, interior_index v_id = 0 );
+		download_argument(raw_buffer* v_stream, int v_status, interior_index v_id = 0);
 
-		virtual ~download_argument( void );
+		virtual ~download_argument(void);
 
 	public:
 		raw_buffer* m_stream;

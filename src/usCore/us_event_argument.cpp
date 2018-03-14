@@ -13,7 +13,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "Stdafx.h"
+//#include "Stdafx.h"
 #include "us_event_argument.h"
 
 namespace uniscope_globe

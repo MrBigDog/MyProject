@@ -15,20 +15,22 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_COMMON_RESOURCE_CONTAINER_H_
 #define _US_COMMON_RESOURCE_CONTAINER_H_
-#include <usCore\Export.h>
+
+//#include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+
 namespace uniscope_globe
 {
 	template<typename KEY>
-	class common_resource_container 
-		: public resource_container<KEY>
+	class common_resource_container : public resource_container<KEY>
 	{
 	protected:
-		common_resource_container( void ){}
+		common_resource_container(void) {}
 
 	public:
-		common_resource_container( document_base* in_doc, KEY key, LPCTSTR str_url, int v_type )
-			: resource_container<KEY>( in_doc, key )
-		{		
+		common_resource_container(document_base* in_doc, KEY key, LPCTSTR str_url, int v_type)
+			: resource_container<KEY>(in_doc, key)
+		{
 			m_update_count = 0;
 			m_raw_buffer = NULL;
 			m_can_reach = true;
@@ -37,33 +39,33 @@ namespace uniscope_globe
 			m_download_type = v_type;
 		}
 
-		virtual ~common_resource_container( void ) 
+		virtual ~common_resource_container(void)
 		{
-			AUTO_DELETE( m_mission_flow );
-			AUTO_DELETE( m_raw_buffer );
+			AUTO_DELETE(m_mission_flow);
+			AUTO_DELETE(m_raw_buffer);
 		}
 
 	public:
-		virtual resource_base* get_resource( void )
+		virtual resource_base* get_resource(void)
 		{
-			if(m_url.size() != 0)
+			if (m_url.size() != 0)
 			{
-				if( m_mission_flow == NULL )
+				if (m_mission_flow == NULL)
 				{
 					m_mission_flow = new mission_flow;
 					download_mission* v_download_mission = NULL;
-					switch( m_download_type )
+					switch (m_download_type)
 					{
 					case US_DOWNLOAD_IN_HEAP:
-						v_download_mission = US_CREATE_MISSION_IN_HEAP( m_url.c_str() );
+						v_download_mission = US_CREATE_MISSION_IN_HEAP(m_url.c_str());
 						break;
 					case US_DOWNLOAD_IN_QUEUE:
-						v_download_mission = US_CREATE_MISSION_IN_QUEUE( m_url.c_str() );
+						v_download_mission = US_CREATE_MISSION_IN_QUEUE(m_url.c_str());
 						break;
 					}
-					v_download_mission->event_download_start  += event_handle( this, &common_resource_container<KEY>::on_download_start );
-					v_download_mission->event_download_finish += event_handle( this, &common_resource_container<KEY>::on_download_finish );
-					m_mission_flow->add_mission( v_download_mission );
+					v_download_mission->event_download_start += event_handle(this, &common_resource_container<KEY>::on_download_start);
+					v_download_mission->event_download_finish += event_handle(this, &common_resource_container<KEY>::on_download_finish);
+					m_mission_flow->add_mission(v_download_mission);
 				}
 
 				m_mission_flow->update();
@@ -74,84 +76,84 @@ namespace uniscope_globe
 		}
 
 		// override from reclaim_base
-		virtual void destroy( void )
+		virtual void destroy(void)
 		{
 
-			if( m_mission_flow != NULL )
+			if (m_mission_flow != NULL)
 			{
 				m_mission_flow->reset();
 
-				DEFERRED_RELEASE( m_resource );
+				DEFERRED_RELEASE(m_resource);
 			}
 
 			reclaim_base::destroy();
 		}
 
-		virtual void reset( void )
+		virtual void reset(void)
 		{
-			if ( m_mission_flow == NULL )
+			if (m_mission_flow == NULL)
 				return;
 
 			m_mission_flow->reset();
 
-			mission_base* v_mission = m_mission_flow->remove_mission( 0 );
-			if ( v_mission )
+			mission_base* v_mission = m_mission_flow->remove_mission(0);
+			if (v_mission)
 			{
-				download_mission* v_load_mission = dynamic_cast<download_mission*>( v_mission );
-				if ( v_load_mission )
+				download_mission* v_load_mission = dynamic_cast<download_mission*>(v_mission);
+				if (v_load_mission)
 				{
 					v_load_mission->dispose();
 				}
 				else
 				{
-					AUTO_DELETE( v_mission );
+					AUTO_DELETE(v_mission);
 				}
 			}
 
 			download_mission* v_download_mission = NULL;
-			switch( m_download_type )
+			switch (m_download_type)
 			{
 			case US_DOWNLOAD_IN_HEAP:
-				v_download_mission = US_CREATE_MISSION_IN_HEAP( m_url.c_str() );
+				v_download_mission = US_CREATE_MISSION_IN_HEAP(m_url.c_str());
 				break;
 			case US_DOWNLOAD_IN_QUEUE:
-				v_download_mission = US_CREATE_MISSION_IN_QUEUE( m_url.c_str() );
+				v_download_mission = US_CREATE_MISSION_IN_QUEUE(m_url.c_str());
 				break;
 			}
-			v_download_mission->event_download_start  += event_handle( this, &common_resource_container<KEY>::on_download_start );
-			v_download_mission->event_download_finish += event_handle( this, &common_resource_container<KEY>::on_download_finish );
-			m_mission_flow->insert_mission( 0, v_download_mission );
+			v_download_mission->event_download_start += event_handle(this, &common_resource_container<KEY>::on_download_start);
+			v_download_mission->event_download_finish += event_handle(this, &common_resource_container<KEY>::on_download_finish);
+			m_mission_flow->insert_mission(0, v_download_mission);
 
-			DEFERRED_RELEASE( m_resource );
+			DEFERRED_RELEASE(m_resource);
 		}
 
-	// download mission
+		// download mission
 	protected:
-		virtual void on_download_start( event_argument* args )
+		virtual void on_download_start(event_argument* args)
 		{
-			enable_reclaim( false );
+			enable_reclaim(false);
 
 			shared_data::add_ref();
 		}
 
-		virtual void on_download_finish( event_argument* args )
+		virtual void on_download_finish(event_argument* args)
 		{
 			download_argument* v_download_args = (download_argument*)args;
 
-			if ( v_download_args->m_download_status == US_DOWNLOAD_ERROR || v_download_args->m_download_status == US_DOWNLOAD_NOFILE )
+			if (v_download_args->m_download_status == US_DOWNLOAD_ERROR || v_download_args->m_download_status == US_DOWNLOAD_NOFILE)
 			{
-				m_can_reach = false;				
+				m_can_reach = false;
 			}
-			else if ( v_download_args->m_download_status == US_DOWNLOAD_SUCCEED )
+			else if (v_download_args->m_download_status == US_DOWNLOAD_SUCCEED)
 			{
-				m_resource = dynamic_cast<resource_base*>(singleton_filter_manager::instance().parse( (raw_buffer*)v_download_args->m_stream ));	
-				if ( m_resource )
+				m_resource = dynamic_cast<resource_base*>(singleton_filter_manager::instance().parse((raw_buffer*)v_download_args->m_stream));
+				if (m_resource)
 				{
 					m_resource->add_ref();
 				}
 			}
 
-			enable_reclaim( true );
+			enable_reclaim(true);
 
 			shared_data::release();
 		}
@@ -164,7 +166,7 @@ namespace uniscope_globe
 		ustring m_url;
 
 		int m_download_type;
-		 
+
 	};
 
 	typedef common_resource_container<ustring> texture_resource_container;

@@ -15,7 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_HARDWARE_OCCLUSION_QUERY_H_
 #define _US_HARDWARE_OCCLUSION_QUERY_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT hardware_occlusion_query

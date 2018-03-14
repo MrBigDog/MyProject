@@ -15,18 +15,20 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_DOUBLE_BUFFER_ARRAY_H_
 #define _US_DOUBLE_BUFFER_ARRAY_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT double_buffer_array
 	{
 	public:
-		double_buffer_array( void );
+		double_buffer_array(void);
 
-		virtual ~double_buffer_array( void );
+		virtual ~double_buffer_array(void);
 
 	public:
-		 
+
 	};
 }
 

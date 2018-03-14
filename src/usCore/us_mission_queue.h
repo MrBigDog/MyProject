@@ -15,7 +15,13 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_MISSION_QUEUE_H_
 #define _US_MISSION_QUEUE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_mission_executant.h>
+
+#include <usUtil/us_mutex.h>
+#include <deque>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT mission_queue : public mission_executant

@@ -13,32 +13,33 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "Stdafx.h"
+//#include "Stdafx.h"
 #include "us_thread_valve.h"
+#include <usCore/us_system_environment.h>
 
 namespace uniscope_globe
 {
-	
+
 	thread_valve* singleton_thread_valve::s_ins = NULL;
 
 	double thread_valve::last_time = 0;
 
-	thread_valve::thread_valve( void )
+	thread_valve::thread_valve(void)
 	{
 		//last_time = 0;
 	}
 
-	thread_valve::~thread_valve( void )
+	thread_valve::~thread_valve(void)
 	{
 
 	}
 
-	int thread_valve::control_time( void )
+	int thread_valve::control_time(void)
 	{
 		double cur_time = (double)timeGetTime();
 		double internal_time = cur_time - last_time;
 
-		if ( internal_time > system_environment::s_download_sleep_interval )
+		if (internal_time > system_environment::s_download_sleep_interval)
 		{
 			return (int)system_environment::s_download_sleep_time;
 		}
@@ -46,5 +47,5 @@ namespace uniscope_globe
 		return 0;
 	}
 
-	
+
 }

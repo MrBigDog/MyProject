@@ -13,14 +13,14 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_document_base.h"
 
 namespace uniscope_globe
 {
 	document_base* document_base::s_document_ptr = NULL;
 
-	document_base::document_base( void )
+	document_base::document_base(void)
 	{
 		m_application = NULL;
 
@@ -33,7 +33,7 @@ namespace uniscope_globe
 		m_map_render_mode = false;
 	}
 
-	document_base::document_base( application_base* in_app, view_base* in_view )
+	document_base::document_base(application_base* in_app, view_base* in_view)
 	{
 		m_application = in_app;
 
@@ -46,7 +46,7 @@ namespace uniscope_globe
 		m_map_render_mode = false;
 	}
 
-	document_base::~document_base( void )
+	document_base::~document_base(void)
 	{
 		m_application = NULL;
 
@@ -55,28 +55,33 @@ namespace uniscope_globe
 		m_common_manager_group = NULL;
 	}
 
-	bool document_base::register_object( spatial_object* in_object )
+	render_manager_base * document_base::get_render_manager(void)
 	{
-		if ( in_object->get_guid().size() == 0 )
+		return m_view->get_render_manager();
+	}
+
+	bool document_base::register_object(spatial_object* in_object)
+	{
+		if (in_object->get_guid().size() == 0)
 			return false;
 
-		object_map::iterator itr = m_object_map.find( in_object->get_guid() );
-		if( itr == m_object_map.end() )
+		object_map::iterator itr = m_object_map.find(in_object->get_guid());
+		if (itr == m_object_map.end())
 		{
-			m_object_map.insert( make_pair( in_object->get_guid(), in_object ) );
+			m_object_map.insert(make_pair(in_object->get_guid(), in_object));
 			return true;
 		}
 
 		return false;
 	}
 
-	bool document_base::unregister_object( spatial_object* in_object )
+	bool document_base::unregister_object(spatial_object* in_object)
 	{
-		if ( in_object->get_guid().size() == 0 )
+		if (in_object->get_guid().size() == 0)
 			return false;
 
-		object_map::iterator itr = m_object_map.find( in_object->get_guid() );
-		if( itr != m_object_map.end() )
+		object_map::iterator itr = m_object_map.find(in_object->get_guid());
+		if (itr != m_object_map.end())
 		{
 			m_object_map.erase(itr);
 			return true;
@@ -85,25 +90,25 @@ namespace uniscope_globe
 		return false;
 	}
 
-	spatial_object* document_base::get_register_object( cpstr id )
+	spatial_object* document_base::get_register_object(cpstr id)
 	{
-		object_map::iterator itr = m_object_map.find( id );
-		if( itr != m_object_map.end() )
+		object_map::iterator itr = m_object_map.find(id);
+		if (itr != m_object_map.end())
 			return itr->second;
 
 		return NULL;
 	}
 
-	void document_base::delete_object( cpstr id )
+	void document_base::delete_object(cpstr id)
 	{
-		object_map::iterator itr = m_object_map.find( id );
-		if( itr != m_object_map.end() )
+		object_map::iterator itr = m_object_map.find(id);
+		if (itr != m_object_map.end())
 		{
 			spatial_object* v_object = itr->second;
 			v_object->dissolve_attachment();
-			AUTO_DELETE( v_object );
+			AUTO_DELETE(v_object);
 
-			m_object_map.erase( itr );
+			m_object_map.erase(itr);
 		}
-	}	
+	}
 }

@@ -13,19 +13,19 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_texture_map_description.h"
 
 namespace uniscope_globe
 {
-	texture_map_description::texture_map_description( void )
+	texture_map_description::texture_map_description(void)
 	{
 		//m_rtti = US_RTTI_TEXTURE_MAP_DESCRIPTION;
 		//m_style_type = style_type::mat_style;
-		m_tu_start	= 0.0;
-		m_tv_start	= 0.0;
-		m_tu_end	= 1.0;
-		m_tv_end	= 1.0;
+		m_tu_start = 0.0;
+		m_tv_start = 0.0;
+		m_tu_end = 1.0;
+		m_tv_end = 1.0;
 
 		m_rotation_u = 0.0;
 		m_rotation_v = 0.0;
@@ -39,14 +39,14 @@ namespace uniscope_globe
 
 	}
 
-	texture_map_description::texture_map_description( const texture_map_description& v_style )
+	texture_map_description::texture_map_description(const texture_map_description& v_style)
 	{
 		//m_rtti = US_RTTI_TEXTURE_MAP_DESCRIPTION;
 
-		m_tu_start	 = v_style.m_tu_start;
-		m_tv_start	 = v_style.m_tv_start;
-		m_tu_end	 = v_style.m_tu_end;
-		m_tv_end	 = v_style.m_tv_end;
+		m_tu_start = v_style.m_tu_start;
+		m_tv_start = v_style.m_tv_start;
+		m_tu_end = v_style.m_tu_end;
+		m_tv_end = v_style.m_tv_end;
 
 		m_rotation_u = v_style.m_rotation_u;
 		m_rotation_v = v_style.m_rotation_v;
@@ -59,12 +59,12 @@ namespace uniscope_globe
 		m_is_texture_matrix_dirty = true;
 	}
 
-	texture_map_description::~texture_map_description( void )
+	texture_map_description::~texture_map_description(void)
 	{
 
 	}
 
-	void texture_map_description::copy_texture_map_desc( texture_map_description* v_tex_map_desc )
+	void texture_map_description::copy_texture_map_desc(texture_map_description* v_tex_map_desc)
 	{
 		this->m_tu_start = v_tex_map_desc->m_tu_start;
 		this->m_tv_start = v_tex_map_desc->m_tv_start;
@@ -78,22 +78,22 @@ namespace uniscope_globe
 		this->m_rotation_v = v_tex_map_desc->m_rotation_v;
 		this->m_rotation_w = v_tex_map_desc->m_rotation_w;
 
-		this->m_mirror_texture_u		= v_tex_map_desc->m_mirror_texture_u;
-		this->m_mirror_texture_v		= v_tex_map_desc->m_mirror_texture_v;
-		this->m_two_sided_mode			= v_tex_map_desc->m_two_sided_mode;
-		this->m_texture_matrix			= v_tex_map_desc->m_texture_matrix;
+		this->m_mirror_texture_u = v_tex_map_desc->m_mirror_texture_u;
+		this->m_mirror_texture_v = v_tex_map_desc->m_mirror_texture_v;
+		this->m_two_sided_mode = v_tex_map_desc->m_two_sided_mode;
+		this->m_texture_matrix = v_tex_map_desc->m_texture_matrix;
 		this->m_is_texture_matrix_dirty = v_tex_map_desc->m_is_texture_matrix_dirty;
 	}
 
-	matrix_4f texture_map_description::get_texture_matrix( void )
+	matrix_4f texture_map_description::get_texture_matrix(void)
 	{
-		if( m_is_texture_matrix_dirty )
+		if (m_is_texture_matrix_dirty)
 		{
 			float scale_u = 1.0f;
 			float scale_v = 1.0f;
 			float translate_u = 0.0f;
 			float translate_v = 0.0f;
-			if( m_mirror_texture_u )
+			if (m_mirror_texture_u)
 			{
 				scale_u = m_tu_start - m_tu_end;
 				translate_u = m_tu_end;
@@ -104,7 +104,7 @@ namespace uniscope_globe
 				translate_u = m_tu_start;
 			}
 
-			if( m_mirror_texture_v )
+			if (m_mirror_texture_v)
 			{
 				scale_v = m_tv_start - m_tv_end;
 				translate_v = m_tv_end;
@@ -117,7 +117,7 @@ namespace uniscope_globe
 
 			float center_u = translate_u + scale_u * 0.5;
 			float center_v = translate_v + scale_v * 0.5;
-			
+
 			//float scale_v = m_tv_end - m_tv_start;
 			//float scale_w = m_tw_start + m_tu_start * 0.5;
 			//float center_u = m_tu_start + scale_u * 0.5;
@@ -125,11 +125,11 @@ namespace uniscope_globe
 			//float center_w = m_tw_start + scale_w * 0.5;
 
 
-			matrix4<float> mat_trans1 = matrix4<float>::translation( -0.5, -0.5, 0);
+			matrix4<float> mat_trans1 = matrix4<float>::translation(-0.5, -0.5, 0);
 			//matrix4<float> mat_trans2 = matrix4<float>::translation(  0.5,  0.5, 0);
-			matrix_4f mat_trans = matrix_4f::translation(center_u, center_v, 0 );
-			matrix_4f mat_rotate = matrix4<float>::rotate_z( m_rotation_w );
-			matrix_4f mat_scale = matrix_4f::scaling(scale_u, scale_v, 1 );
+			matrix_4f mat_trans = matrix_4f::translation(center_u, center_v, 0);
+			matrix_4f mat_rotate = matrix4<float>::rotate_z(m_rotation_w);
+			matrix_4f mat_scale = matrix_4f::scaling(scale_u, scale_v, 1);
 
 			//m_texture_matrix = mmat_trans * mat_trans1 * mat_scale * mat_rotate * mat_trans2;
 

@@ -16,7 +16,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_TEXTURE_FILL_STYLE_H_
 #define _US_TEXTURE_FILL_STYLE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_style_base.h>
+#include <wtypes.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT texture_fill_style : public style_base

@@ -15,7 +15,12 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_MISSION_FLOW_H_
 #define _US_MISSION_FLOW_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_mission_base.h>
+
+#include <vector>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT mission_flow : public mission_base

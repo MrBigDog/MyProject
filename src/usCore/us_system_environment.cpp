@@ -13,7 +13,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "Stdafx.h"
+//#include "Stdafx.h"
 #include "us_system_environment.h"
 
 namespace uniscope_globe
@@ -291,7 +291,7 @@ namespace uniscope_globe
 			return itr->second;
 		}
 		
-		return L"";
+		return /*L*/"";
 	}
 
 	//void system_environment::update_frame_time( void )

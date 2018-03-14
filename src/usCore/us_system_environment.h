@@ -17,7 +17,12 @@
 #define _US_SYSTEM_ENVIRONMENT_H_
 
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <usUtil\us_rect.h>
+#include <usUtil\us_vector3.h>
+#include <usUtil\us_singleton.h>
 #include <map>
+#include <vector>
 
 #ifndef _PUBLISH
 #define US_RENDER_TRACE0(format) { wchar_t str[1024]; swprintf( str, format ); singleton_system_environment::instance().m_debug_info += str; }

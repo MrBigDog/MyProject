@@ -13,26 +13,32 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_mission_executant_async.h"
+
+#include <usCore/gw_exception_public.h>
+#include <usCore/us_mission_base.h>
+#include <usCore/us_logcreator.h>
+#include <usCore/us_thread_valve.h>
+#include <usUtil/us_singleton.h>
 
 namespace uniscope_globe
 {
-	mission_executant_async::mission_executant_async( void )
+	mission_executant_async::mission_executant_async(void)
 	{
-		create();		
+		create();
 	}
 
-	mission_executant_async::~mission_executant_async( void )
+	mission_executant_async::~mission_executant_async(void)
 	{
 		//destroy();
 	}
 
-	void mission_executant_async::receive_mission( mission_base* mission_value )
+	void mission_executant_async::receive_mission(mission_base* mission_value)
 	{
 		m_current_mission = mission_value;
 		m_busy = true;
-	
+
 
 		//if ( !thread_private_info.thread_created )
 		//{
@@ -42,32 +48,32 @@ namespace uniscope_globe
 		thread_run();
 	}
 
-	void mission_executant_async::terminate_mission( void )
+	void mission_executant_async::terminate_mission(void)
 	{
 		thread_base::destroy();
 	}
 
-	bool mission_executant_async::on_waiting( void )
+	bool mission_executant_async::on_waiting(void)
 	{
 		/**@add by Felix ÈÝ´í»úÖÆ*/
 		AUTO_DECLEAR_STRUCT_EXCEPTION
-		//TRY_SUSPEND_THREAD
+			//TRY_SUSPEND_THREAD
 		{
 			int time_sleep = singleton_thread_valve::instance().control_time();
-			time_sleep = max( 0, time_sleep );
-			time_sleep = min( 200, time_sleep );
+			time_sleep = max(0, time_sleep);
+			time_sleep = min(200, time_sleep);
 			time_sleep = 0;
-			
-			if ( !thread_private_info.m_canceling )
+
+			if (!thread_private_info.m_canceling)
 			{
-				Sleep( time_sleep ); 
-			} 
+				Sleep(time_sleep);
+			}
 		}
 
 		return thread_base::on_waiting();
 	}
 
-	void mission_executant_async::on_running( void )
+	void mission_executant_async::on_running(void)
 	{
 		try
 		{
@@ -78,9 +84,9 @@ namespace uniscope_globe
 
 			thread_stop();
 
-			if ( m_parent )
+			if (m_parent)
 			{
-				m_parent->on_mission_complete( this );
+				m_parent->on_mission_complete(this);
 			}
 		}
 		catch (gw_exception::exception_base& e)
@@ -91,7 +97,7 @@ namespace uniscope_globe
 		{
 			GWLOG_ERROR("unknown error!");
 		}
-		
+
 	}
 
 }

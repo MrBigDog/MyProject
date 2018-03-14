@@ -13,41 +13,44 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_common_mission_queue.h"
+#include <usCore/us_mission_base.h>
+#include <usUtil/us_common_file.h>
+#include <usUtil/us_mutex.h>
 
 namespace uniscope_globe
 {
 	common_mission_queue* singleton_common_mission_queue::s_ins = NULL;
 
-	common_mission_queue::common_mission_queue( void )
-		: mission_queue( 1 )
+	common_mission_queue::common_mission_queue(void)
+		: mission_queue(1)
 	{
-		
+
 	}
 
-	common_mission_queue::~common_mission_queue( void )
+	common_mission_queue::~common_mission_queue(void)
 	{
-		
+
 	}
 
-	void common_mission_queue::remove_mission( mission_base* v_mission )
+	void common_mission_queue::remove_mission(mission_base* v_mission)
 	{
 		US_LOCK_AUTO_MUTEX
 
-		m_mission_array.push_back( v_mission );
+			m_mission_array.push_back(v_mission);
 	}
 
-	void common_mission_queue::clean( void )
+	void common_mission_queue::clean(void)
 	{
 		US_LOCK_AUTO_MUTEX
 
-		for ( int i = 0; i < (int)m_mission_array.size(); i++ )
-		{
-			AUTO_DELETE( m_mission_array[i] );
-		}
+			for (int i = 0; i < (int)m_mission_array.size(); i++)
+			{
+				AUTO_DELETE(m_mission_array[i]);
+			}
 		m_mission_array.clear();
 	}
 
-		
+
 }

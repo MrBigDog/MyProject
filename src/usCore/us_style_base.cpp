@@ -13,24 +13,24 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_style_base.h"
 
 namespace uniscope_globe
 {
-	style_base::style_base( void )
-	{	
+	style_base::style_base(void)
+	{
 	}
 
-	style_base::~style_base( void )
+	style_base::~style_base(void)
 	{
-		for ( int ni = 0; ni < (int)m_style_array.size(); ni++ )
+		for (int ni = 0; ni < (int)m_style_array.size(); ni++)
 		{
 			AUTO_DELETE(m_style_array[ni]);
 		}
 	}
 
-	void style_base::Initialize( styling_object* v_styling_obj )
+	void style_base::Initialize(styling_object* v_styling_obj)
 	{
 
 	}

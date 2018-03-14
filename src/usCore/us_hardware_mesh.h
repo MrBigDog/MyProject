@@ -15,7 +15,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_HARDWARE_MESH_H_
 #define _US_HARDWARE_MESH_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_hardware_base.h>
+#include <usUtil\us_matrix4.h>
+
 namespace uniscope_globe
 {
 	class render_argument;

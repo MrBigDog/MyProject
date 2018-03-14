@@ -13,7 +13,7 @@
 //	Reference : 
 //
 //////////////////////////////////////////////////////////////////////////
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "us_node_base.h"
 
 namespace uniscope_globe

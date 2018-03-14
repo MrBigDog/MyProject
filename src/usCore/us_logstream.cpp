@@ -1,7 +1,11 @@
 /**@add by Felix »’÷æ¿‡*/
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_logstream.h"
 #include "us_queue.h"
+#include <usUtil/us_mutex.h>
+#include <usUtil/us_singleton.h>
+#include <usCore/us_thread_base.h>
+#include <usCore/us_thread_valve.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -17,7 +21,7 @@ namespace uniscope_globe
 {
 	const char* debugClassToString(mdDebugClass c)
 	{
-		switch (c) 
+		switch (c)
 		{
 		case MD_NONE:       return "none";
 		case MD_TERRAIN:    return "terrain";
@@ -53,7 +57,7 @@ namespace uniscope_globe
 
 
 	LogCallback::LogCallback(mdDebugClass c, gwDebugPriority p) :
-	class_(c),
+		class_(c),
 		priority_(p)
 	{
 	}
@@ -63,7 +67,7 @@ namespace uniscope_globe
 		return ((c & class_) != 0 && p >= priority_);
 	}
 
-	void LogCallback::setLogLevels( mdDebugClass c, gwDebugPriority p )
+	void LogCallback::setLogLevels(mdDebugClass c, gwDebugPriority p)
 	{
 		priority_ = p;
 		class_ = c;
@@ -74,7 +78,7 @@ namespace uniscope_globe
 	class FileLogCallback : public uniscope_globe::LogCallback
 	{
 	public:
-		FileLogCallback(const std::string& aPath, mdDebugClass c, gwDebugPriority p) 
+		FileLogCallback(const std::string& aPath, mdDebugClass c, gwDebugPriority p)
 			: uniscope_globe::LogCallback(c, p)
 			, m_file(aPath.c_str(), std::ios_base::out | std::ios_base::trunc)
 		{
@@ -83,37 +87,37 @@ namespace uniscope_globe
 		virtual void operator()(mdDebugClass c, gwDebugPriority p, const char* file, int line, const std::string& message)
 		{
 			if (!shouldLog(c, p)) return;
-			m_file << debugClassToString(c) << ":" << (int) p
+			m_file << debugClassToString(c) << ":" << (int)p
 				<< ":" << file << ":" << line << ":" << message << std::endl;
 		}
 	private:
-		std::ofstream m_file;   
+		std::ofstream m_file;
 	};
 
 	class StderrLogCallback : public uniscope_globe::LogCallback
 	{
 	public:
 		StderrLogCallback(mdDebugClass c, gwDebugPriority p) :
-		  uniscope_globe::LogCallback(c, p)
-		  {
+			uniscope_globe::LogCallback(c, p)
+		{
 #ifdef GW_WINDOWS
-			  AllocConsole(); // but only if we want a console
-			  freopen("conin$", "r", stdin);
-			  freopen("conout$", "w", stdout);
-			  freopen("conout$", "w", stderr);
+			AllocConsole(); // but only if we want a console
+			freopen("conin$", "r", stdin);
+			freopen("conout$", "w", stdout);
+			freopen("conout$", "w", stderr);
 #endif
-		  }
+		}
 
-		  virtual void operator()(mdDebugClass c, gwDebugPriority p, 
-			  const char* /*file*/, int /*line*/, const std::string& aMessage)
-		  {
-			  if (!shouldLog(c, p)) return;
+		virtual void operator()(mdDebugClass c, gwDebugPriority p,
+			const char* /*file*/, int /*line*/, const std::string& aMessage)
+		{
+			if (!shouldLog(c, p)) return;
 
-			  fprintf(stderr, "%s\n", aMessage.c_str());
-			  //fprintf(stderr, "%s:%d:%s:%d:%s\n", debugClassToString(c), p,
-			  //    file, line, aMessage.c_str());
-			  fflush(stderr);
-		  }
+			fprintf(stderr, "%s\n", aMessage.c_str());
+			//fprintf(stderr, "%s:%d:%s:%d:%s\n", debugClassToString(c), p,
+			//    file, line, aMessage.c_str());
+			fflush(stderr);
+		}
 	};
 
 
@@ -123,19 +127,19 @@ namespace uniscope_globe
 	{
 	public:
 		WinDebugLogCallback(mdDebugClass c, gwDebugPriority p) :
-		  uniscope_globe::LogCallback(c, p)
-		  {
-		  }
+			uniscope_globe::LogCallback(c, p)
+		{
+		}
 
-		  virtual void operator()(mdDebugClass c, gwDebugPriority p, 
-			  const char* file, int line, const std::string& aMessage)
-		  {
-			  if (!shouldLog(c, p)) return;
+		virtual void operator()(mdDebugClass c, gwDebugPriority p,
+			const char* file, int line, const std::string& aMessage)
+		{
+			if (!shouldLog(c, p)) return;
 
-			  std::ostringstream os;
-			  os << debugClassToString(c) << ":" << aMessage << std::endl;
-			  OutputDebugStringA(os.str().c_str());
-		  }
+			std::ostringstream os;
+			os << debugClassToString(c) << ":" << aMessage << std::endl;
+			OutputDebugStringA(os.str().c_str());
+		}
 	};
 
 #endif
@@ -146,9 +150,9 @@ namespace uniscope_globe
 		class LogEntry
 		{
 		public:
-			LogEntry(mdDebugClass c, gwDebugPriority p, const char* f, int l, const std::string& msg) 
+			LogEntry(mdDebugClass c, gwDebugPriority p, const char* f, int l, const std::string& msg)
 				: debugClass(c), debugPriority(p), file(f), line(l), message(msg)
-			{   
+			{
 			}
 
 			mdDebugClass debugClass;
@@ -168,7 +172,7 @@ namespace uniscope_globe
 
 			~PauseThread()
 			{
-				if (m_wasRunning) 
+				if (m_wasRunning)
 				{
 					m_parent->startLog();
 				}
@@ -178,9 +182,9 @@ namespace uniscope_globe
 			bool m_wasRunning;
 		};
 	public:
-		LogStreamPrivate() 
+		LogStreamPrivate()
 			: m_logClass(MD_ALL), m_logPriority(MD_ALERT), m_isRunning(false), m_consoleRequested(false)
-		{ 
+		{
 			thread_base::create();
 #if !defined(GW_WINDOWS)
 			m_callbacks.push_back(new StderrLogCallback(m_logClass, m_logPriority));
@@ -195,10 +199,10 @@ namespace uniscope_globe
 		}
 
 		US_AUTO_MUTEX
-		GWBlockingQueue<LogEntry> m_entries;
+			GWBlockingQueue<LogEntry> m_entries;
 
 		typedef std::vector<uniscope_globe::LogCallback*> CallbackVec;
-		CallbackVec m_callbacks;    
+		CallbackVec m_callbacks;
 		/// subset of callbacks which correspond to stdout / console,
 		/// and hence should dynamically reflect console logging settings
 		CallbackVec m_consoleCallbacks;
@@ -216,16 +220,16 @@ namespace uniscope_globe
 			thread_run();
 		}
 
-		bool on_waiting( void )
+		bool on_waiting(void)
 		{
 			int time_sleep = singleton_thread_valve::instance().control_time();
-			time_sleep = max( 0, time_sleep );
-			time_sleep = min( 200, time_sleep );
+			time_sleep = max(0, time_sleep);
+			time_sleep = min(200, time_sleep);
 
-			if ( !thread_private_info.m_canceling )
+			if (!thread_private_info.m_canceling)
 			{
-				Sleep( time_sleep ); 
-			} 
+				Sleep(time_sleep);
+			}
 			return thread_base::on_waiting();
 		}
 
@@ -239,19 +243,19 @@ namespace uniscope_globe
 			LogEntry entry(m_entries.pop());
 			// special marker entry detected, terminate the thread since we are
 			// making a configuration change or quitting the app
-			if ((entry.debugClass == MD_NONE) && !strcmp(entry.file, "done")) 
+			if ((entry.debugClass == MD_NONE) && !strcmp(entry.file, "done"))
 			{
 				return;
 			}
 
 			// submit to each installed callback in turn
 			//std::for_each(uniscope_globe::LogCallback* cb, m_callbacks) 
-			for(int index = 0; index < m_callbacks.size(); ++index )
+			for (int index = 0; index < m_callbacks.size(); ++index)
 			{
 				//uniscope_globe::LogCallback* cb = m_callbacks[index];
 				(*m_callbacks[index])(entry.debugClass, entry.debugPriority,
 					entry.file, entry.line, entry.message);
-			}           
+			}
 		}
 
 		bool stop()
@@ -262,13 +266,13 @@ namespace uniscope_globe
 					return false;
 				}
 
-				// log a special marker value, which will cause the thread to wakeup,
-				// and then exit
-				log(MD_NONE, MD_ALERT, "done", -1, "");
-				thread_base::thread_stop();
+			// log a special marker value, which will cause the thread to wakeup,
+			// and then exit
+			log(MD_NONE, MD_ALERT, "done", -1, "");
+			thread_base::thread_stop();
 
-				m_isRunning = false;
-				return true;
+			m_isRunning = false;
+			return true;
 		}
 
 		void addCallback(uniscope_globe::LogCallback* cb)
@@ -286,26 +290,26 @@ namespace uniscope_globe
 			}
 		}
 
-		void setLogLevels( mdDebugClass c, gwDebugPriority p )
+		void setLogLevels(mdDebugClass c, gwDebugPriority p)
 		{
 			PauseThread pause(this);
 			m_logPriority = p;
 			m_logClass = c;
 			//for(uniscope_globe::LogCallback* cb; m_consoleCallbacks)
-			for( int index = 0; index < m_consoleCallbacks.size(); ++index )
+			for (int index = 0; index < m_consoleCallbacks.size(); ++index)
 			{
 				uniscope_globe::LogCallback* cb = m_consoleCallbacks[index];
 				cb->setLogLevels(c, p);
 			}
 		}
 
-		bool would_log( mdDebugClass c, gwDebugPriority p ) const
+		bool would_log(mdDebugClass c, gwDebugPriority p) const
 		{
 			if (p >= MD_INFO) return true;
 			return ((c & m_logClass) != 0 && p >= m_logPriority);
 		}
 
-		void log( mdDebugClass c, gwDebugPriority p,
+		void log(mdDebugClass c, gwDebugPriority p,
 			const char* fileName, int line, const std::string& msg)
 		{
 			LogEntry entry(c, p, fileName, line, msg);
@@ -335,30 +339,30 @@ namespace uniscope_globe
 		global_privateLogstream->startLog();
 	}
 
-	void logstream::setLogLevels( mdDebugClass c, gwDebugPriority p )
+	void logstream::setLogLevels(mdDebugClass c, gwDebugPriority p)
 	{
 		global_privateLogstream->setLogLevels(c, p);
 	}
 
 	void logstream::addCallback(uniscope_globe::LogCallback* cb)
-	{   
+	{
 		global_privateLogstream->addCallback(cb);
 	}
 
 	void logstream::removeCallback(uniscope_globe::LogCallback* cb)
-	{   
+	{
 		global_privateLogstream->removeCallback(cb);
 	}
 
-	void logstream::log( mdDebugClass c, gwDebugPriority p,
+	void logstream::log(mdDebugClass c, gwDebugPriority p,
 		const char* fileName, int line, const std::string& msg)
 	{
 		global_privateLogstream->log(c, p, fileName, line, msg);
 	}
 
-	bool logstream::would_log( mdDebugClass c, gwDebugPriority p ) const
+	bool logstream::would_log(mdDebugClass c, gwDebugPriority p) const
 	{
-		return global_privateLogstream->would_log(c,p);
+		return global_privateLogstream->would_log(c, p);
 	}
 
 	mdDebugClass logstream::get_log_classes() const
@@ -371,12 +375,12 @@ namespace uniscope_globe
 		return global_privateLogstream->m_logPriority;
 	}
 
-	void logstream::set_log_priority( gwDebugPriority p)
+	void logstream::set_log_priority(gwDebugPriority p)
 	{
 		global_privateLogstream->setLogLevels(global_privateLogstream->m_logClass, p);
 	}
 
-	void logstream::set_log_classes( mdDebugClass c)
+	void logstream::set_log_classes(mdDebugClass c)
 	{
 		global_privateLogstream->setLogLevels(c, global_privateLogstream->m_logPriority);
 	}
@@ -389,12 +393,12 @@ namespace uniscope_globe
 		// let's keep this correct & safe
 		US_LOCK_MUTEX(global_privateLogstream->mutex)
 
-			if( !global_logstream )
+			if (!global_logstream)
 				global_logstream = new logstream();
 		return *global_logstream;
 	}
 
-	void logstream::logToFile( const std::string& aPath, mdDebugClass c, gwDebugPriority p )
+	void logstream::logToFile(const std::string& aPath, mdDebugClass c, gwDebugPriority p)
 	{
 		global_privateLogstream->addCallback(new FileLogCallback(aPath, c, p));
 	}

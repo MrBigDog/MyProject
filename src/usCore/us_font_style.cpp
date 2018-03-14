@@ -13,15 +13,15 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_font_style.h"
 
 namespace uniscope_globe
 {
-	font_style::font_style( void )
+	font_style::font_style(void)
 	{
 		m_rtti = US_RTTI_FONT_STYLE;
-		m_face_name = L"Arial";
+		m_face_name = /*L*/"Arial";
 		m_font_color = 0xffffffff;
 		m_font_back_color = 0x00ffffff;
 		m_font_scale = 1.0;
@@ -31,7 +31,7 @@ namespace uniscope_globe
 		m_italic = false;
 	}
 
-	font_style::font_style( const font_style& v_style )
+	font_style::font_style(const font_style& v_style)
 	{
 		m_rtti = US_RTTI_FONT_STYLE;
 		m_face_name = v_style.m_face_name;
@@ -44,10 +44,10 @@ namespace uniscope_globe
 		m_italic = v_style.m_italic;
 	}
 
-	font_style::~font_style( void )
+	font_style::~font_style(void)
 	{
 
 	}
 
-	
+
 }

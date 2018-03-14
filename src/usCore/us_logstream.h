@@ -1,9 +1,10 @@
 #ifndef _LOGSTREAM_H
 #define _LOGSTREAM_H
+
 #include <usCore\Export.h>
 #include "DebugTypes.h"
-
 #include <sstream>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT LogCallback

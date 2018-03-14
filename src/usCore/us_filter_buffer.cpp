@@ -13,12 +13,13 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_filter_buffer.h"
+#include <usUtil/us_object_base.h>
 
 namespace uniscope_globe
 {
-	filter_buffer::filter_buffer( void* in_buffer, int in_size, object_base* in_parent, object_base* in_container )
+	filter_buffer::filter_buffer(void* in_buffer, int in_size, object_base* in_parent, object_base* in_container)
 	{
 		m_buffer = (byte*)in_buffer;
 
@@ -29,10 +30,10 @@ namespace uniscope_globe
 		m_container = in_container;
 	}
 
-	filter_buffer::~filter_buffer( void )
+	filter_buffer::~filter_buffer(void)
 	{
 
 	}
 
-	
+
 }

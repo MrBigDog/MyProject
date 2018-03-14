@@ -15,9 +15,14 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_NATIVE_LOADER_H_
 #define _US_NATIVE_LOADER_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
+	class link_base;
+	class byte;
+
 	class USCORE_EXPORT native_loader
 	{
 	protected:

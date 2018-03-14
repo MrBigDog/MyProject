@@ -17,22 +17,25 @@
 //////////////////////////////////////////////////////////////////////////
 #ifndef _US_FUNCTION_BASE_H_
 #define _US_FUNCTION_BASE_H_
+
 //#include <usCore\Export.h>
+#include <usUtil/us_common_file.h>
+
 namespace uniscope_globe
 {
 	// parameter none
 	class function_base
 	{
 	public:
-		function_base(void){}
-		virtual ~function_base(void){}
+		function_base(void) {}
+		virtual ~function_base(void) {}
 
 	public:
-		virtual void operator()( event_argument* v_event ) = 0;
+		virtual void operator()(event_argument* v_event) = 0;
 
-		virtual bool operator == ( const function_base& fun ) = 0;
+		virtual bool operator == (const function_base& fun) = 0;
 
-		virtual bool equal( function_base* v_fun ) = 0;
+		virtual bool equal(function_base* v_fun) = 0;
 
 		virtual function_base* clone() = 0;
 	};
@@ -41,13 +44,13 @@ namespace uniscope_globe
 	class function_parameter_one
 	{
 	public:
-		function_parameter_one(void){}
-		virtual ~function_parameter_one(void){}
+		function_parameter_one(void) {}
+		virtual ~function_parameter_one(void) {}
 
 	public:
-		virtual ulong operator()( ulong v_param ) = 0;
+		virtual ulong operator()(ulong v_param) = 0;
 
-		virtual bool operator == ( const function_parameter_one& fun ) = 0;
+		virtual bool operator == (const function_parameter_one& fun) = 0;
 
 		virtual function_parameter_one* clone() = 0;
 	};

@@ -15,23 +15,28 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_FILTER_BUFFER_H_
 #define _US_FILTER_BUFFER_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_raw_buffer.h>
+
 namespace uniscope_globe
 {
-	class USCORE_EXPORT filter_buffer: public raw_buffer
+	class object_base;
+
+	class USCORE_EXPORT filter_buffer : public raw_buffer
 	{
 	protected:
-		filter_buffer( void ){}
+		filter_buffer(void) {}
 
 	public:
-		filter_buffer( void* in_buffer, int in_size, object_base* in_parent, object_base* in_container );
+		filter_buffer(void* in_buffer, int in_size, object_base* in_parent, object_base* in_container);
 
-		virtual ~filter_buffer( void );
+		virtual ~filter_buffer(void);
 
 	public:
-		 object_base*	m_parent;
+		object_base*	m_parent;
 
-		 object_base*   m_container;
+		object_base*   m_container;
 	};
 }
 

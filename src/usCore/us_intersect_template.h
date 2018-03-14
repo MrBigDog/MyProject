@@ -15,7 +15,13 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_INTERSECT_TEMPLATE_H_
 #define _US_INTERSECT_TEMPLATE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_vector3.h>
+#include <usUtil\us_lon_lat_rect.h>
+#include <usUtil\us_axis_aligned_box.h>
+#include <usCore\us_intersect_template.h>
+
 namespace uniscope_globe
 {
 	struct part_sphere

@@ -14,7 +14,9 @@
 //////////////////////////////////////////////////////////////////////////
 #ifndef _US_MEMBER_FUNCTION_H_
 #define _US_MEMBER_FUNCTION_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
 	// parameter none

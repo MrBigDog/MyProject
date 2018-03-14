@@ -15,7 +15,16 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_LINK_HTTP_H_
 #define _US_LINK_HTTP_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <usCore\us_link_base.h>
+#include <string>
+#include <WinInet.h>
+#include <wtypes.h>
+
+using namespace std;
+
 namespace uniscope_globe
 {
 	class http_link_desc

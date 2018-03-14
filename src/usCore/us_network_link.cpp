@@ -13,65 +13,69 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_network_link.h"
+#include <usCore/us_event_argument.h>
+#include <usCore/us_download_mission.h>
+#include <usCore/us_downloader.h>
+#include <usCore/us_event_handle.h>
 
 namespace uniscope_globe
 {
-	network_link::network_link( void )
+	network_link::network_link(void)
 	{
-		m_loaded = false;	
+		m_loaded = false;
 
 		m_download_mission = NULL;
 	}
 
-	network_link::~network_link( void )
+	network_link::~network_link(void)
 	{
-		AUTO_DELETE( m_download_mission );
+		AUTO_DELETE(m_download_mission);
 	}
 
-	void network_link::set_link( cpstr link )
+	void network_link::set_link(cpstr link)
 	{
 		m_link = link;
 	}
 
-	ustring network_link::get_link( void )
+	ustring network_link::get_link(void)
 	{
 		return m_link;
 	}
 
-	void network_link::load( void )
+	void network_link::load(void)
 	{
-		if ( m_loaded == false && m_download_mission == NULL )
+		if (m_loaded == false && m_download_mission == NULL)
 		{
-			AUTO_DELETE( m_download_mission );
-			m_download_mission = US_CREATE_MISSION_IN_QUEUE( m_link.c_str() );
-			m_download_mission->event_download_finish += event_handle( this, &network_link::on_download_finish );
-		}		
+			AUTO_DELETE(m_download_mission);
+			m_download_mission = US_CREATE_MISSION_IN_QUEUE(m_link.c_str());
+			m_download_mission->event_download_finish += event_handle(this, &network_link::on_download_finish);
+		}
 
 		m_download_mission->update();
 	}
 
-	void network_link::reload( void )
+	void network_link::reload(void)
 	{
-		if ( m_loaded == false && m_download_mission == NULL )
+		if (m_loaded == false && m_download_mission == NULL)
 		{
-			AUTO_DELETE( m_download_mission );
-			m_download_mission = US_CREATE_MISSION_IN_QUEUE( m_link.c_str() );
-			m_download_mission->event_download_finish += event_handle( this, &network_link::on_download_finish );
-		}		
+			AUTO_DELETE(m_download_mission);
+			m_download_mission = US_CREATE_MISSION_IN_QUEUE(m_link.c_str());
+			m_download_mission->event_download_finish += event_handle(this, &network_link::on_download_finish);
+		}
 
 		m_download_mission->reset();
 
 		m_download_mission->update();
 	}
 
-	bool network_link::is_loaded( void )
+	bool network_link::is_loaded(void)
 	{
 		return m_loaded;
 	}
 
-	void network_link::on_download_finish( event_argument* args )
+	void network_link::on_download_finish(event_argument* args)
 	{
 		m_loaded = true;
 	}

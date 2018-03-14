@@ -15,7 +15,9 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_LINK_BASE_H_
 #define _US_LINK_BASE_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
 #define US_LINK_TYPE_UDE		0x0000

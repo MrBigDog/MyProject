@@ -15,7 +15,9 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_MISSION_EXECUTANT_H_
 #define _US_MISSION_EXECUTANT_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT mission_executant

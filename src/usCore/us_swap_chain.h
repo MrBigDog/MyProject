@@ -15,7 +15,9 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_SWAP_CHAIN_H_
 #define _US_SWAP_CHAIN_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT swap_chain

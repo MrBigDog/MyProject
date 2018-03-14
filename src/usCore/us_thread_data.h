@@ -15,7 +15,9 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_THREAD_DATA_H_
 #define _US_THREAD_DATA_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT thread_data

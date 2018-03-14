@@ -13,12 +13,13 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_operator_base.h"
+#include <usCore/us_operator_executant.h>
 
 namespace uniscope_globe
 {
-	operator_base::operator_base( void )
+	operator_base::operator_base(void)
 	{
 		m_target_object = NULL;
 
@@ -27,42 +28,42 @@ namespace uniscope_globe
 		m_is_end = false;
 	}
 
-	operator_base::~operator_base( void )
+	operator_base::~operator_base(void)
 	{
 
 	}
 
-	void operator_base::on_begin( time_value current_time )
+	void operator_base::on_begin(time_value current_time)
 	{
 		m_begin_time = current_time;
 	}
 
-	void operator_base::on_execute( time_value current_time )
+	void operator_base::on_execute(time_value current_time)
 	{
 
 	}
 
-	void operator_base::on_draw( render_device* device )
+	void operator_base::on_draw(render_device* device)
 	{
 
 	}
 
-	void operator_base::on_end( time_value current_time )
+	void operator_base::on_end(time_value current_time)
 	{
 
 	}
 
-	void operator_base::unregister_operator( void )
+	void operator_base::unregister_operator(void)
 	{
 		m_executant->unregister_operator(this);
 	}
 
-	void operator_base::set_target_object( object_base* object )
+	void operator_base::set_target_object(object_base* object)
 	{
 		m_target_object = object;
 	}
 
-	object_base* operator_base::get_target_object( void )
+	object_base* operator_base::get_target_object(void)
 	{
 		return m_target_object;
 	}

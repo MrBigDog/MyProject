@@ -15,7 +15,9 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_HTTP_LOADER_H_
 #define _US_HTTP_LOADER_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
 #define TEST_BYTE_COUNT 9
@@ -25,6 +27,9 @@ namespace uniscope_globe
 #define LOAD_RESULT_SUC		0
 #define LOAD_RESULT_ERR		1
 #define LOAD_RESULT_NOF		2
+
+	class link_http;
+	class byte;
 
 	class USCORE_EXPORT http_loader
 	{

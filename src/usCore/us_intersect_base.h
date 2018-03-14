@@ -15,7 +15,13 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_INTERSECT_BASE_H_
 #define _US_INTERSECT_BASE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_lon_lat_rect.h>
+#include <usUtil\us_rect.h>
+#include <usUtil\us_point.h>
+#include <usCore\us_intersect_template.h>
+
 namespace uniscope_globe
 {
 	class observer_base;

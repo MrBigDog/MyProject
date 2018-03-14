@@ -15,23 +15,27 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_EVENT_SENDER_H_
 #define _US_EVENT_SENDER_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
+	class event_base;
+
 	typedef void* event_sender_ptr;
 
 	class USCORE_EXPORT event_sender
 	{
 	protected:
-		event_sender( void );
+		event_sender(void);
 
 	public:
-		event_sender( event_sender_ptr v_sender, event_base* v_event );
+		event_sender(event_sender_ptr v_sender, event_base* v_event);
 
-		~event_sender( void );
+		~event_sender(void);
 
 	public:
-		void terminate_event( void );
+		void terminate_event(void);
 
 	protected:
 		event_sender_ptr m_sender;

@@ -13,12 +13,12 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_view_base.h"
 
 namespace uniscope_globe
 {
-	view_base::view_base( void )
+	view_base::view_base(void)
 	{
 		m_application = NULL;
 
@@ -27,7 +27,7 @@ namespace uniscope_globe
 		m_sound_device = NULL;
 	}
 
-	view_base::view_base( application_base* in_app )
+	view_base::view_base(application_base* in_app)
 	{
 		m_application = in_app;
 
@@ -36,9 +36,9 @@ namespace uniscope_globe
 		m_sound_device = NULL;
 	}
 
-	view_base::~view_base( void )
-	{		
+	view_base::~view_base(void)
+	{
 	}
 
-	
+
 }

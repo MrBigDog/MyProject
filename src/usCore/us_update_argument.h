@@ -15,21 +15,29 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_UPDATE_ARGUMENT_H_
 #define _US_UPDATE_ARGUMENT_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_shadow_parameter.h>
+
 namespace uniscope_globe
 {
 #define  us_dr_dem		0x0001
 #define  us_dr_dom		0x0002
 #define  us_dr_model	0x0004
 
+	class document_base;
+	class observer_base;
+	class render_node;
+
+
 	class USCORE_EXPORT update_argument
 	{
 	public:
-		update_argument( void );
+		update_argument(void);
 
-		update_argument( document_base* v_document, observer_base* v_observer, render_node* v_render, shadow_parameter& v_shadow_param, int data_ready = 0 );
+		update_argument(document_base* v_document, observer_base* v_observer, render_node* v_render, shadow_parameter& v_shadow_param, int data_ready = 0);
 
-		virtual ~update_argument( void );
+		virtual ~update_argument(void);
 
 	public:
 		observer_base*			m_observer;
@@ -41,7 +49,7 @@ namespace uniscope_globe
 		shadow_parameter		m_shadow_param;
 
 		int						m_data_ready;
-		 
+
 	};
 }
 

@@ -14,7 +14,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_editable_object.h"
 
 namespace uniscope_globe

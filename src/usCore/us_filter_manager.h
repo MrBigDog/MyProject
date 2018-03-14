@@ -15,7 +15,12 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_FILTER_MANAGER_H_
 #define _US_FILTER_MANAGER_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <usUtil\us_singleton.h>
+#include <unordered_map>
+
 namespace uniscope_globe
 {
 	class filter_base;

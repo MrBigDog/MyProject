@@ -15,8 +15,9 @@
 //				http://mathworld.wolfram.com/Matrix.html
 //
 //////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_event_handle.h"
+#include <usUtil/us_common_file.h>
 
 namespace uniscope_globe
 {
@@ -25,17 +26,17 @@ namespace uniscope_globe
 	{
 		callback_function = NULL;
 	}
-		
-	event_handle::~event_handle( void )
+
+	event_handle::~event_handle(void)
 	{
 		clear();
 	}
 
-	event_handle& event_handle::operator = (const event_handle& fun_value )
+	event_handle& event_handle::operator = (const event_handle& fun_value)
 	{
 		clear();
 
-		if ( fun_value.callback_function )
+		if (fun_value.callback_function)
 		{
 			callback_function = fun_value.callback_function->clone();
 		}
@@ -51,7 +52,7 @@ namespace uniscope_globe
 	//	}
 	//}
 
-	bool event_handle::operator == ( const event_handle& handler )
+	bool event_handle::operator == (const event_handle& handler)
 	{
 		//if ( callback_function == NULL || handler.callback_function == NULL )
 		//{
@@ -65,14 +66,14 @@ namespace uniscope_globe
 
 		//return false;
 
-		if ( callback_function == NULL || handler.callback_function == NULL )
+		if (callback_function == NULL || handler.callback_function == NULL)
 		{
 			return true;
 		}
 
-		if ( typeid(callback_function) == typeid(handler.callback_function) )
+		if (typeid(callback_function) == typeid(handler.callback_function))
 		{
-			return callback_function->equal( handler.callback_function );
+			return callback_function->equal(handler.callback_function);
 		}
 
 		return false;
@@ -80,7 +81,7 @@ namespace uniscope_globe
 
 	void event_handle::clear()
 	{
-		AUTO_DELETE( callback_function );
+		AUTO_DELETE(callback_function);
 	}
 
 }

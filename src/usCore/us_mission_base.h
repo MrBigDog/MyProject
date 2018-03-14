@@ -15,7 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_MISSSION_BASE_H_
 #define _US_MISSSION_BASE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_heap.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT mission_base : public heapable<uint>

@@ -15,9 +15,13 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_NODE_VISITOR_H_
 #define _US_NODE_VISITOR_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_intersect_base.h>
+
 namespace uniscope_globe
 {
+	class spatial_object;
 	class node_visitor : public intersect_base
 	{
 	public:

@@ -13,20 +13,21 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_intersect_argument.h"
+#include <usUtil/us_object_base.h>
 
 namespace uniscope_globe
 {
-	intersect_argument::intersect_argument( void )
+	intersect_argument::intersect_argument(void)
 	{
 		m_observer = NULL;
 	}
 
-	intersect_argument::~intersect_argument( void )
+	intersect_argument::~intersect_argument(void)
 	{
 
 	}
 
-	
+
 }

@@ -13,25 +13,26 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "Stdafx.h"
+//#include "Stdafx.h"
 #include "us_filter_base.h"
+#include <usCore/us_filter_manager.h>
 
 namespace uniscope_globe
 {
-	filter_base::filter_base( void )
+	filter_base::filter_base(void)
 	{
 		m_filter_manager = NULL;
 	}
 
-	filter_base::~filter_base( void )
+	filter_base::~filter_base(void)
 	{
 
 	}
 
-	void filter_base::set_manager( filter_manager *manager )
+	void filter_base::set_manager(filter_manager *manager)
 	{
-		m_filter_manager = manager; 
+		m_filter_manager = manager;
 	}
 
-	
+
 }

@@ -14,44 +14,44 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_texture_fill_style.h"
 
 namespace uniscope_globe
 {
-	texture_fill_style::texture_fill_style( void )
+	texture_fill_style::texture_fill_style(void)
 	{
 		m_rtti = US_RTTI_TEXTURE_FILL_STYLE;
-		m_fill_color  = 0xff999999;
+		m_fill_color = 0xff999999;
 		m_blend_color = 0x00000000;
 
-		m_tu_start	= 0.0;
-		m_tv_start	= 0.0;
-		m_tu_end	= 1.0;
-		m_tv_end	= 1.0;
+		m_tu_start = 0.0;
+		m_tv_start = 0.0;
+		m_tu_end = 1.0;
+		m_tv_end = 1.0;
 		m_texture_rotation = 0.0;
 
 		m_flip_texture_y = false;
 		m_two_sided_mode = false;
 	}
 
-	texture_fill_style::texture_fill_style( const texture_fill_style& v_style )
+	texture_fill_style::texture_fill_style(const texture_fill_style& v_style)
 	{
 		m_rtti = US_RTTI_TEXTURE_FILL_STYLE;
-		m_fill_color  = v_style.m_fill_color;
+		m_fill_color = v_style.m_fill_color;
 		m_blend_color = v_style.m_blend_color;
 
-		m_tu_start	 = v_style.m_tu_start;
-		m_tv_start	 = v_style.m_tv_start;
-		m_tu_end	 = v_style.m_tu_end;
-		m_tv_end	 = v_style.m_tv_end;
+		m_tu_start = v_style.m_tu_start;
+		m_tv_start = v_style.m_tv_start;
+		m_tu_end = v_style.m_tu_end;
+		m_tv_end = v_style.m_tv_end;
 		m_texture_rotation = v_style.m_texture_rotation;
 
 		m_flip_texture_y = false;
 		m_two_sided_mode = false;
 	}
 
-	texture_fill_style::~texture_fill_style( void )
+	texture_fill_style::~texture_fill_style(void)
 	{
 
 	}
@@ -74,5 +74,5 @@ namespace uniscope_globe
 	//}
 
 
-	
+
 }

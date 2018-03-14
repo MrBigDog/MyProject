@@ -15,15 +15,19 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_TIME_COST_H_
 #define _US_TIME_COST_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_file_buffer.h>
+#include <usUtil\us_singleton.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT time_cost
 	{
 	public:
-		time_cost( void );
+		time_cost(void);
 
-		~time_cost( void );
+		~time_cost(void);
 
 	public:
 		void write_render_time();
@@ -45,22 +49,21 @@ namespace uniscope_globe
 		// for download
 		long m_download_time;
 		long m_uncompress_time;
-		
+
 		file_buffer m_render_file;
 		file_buffer m_update_file;
 		file_buffer m_download_file;
 
 	};
 
-	class USCORE_EXPORT singleton_time_cost_checker
-		: public singleton<time_cost>
+	class USCORE_EXPORT singleton_time_cost_checker : public singleton<time_cost>
 	{
 	public:
-		singleton_time_cost_checker( void )
+		singleton_time_cost_checker(void)
 		{
 		}
 
-		virtual ~singleton_time_cost_checker( void )
+		virtual ~singleton_time_cost_checker(void)
 		{
 		}
 	};

@@ -15,15 +15,18 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_FONT_STYLE_H_
 #define _US_FONT_STYLE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_style_base.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT font_style : public style_base
 	{
 	public:
-		font_style( void );
-		font_style( const font_style& v_style );
-		virtual ~font_style( void );
+		font_style(void);
+		font_style(const font_style& v_style);
+		virtual ~font_style(void);
 
 	public:
 		ustring m_face_name;

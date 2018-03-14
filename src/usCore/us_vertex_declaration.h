@@ -15,7 +15,9 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_VERTEX_DECLARATION_H_
 #define _US_VERTEX_DECLARATION_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT vertex_declaration

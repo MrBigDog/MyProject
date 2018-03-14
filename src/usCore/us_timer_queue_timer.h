@@ -15,35 +15,39 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_TIMER_QUEUE_TIMER_H_
 #define _US_TIMER_QUEUE_TIMER_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_singleton.h>
+
+#include <wtypes.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT timer_queue_timer
 	{
 	public:
-		timer_queue_timer( void );
+		timer_queue_timer(void);
 
-		virtual ~timer_queue_timer( void );
+		virtual ~timer_queue_timer(void);
 
 	public:
-		void register_timer( HANDLE& out_new_timer,WAITORTIMERCALLBACK callback_fun, PVOID params, DWORD due_time, DWORD period, ULONG flags );
+		void register_timer(HANDLE& out_new_timer, WAITORTIMERCALLBACK callback_fun, PVOID params, DWORD due_time, DWORD period, ULONG flags);
 
-		void un_register_timer( HANDLE in_timer );
+		void un_register_timer(HANDLE in_timer);
 
 	protected:
 		HANDLE m_timer_queue;
 	};
 
-	class singleton_timer_queue_timer
-		: public singleton<timer_queue_timer>
+	class singleton_timer_queue_timer : public singleton<timer_queue_timer>
 	{
 
 	public:
-		singleton_timer_queue_timer( void )
+		singleton_timer_queue_timer(void)
 		{
 		}
 
-		virtual ~singleton_timer_queue_timer( void )
+		virtual ~singleton_timer_queue_timer(void)
 		{
 		}
 	};

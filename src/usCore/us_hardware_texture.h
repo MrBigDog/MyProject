@@ -15,7 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_HARDWARE_TEXTURE_H_
 #define _US_HARDWARE_TEXTURE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_hardware_base.h>
+
 #pragma warning ( disable:4482 )
 namespace uniscope_globe
 {
@@ -45,6 +48,7 @@ namespace uniscope_globe
 		}
 	};
 
+	class hardware_creator;
 
 	class USCORE_EXPORT hardware_texture : public hardware_base
 	{

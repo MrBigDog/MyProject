@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                              ///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 //
 //  This source file is part of Uniscope Virtual Globe
 //  Copyright (c) 2008-2009 by The Uniscope Team . All Rights Reserved
@@ -15,7 +15,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_DOWNLOADER_H_
 #define _US_DOWNLOADER_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_tls_singleton.h>
+#include <usUtil\us_file_buffer.h>
+
 namespace uniscope_globe
 {
 	enum download_type
@@ -24,30 +28,34 @@ namespace uniscope_globe
 		US_DOWNLOAD_IN_QUEUE
 	};
 
+	class link_manager;
+	class mission_heap;
+	class mission_queue;
+
 	class USCORE_EXPORT downloader
 	{
 	public:
-		downloader( void );
+		downloader(void);
 
-		virtual ~downloader( void );
-
-	public:
-		link_manager* get_link_manager( void );
-
-		int get_mission_count( void );
+		virtual ~downloader(void);
 
 	public:
-		mission_base* create_mission_in_heap( const LPCTSTR str_url );
+		link_manager* get_link_manager(void);
 
-		mission_base* create_mission_in_queue( const LPCTSTR str_url );
-		
-		void destroy_mission( mission_base* v_mission );
+		int get_mission_count(void);
+
+	public:
+		mission_base* create_mission_in_heap(const LPCTSTR str_url);
+
+		mission_base* create_mission_in_queue(const LPCTSTR str_url);
+
+		void destroy_mission(mission_base* v_mission);
 
 		void update();
 
-		void terminate( void );
+		void terminate(void);
 
-		void write( const LPCTSTR str_log );
+		void write(const LPCTSTR str_log);
 
 	private:
 		mission_heap* m_mission_heap;
@@ -58,13 +66,13 @@ namespace uniscope_globe
 		file_buffer m_file;
 	};
 
-	class USCORE_EXPORT tls_singleton_downloader: public tls_singleton<downloader>
+	class USCORE_EXPORT tls_singleton_downloader : public tls_singleton<downloader>
 	{
 	public:
-		tls_singleton_downloader( void ) { }
-		virtual ~tls_singleton_downloader( void ) { }
+		tls_singleton_downloader(void) { }
+		virtual ~tls_singleton_downloader(void) { }
 	};
-	
+
 #define US_CREATE_MISSION_IN_HEAP(url)	(download_mission*)tls_singleton_downloader::instance().create_mission_in_heap(url);
 #define US_CREATE_MISSION_IN_QUEUE(url)	(download_mission*)tls_singleton_downloader::instance().create_mission_in_queue(url);
 #define US_DESTROY_MISSION(mssn)		tls_singleton_downloader::instance().create_mission_in_queue(mssn);

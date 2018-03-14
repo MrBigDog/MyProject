@@ -15,7 +15,17 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_OBSERVER_BASE_H_
 #define _US_OBSERVER_BASE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_spherical_object.h>
+#include <usCore\us_view_port.h>
+
+#include <usUtil/us_ray.h>
+#include <usUtil/us_point.h>
+#include <usUtil/us_frustum.h>
+#include <usUtil/us_matrix4.h>
+#include <usUtil/us_spherical_coords.h>
+
 namespace uniscope_globe
 {
 	class render_device;
@@ -30,8 +40,6 @@ namespace uniscope_globe
 		FREE_TRACKING,
 		ON_TRACK,
 	}observer_state;
-
-	class spherical_object;
 
 	class USCORE_EXPORT observer_base : public spherical_object
 	{

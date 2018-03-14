@@ -15,27 +15,30 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_FILTER_BASE_H_
 #define _US_FILTER_BASE_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
 	class filter_manager;
 	class raw_buffer;
+	class object_base;
 
 	class USCORE_EXPORT filter_base
 	{
 	public:
-		filter_base( void );
+		filter_base(void);
 
-		virtual ~filter_base( void );
+		virtual ~filter_base(void);
 
 	public:
-		virtual object_base* parse( raw_buffer* in_buffer ) = 0;
+		virtual object_base* parse(raw_buffer* in_buffer) = 0;
 
-		void set_manager( filter_manager *manager );
+		void set_manager(filter_manager *manager);
 
 	protected:
 		filter_manager* m_filter_manager;
-		 
+
 	};
 }
 

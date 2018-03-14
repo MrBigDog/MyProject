@@ -15,26 +15,33 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_HARDWARE_CREATOR_H_
 #define _US_HARDWARE_CREATOR_H_
+
 #include <usCore\Export.h>
+#include <usUtil/us_mutex.h>
+#include <vector>
+
 namespace uniscope_globe
 {
+	class hardware_base;
+	class render_device;
+
 	class USCORE_EXPORT hardware_creator
 	{
 	public:
-		hardware_creator( void );
+		hardware_creator(void);
 
-		~hardware_creator( void );
+		~hardware_creator(void);
 
 		typedef std::vector<hardware_base*> hardware_array;
 
 	public:
-		void insert_mesh ( hardware_base* hardware );
+		void insert_mesh(hardware_base* hardware);
 
-		void insert_texture ( hardware_base* hardware );
+		void insert_texture(hardware_base* hardware);
 
-		void update( render_device* device, ulong v_time );
+		void update(render_device* device, ulong v_time);
 
-		void clear( void );
+		void clear(void);
 
 	public:
 		hardware_array m_mesh_create_array;
@@ -42,7 +49,7 @@ namespace uniscope_globe
 		hardware_array m_text_create_array;
 
 		US_AUTO_MUTEX
-		 
+
 	};
 }
 

@@ -16,7 +16,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_THREADSAFE_MEMORY_POOL_H_
 #define _US_THREADSAFE_MEMORY_POOL_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <map>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT threadsafe_memory_pool

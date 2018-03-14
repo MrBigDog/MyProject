@@ -16,9 +16,16 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_INTERSECT_HELPER_H_
 #define _US_INTERSECT_HELPER_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_axis_aligned_box.h>
+#include <usUtil\us_rect.h>
+#include <usUtil\us_point.h>
+
 namespace uniscope_globe
 {
+	class observer_base;
+
 	class USCORE_EXPORT intersect_helper
 	{
 	public:

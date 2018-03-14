@@ -15,23 +15,27 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_STYLING_OBJECT_H_
 #define _US_STYLING_OBJECT_H_
+
 #include <usCore\Export.h>
+
 namespace uniscope_globe
 {
+	class style_base;
+
 	class USCORE_EXPORT styling_object
 	{
 	public:
-		styling_object( void );
+		styling_object(void);
 
-		virtual ~styling_object( void );
+		virtual ~styling_object(void);
 
 	public:
-		virtual void set_render_style( style_base* v_style );
+		virtual void set_render_style(style_base* v_style);
 
-		virtual style_base* get_render_style( void ) = 0;
+		virtual style_base* get_render_style(void) = 0;
 
-		virtual void on_render_style_changed(style_base* v_style_base){}
-		
+		virtual void on_render_style_changed(style_base* v_style_base) {}
+
 	protected:
 		style_base*	m_render_style;
 	};

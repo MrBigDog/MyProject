@@ -15,7 +15,12 @@
 //////////////////////////////////////////////////////////////////////////
 #ifndef _US_NODE_BASE_H_
 #define _US_NODE_BASE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+
+#include <vector>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT node_base
