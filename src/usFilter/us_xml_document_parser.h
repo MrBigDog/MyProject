@@ -23,237 +23,237 @@ namespace uniscope_globe
 
 
 	//	XMLGlobe Parser
-	class LIB_FILTER_API xml_globe_parser
+	class USFILTER_EXPORT xml_globe_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_globe_parser( void ){}
+		xml_globe_parser(void) {}
 
-		virtual ~xml_globe_parser( void ){}
+		virtual ~xml_globe_parser(void) {}
 
 	public:
-		virtual object_base* forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base* forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 	//
 	//	XML Terrain Parser
 	//
-	class LIB_FILTER_API xml_dem_system_parser 
+	class USFILTER_EXPORT xml_dem_system_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_dem_system_parser( void ){}
+		xml_dem_system_parser(void) {}
 
-		virtual ~xml_dem_system_parser( void ){}
+		virtual ~xml_dem_system_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 	//
 	//	XML Image Parser
 	//
-	class LIB_FILTER_API xml_dom_system_parser 
+	class USFILTER_EXPORT xml_dom_system_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_dom_system_parser( void ){}
+		xml_dom_system_parser(void) {}
 
-		virtual ~xml_dom_system_parser( void ){}
+		virtual ~xml_dom_system_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 	//
 	//	XML Primary Coverage Parser
 	//
-	class LIB_FILTER_API xml_primary_coverage_parser 
+	class USFILTER_EXPORT xml_primary_coverage_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_primary_coverage_parser( void ){}
+		xml_primary_coverage_parser(void) {}
 
-		virtual ~xml_primary_coverage_parser( void ){}
+		virtual ~xml_primary_coverage_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 	//
 	//	XML Secondary Coverage Parser
 	//
-	class LIB_FILTER_API xml_secondary_coverage_parser 
+	class USFILTER_EXPORT xml_secondary_coverage_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_secondary_coverage_parser( void ){}
+		xml_secondary_coverage_parser(void) {}
 
-		virtual ~xml_secondary_coverage_parser( void ){}
+		virtual ~xml_secondary_coverage_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 	//
 	//	XML Connection Parser
 	//
-	class LIB_FILTER_API xml_connection_parser 
+	class USFILTER_EXPORT xml_connection_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_connection_parser( void ){}
+		xml_connection_parser(void) {}
 
-		virtual ~xml_connection_parser( void ){}
+		virtual ~xml_connection_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 
 	//
 	//	XMLModelLayer Parser
 	//
-	class LIB_FILTER_API xml_model_layer_parser 
+	class USFILTER_EXPORT xml_model_layer_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_model_layer_parser( void ){}
+		xml_model_layer_parser(void) {}
 
-		virtual ~xml_model_layer_parser( void ){}
+		virtual ~xml_model_layer_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 	//
 	//	xml building layer performance parser
 	//
-	class LIB_FILTER_API xml_bldg_layer_performance_parser 
+	class USFILTER_EXPORT xml_bldg_layer_performance_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_bldg_layer_performance_parser( void ){}
+		xml_bldg_layer_performance_parser(void) {}
 
-		virtual ~xml_bldg_layer_performance_parser( void ){}
+		virtual ~xml_bldg_layer_performance_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 
 	protected:
-		bool parse_texture_connection( TiXmlNode* v_xml_node, void* in_object );
+		bool parse_texture_connection(TiXmlNode* v_xml_node, void* in_object);
 
-		bool parse_building_connection( TiXmlNode* v_xml_node, void* in_object );
+		bool parse_building_connection(TiXmlNode* v_xml_node, void* in_object);
 
-		bool parse_lod_parameter( TiXmlNode* v_xml_node, void* in_object );
+		bool parse_lod_parameter(TiXmlNode* v_xml_node, void* in_object);
 	};
 
 	//
 	//	xml building layer config parser
 	//
-	class LIB_FILTER_API xml_bldg_layer_config_parser 
+	class USFILTER_EXPORT xml_bldg_layer_config_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_bldg_layer_config_parser( void ){}
+		xml_bldg_layer_config_parser(void) {}
 
-		virtual ~xml_bldg_layer_config_parser( void ){}
+		virtual ~xml_bldg_layer_config_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 	//
 	//	block_layer Parser
 	//
-	class LIB_FILTER_API xml_block_layer_parser 
+	class USFILTER_EXPORT xml_block_layer_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_block_layer_parser( void ){}
+		xml_block_layer_parser(void) {}
 
-		virtual ~xml_block_layer_parser( void ){}
+		virtual ~xml_block_layer_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 
 	//
 	//	XMLPOILayer Parser
 	//
-	class LIB_FILTER_API xml_poi_layer_parser 
+	class USFILTER_EXPORT xml_poi_layer_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_poi_layer_parser( void ){}
+		xml_poi_layer_parser(void) {}
 
-		virtual ~xml_poi_layer_parser( void ){}
+		virtual ~xml_poi_layer_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 
-		void parse_poi_style( TiXmlNode* v_xml_node, poi_style& v_style );
+		void parse_poi_style(TiXmlNode* v_xml_node, poi_style& v_style);
 	};
 
 	//
 	//	XMLVectorLayer Parser
 	//
-	class LIB_FILTER_API xml_vector_layer_parser
+	class USFILTER_EXPORT xml_vector_layer_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_vector_layer_parser( void ){}
+		xml_vector_layer_parser(void) {}
 
-		virtual ~xml_vector_layer_parser( void ){}
+		virtual ~xml_vector_layer_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 	//
 	//	Annotation Layer Parser
 	//
-	class LIB_FILTER_API xml_annotation_layer_parser
+	class USFILTER_EXPORT xml_annotation_layer_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_annotation_layer_parser( void ){}
+		xml_annotation_layer_parser(void) {}
 
-		virtual ~xml_annotation_layer_parser( void ){}
+		virtual ~xml_annotation_layer_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 	//
 	//	XMLBillboardChunk Parser
 	//
-	class LIB_FILTER_API xml_billboard_layer_parser
+	class USFILTER_EXPORT xml_billboard_layer_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_billboard_layer_parser( void ){}
+		xml_billboard_layer_parser(void) {}
 
-		virtual ~xml_billboard_layer_parser( void ){}
+		virtual ~xml_billboard_layer_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 	//
 	//	Match Model Parser
 	//
-	class LIB_FILTER_API xml_match_model_layer_parser
+	class USFILTER_EXPORT xml_match_model_layer_parser
 		: public xml_parser_base
 	{
 	public:
-		xml_match_model_layer_parser( void ){}
+		xml_match_model_layer_parser(void) {}
 
-		virtual ~xml_match_model_layer_parser( void ){}
+		virtual ~xml_match_model_layer_parser(void) {}
 
 	public:
-		virtual object_base *forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
+		virtual object_base *forward_parse(object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object);
 	};
 
 

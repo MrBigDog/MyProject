@@ -29,7 +29,7 @@ namespace se
 
 namespace uniscope_globe
 {
-	class LIB_FILTER_API geo3d_filter
+	class USFILTER_EXPORT geo3d_filter
 		: public filter_base
 	{
 	public: 

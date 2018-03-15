@@ -19,7 +19,7 @@
 
 namespace uniscope_globe
 {
-	class LIB_FILTER_API track_parser : public xml_parser_base
+	class USFILTER_EXPORT track_parser : public xml_parser_base
 	{
 	public:
 		track_parser( void ){}
@@ -30,7 +30,7 @@ namespace uniscope_globe
 		virtual object_base* forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
 	};
 
-	class LIB_FILTER_API station_route_parser : public xml_parser_base
+	class USFILTER_EXPORT station_route_parser : public xml_parser_base
 	{
 	public:
 		station_route_parser( void ){}
@@ -41,7 +41,7 @@ namespace uniscope_globe
 		virtual object_base* forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
 	};
 	
-	class LIB_FILTER_API station_pass_parser : public xml_parser_base
+	class USFILTER_EXPORT station_pass_parser : public xml_parser_base
 	{
 	public:
 		station_pass_parser( void ){}
@@ -52,7 +52,7 @@ namespace uniscope_globe
 		virtual object_base* forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
 	};
 
-	class LIB_FILTER_API station_stamp_parser : public xml_parser_base
+	class USFILTER_EXPORT station_stamp_parser : public xml_parser_base
 	{
 	public:
 		station_stamp_parser( void ){}
@@ -63,7 +63,7 @@ namespace uniscope_globe
 		virtual object_base* forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
 	};
 
-	class LIB_FILTER_API station_lookat_parser : public xml_parser_base
+	class USFILTER_EXPORT station_lookat_parser : public xml_parser_base
 	{
 	public:
 		station_lookat_parser( void ){}
@@ -74,7 +74,7 @@ namespace uniscope_globe
 		virtual object_base* forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
 	};
 
-	class LIB_FILTER_API station_surround_parser : public xml_parser_base
+	class USFILTER_EXPORT station_surround_parser : public xml_parser_base
 	{
 	public:
 		station_surround_parser( void ){}
@@ -85,7 +85,7 @@ namespace uniscope_globe
 		virtual object_base* forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object );
 	};
 
-	class LIB_FILTER_API station_stop_parser : public xml_parser_base
+	class USFILTER_EXPORT station_stop_parser : public xml_parser_base
 	{
 	public:
 		station_stop_parser( void ){}

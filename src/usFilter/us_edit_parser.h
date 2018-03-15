@@ -22,7 +22,7 @@ namespace uniscope_globe
 	////
 	//// edit model system parser
 	////
-	//class LIB_FILTER_API xml_edit_model_layer_parser : public xml_parser_base
+	//class USFILTER_EXPORT xml_edit_model_layer_parser : public xml_parser_base
 	//{
 	//public:
 	//	xml_edit_model_layer_parser(void){}
@@ -35,7 +35,7 @@ namespace uniscope_globe
 	////
 	//// edit model parser
 	////
-	//class LIB_FILTER_API xml_edit_model_parser : public xml_parser_base
+	//class USFILTER_EXPORT xml_edit_model_parser : public xml_parser_base
 	//{
 	//public:
 	//	xml_edit_model_parser(void){}
@@ -48,7 +48,7 @@ namespace uniscope_globe
 	////
 	//// element_model_set parser
 	////
-	//class LIB_FILTER_API xml_element_model_set_parser : public xml_parser_base
+	//class USFILTER_EXPORT xml_element_model_set_parser : public xml_parser_base
 	//{
 	//public:
 	//	xml_element_model_set_parser(void){}
@@ -62,7 +62,7 @@ namespace uniscope_globe
 	////
 	//// edit add parser
 	////
-	//class LIB_FILTER_API xml_edit_add_parser : public xml_parser_base
+	//class USFILTER_EXPORT xml_edit_add_parser : public xml_parser_base
 	//{
 	//public:
 	//	xml_edit_add_parser(void){}

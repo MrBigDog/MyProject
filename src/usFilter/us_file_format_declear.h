@@ -19,7 +19,7 @@
 
 namespace uniscope_globe
 {
-	typedef struct LIB_FILTER_API _VG_DataBlockHead
+	typedef struct USFILTER_EXPORT _VG_DataBlockHead
 	{
 		short nVersion;
 		short nType;
@@ -27,26 +27,26 @@ namespace uniscope_globe
 	}VG_DataBlockHead;
 
 
-	struct LIB_FILTER_API us_square_head
+	struct USFILTER_EXPORT us_square_head
 	{
 		short version;
 		short square_type;		// us_square_type
 	};
 
-	struct LIB_FILTER_API us_common_segment
+	struct USFILTER_EXPORT us_common_segment
 	{
 		short			segment_type;		// us_segment_type
 		unsigned long	data_size;
 	};
 
-	struct LIB_FILTER_API us_zipped_segment
+	struct USFILTER_EXPORT us_zipped_segment
 	{
 		short			segment_type;		// us_segment_type
 		unsigned long	unzipped_data_size;
 		unsigned long	zipped_data_size;
 	};
 
-	struct LIB_FILTER_API us_grid_segment_ex
+	struct USFILTER_EXPORT us_grid_segment_ex
 	{
 		unsigned short invalid_value;
 		short divide_number;
@@ -54,26 +54,26 @@ namespace uniscope_globe
 		float elevation_min;
 	};
 
-	struct LIB_FILTER_API us_vertex_segment_ex
+	struct USFILTER_EXPORT us_vertex_segment_ex
 	{
 		short			divide_number;
 		float			elevation_max;
 		float			elevation_min;
 	};
 
-	struct LIB_FILTER_API us_vertex_segment
+	struct USFILTER_EXPORT us_vertex_segment
 	{
 		short			segment_type;
 		unsigned long	data_size;
 	};
 
-	struct LIB_FILTER_API us_index_segment
+	struct USFILTER_EXPORT us_index_segment
 	{
 		short			segment_type;
 		unsigned long	data_size;
 	};
 
-	typedef struct LIB_FILTER_API _us_grid_segment_head
+	typedef struct USFILTER_EXPORT _us_grid_segment_head
 	{
 		short			segment_type;		// us_segment_type
 		short			grid_size;
@@ -83,7 +83,7 @@ namespace uniscope_globe
 		long			interval_count;			
 	} us_grid_segment_head;
 
-	typedef struct LIB_FILTER_API _us_zipped_grid_segment_head
+	typedef struct USFILTER_EXPORT _us_zipped_grid_segment_head
 	{
 		short			segment_type;		// us_segment_type
 		short			grid_size;
@@ -93,21 +93,21 @@ namespace uniscope_globe
 		long			data_length;
 	} us_zipped_grid_segment_head;
 
-	typedef struct LIB_FILTER_API _us_vertex3d 
+	typedef struct USFILTER_EXPORT _us_vertex3d 
 	{
 		short x;
 		short y;
 		short h;
 	} us_vertex3d;
 
-	typedef struct LIB_FILTER_API _us_zipped_segment_head 
+	typedef struct USFILTER_EXPORT _us_zipped_segment_head 
 	{
 		short segment_type;		// us_segment_type
 		unsigned long  unzipped_data_size;
 		unsigned long  zipped_data_size;
 	} us_zipped_segment_head;
 
-	typedef struct LIB_FILTER_API _us_zipped_tin_segment_head
+	typedef struct USFILTER_EXPORT _us_zipped_tin_segment_head
 	{
 		short			segment_type;		// us_segment_type
 		float			max_height;
@@ -115,7 +115,7 @@ namespace uniscope_globe
 		long			data_length;
 	} us_zipped_tin_segment_head;
 
-	typedef struct LIB_FILTER_API _us_zipped_vertex_segment_head
+	typedef struct USFILTER_EXPORT _us_zipped_vertex_segment_head
 	{		
 		long  segment_type;			// =1
 		long  vertex_count;			
@@ -125,21 +125,21 @@ namespace uniscope_globe
 		long  interval_count;
 	} us_zipped_vertex_segment_head;
 
-	typedef struct LIB_FILTER_API _us_zipped_index_segment_head
+	typedef struct USFILTER_EXPORT _us_zipped_index_segment_head
 	{		
 		long  segment_type;			// =3
 		long  face_count;			
 		long  zip_data_size;		
 	} us_zipped_index_segment_head;
 
-	typedef struct LIB_FILTER_API _us_jpeg_segment_head
+	typedef struct USFILTER_EXPORT _us_jpeg_segment_head
 	{
 		short		segment_type;
 		long		reverse_flags;
 		long		zip_data_size;
 	} us_jpeg_segment_head;
 
-	typedef struct LIB_FILTER_API _us_alpha_1bit_segment_head
+	typedef struct USFILTER_EXPORT _us_alpha_1bit_segment_head
 	{
 		short		segment_type;
 		long		zip_data_size;

@@ -22,7 +22,7 @@ namespace uniscope_globe
 	// 
 	// xml_element_block_parser
 	//
-	class LIB_FILTER_API xml_edit_element_block_parser
+	class USFILTER_EXPORT xml_edit_element_block_parser
 		: public xml_parser_base
 	{
 	public:

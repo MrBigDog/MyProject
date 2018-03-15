@@ -19,7 +19,7 @@
 
 namespace uniscope_globe
 {
-	class LIB_FILTER_API xml_mission_argument
+	class USFILTER_EXPORT xml_mission_argument
 		: public event_argument
 	{
 	public:
@@ -32,7 +32,7 @@ namespace uniscope_globe
 	};
 	
 
-	class LIB_FILTER_API xml_mission
+	class USFILTER_EXPORT xml_mission
 		: public mission_base
 	{
 	protected:

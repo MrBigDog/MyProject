@@ -19,7 +19,7 @@
 
 namespace uniscope_globe
 {
-	class LIB_FILTER_API jpeg_loader
+	class USFILTER_EXPORT jpeg_loader
 	{
 	public:
 		jpeg_loader( void ){}

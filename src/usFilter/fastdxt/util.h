@@ -87,7 +87,7 @@ void aligned_free(void *ptr);
 #ifndef DATA_PATH_H
 #define DATA_PATH_H
 
-class data_path
+class USFILTER_EXPORT data_path
 {
 public:
   std::string              file_path;

@@ -17,6 +17,7 @@
 #define _US_ANIMATION_FILTER_EX_H_
 
 #include <usFilter\Export.h>
+#include <usCore\us_filter_base.h>
 
 namespace uniscope_globe
 {

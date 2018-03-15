@@ -19,7 +19,7 @@
 
 namespace uniscope_globe
 {
-	class LIB_FILTER_API tin_filter
+	class USFILTER_EXPORT tin_filter
 		: public filter_base
 	{
 	public:
@@ -36,7 +36,7 @@ namespace uniscope_globe
 	};
 
 
-	class LIB_FILTER_API tin_filter_v2
+	class USFILTER_EXPORT tin_filter_v2
 		: public filter_base
 	{
 	public:
@@ -52,7 +52,7 @@ namespace uniscope_globe
 
 	};
 
-	class LIB_FILTER_API tin_filter_v4
+	class USFILTER_EXPORT tin_filter_v4
 		: public filter_base
 	{
 	public:
@@ -69,7 +69,7 @@ namespace uniscope_globe
 	};
 
 
-	class LIB_FILTER_API dem_mesh_filter
+	class USFILTER_EXPORT dem_mesh_filter
 		: public filter_base
 	{
 	public:
@@ -132,7 +132,7 @@ namespace uniscope_globe
 
 
 
-	class LIB_FILTER_API dem_mesh_filter_v2
+	class USFILTER_EXPORT dem_mesh_filter_v2
 		: public filter_base
 	{
 	public:
@@ -149,7 +149,7 @@ namespace uniscope_globe
 	};
 
 
-	class LIB_FILTER_API dem_mesh_filter_v3
+	class USFILTER_EXPORT dem_mesh_filter_v3
 		: public filter_base
 	{
 	public:
@@ -165,7 +165,7 @@ namespace uniscope_globe
 
 	};
 
-	class LIB_FILTER_API dem_mesh_filter_v4
+	class USFILTER_EXPORT dem_mesh_filter_v4
 		: public filter_base
 	{
 	public:

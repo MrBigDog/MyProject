@@ -42,7 +42,7 @@ namespace uniscope_globe
 		 
 	};
 
-	class LIB_FILTER_API singleton_usx_exporter_assistant_ex 
+	class USFILTER_EXPORT singleton_usx_exporter_assistant_ex 
 		: public singleton<usx_exporter_assistant_ex>
 	{
 	public:

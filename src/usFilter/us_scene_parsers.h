@@ -22,7 +22,7 @@ namespace uniscope_globe
 	//
 	// scene link
 	//
-	class LIB_FILTER_API xml_scene_link_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_scene_link_parser : public xml_parser_base
 	{
 	public:
 		xml_scene_link_parser(void){}
@@ -36,7 +36,7 @@ namespace uniscope_globe
 	//
 	// scene parser
 	//
-	class LIB_FILTER_API xml_scene_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_scene_parser : public xml_parser_base
 	{
 	public:
 		xml_scene_parser(void){}
@@ -50,7 +50,7 @@ namespace uniscope_globe
 	//
 	// billboard_set_parser
 	//
-	class LIB_FILTER_API xml_billboard_set_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_billboard_set_parser : public xml_parser_base
 	{
 	public:
 		xml_billboard_set_parser( void ) {}
@@ -64,7 +64,7 @@ namespace uniscope_globe
 	//
 	//	geo_spatial_parser
 	//
-	class LIB_FILTER_API xml_spherical_transform_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_spherical_transform_parser : public xml_parser_base
 	{
 	public:
 		xml_spherical_transform_parser( void ){}
@@ -78,7 +78,7 @@ namespace uniscope_globe
 	//
 	//	birth_place_parser
 	//
-	class LIB_FILTER_API xml_birth_place_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_birth_place_parser : public xml_parser_base
 	{
 	public:
 		xml_birth_place_parser( void ){}
@@ -93,7 +93,7 @@ namespace uniscope_globe
 	//
 	//	model_parser
 	//
-	class LIB_FILTER_API xml_model_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_model_parser : public xml_parser_base
 	{
 	public:
 		xml_model_parser( void ){}
@@ -107,7 +107,7 @@ namespace uniscope_globe
 	//
 	//	volume_parser
 	//
-	class LIB_FILTER_API xml_volume_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_volume_parser : public xml_parser_base
 	{
 	public:
 		xml_volume_parser( void ){}
@@ -121,7 +121,7 @@ namespace uniscope_globe
 	//
 	//	box_parser
 	//
-	class LIB_FILTER_API xml_box_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_box_parser : public xml_parser_base
 	{
 	public:
 		xml_box_parser( void ){}
@@ -134,7 +134,7 @@ namespace uniscope_globe
 	//
 	//	sphere_parser
 	//
-	class LIB_FILTER_API xml_sphere_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_sphere_parser : public xml_parser_base
 	{
 	public:
 		xml_sphere_parser( void ){}
@@ -147,7 +147,7 @@ namespace uniscope_globe
 	//
 	//	cylinder_parser
 	//
-	class LIB_FILTER_API xml_cylinder_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_cylinder_parser : public xml_parser_base
 	{
 	public:
 		xml_cylinder_parser( void ){}
@@ -160,7 +160,7 @@ namespace uniscope_globe
 	//
 	//	cone_parser
 	//
-	class LIB_FILTER_API xml_cone_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_cone_parser : public xml_parser_base
 	{
 	public:
 		xml_cone_parser( void ){}
@@ -173,7 +173,7 @@ namespace uniscope_globe
 	//
 	//	prism_parser
 	//
-	class LIB_FILTER_API xml_prism_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_prism_parser : public xml_parser_base
 	{
 	public:
 		xml_prism_parser( void ){}
@@ -186,7 +186,7 @@ namespace uniscope_globe
 	//
 	//	pyramid_parser
 	//
-	class LIB_FILTER_API xml_pyramid_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_pyramid_parser : public xml_parser_base
 	{
 	public:
 		xml_pyramid_parser( void ){}
@@ -200,7 +200,7 @@ namespace uniscope_globe
 	//
 	//	dummy_geometry_parser
 	//
-	class LIB_FILTER_API xml_dummy_geometry_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_dummy_geometry_parser : public xml_parser_base
 	{
 	public:
 		xml_dummy_geometry_parser( void ){}
@@ -214,7 +214,7 @@ namespace uniscope_globe
 	//
 	//	scene_graph_parser
 	//
-	class LIB_FILTER_API xml_scene_graph_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_scene_graph_parser : public xml_parser_base
 	{
 	public:
 		xml_scene_graph_parser( void ){}
@@ -228,7 +228,7 @@ namespace uniscope_globe
 	//
 	//	bound_box_parser
 	//
-	class LIB_FILTER_API xml_bound_box_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_bound_box_parser : public xml_parser_base
 	{
 	public:
 		xml_bound_box_parser( void ){}
@@ -241,7 +241,7 @@ namespace uniscope_globe
 	//
 	//	label_parser
 	//
-	class LIB_FILTER_API xml_label_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_label_parser : public xml_parser_base
 	{
 	public:
 		xml_label_parser( void ){}
@@ -254,7 +254,7 @@ namespace uniscope_globe
 	//
 	//	animation_link_parser
 	//
-	class LIB_FILTER_API xml_animation_link_parser : public xml_parser_base
+	class USFILTER_EXPORT xml_animation_link_parser : public xml_parser_base
 	{
 	public:
 		xml_animation_link_parser( void ){}

@@ -19,7 +19,7 @@
 
 namespace uniscope_globe
 {
-	class LIB_FILTER_API ugp_filter
+	class USFILTER_EXPORT ugp_filter
 			: public filter_base
 	{
 	public:

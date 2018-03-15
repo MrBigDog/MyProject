@@ -7,7 +7,7 @@
 
 namespace uniscope_globe
 {
-	class LIB_FILTER_API usm_filter_7z : public filter_base
+	class USFILTER_EXPORT usm_filter_7z : public filter_base
 	{
 	public:
 		usm_filter_7z( void ) { }

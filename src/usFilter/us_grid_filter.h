@@ -19,7 +19,7 @@
 
 namespace uniscope_globe
 {
-	class LIB_FILTER_API grid_filter
+	class USFILTER_EXPORT grid_filter
 		: public filter_base
 	{
 	public:
@@ -34,7 +34,7 @@ namespace uniscope_globe
 		object_base* parse_from_compressed_stream( raw_buffer* stream, interior_index index );
 	};
 
-	class LIB_FILTER_API grid_filter_v2
+	class USFILTER_EXPORT grid_filter_v2
 		: public filter_base
 	{
 	public:

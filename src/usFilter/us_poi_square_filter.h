@@ -20,7 +20,7 @@
 namespace uniscope_globe
 {
 
-	class LIB_FILTER_API poi_square_filter
+	class USFILTER_EXPORT poi_square_filter
 		: public filter_base
 	{
 	public:

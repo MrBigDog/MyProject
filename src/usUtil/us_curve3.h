@@ -17,7 +17,7 @@
 #define _US_CURVE3_H_
 
 #include <usUtil/us_vector3.h>
-#include <sal.h>
+#include <windows.h>
 
 namespace uniscope_globe
 {

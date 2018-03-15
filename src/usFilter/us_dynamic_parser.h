@@ -19,7 +19,7 @@
 
 namespace uniscope_globe
 {
-	class LIB_FILTER_API dynamic_layer_parser: public xml_parser_base
+	class USFILTER_EXPORT dynamic_layer_parser: public xml_parser_base
 	{
 	public:
 		dynamic_layer_parser( void ){}
@@ -30,7 +30,7 @@ namespace uniscope_globe
 		virtual object_base* forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object ); 
 	};
 
-	class LIB_FILTER_API dynamic_model_parser: public xml_parser_base
+	class USFILTER_EXPORT dynamic_model_parser: public xml_parser_base
 	{
 	public:
 		dynamic_model_parser( void ){}
@@ -41,7 +41,7 @@ namespace uniscope_globe
 		virtual object_base* forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object ); 
 	};
 
-	class LIB_FILTER_API dynamic_billboard_set_parser: public xml_parser_base
+	class USFILTER_EXPORT dynamic_billboard_set_parser: public xml_parser_base
 	{
 	public:
 		dynamic_billboard_set_parser( void ){}
@@ -52,7 +52,7 @@ namespace uniscope_globe
 		virtual object_base* forward_parse( object_base* v_container, TiXmlNode* v_xml_node, object_base* parent_object ); 
 	};
 
-	class LIB_FILTER_API dynamic_label_parser: public xml_parser_base
+	class USFILTER_EXPORT dynamic_label_parser: public xml_parser_base
 	{
 	public:
 		dynamic_label_parser( void ){}
@@ -66,7 +66,7 @@ namespace uniscope_globe
 	//
 	// sound_style
 	//
-	class LIB_FILTER_API dynamic_sound_parser
+	class USFILTER_EXPORT dynamic_sound_parser
 		: public xml_parser_base
 	{
 	public:
