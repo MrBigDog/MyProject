@@ -40,7 +40,7 @@ namespace uniscope_globe
 	bool dbf_file::init_dbf_file(LPCTSTR str_path)
 	{
 
-		m_str_file = string(str_path);//string_ext::from_wstring(wstring(str_path));
+		m_str_file = string_ext::from_wstring(wstring(str_path));
 		m_h_dbf = DBFOpen(m_str_file.data(), "rb+");
 		if (m_h_dbf == NULL)
 		{

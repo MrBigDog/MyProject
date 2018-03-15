@@ -17,6 +17,7 @@
 #define _US_THREAD_VALVE_H_
 
 #include <usCore\Export.h>
+#include <usUtil\us_singleton.h>
 
 namespace uniscope_globe
 {

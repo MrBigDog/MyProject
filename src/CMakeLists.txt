@@ -25,6 +25,7 @@ FOREACH( uniscope
 		usCore
 		usUtil
 		usFilter
+		usLua
 		 )
 ADD_SUBDIRECTORY(${uniscope})
 SET_PROPERTY(TARGET ${uniscope} PROPERTY FOLDER "Uniscope")
