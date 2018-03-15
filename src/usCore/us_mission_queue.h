@@ -20,6 +20,7 @@
 #include <usCore\us_mission_executant.h>
 
 #include <usUtil/us_mutex.h>
+#include <vector>
 #include <deque>
 
 namespace uniscope_globe

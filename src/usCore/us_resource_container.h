@@ -15,7 +15,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RESOURCE_CONTAINER_H_
 #define _US_RESOURCE_CONTAINER_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_reclaim_base.h>
+#include <usCore\us_resource_base.h>
+
 namespace uniscope_globe
 {
 	template<typename KEY>

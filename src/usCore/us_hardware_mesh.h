@@ -18,7 +18,9 @@
 
 #include <usCore\Export.h>
 #include <usCore\us_hardware_base.h>
+#include <usUtil\us_axis_aligned_box.h>
 #include <usUtil\us_matrix4.h>
+#include <usCore\us_intersect_result.h>
 
 namespace uniscope_globe
 {

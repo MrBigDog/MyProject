@@ -13,22 +13,23 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_priority_stack.h"
+#include <wtypes.h>
 
 namespace uniscope_globe
 {
-	
+
 	DWORD singleton_priority_stack::m_tls_index = TlsAlloc();
 
-	priority_stack::priority_stack( void )
+	priority_stack::priority_stack(void)
 	{
 
 	}
 
-	priority_stack::~priority_stack( void )
+	priority_stack::~priority_stack(void)
 	{
 
 	}
-	
+
 }

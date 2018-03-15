@@ -15,9 +15,18 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RENDER_OBJECT_H_
 #define _US_RENDER_OBJECT_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_shared_data.h>
+#include <usCore\us_intersect_base.h>
+#include <usCore\us_renderable_base.h>
+#include <usUtil\us_object_base.h>
+
 namespace uniscope_globe
 {
+	class render_device;
+	class render_argument;
+
 	class USCORE_EXPORT render_object
 		: virtual public object_base
 		, virtual public shared_data

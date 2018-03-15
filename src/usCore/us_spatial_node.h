@@ -17,7 +17,9 @@
 #define _US_SPATIAL_NODE_H_
 
 #include <usCore\Export.h>
-
+#include <usCore\us_node_base.h>
+#include <usCore\us_spatial_object.h>
+#include <map>
 namespace uniscope_globe
 {
 	class USCORE_EXPORT spatial_node : public node_base

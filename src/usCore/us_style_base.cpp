@@ -15,6 +15,7 @@
 ///////////////////////////////////////////////////////////////////////////
 //#include "stdafx.h"
 #include "us_style_base.h"
+#include <usCore/us_styling_object.h>
 
 namespace uniscope_globe
 {

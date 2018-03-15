@@ -13,14 +13,15 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_spatial_object.h"
+#include <usCore/us_spatial_node.h>
 
 namespace uniscope_globe
 {
-	spatial_object::spatial_object( void )
-	{				
-		m_aabb.set_extent( vector3<double>( -1.0, -1.0, -1.0 ), vector3<double>( 1.0, 1.0, 1.0 ) );
+	spatial_object::spatial_object(void)
+	{
+		m_aabb.set_extent(vector3<double>(-1.0, -1.0, -1.0), vector3<double>(1.0, 1.0, 1.0));
 
 		m_is_intersectable = true;
 
@@ -39,9 +40,9 @@ namespace uniscope_globe
 		m_object_flags = US_OBJECT_FLAGS_NONE;
 	}
 
-	spatial_object::spatial_object( document_base* in_doc )
+	spatial_object::spatial_object(document_base* in_doc)
 	{
-		m_aabb.set_extent( vector3<double>( -1.0, -1.0, -1.0 ), vector3<double>( 1.0, 1.0, 1.0 ) );
+		m_aabb.set_extent(vector3<double>(-1.0, -1.0, -1.0), vector3<double>(1.0, 1.0, 1.0));
 
 		m_is_intersectable = true;
 
@@ -56,7 +57,7 @@ namespace uniscope_globe
 		m_object_flags = US_OBJECT_FLAGS_NONE;
 	}
 
-	spatial_object::~spatial_object( void )
+	spatial_object::~spatial_object(void)
 	{
 	}
 
@@ -68,27 +69,27 @@ namespace uniscope_globe
 
 	void spatial_object::copy_from(spatial_object* v_object)
 	{
-		m_name			   = v_object->m_name;
-		m_mem_size		   = v_object->m_mem_size;
-		m_document         = v_object->m_document;
-		m_is_visible       = v_object->m_is_visible;
+		m_name = v_object->m_name;
+		m_mem_size = v_object->m_mem_size;
+		m_document = v_object->m_document;
+		m_is_visible = v_object->m_is_visible;
 		m_is_intersectable = v_object->m_is_intersectable;
-		m_is_selectable    = v_object->m_is_selectable;
-		m_object_flags     = v_object->m_object_flags;
-		m_aabb		       = v_object->m_aabb;
+		m_is_selectable = v_object->m_is_selectable;
+		m_object_flags = v_object->m_object_flags;
+		m_aabb = v_object->m_aabb;
 	}
 
-	void spatial_object::finalize( void )
+	void spatial_object::finalize(void)
 	{
 		spatial_object_final_release_argument args;
 		args.m_object = this;
 
-		m_on_object_finalize( &args );
+		m_on_object_finalize(&args);
 		m_on_object_finalize.clear();
 	}
 
 	////////////////////////////////////////////////////////////////////
-	void spatial_object::set_visible( bool is_enable )
+	void spatial_object::set_visible(bool is_enable)
 	{
 		m_is_visible = is_enable;
 	}
@@ -100,11 +101,11 @@ namespace uniscope_globe
 	}
 
 	// remove link with parent node actively
-	void spatial_object::dissolve_attachment( void )
+	void spatial_object::dissolve_attachment(void)
 	{
-		if ( m_node_attached )
+		if (m_node_attached)
 		{
-			m_node_attached->detach_object( this );
+			m_node_attached->detach_object(this);
 
 			m_node_attached = NULL;
 		}

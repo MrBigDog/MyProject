@@ -16,7 +16,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_PROXY_RESOURCE_CONTAINER_H_
 #define _US_PROXY_RESOURCE_CONTAINER_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_resource_container.h>
+
 namespace uniscope_globe
 {
 	template<typename KEY>

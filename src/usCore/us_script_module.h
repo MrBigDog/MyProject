@@ -15,7 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_SCRIPT_MODULE_H_
 #define _US_SCRIPT_MODULE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_script_ext.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT script_module

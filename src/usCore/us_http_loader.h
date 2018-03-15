@@ -17,6 +17,7 @@
 #define _US_HTTP_LOADER_H_
 
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
 
 namespace uniscope_globe
 {
@@ -29,7 +30,7 @@ namespace uniscope_globe
 #define LOAD_RESULT_NOF		2
 
 	class link_http;
-	class byte;
+	//class byte;
 
 	class USCORE_EXPORT http_loader
 	{

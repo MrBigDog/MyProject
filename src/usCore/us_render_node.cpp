@@ -13,151 +13,153 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_render_node.h"
+#include <usCore/us_render_argument.h>
+//#include <usUtil/us_mutex.h>
 
 namespace uniscope_globe
 {
-	render_node::render_node( void )
+	render_node::render_node(void)
 	{
 		m_priority = 0;
 	}
 
-	render_node::~render_node( void )
+	render_node::~render_node(void)
 	{
 
 	}
 
-	void render_node::draw( render_argument* args )
+	void render_node::draw(render_argument* args)
 	{
-		US_LOCK_MUTEX( base_mutex )
+		US_LOCK_MUTEX(base_mutex)
 
-		for ( int i = 0; i < (int)m_child_node_array.size(); i++ )
-		{
-			m_child_node_array[i]->draw( args );
-		}
+			for (int i = 0; i < (int)m_child_node_array.size(); i++)
+			{
+				m_child_node_array[i]->draw(args);
+			}
 	}
 
 
-	void render_node::draw_alpha( render_argument* args )
+	void render_node::draw_alpha(render_argument* args)
 	{
-		US_LOCK_MUTEX( base_mutex )
+		US_LOCK_MUTEX(base_mutex)
 
-		for ( int i = 0; i < (int)m_child_node_array.size(); i++ )
-		{
-			m_child_node_array[i]->draw_alpha( args );
-		}
+			for (int i = 0; i < (int)m_child_node_array.size(); i++)
+			{
+				m_child_node_array[i]->draw_alpha(args);
+			}
 	}
 
-	void render_node::draw( render_argument* args, void* in_mesh )
+	void render_node::draw(render_argument* args, void* in_mesh)
 	{
 
 	}
 
-	void render_node::set_texture( render_argument* args, void* in_texture, uint stage_index )
+	void render_node::set_texture(render_argument* args, void* in_texture, uint stage_index)
 	{
-		
+
 	}
 
-	void render_node::occlusion( render_argument* args )
+	void render_node::occlusion(render_argument* args)
 	{
-		if ( m_child_node_array.size() == 0 )
+		if (m_child_node_array.size() == 0)
 			return;
 
-		US_LOCK_MUTEX( base_mutex )
+		US_LOCK_MUTEX(base_mutex)
 
-		for ( int i = 0; i < (int)m_child_node_array.size(); i++ )
-		{
-			m_child_node_array[i]->occlusion( args );
-		}
+			for (int i = 0; i < (int)m_child_node_array.size(); i++)
+			{
+				m_child_node_array[i]->occlusion(args);
+			}
 	}
 
-	void render_node::flush( void )
+	void render_node::flush(void)
 	{
-		if ( m_child_node_array.size() == 0 )
+		if (m_child_node_array.size() == 0)
 			return;
 
-		US_LOCK_MUTEX( base_mutex )
+		US_LOCK_MUTEX(base_mutex)
 
-		for ( int i = 0; i < (int)m_child_node_array.size(); i++ )
-		{
-			m_child_node_array[i]->flush();
-		}
+			for (int i = 0; i < (int)m_child_node_array.size(); i++)
+			{
+				m_child_node_array[i]->flush();
+			}
 	}
 
-	void render_node::add_child( render_node* in_render )
+	void render_node::add_child(render_node* in_render)
 	{
-		US_LOCK_MUTEX( base_mutex )
+		US_LOCK_MUTEX(base_mutex)
 
-		m_child_node_array.push_back( in_render );
+			m_child_node_array.push_back(in_render);
 
 	}
 
-	render_node* render_node::get_child( int in_index )
+	render_node* render_node::get_child(int in_index)
 	{
-		US_LOCK_MUTEX( base_mutex )
+		US_LOCK_MUTEX(base_mutex)
 
-		if ( m_child_node_array.size() > in_index )
-		{
-			return m_child_node_array[in_index];
-		}
+			if (m_child_node_array.size() > in_index)
+			{
+				return m_child_node_array[in_index];
+			}
 
 		return NULL;
 	}
 
-	int render_node::get_child_count( void )
+	int render_node::get_child_count(void)
 	{
-		US_LOCK_MUTEX( base_mutex )
+		US_LOCK_MUTEX(base_mutex)
 
-		return m_child_node_array.size();
+			return m_child_node_array.size();
 	}
 
-	void render_node::remove_child( render_node* in_render )
+	void render_node::remove_child(render_node* in_render)
 	{
-		US_LOCK_MUTEX( base_mutex )
+		US_LOCK_MUTEX(base_mutex)
 
-		render_node_array::iterator itr = m_child_node_array.begin();
-		for ( ; itr != m_child_node_array.end() ; itr++ )
+			render_node_array::iterator itr = m_child_node_array.begin();
+		for (; itr != m_child_node_array.end(); itr++)
 		{
-			if ( in_render == (*itr) )
+			if (in_render == (*itr))
 			{
-				m_child_node_array.erase( itr );
+				m_child_node_array.erase(itr);
 				break;
 			}
 		}
 	}
 
-	void render_node::remove_all( void )
+	void render_node::remove_all(void)
 	{
-		US_LOCK_MUTEX( base_mutex )
+		US_LOCK_MUTEX(base_mutex)
 
-		m_child_node_array.clear();
+			m_child_node_array.clear();
 	}
 
-	bool render_node_priority_ascending( render_node* bs1, render_node* bs2 )
+	bool render_node_priority_ascending(render_node* bs1, render_node* bs2)
 	{
 		return bs1->get_priority() < bs2->get_priority();
 	}
 
-	bool render_node_priority_descending( render_node* bs1, render_node* bs2 )
+	bool render_node_priority_descending(render_node* bs1, render_node* bs2)
 	{
 		return bs1->get_priority() > bs2->get_priority();
 	}
 
-	void render_node::sort( bool is_ascending )
+	void render_node::sort(bool is_ascending)
 	{
-		US_LOCK_MUTEX( base_mutex )
+		US_LOCK_MUTEX(base_mutex)
 
-		if(is_ascending)
-		{
-			std::sort(m_child_node_array.begin(), m_child_node_array.end(), render_node_priority_ascending);
-		}
-		else
-		{
-			std::sort(m_child_node_array.begin(), m_child_node_array.end(), render_node_priority_descending);
-		}
+			if (is_ascending)
+			{
+				std::sort(m_child_node_array.begin(), m_child_node_array.end(), render_node_priority_ascending);
+			}
+			else
+			{
+				std::sort(m_child_node_array.begin(), m_child_node_array.end(), render_node_priority_descending);
+			}
 
-		for ( int i = 0; i < (int)m_child_node_array.size(); i++ )
+		for (int i = 0; i < (int)m_child_node_array.size(); i++)
 		{
 			m_child_node_array[i]->sort(is_ascending);
 		}
@@ -165,5 +167,5 @@ namespace uniscope_globe
 
 
 
-	
+
 }

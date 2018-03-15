@@ -13,32 +13,32 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_pen_style.h"
 
 namespace uniscope_globe
 {
-	pen_style::pen_style( void )
+	pen_style::pen_style(void)
 	{
 		m_rtti = US_RTTI_PEN_STYLE;
 		m_pen_width = 0.0f;
 		m_pen_color = 0xffaaaaaa;
 	}
 
-	pen_style::pen_style( const pen_style& v_style )
+	pen_style::pen_style(const pen_style& v_style)
 	{
 		m_rtti = US_RTTI_PEN_STYLE;
 		m_pen_color = v_style.m_pen_color;
 		m_pen_width = v_style.m_pen_width;
 	}
 
-	pen_style::~pen_style( void )
+	pen_style::~pen_style(void)
 	{
 
 	}
 
 
-	simple_line_style::simple_line_style( void )
+	simple_line_style::simple_line_style(void)
 	{
 		m_rtti = US_RTTI_SIMPLE_LINE_STYLE;
 		m_line_width = 0.0f;
@@ -46,7 +46,7 @@ namespace uniscope_globe
 		m_line_width_type = 0;
 	}
 
-	simple_line_style::simple_line_style( const simple_line_style& v_style )
+	simple_line_style::simple_line_style(const simple_line_style& v_style)
 	{
 		m_rtti = US_RTTI_SIMPLE_LINE_STYLE;
 		m_line_width = v_style.m_line_width;
@@ -54,7 +54,7 @@ namespace uniscope_globe
 		m_line_width_type = v_style.m_line_width_type;
 	}
 
-	simple_line_style::~simple_line_style( void )
+	simple_line_style::~simple_line_style(void)
 	{
 
 	}

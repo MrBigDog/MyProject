@@ -16,36 +16,39 @@
 #ifndef _US_SOUND_STYLE_H_
 #define _US_SOUND_STYLE_H_
 #include <usCore\Export.h>
+#include <usCore\us_style_base.h>
 namespace uniscope_globe
 {
+	class sound_base;
+
 	class USCORE_EXPORT sound_style : public style_base
 	{
 	public:
-		sound_style( void );
+		sound_style(void);
 
-		sound_style( sound_style& v_style );
+		sound_style(sound_style& v_style);
 
-		sound_style( sound_style* v_style );
+		sound_style(sound_style* v_style);
 
-		virtual ~sound_style( void );
+		virtual ~sound_style(void);
 
 	public:
-		void	set_repeat_mode( bool color );
+		void	set_repeat_mode(bool color);
 
-		bool	get_repeat_mode( void );
+		bool	get_repeat_mode(void);
 
-		void	set_url( const LPCTSTR str_url );
+		void	set_url(const LPCTSTR str_url);
 
-		ustring get_url( void );
+		ustring get_url(void);
 
-		sound_base* get_sound( void );
+		sound_base* get_sound(void);
 
 	protected:
 		bool	m_repeat_mode;
 
 		ustring	m_str_sound_url;
 
-		sound_base*	m_sound;		 
+		sound_base*	m_sound;
 	};
 }
 

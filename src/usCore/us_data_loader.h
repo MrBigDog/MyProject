@@ -63,7 +63,7 @@ namespace uniscope_globe
 		static bool get_data_from_local(IN LPCTSTR str_url, OUT byte* &v_buf, OUT int &v_size);
 
 	public:
-		raw_buffer* load(LPCTSTR str_url, int server_type = US_SERVER_TYPE_DEFAULT, LPCTSTR http_mode = L"GET");
+		raw_buffer* load(LPCTSTR str_url, int server_type = US_SERVER_TYPE_DEFAULT, LPCTSTR http_mode = /*L*/"GET");
 	protected:
 		void clear();
 

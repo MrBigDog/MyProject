@@ -17,7 +17,7 @@
 //////////////////////////////////////////////////////////////////////////
 //#include "StdAfx.h"
 #include "us_event_base.h"
-#include <usCore\us_event_handle.h>
+
 #include <usCore\us_event_argument.h>
 
 namespace uniscope_globe

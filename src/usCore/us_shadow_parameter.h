@@ -16,16 +16,19 @@
 #ifndef _US_SHADOW_PARAMETER_H_
 #define _US_SHADOW_PARAMETER_H_
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <usUtil\us_lon_lat_rect.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT shadow_parameter
 	{
 	public:
-		shadow_parameter( void );
+		shadow_parameter(void);
 
-		shadow_parameter( double v_azimuth, double v_elevation );
+		shadow_parameter(double v_azimuth, double v_elevation);
 
-		~shadow_parameter( void );
+		~shadow_parameter(void);
 
 	public:
 		lon_lat_rect m_rect;
@@ -34,7 +37,7 @@ namespace uniscope_globe
 
 		double		 m_azimuth_angle;
 
-		bool		 m_enable;	
+		bool		 m_enable;
 
 		ulong		 m_stamp;
 

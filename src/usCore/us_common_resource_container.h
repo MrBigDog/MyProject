@@ -18,6 +18,7 @@
 
 //#include <usCore\Export.h>
 #include <usUtil\us_common_file.h>
+#include <usCore\us_resource_container.h>
 
 namespace uniscope_globe
 {

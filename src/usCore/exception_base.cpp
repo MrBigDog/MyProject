@@ -4,7 +4,7 @@
 //  Created on:      09-Ê®Ò»ÔÂ-2015 11:26:52
 //  Original author: felix
 ///////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "exception_base.h"
 #include "SimpleSymbolEngine.h"
 #include <sstream>

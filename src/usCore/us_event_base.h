@@ -19,11 +19,12 @@
 #define _US_EVENT_BASE_H_
 
 #include <usCore\Export.h>
+#include <usCore\us_event_handle.h>
 #include <vector>
 
 namespace uniscope_globe
 {
-	class event_handle;
+	//class event_handle;
 	class event_argument;
 
 	enum USCORE_EXPORT event_type

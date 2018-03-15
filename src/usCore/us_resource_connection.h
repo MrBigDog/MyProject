@@ -16,36 +16,42 @@
 #ifndef _US_RESOURCE_CONNECTION_H_
 #define _US_RESOURCE_CONNECTION_H_
 #include <usCore\Export.h>
+#include <usCore/us_resource_manager.h>
+#include <usUtil/us_common_file.h>
+#include <map>
 namespace uniscope_globe
 {
+	class download_mission;
+	class event_argument;
+
 	class USCORE_EXPORT resource_connection
 	{
 	protected:
-		resource_connection( void );
+		resource_connection(void);
 
 	public:
-		resource_connection( resource_manager<interior_index>* parent_mngr );
+		resource_connection(resource_manager<interior_index>* parent_mngr);
 
-		virtual ~resource_connection( void );
+		virtual ~resource_connection(void);
 
 		typedef std::map<interior_index, download_mission*> resource_request_map;
 
 		// override from storage base
 	public:
-		virtual bool request_data( interior_index index );
-		
-		virtual void parse_raw_buffer( event_argument* args );
+		virtual bool request_data(interior_index index);
+
+		virtual void parse_raw_buffer(event_argument* args);
 
 	protected:
-		void remove_request( interior_index index );
+		void remove_request(interior_index index);
 
-		virtual ustring index_to_path( interior_index index ) = 0;
+		virtual ustring index_to_path(interior_index index) = 0;
 
 	protected:
 		resource_request_map m_request_map;
 
 		resource_manager<interior_index>* m_parent_mngr;
-		 
+
 	};
 }
 

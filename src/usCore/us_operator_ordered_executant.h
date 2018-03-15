@@ -15,10 +15,14 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_OPERATOR_ORDERED_EXECUTANT_H_
 #define _US_OPERATOR_ORDERED_EXECUTANT_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_operator_base.h>
+
+#include <deque>
+
 namespace uniscope_globe
 {
-	class operator_base;
 	class event_base;
 
 	class USCORE_EXPORT operator_ordered_executant : public operator_base

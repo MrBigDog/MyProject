@@ -16,21 +16,23 @@
 #ifndef _US_SOUND_BASE_H_
 #define _US_SOUND_BASE_H_
 #include <usCore\Export.h>
+#include <usUtil\us_vector3.h>
+#include <wtypes.h>
 namespace uniscope_globe
 {
 	class USCORE_EXPORT sound_base
 	{
 	public:
-		sound_base( void );
+		sound_base(void);
 
-		virtual ~sound_base( void );
+		virtual ~sound_base(void);
 
 	public:
-		virtual long play( DWORD dwPriority = 0, DWORD dwFlags = 0, LONG lVolume = 0, LONG lFrequency = -1, LONG lPan = 0 ) { return false; }
+		virtual long play(DWORD dwPriority = 0, DWORD dwFlags = 0, LONG lVolume = 0, LONG lFrequency = -1, LONG lPan = 0) { return false; }
 
 		//virtual long play3d( LPDS3DBUFFER p3DBuffer, DWORD dwPriority = 0, DWORD dwFlags = 0, LONG lFrequency = 0 ) { return false; } 
 
-		virtual long set_position( vector3<float> v_pos ) { return 0; }
+		virtual long set_position(vector3<float> v_pos) { return 0; }
 
 		virtual long stop() { return false; }
 

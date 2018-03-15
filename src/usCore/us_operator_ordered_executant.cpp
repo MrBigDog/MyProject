@@ -13,47 +13,47 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_operator_ordered_executant.h"
 
 namespace uniscope_globe
 {
-	operator_ordered_executant::operator_ordered_executant( void )
+	operator_ordered_executant::operator_ordered_executant(void)
 	{
 
 	}
 
-	operator_ordered_executant::~operator_ordered_executant( void )
+	operator_ordered_executant::~operator_ordered_executant(void)
 	{
 		clear_operator();
 	}
 
-	int operator_ordered_executant::execute_operator( time_value v_current_time )
+	int operator_ordered_executant::execute_operator(time_value v_current_time)
 	{
-		if( m_operators.size() == 0 ) return 0;
+		if (m_operators.size() == 0) return 0;
 
 		//time_value v_eclipse_time = v_current_time - m_last_time;
 		//if ( v_eclipse_time < MIN_TIME_INTERVAL ) return;
 
 		{
 			operator_base* v_operator = m_operators.front();
-			v_operator->on_execute( v_current_time );
-			if( v_operator->is_end() )
+			v_operator->on_execute(v_current_time);
+			if (v_operator->is_end())
 			{
 				v_operator->on_end(v_current_time);
 				AUTO_DELETE(v_operator);
 				m_operators.pop_front();
-				if( m_operators.size() > 0 )
+				if (m_operators.size() > 0)
 				{
 					operator_base* v_next_operator = m_operators.front();
-					v_next_operator->on_begin( v_current_time );
+					v_next_operator->on_begin(v_current_time);
 				}
 			}
 		}
 
 		m_last_time = v_current_time;
 
-		if( m_operators.size() == 0 )
+		if (m_operators.size() == 0)
 		{
 			return -1;
 			//m_operator_event( NULL );
@@ -61,52 +61,52 @@ namespace uniscope_globe
 		return (int)m_operators.size();
 	}
 
-	void operator_ordered_executant::start_operator( time_value v_current_time )
+	void operator_ordered_executant::start_operator(time_value v_current_time)
 	{
-		if( m_operators.size() > 0 )
+		if (m_operators.size() > 0)
 		{
 			operator_base* v_operator = m_operators.front();
-			v_operator->on_begin( v_current_time );
+			v_operator->on_begin(v_current_time);
 		}
 	}
 
-	void operator_ordered_executant::operator () (  time_value v_current_time  )
+	void operator_ordered_executant::operator () (time_value v_current_time)
 	{
-		execute_operator( v_current_time );
+		execute_operator(v_current_time);
 	}
 
-	void operator_ordered_executant::operator += ( operator_base* in_operator )
+	void operator_ordered_executant::operator += (operator_base* in_operator)
 	{
-		register_operator( in_operator );
+		register_operator(in_operator);
 	}
 
-	void operator_ordered_executant::operator -= ( operator_base* in_operator )
+	void operator_ordered_executant::operator -= (operator_base* in_operator)
 	{
-		unregister_operator( in_operator );
+		unregister_operator(in_operator);
 	}
 
-	void operator_ordered_executant::register_operator( operator_base* in_operator )
+	void operator_ordered_executant::register_operator(operator_base* in_operator)
 	{
-		m_operators.push_back( in_operator );
+		m_operators.push_back(in_operator);
 	}
 
-	void operator_ordered_executant::unregister_operator( operator_base* in_operator )
+	void operator_ordered_executant::unregister_operator(operator_base* in_operator)
 	{
 		operator_queue::iterator itr = m_operators.begin();
-		for ( ; itr != m_operators.end(); ++itr )
+		for (; itr != m_operators.end(); ++itr)
 		{
-			if ( *itr == in_operator )
+			if (*itr == in_operator)
 			{
-				m_operators.erase( itr );
+				m_operators.erase(itr);
 				AUTO_DELETE(in_operator);
 				break;
 			}
 		}
 	}
 
-	void operator_ordered_executant::clear_operator( void )
+	void operator_ordered_executant::clear_operator(void)
 	{
-		while( m_operators.size() > 0 )
+		while (m_operators.size() > 0)
 		{
 			operator_base* v_operator = m_operators.front();
 			AUTO_DELETE(v_operator);

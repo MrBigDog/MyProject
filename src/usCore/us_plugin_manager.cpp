@@ -13,35 +13,38 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_plugin_manager.h"
-
+#include <usUtil/us_string_ext.h>
+#include <libloaderapi.h>
+#include <fileapi.h>
+#include <WinBase.h>
 namespace uniscope_globe
 {
-	const int plugin_init_failed		= -1;
-	const int plugin_init_error			= -2;
+	const int plugin_init_failed = -1;
+	const int plugin_init_error = -2;
 
 	void plugin_manager::init(application_base* core, cpstr pluginPath)
 	{
 		ustring path = pluginPath;
 		//ustring filter = L"d:\\lib_osgb_reader.plugin";
-		ustring filter = path + L"lib_osgb_reader.plugin";
+		ustring filter = path + /*L*/"lib_osgb_reader.plugin";
 		WIN32_FIND_DATA wfd;
 		HANDLE handle = FindFirstFile(filter.c_str(), &wfd);
-		if(INVALID_HANDLE_VALUE != handle)
+		if (INVALID_HANDLE_VALUE != handle)
 		{
 			do
 			{
 				ustring fileName = wfd.cFileName;
-				HMODULE hmodule = LoadLibraryW(fileName.c_str());
-				DWORD kk =  GetLastError();
-				
-				if(0 != hmodule)
+				HMODULE hmodule = LoadLibraryW(string_ext::to_wstring(fileName).c_str());
+				DWORD kk = GetLastError();
+
+				if (0 != hmodule)
 				{
 					PluginInitialize_t callBackInit = (PluginInitialize_t)GetProcAddress(hmodule, "PluginInitialize");
-					
+
 					PluginFinalize_t callBackFini = (PluginFinalize_t)GetProcAddress(hmodule, "PluginFinalize");
-					if(0 != callBackInit && 0 != callBackFini)
+					if (0 != callBackInit && 0 != callBackFini)
 					{
 						plugin_base plugin;
 						plugin.m_fileName = wfd.cFileName;
@@ -53,8 +56,7 @@ namespace uniscope_globe
 						m_plugins.push_back(plugin);
 					}
 				}
-			}
-			while(FindNextFile(handle, &wfd));
+			} while (FindNextFile(handle, &wfd));
 		}
 
 	}
@@ -62,11 +64,11 @@ namespace uniscope_globe
 	void plugin_manager::fini(application_base* core)
 	{
 		size_t count = m_plugins.size();
-		for(size_t i = 0; i < count; ++i)
+		for (size_t i = 0; i < count; ++i)
 		{
 			(*m_plugins[i].m_finalize)(core);
 		}
-		for(size_t i = 0; i < count; ++i)
+		for (size_t i = 0; i < count; ++i)
 		{
 			FreeLibrary(m_plugins[i].m_hmodule);
 		}

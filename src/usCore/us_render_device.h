@@ -15,16 +15,31 @@
 //////////////////////////////////////////////////////////////////////////
 #ifndef _US_RENDER_DEVICE_H_
 #define _US_RENDER_DEVICE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <usUtil\us_matrix4.h>
+#include <usUtil\us_rect.h>
+#include <usCore\us_view_port.h>
+#include <usCore\us_render_common.h>
+#include <usCore\us_event_base.h>
+#include <usCore\us_texture_state.h>
+
+#include <stack>
+
 namespace uniscope_globe
 {
 	class 	render_transform;
-
 	class	render_state;
-
 	class	texture_stage;
-
 	class	texture_state;
+	class render_device_capabilities;
+	class raw_buffer;
+	class hardware_occlusion_query;
+	class vertex_buffer_binding;
+	class vertex_declaration;
+	class material_set;
+	class texture_info;
 
 	class USCORE_EXPORT render_device
 	{

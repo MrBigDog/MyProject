@@ -15,11 +15,20 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RENDER_ARGUMENT_H_
 #define _US_RENDER_ARGUMENT_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_shadow_parameter.h>
+#include <vector>
+
 namespace uniscope_globe
 {
 	class render_node;
+	class render_device;
+	class observer_base;
+	class sound_device;
+	class frame_counter;
 	class render_manager_base;
+	class render_effect;
 
 #define US_MATERIAL_TYPE_NONE				0x0000
 #define US_MATERIAL_TYPE_NORMAL				0x0001

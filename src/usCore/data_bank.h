@@ -4,10 +4,11 @@
  */
 #ifndef data_bank_h__
 #define data_bank_h__
-#include <usCore\Export.h>
-#include <leveldb/db.h>
 
+#include <usCore\Export.h>
 #include <usUtil/us_common_file.h>
+
+#include <leveldb/db.h>
 
 namespace uniscope_globe
 {
@@ -38,7 +39,7 @@ namespace uniscope_globe
 		ustring m_bank_address;
 	};
 
-	inline data_bank* USCORE_EXPORT create_data_bank(const ustring& bank_path)
+	inline data_bank* create_data_bank(const ustring& bank_path)
 	{
 		data_bank* db = new data_bank(bank_path);
 		if (true != db->create_data_system()) return NULL;

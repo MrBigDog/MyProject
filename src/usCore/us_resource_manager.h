@@ -15,7 +15,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RESOURCE_MANAGER_H_
 #define _US_RESOURCE_MANAGER_H_
+
 //#include <usCore\Export.h>
+#include <usUtil/us_object_base.h>
+#include <usCore/us_resource_container.h>
+
 namespace uniscope_globe
 {
 	template<typename KEY>
@@ -30,37 +34,37 @@ namespace uniscope_globe
 
 
 	public:
-		resource_manager( void ){}
+		resource_manager(void) {}
 
-		virtual ~resource_manager( void )
+		virtual ~resource_manager(void)
 		{
 			resource_map::iterator itr = m_resource_map.begin();
-			for ( ; itr != m_resource_map.end(); itr++ )
+			for (; itr != m_resource_map.end(); itr++)
 			{
 				itr->second->detach();
 				//AUTO_RELEASE( itr->second );
 			}
 			m_resource_map.clear();
-		}	
+		}
 
 	public:
-		void add_resource( KEY key, resource_container<KEY>* v_resource )
+		void add_resource(KEY key, resource_container<KEY>* v_resource)
 		{
-			resource_map::iterator itr = m_resource_map.find( key );
-			if ( itr != m_resource_map.end() )
+			resource_map::iterator itr = m_resource_map.find(key);
+			if (itr != m_resource_map.end())
 			{
-				itr->second->detach();				
+				itr->second->detach();
 			}
 
 			m_resource_map[key] = v_resource;
-			v_resource->attach( this );
+			v_resource->attach(this);
 			v_resource->add_ref();
 		}
 
-		resource_container<KEY>* get_resource( KEY key )
+		resource_container<KEY>* get_resource(KEY key)
 		{
-			resource_map::iterator itr = m_resource_map.find( key );
-			if ( itr != m_resource_map.end() )
+			resource_map::iterator itr = m_resource_map.find(key);
+			if (itr != m_resource_map.end())
 			{
 				itr->second->add_ref();
 				return itr->second;
@@ -69,14 +73,14 @@ namespace uniscope_globe
 			return NULL;
 		}
 
-		void remove_resource( KEY key )
+		void remove_resource(KEY key)
 		{
-			resource_map::iterator itr = m_resource_map.find( key );
-			if ( itr != m_resource_map.end() )
+			resource_map::iterator itr = m_resource_map.find(key);
+			if (itr != m_resource_map.end())
 			{
 				itr->second->detach();
 				//AUTO_RELEASE( itr->second );
-				m_resource_map.erase( itr );
+				m_resource_map.erase(itr);
 			}
 		}
 

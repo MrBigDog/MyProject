@@ -15,7 +15,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_PRIORITY_STACK_H_
 #define _US_PRIORITY_STACK_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_tls_singleton.h>
+#include <usUtil\us_common_file.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT priority_stack

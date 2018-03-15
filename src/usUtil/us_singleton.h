@@ -16,6 +16,8 @@
 #ifndef _US_SINGLETON_H_
 #define _US_SINGLETON_H_
 
+#include <usUtil/us_common_file.h>
+
 namespace uniscope_globe
 {
 	template <class T>

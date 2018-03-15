@@ -13,8 +13,9 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_resource_killer.h"
+#include <usCore/us_resource_base.h>
 
 namespace uniscope_globe
 {
@@ -22,15 +23,15 @@ namespace uniscope_globe
 	//resource_killer* singleton_resource_killer::s_ins = NULL;
 	DWORD tls_singleton_resource_killer::m_tls_index = TlsAlloc();
 
-	resource_killer::resource_killer( void )
+	resource_killer::resource_killer(void)
 	{
 
 	}
 
-	resource_killer::~resource_killer( void )
+	resource_killer::~resource_killer(void)
 	{
 		//clear();
-		while ( m_list.size() > 0 )
+		while (m_list.size() > 0)
 		{
 			resource_base* v_res = (resource_base*)m_list.front();
 			m_list.pop_front();
@@ -38,26 +39,26 @@ namespace uniscope_globe
 		}
 	}
 
-	void resource_killer::push( resource_base* v_ptr )
+	void resource_killer::push(resource_base* v_ptr)
 	{
 		US_LOCK_AUTO_MUTEX
 
-		//m_array.push_back( v_ptr );
-		m_list.push_back( v_ptr );
+			//m_array.push_back( v_ptr );
+			m_list.push_back(v_ptr);
 	}
 
-	void resource_killer::clear( ulong v_time )
+	void resource_killer::clear(ulong v_time)
 	{
 		US_LOCK_AUTO_MUTEX
-		
-		//for ( int i = 0; i < (int)m_array.size(); i++ )
-		//{
-		//	AUTO_RELEASE( m_array[i] );
-		//}
-		//m_array.clear();
 
-		ulong vtt = v_time;
-		if ( long(vtt) < 1 )
+			//for ( int i = 0; i < (int)m_array.size(); i++ )
+			//{
+			//	AUTO_RELEASE( m_array[i] );
+			//}
+			//m_array.clear();
+
+			ulong vtt = v_time;
+		if (long(vtt) < 1)
 		{
 			vtt = 3;
 		}
@@ -66,7 +67,7 @@ namespace uniscope_globe
 		ulong last_time = 0;
 
 		int kill_num = 0;
-		while ( m_list.size() > 0 &&  last_time < vtt )
+		while (m_list.size() > 0 && last_time < vtt)
 		{
 			resource_base* v_res = (resource_base*)m_list.front();
 			m_list.pop_front();
@@ -77,7 +78,7 @@ namespace uniscope_globe
 		}
 
 		//US_RENDER_TRACE2( L" kill num : %d, cost : %d \n", kill_num, last_time );
-	
+
 		//int v_num = 0;
 		//int v_size = 0;
 		//int v_range = 1<<23;
@@ -97,34 +98,34 @@ namespace uniscope_globe
 	//memory_ptr_destroyer* singleton_memory_ptr_destroyer::s_ins = NULL;
 	DWORD tls_singleton_memory_ptr_destroyer::m_tls_index = TlsAlloc();
 
-	memory_ptr_destroyer::memory_ptr_destroyer( void )
+	memory_ptr_destroyer::memory_ptr_destroyer(void)
 	{
 
 	}
 
-	memory_ptr_destroyer::~memory_ptr_destroyer( void )
+	memory_ptr_destroyer::~memory_ptr_destroyer(void)
 	{
 		clear();
 	}
 
-	void memory_ptr_destroyer::push( object_base* v_ptr )
+	void memory_ptr_destroyer::push(object_base* v_ptr)
 	{
 		//US_LOCK_AUTO_MUTEX
 
-		m_array.push_back( v_ptr );
+		m_array.push_back(v_ptr);
 	}
 
 	void memory_ptr_destroyer::clear()
 	{
 		//US_LOCK_AUTO_MUTEX
 
-		for ( int i = 0; i < (int)m_array.size(); i++ )
+		for (int i = 0; i < (int)m_array.size(); i++)
 		{
-			AUTO_DELETE( m_array[i] );
+			AUTO_DELETE(m_array[i]);
 		}
 		m_array.clear();
 	}
 
-	
-	
+
+
 }

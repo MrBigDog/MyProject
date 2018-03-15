@@ -28,6 +28,7 @@ namespace uniscope_globe
 	class hardware_creator;
 	class object_base;
 	template<typename KEY> class resource_manager;
+	class document_base;
 
 	class USCORE_EXPORT common_manager_group
 	{

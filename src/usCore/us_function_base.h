@@ -23,6 +23,8 @@
 
 namespace uniscope_globe
 {
+	class event_argument;
+
 	// parameter none
 	class function_base
 	{

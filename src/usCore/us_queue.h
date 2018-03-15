@@ -2,6 +2,7 @@
 #define MDQueue_h__
 ////add by Felix
 #include <usCore\Export.h>
+#include <usUtil\us_mutex.h>
 #include <cassert>
 #include <queue>
 
@@ -218,12 +219,12 @@ namespace uniscope_globe
 				}
 
 
-				assert(this->fifo.empty() != true);
-				//if (fifo.empty()) throw ??
+			assert(this->fifo.empty() != true);
+			//if (fifo.empty()) throw ??
 
-				T item = this->fifo.front();
-				this->fifo.pop();
-				return item;
+			T item = this->fifo.front();
+			this->fifo.pop();
+			return item;
 		}
 
 		/**
@@ -339,12 +340,12 @@ namespace uniscope_globe
 					not_empty.wait(mutex);
 				}
 
-				assert(this->queue.empty() != true);
-				//if (queue.empty()) throw ??
+			assert(this->queue.empty() != true);
+			//if (queue.empty()) throw ??
 
-				T item = this->queue.front();
-				this->queue.pop_front();
-				return item;
+			T item = this->queue.front();
+			this->queue.pop_front();
+			return item;
 		}
 
 		/**
@@ -362,12 +363,12 @@ namespace uniscope_globe
 					not_empty.wait(mutex);
 				}
 
-				assert(this->queue.empty() != true);
-				//if (queue.empty()) throw ??
+			assert(this->queue.empty() != true);
+			//if (queue.empty()) throw ??
 
-				T item = this->queue.back();
-				this->queue.pop_back();
-				return item;
+			T item = this->queue.back();
+			this->queue.pop_back();
+			return item;
 		}
 
 		/**

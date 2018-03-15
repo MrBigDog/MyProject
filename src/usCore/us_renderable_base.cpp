@@ -14,15 +14,16 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_renderable_base.h"
-
+#include <usCore/us_render_argument.h>
+#include <usCore/us_frame_counter.h>
 namespace uniscope_globe
 {
 
-	renderable_base::renderable_base( void )
+	renderable_base::renderable_base(void)
 	{
-		m_blend_color  = 0x00000000;
+		m_blend_color = 0x00000000;
 		m_alpha_blend = true;
 		m_depth_enable = true;
 		m_depth_bias = 0.0f;
@@ -39,12 +40,12 @@ namespace uniscope_globe
 		m_light_enable = 0;
 	}
 
-	renderable_base::~renderable_base( void )
+	renderable_base::~renderable_base(void)
 	{
 
 	}
 
-	void renderable_base::copy_from( renderable_base* v_src_data )
+	void renderable_base::copy_from(renderable_base* v_src_data)
 	{
 		m_blend_color = v_src_data->m_blend_color;
 
@@ -59,7 +60,7 @@ namespace uniscope_globe
 		m_light_enable = v_src_data->m_light_enable;
 	}
 
-	void renderable_base::show_high_light( double v_last_time, double v_interval_time, ulong v_color )
+	void renderable_base::show_high_light(double v_last_time, double v_interval_time, ulong v_color)
 	{
 		m_render_type_state = 1;
 		m_last_time = v_last_time;
@@ -83,18 +84,18 @@ namespace uniscope_globe
 		m_flash_start_time = 0.0;
 	}
 
-	bool renderable_base::draw_high_light( render_argument* v_args )
+	bool renderable_base::draw_high_light(render_argument* v_args)
 	{
-		if ( m_render_type_state == 0 )
+		if (m_render_type_state == 0)
 			return true;
-		
-		if ( m_flash_start_time == 0.0 )
+
+		if (m_flash_start_time == 0.0)
 		{
 			m_flash_start_time = v_args->m_frame_counter->m_frame_time;
 		}
 
-		time_value time_segment = ( v_args->m_frame_counter->m_frame_time - m_flash_start_time );
-		if ( time_segment > m_last_time )
+		time_value time_segment = (v_args->m_frame_counter->m_frame_time - m_flash_start_time);
+		if (time_segment > m_last_time)
 		{
 			m_render_type_state = 0;
 
@@ -105,15 +106,15 @@ namespace uniscope_globe
 
 			return true;
 		}
-		
-		if( m_interval_time == 0.0)
+
+		if (m_interval_time == 0.0)
 		{
 			return true;
 		}
 		else
 		{
 			int v_v = time_segment / m_interval_time;
-			if ( v_v%2 == 0 )
+			if (v_v % 2 == 0)
 				return true;
 		}
 
@@ -121,5 +122,5 @@ namespace uniscope_globe
 		return false;
 	}
 
-	
+
 }

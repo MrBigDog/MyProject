@@ -15,7 +15,12 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RENDER_NODE_H_
 #define _US_RENDER_NODE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_render_object.h>
+
+#include <usUtil/us_mutex.h>
+
 namespace uniscope_globe
 {
 	enum us_render_node_id
@@ -31,6 +36,8 @@ namespace uniscope_globe
 		US_BLDG_RENDER_NODE = 10,
 		US_BACKGROUND_RENDER_NODE = 0,
 	};
+
+	class render_argument;
 
 	class USCORE_EXPORT render_node : public render_object
 	{

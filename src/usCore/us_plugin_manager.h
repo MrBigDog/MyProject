@@ -17,6 +17,9 @@
 #define _US_PLUGIN_MANEGER_H_
 
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <vector>
+#include <windef.h>
 
 namespace uniscope_globe
 {

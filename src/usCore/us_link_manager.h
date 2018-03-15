@@ -15,7 +15,13 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_LINK_MANAGER_H_
 #define _US_LINK_MANAGER_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_link_http.h>
+#include <usUtil\us_mutex.h>
+#include <usUtil\us_common_file.h>
+#include <map>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT link_manager

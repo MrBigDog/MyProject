@@ -15,9 +15,17 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_PHYSICAL_SYSTEM_H_
 #define _US_PHYSICAL_SYSTEM_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_rigid_body.h>
+#include <usUtil\us_common_file.h>
+#include <usUtil\us_mutex.h>
+#include <map>
 namespace uniscope_globe
 {
+	class object_base;
+	class event_argument;
+
 	class USCORE_EXPORT physical_system
 	{
 	public:

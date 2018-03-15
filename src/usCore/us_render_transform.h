@@ -16,21 +16,24 @@
 #ifndef _US_RENDER_TRANSFORM_H_
 #define _US_RENDER_TRANSFORM_H_
 #include <usCore\Export.h>
+#include <usUtil\us_matrix4.h>
+#include <stack>
 namespace uniscope_globe
 {
+	class render_device;
 	class USCORE_EXPORT render_transform
 	{
 	public:
-		render_transform( render_device* rd );
+		render_transform(render_device* rd);
 
-		virtual ~render_transform( void );
+		virtual ~render_transform(void);
 
 	public:
-		void push( matrix4<float>& mat );
+		void push(matrix4<float>& mat);
 
-		void pop( void );
+		void pop(void);
 
-		void flush( void );
+		void flush(void);
 
 	protected:
 		std::stack<matrix_4f> m_matrix_stack;

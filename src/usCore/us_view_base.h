@@ -24,6 +24,7 @@ namespace uniscope_globe
 	class render_device;
 	class observer_base;
 	class sound_device;
+	class render_manager_base;
 
 	class USCORE_EXPORT view_base
 	{

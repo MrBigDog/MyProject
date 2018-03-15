@@ -16,21 +16,24 @@
 #ifndef _US_SOUND_DEVICE_H_
 #define _US_SOUND_DEVICE_H_
 #include <usCore\Export.h>
+#include <usUtil\us_object_base.h>
+#include <wtypes.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT sound_device : public object_base
 	{
 	public:
-		sound_device( void );
+		sound_device(void);
 
-		virtual ~sound_device( void );
+		virtual ~sound_device(void);
 
 	public:
-		virtual bool create( HWND hwnd, dword coop_level ) { return true; }
+		virtual bool create(HWND hwnd, dword coop_level) { return true; }
 
-		virtual void destory( void ) {}
+		virtual void destory(void) {}
 
-		inline ULONG_PTR get_direct_sound( void ) { return 0; }	 
+		inline ULONG_PTR get_direct_sound(void) { return 0; }
 	};
 }
 

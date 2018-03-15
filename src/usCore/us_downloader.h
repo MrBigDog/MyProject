@@ -31,6 +31,7 @@ namespace uniscope_globe
 	class link_manager;
 	class mission_heap;
 	class mission_queue;
+	class mission_base;
 
 	class USCORE_EXPORT downloader
 	{

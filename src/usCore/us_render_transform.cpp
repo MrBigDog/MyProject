@@ -13,7 +13,7 @@
 //	Reference : 
 //
 //////////////////////////////////////////////////////////////////////////
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "us_render_transform.h"
 
 namespace uniscope_globe

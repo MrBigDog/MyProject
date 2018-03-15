@@ -15,31 +15,36 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RESOURCE_RECLAIMER_H_
 #define _US_RESOURCE_RECLAIMER_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_bidirectional_chain.h>
+#include <usUtil\us_mutex.h>
+#include <usCore\us_tls_singleton.h>
+
 namespace uniscope_globe
 {
 	class USCORE_EXPORT resource_reclaimer
 		: public bidirectional_chain
 	{
 	public:
-		resource_reclaimer( void );
+		resource_reclaimer(void);
 
-		virtual ~resource_reclaimer( void );
+		virtual ~resource_reclaimer(void);
 
 		friend class reclaim_base;
 
 	public:
-		void update( void );
+		void update(void);
 
-		ULONG_PTR get_memory_size( void );
+		ULONG_PTR get_memory_size(void);
 
-		void push_front( reclaim_base* reclaim );
+		void push_front(reclaim_base* reclaim);
 
-		void remove( reclaim_base* reclaim );
+		void remove(reclaim_base* reclaim);
 
-		void increase( ULONG_PTR v_size );
+		void increase(ULONG_PTR v_size);
 
-		void decrease( ULONG_PTR v_size );
+		void decrease(ULONG_PTR v_size);
 
 	private:
 		ULONG_PTR showMemoryInfo();
@@ -51,12 +56,12 @@ namespace uniscope_globe
 		double m_last_cost_time;
 
 		US_AUTO_MUTEX
-		
+
 	};
 
 	class USCORE_EXPORT singleton_resource_reclaimer
 		: public tls_singleton<resource_reclaimer>
-	{	
+	{
 	};
 }
 

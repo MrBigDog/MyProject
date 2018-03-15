@@ -15,6 +15,8 @@
 ///////////////////////////////////////////////////////////////////////////
 //#include "stdafx.h"
 #include "us_document_base.h"
+#include <usCore\us_application_base.h>
+#include <usCore\us_spatial_object.h>
 
 namespace uniscope_globe
 {

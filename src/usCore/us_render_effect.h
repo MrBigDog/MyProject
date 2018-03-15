@@ -15,9 +15,13 @@
 //////////////////////////////////////////////////////////////////////////
 #ifndef _US_RENDER_EFFECT_H_
 #define _US_RENDER_EFFECT_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <wtypes.h>
 namespace uniscope_globe
 {
+	class render_device;
 	class USCORE_EXPORT render_effect
 	{
 	protected:

@@ -24,6 +24,8 @@
 namespace uniscope_globe
 {
 	class filter_base;
+	class object_base;
+	class raw_buffer;
 
 	class USCORE_EXPORT filter_manager
 	{

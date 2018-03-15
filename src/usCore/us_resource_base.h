@@ -16,6 +16,8 @@
 #ifndef _US_RESOURCE_BASE_H_
 #define _US_RESOURCE_BASE_H_
 #include <usCore\Export.h>
+#include <usCore\us_shared_data.h>
+#include <usUtil\us_object_base.h>
 namespace uniscope_globe
 {
 	class USCORE_EXPORT resource_base : virtual public object_base, virtual public shared_data

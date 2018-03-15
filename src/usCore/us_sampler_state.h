@@ -15,9 +15,16 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_SAMPLER_STATE_H_
 #define _US_SAMPLER_STATE_H_
+
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+
+#include <stack>
+
 namespace uniscope_globe
 {
+	class render_device;
+
 	class USCORE_EXPORT sampler_state
 	{
 	public:
@@ -29,18 +36,18 @@ namespace uniscope_globe
 		};
 
 	private:
-		sampler_state( void );
+		sampler_state(void);
 
 	public:
-		sampler_state( render_device* device );
+		sampler_state(render_device* device);
 
-		virtual ~sampler_state( void );
+		virtual ~sampler_state(void);
 
 	public:
-		void set_state( ulong stage_index, ulong state_type, ulong state_value );
+		void set_state(ulong stage_index, ulong state_type, ulong state_value);
 
 	private:
-		void restore_state( void );
+		void restore_state(void);
 
 	private:
 		render_device* m_render_device;

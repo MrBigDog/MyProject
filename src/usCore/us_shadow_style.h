@@ -15,7 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_SHADOW_STYLE_H_
 #define _US_SHADOW_STYLE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_style_base.h>
+
 namespace uniscope_globe
 {
 #define US_SHADOW_NONE				0x0000
@@ -26,9 +29,9 @@ namespace uniscope_globe
 	class USCORE_EXPORT shadow_style : public style_base
 	{
 	public:
-		shadow_style( void );
-		shadow_style( const shadow_style& v_style );
-		virtual ~shadow_style( void );
+		shadow_style(void);
+		shadow_style(const shadow_style& v_style);
+		virtual ~shadow_style(void);
 
 	public:
 		ulong m_shadow_color;

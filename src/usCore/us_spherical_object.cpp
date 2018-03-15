@@ -16,6 +16,8 @@
 //#include "stdafx.h"
 #include "us_spherical_object.h"
 #include <usUtil/us_spherical_coords.h>
+#include <usCore/us_document_base.h>
+#include <usCore/us_observer_base.h>
 
 namespace uniscope_globe
 {

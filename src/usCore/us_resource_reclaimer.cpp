@@ -13,21 +13,23 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "Stdafx.h"
+//#include "Stdafx.h"
 #include "us_resource_reclaimer.h"
+#include <usCore/us_system_environment.h>
+#include <usCore/us_reclaim_base.h>
 #include <psapi.h>
 
 namespace uniscope_globe
 {
 	DWORD singleton_resource_reclaimer::m_tls_index = TlsAlloc();
 
-	resource_reclaimer::resource_reclaimer( void )
+	resource_reclaimer::resource_reclaimer(void)
 	{
 		m_max_memory_size = 0L;
 		m_last_cost_time = 0.0;
 	}
 
-	resource_reclaimer::~resource_reclaimer( void )
+	resource_reclaimer::~resource_reclaimer(void)
 	{
 		//reclaim_base* itr = dynamic_cast<reclaim_base*>( pop_tail() );
 		//while ( itr )
@@ -85,30 +87,30 @@ namespace uniscope_globe
 	//**@add by felix 记录当前进程的内存使用情况*/
 	ULONG_PTR resource_reclaimer::showMemoryInfo()
 	{
-		HANDLE handle=GetCurrentProcess();
+		HANDLE handle = GetCurrentProcess();
 		PROCESS_MEMORY_COUNTERS pmc;
-		GetProcessMemoryInfo(handle,&pmc,sizeof(pmc));
+		GetProcessMemoryInfo(handle, &pmc, sizeof(pmc));
 		return pmc.WorkingSetSize;
 		//pmc.WorkingSetSize/1000 <<"K/"<<pmc.PeakWorkingSetSize/1000<<"K + "<<pmc.PagefileUsage/1000 <<"K/"<<pmc.PeakPagefileUsage/1000 ;
 	}
 
-	void resource_reclaimer::update( void )
+	void resource_reclaimer::update(void)
 	{
 		US_LOCK_AUTO_MUTEX
 
-		//double start_time = timeGetTime();
+			//double start_time = timeGetTime();
 
-		double v_reclaim_size = system_environment::s_reclaim_memory_size;
+			double v_reclaim_size = system_environment::s_reclaim_memory_size;
 		double v_check_rate = m_max_memory_size / v_reclaim_size;
 
 		int v_checked_num = 30;
 
-		int v_life_time = system_environment::s_resource_life_time * ( 1.0 - v_check_rate ) * ( 1.0 - v_check_rate );
-		v_life_time = (v_life_time<3)?3:v_life_time;
-		
-		system_environment::s_max_process_memory_size  = showMemoryInfo();
+		int v_life_time = system_environment::s_resource_life_time * (1.0 - v_check_rate) * (1.0 - v_check_rate);
+		v_life_time = (v_life_time < 3) ? 3 : v_life_time;
+
+		system_environment::s_max_process_memory_size = showMemoryInfo();
 		//modify begin by felix 此处注释掉，32位和64位使用相同算法，注意设置好最大内存
-		v_life_time = (v_life_time > system_environment::s_resource_life_time)? system_environment::s_resource_life_time:v_life_time;
+		v_life_time = (v_life_time > system_environment::s_resource_life_time) ? system_environment::s_resource_life_time : v_life_time;
 
 		//modify end by felix
 		v_checked_num = chain_size;// * v_check_rate * 1.5;
@@ -118,14 +120,14 @@ namespace uniscope_globe
 
 		reclaim_base* v_tail = (reclaim_base*)chain_tail;
 
-//modify by felix
+		//modify by felix
 #ifdef WIN64
-		while( v_checked_num>0  && v_tail != NULL &&  v_cur_reclaim_size < system_environment::s_reclaim_memory_per_frame )
+		while (v_checked_num > 0 && v_tail != NULL &&  v_cur_reclaim_size < system_environment::s_reclaim_memory_per_frame)
 #else
-		while( v_checked_num>0  && v_tail != NULL &&  v_cur_reclaim_size < 30000000 )
+		while (v_checked_num > 0 && v_tail != NULL &&  v_cur_reclaim_size < 30000000)
 #endif
 		{
-			if ( v_tail->can_reclaim( v_life_time ) )
+			if (v_tail->can_reclaim(v_life_time))
 			{
 				//pop_tail();
 				v_cur_reclaim_size += v_tail->get_size();
@@ -134,7 +136,7 @@ namespace uniscope_globe
 			}
 			else
 			{
-				move_to_head( v_tail );
+				move_to_head(v_tail);
 			}
 
 			v_tail = (reclaim_base*)chain_tail;
@@ -151,36 +153,36 @@ namespace uniscope_globe
 		//tls_singleton_downloader::instance().write( str.c_str() );
 	}
 
-	void resource_reclaimer::push_front( reclaim_base* reclaim )
+	void resource_reclaimer::push_front(reclaim_base* reclaim)
 	{
 		US_LOCK_AUTO_MUTEX
 
-		move_to_head( reclaim );
+			move_to_head(reclaim);
 	}
 
-	void resource_reclaimer::remove( reclaim_base* reclaim )
+	void resource_reclaimer::remove(reclaim_base* reclaim)
 	{
 		US_LOCK_AUTO_MUTEX
 
-		erase( reclaim );
-		
+			erase(reclaim);
+
 		m_max_memory_size -= reclaim->get_size();
 	}
 
-	void resource_reclaimer::increase( ULONG_PTR v_size )
+	void resource_reclaimer::increase(ULONG_PTR v_size)
 	{
 		m_max_memory_size += v_size;
 	}
 
-	void resource_reclaimer::decrease( ULONG_PTR v_size )
+	void resource_reclaimer::decrease(ULONG_PTR v_size)
 	{
 		m_max_memory_size -= v_size;
 	}
 
-	ULONG_PTR resource_reclaimer::get_memory_size( void )
+	ULONG_PTR resource_reclaimer::get_memory_size(void)
 	{
 		return m_max_memory_size;
 	}
 
-	
+
 }

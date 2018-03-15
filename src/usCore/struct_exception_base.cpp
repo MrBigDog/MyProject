@@ -4,7 +4,7 @@
 //  Created on:      10-Ê®Ò»ÔÂ-2015 11:26:52
 //  Original author: felix
 ///////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "struct_exception_base.h"
 
 namespace gw_exception

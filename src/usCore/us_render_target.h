@@ -16,8 +16,11 @@
 #ifndef _US_RENDER_TARGET_H_
 #define _US_RENDER_TARGET_H_
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <basetsd.h>
 namespace uniscope_globe
 {
+	class event_argument;
 	class USCORE_EXPORT render_target
 	{
 	public:

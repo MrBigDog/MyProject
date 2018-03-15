@@ -13,80 +13,82 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_physical_system.h"
+#include <usCore/us_event_handle.h>
+#include <usUtil/us_object_base.h>
 
 namespace uniscope_globe
 {
-	physical_system::physical_system( void )
+	physical_system::physical_system(void)
 	{
 
 	}
 
-	physical_system::~physical_system( void )
+	physical_system::~physical_system(void)
 	{
 		m_rigid_body_map.clear();
 	}
 
-	void physical_system::update( time_value in_frame_time )
+	void physical_system::update(time_value in_frame_time)
 	{
 		US_LOCK_AUTO_MUTEX
-		rigid_body_map::iterator itr = m_rigid_body_map.begin();
-		for ( ; itr != m_rigid_body_map.end(); itr++ )
+			rigid_body_map::iterator itr = m_rigid_body_map.begin();
+		for (; itr != m_rigid_body_map.end(); itr++)
 		{
-			itr->second->update_motion( in_frame_time );
+			itr->second->update_motion(in_frame_time);
 		}
 	}
 
-	bool physical_system::add_body( cpstr name, object_base* in_object )
+	bool physical_system::add_body(cpstr name, object_base* in_object)
 	{
 		US_LOCK_AUTO_MUTEX
-		rigid_body_map::iterator itr = m_rigid_body_map.find( name );
-		if( itr != m_rigid_body_map.end() )
+			rigid_body_map::iterator itr = m_rigid_body_map.find(name);
+		if (itr != m_rigid_body_map.end())
 		{
 			return false;
 		}
 
-		rigid_body* body = dynamic_cast<rigid_body*>( in_object );
-		if( body == NULL ) return false;
+		rigid_body* body = dynamic_cast<rigid_body*>(in_object);
+		if (body == NULL) return false;
 
-		m_rigid_body_map.insert( make_pair( name, body ) );
+		m_rigid_body_map.insert(std::make_pair(name, body));
 
-		body->m_on_rigid_body_delete += event_handle( this, &physical_system::on_rigid_body_delete );
+		body->m_on_rigid_body_delete += event_handle(this, &physical_system::on_rigid_body_delete);
 
 		return true;
 	}
 
-	void physical_system::remove_body( cpstr name )
+	void physical_system::remove_body(cpstr name)
 	{
 		US_LOCK_AUTO_MUTEX
 
-		rigid_body_map::iterator itr = m_rigid_body_map.find( name );
-		if( itr != m_rigid_body_map.end() )
+			rigid_body_map::iterator itr = m_rigid_body_map.find(name);
+		if (itr != m_rigid_body_map.end())
 		{
-			m_rigid_body_map.erase( itr );
+			m_rigid_body_map.erase(itr);
 		}
 	}
 
-	void physical_system::remove_body( rigid_body* in_object )
+	void physical_system::remove_body(rigid_body* in_object)
 	{
 		US_LOCK_AUTO_MUTEX
 
-		rigid_body_map::iterator itr = m_rigid_body_map.begin();
-		for ( ; itr != m_rigid_body_map.end(); itr++ )
+			rigid_body_map::iterator itr = m_rigid_body_map.begin();
+		for (; itr != m_rigid_body_map.end(); itr++)
 		{
-			if( itr->second == in_object )
+			if (itr->second == in_object)
 			{
-				m_rigid_body_map.erase( itr );
+				m_rigid_body_map.erase(itr);
 				return;
 			}
 		}
 	}
 
-	void physical_system::on_rigid_body_delete( event_argument* args )
+	void physical_system::on_rigid_body_delete(event_argument* args)
 	{
 		rigid_body_event_argument* rigid_args = (rigid_body_event_argument*)args;
 
-		this->remove_body( rigid_args->m_this );
+		this->remove_body(rigid_args->m_this);
 	}
 }

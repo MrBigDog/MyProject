@@ -17,6 +17,7 @@
 #define _US_TLS_SINGLETON_H_
 
 //#include <usCore\Export.h>
+#include <wtypes.h>
 
 namespace uniscope_globe
 {
@@ -35,21 +36,21 @@ namespace uniscope_globe
 
 		static T* ptr();
 
-		static void attach( T* in_ptr );
+		static void attach(T* in_ptr);
 
 		//static void destroy();
 	};
 
 	template <class T>
 	inline tls_singleton<T>::tls_singleton()
-	{		
+	{
 		m_tls_index = TLS_OUT_OF_INDEXES;
 	}
 
 	template <class T>
 	inline tls_singleton<T>::~tls_singleton()
-	{	
-		TlsFree( m_tls_index );	
+	{
+		TlsFree(m_tls_index);
 	}
 
 	template <class T>
@@ -61,18 +62,18 @@ namespace uniscope_globe
 	template <class T>
 	T* tls_singleton<T>::ptr()
 	{
-		return (T*)TlsGetValue( m_tls_index );		
+		return (T*)TlsGetValue(m_tls_index);
 	}
-	
+
 	template <class T>
-	void tls_singleton<T>::attach( T* in_ptr )
+	void tls_singleton<T>::attach(T* in_ptr)
 	{
 		// function-local static to force this to work correctly at static
 		// initialization time.
 /*		if ( m_tls_index == TLS_OUT_OF_INDEXES )
 		{
-			m_tls_index = TlsAlloc();	*/		
-			TlsSetValue( m_tls_index, in_ptr );
+			m_tls_index = TlsAlloc();	*/
+		TlsSetValue(m_tls_index, in_ptr);
 		//}
 	}
 

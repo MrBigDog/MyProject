@@ -25,6 +25,8 @@
 namespace uniscope_globe
 {
 	class observer_base;
+	class intersect_result;
+
 	class USCORE_EXPORT intersect_base
 	{
 	public:

@@ -18,6 +18,7 @@
 
 #include <usCore\Export.h>
 #include <usUtil/us_mutex.h>
+#include <usUtil/us_common_file.h>
 #include <vector>
 
 namespace uniscope_globe

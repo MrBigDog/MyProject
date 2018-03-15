@@ -14,7 +14,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_proxy_resource_container.h"
 
 namespace uniscope_globe

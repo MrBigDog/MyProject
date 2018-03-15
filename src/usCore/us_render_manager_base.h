@@ -15,7 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RENDER_MANAGER_BASE_H_
 #define _US_RENDER_MANAGER_BASE_H_
+
 #include <usCore\Export.h>
+#include <usCore\us_render_node.h>
+
 namespace uniscope_globe
 {
 	enum us_render_id
@@ -59,6 +62,8 @@ namespace uniscope_globe
 
 		US_RENDER_COUNT
 	};
+
+	class render_argument;
 
 	class USCORE_EXPORT render_manager_base : public render_node
 	{

@@ -17,6 +17,9 @@
 #define _US_LINK_BASE_H_
 
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+
+#include <wtypes.h>
 
 namespace uniscope_globe
 {

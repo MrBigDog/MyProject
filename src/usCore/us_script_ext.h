@@ -17,6 +17,9 @@
 #ifndef _US_SCRIPT_EXT_H_
 #define _US_SCRIPT_EXT_H_
 //#include <usCore\Export.h>
+
+#include <string>
+
 using namespace LuaPlus;
 
 namespace uniscope_globe
