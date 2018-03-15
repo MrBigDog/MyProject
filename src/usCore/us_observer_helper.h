@@ -18,7 +18,7 @@
 #define _US_OBSERVER_HELPER_H_
 
 #include <usCore\Export.h>
-#include <usUtil\us_vector3.h>
+#include <usUtil\us_matrix4.h>
 #include <usUtil\us_region.h>
 
 namespace uniscope_globe

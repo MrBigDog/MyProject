@@ -23,7 +23,7 @@ bool data_bank::create_data_system()
 {
 	set_options_create_if_missing(true);
 
-	leveldb::Status s = leveldb::DB::Open(m_op, /*string_ext::from_wstring*/(m_bank_address), &m_bank);
+	leveldb::Status s = leveldb::DB::Open(m_op, string_ext::from_wstring(m_bank_address), &m_bank);
 
 	if (!s.ok()) return false;
 

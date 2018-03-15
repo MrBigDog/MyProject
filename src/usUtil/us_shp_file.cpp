@@ -13,19 +13,19 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-
+//#include "stdafx.h"
 #include "us_shp_file.h"
 #include <usUtil/us_string_ext.h>
 #include <usUtil/us_file_directory.h>
 
 namespace uniscope_globe
 {
-	shp_file::shp_file(void)
+	shp_file::shp_file( void )
 	{
 		m_dbf_file = new dbf_file();
 		m_handle = NULL;
 	}
-	shp_file::~shp_file(void)
+	shp_file::~shp_file( void )
 	{
 		AUTO_DELETE(m_dbf_file);
 		SHPClose(m_handle);
@@ -38,14 +38,14 @@ namespace uniscope_globe
 		m_str_path = str_path;
 
 		// open shape file
-		m_handle = SHPOpen(/*string_ext::from_wstring*/(m_str_path).data(), "rb");
+		m_handle = SHPOpen(string_ext::from_wstring(m_str_path).data(), "rb");
 		if (m_handle == NULL)
 		{
 			return false;
 		}
 
-		ustring str_dbf_file = file_directory::get_path_without_ext(str_path) + /*L*/".dbf";
-		if (!m_dbf_file->init_dbf_file(str_dbf_file.c_str()))
+		ustring str_dbf_file = file_directory::get_path_without_ext( str_path ) + L".dbf";
+		if (! m_dbf_file->init_dbf_file(str_dbf_file.c_str()))
 		{
 			SHPClose(m_handle);
 			m_handle = NULL;
@@ -56,9 +56,9 @@ namespace uniscope_globe
 		double v_max_bound[4], v_min_bound[4];
 		SHPGetInfo(m_handle, &m_n_record_num, &m_n_shape_type, &v_min_bound[0], &v_max_bound[0]);
 
-		m_rect.m_east = v_max_bound[0];
+		m_rect.m_east  = v_max_bound[0];
 		m_rect.m_north = v_max_bound[1];
-		m_rect.m_west = v_min_bound[0];
+		m_rect.m_west  = v_min_bound[0];
 		m_rect.m_south = v_min_bound[1];
 
 		// init attribute map
@@ -68,17 +68,17 @@ namespace uniscope_globe
 		DBFFieldType field_type;
 		int field_width;
 		int n_decimal;
-		for (int i = 0; i < attri_cnt; i++)
+		for (int i = 0; i < attri_cnt; i ++)
 		{
-			if (get_field_info(i, ptr_text, field_type, field_width, n_decimal))
+			if (get_field_info( i, ptr_text, field_type, field_width, n_decimal))
 			{
-				m_field_map.insert(make_pair(/*string_ext::to_wstring*/(ptr_text), i));
+				m_field_map.insert(make_pair(string_ext::to_wstring(ptr_text), i));
 			}
 		}
 		return true;
 	}
 
-	dbf_file* shp_file::get_relative_dbf(void)
+	dbf_file* shp_file::get_relative_dbf( void )
 	{
 		return m_dbf_file;
 	}
@@ -139,15 +139,15 @@ namespace uniscope_globe
 		}
 
 		// get entity rect
-		obj_rect->m_west = v_shp_object->dfXMin;
-		obj_rect->m_east = v_shp_object->dfXMax;
+		obj_rect->m_west  = v_shp_object->dfXMin;
+		obj_rect->m_east  = v_shp_object->dfXMax;
 		obj_rect->m_south = v_shp_object->dfYMin;
 		obj_rect->m_north = v_shp_object->dfYMax;
 
 		// get object vertex
 		*n_part = v_shp_object->nParts;
 		*part_list = new int[v_shp_object->nParts];
-		for (int i = 0; i < v_shp_object->nParts; i++)
+		for (int i = 0; i < v_shp_object->nParts; i ++)
 		{
 			(*part_list)[i] = v_shp_object->panPartStart[i];
 		}
@@ -155,11 +155,11 @@ namespace uniscope_globe
 		*n_vertex = v_shp_object->nVertices;
 		*vec_list = new vector3<double>[v_shp_object->nVertices];
 		vector3<double> v_vertex;
-		for (int i = 0; i < v_shp_object->nVertices; i++)
+		for (int i = 0; i < v_shp_object->nVertices; i ++)
 		{
 			v_vertex.x = v_shp_object->padfX[i];
 			v_vertex.y = v_shp_object->padfY[i];
-			if (m_n_shape_type == SHPT_POINTZ || m_n_shape_type == SHPT_POLYGONZ || m_n_shape_type == SHPT_ARCZ)
+			if (m_n_shape_type == SHPT_POINTZ || m_n_shape_type == SHPT_POLYGONZ ||m_n_shape_type == SHPT_ARCZ)
 			{
 				v_vertex.z = v_shp_object->padfZ[i];
 			}
@@ -193,8 +193,8 @@ namespace uniscope_globe
 		}
 
 		// get entity rect
-		obj_rect->m_west = v_shp_object->dfXMin;
-		obj_rect->m_east = v_shp_object->dfXMax;
+		obj_rect->m_west  = v_shp_object->dfXMin;
+		obj_rect->m_east  = v_shp_object->dfXMax;
 		obj_rect->m_south = v_shp_object->dfYMin;
 		obj_rect->m_north = v_shp_object->dfYMax;
 
@@ -212,11 +212,11 @@ namespace uniscope_globe
 		*n_vertex = v_n_outring_ver_num;
 		*vec_list = new vector3<double>[v_n_outring_ver_num];
 		vector3<double> v_vertex;
-		for (int i = 0; i < v_n_outring_ver_num; i++)
+		for (int i = 0; i < v_n_outring_ver_num; i ++)
 		{
 			v_vertex.x = v_shp_object->padfX[i];
 			v_vertex.y = v_shp_object->padfY[i];
-			if (m_n_shape_type == SHPT_POINTZ || m_n_shape_type == SHPT_POLYGONZ || m_n_shape_type == SHPT_ARCZ)
+			if (m_n_shape_type == SHPT_POINTZ || m_n_shape_type == SHPT_POLYGONZ ||m_n_shape_type == SHPT_ARCZ)
 			{
 				v_vertex.z = v_shp_object->padfZ[i];
 			}
@@ -265,3 +265,4 @@ namespace uniscope_globe
 }
 
 
+ 

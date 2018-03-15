@@ -405,13 +405,13 @@ void axis_aligned_box<real>::transform(matrix4<real>& trans_mat)
 	for (int i = 0; i < 8; i++)
 	{
 		m_corners[i] = m_corners[i] * trans_mat;
-		m_min_vector.x = min(m_min_vector.x, m_corners[i].x);
-		m_min_vector.y = min(m_min_vector.y, m_corners[i].y);
-		m_min_vector.z = min(m_min_vector.z, m_corners[i].z);
+		m_min_vector.x = (std::min)(m_min_vector.x, m_corners[i].x);
+		m_min_vector.y = (std::min)(m_min_vector.y, m_corners[i].y);
+		m_min_vector.z = (std::min)(m_min_vector.z, m_corners[i].z);
 
-		m_max_vector.x = max(m_max_vector.x, m_corners[i].x);
-		m_max_vector.y = max(m_max_vector.y, m_corners[i].y);
-		m_max_vector.z = max(m_max_vector.z, m_corners[i].z);
+		m_max_vector.x = (std::max)(m_max_vector.x, m_corners[i].x);
+		m_max_vector.y = (std::max)(m_max_vector.y, m_corners[i].y);
+		m_max_vector.z = (std::max)(m_max_vector.z, m_corners[i].z);
 	}
 }
 
@@ -424,14 +424,12 @@ double axis_aligned_box<real>::nearest_distance_to_point(vector3<real>& in_pt)
 
 	vector3<real> v_nearest_pos = in_pt;
 
-	v_nearest_pos.x = max(vec_min.x, v_nearest_pos.x);
-	v_nearest_pos.x = min(vec_max.x, v_nearest_pos.x);
-
-	v_nearest_pos.y = max(vec_min.y, v_nearest_pos.y);
-	v_nearest_pos.y = min(vec_max.y, v_nearest_pos.y);
-
-	v_nearest_pos.z = max(vec_min.z, v_nearest_pos.z);
-	v_nearest_pos.z = min(vec_max.z, v_nearest_pos.z);
+	v_nearest_pos.x = (std::max)(vec_min.x, v_nearest_pos.x);
+	v_nearest_pos.x = (std::min)(vec_max.x, v_nearest_pos.x);
+	v_nearest_pos.y = (std::max)(vec_min.y, v_nearest_pos.y);
+	v_nearest_pos.y = (std::min)(vec_max.y, v_nearest_pos.y);
+	v_nearest_pos.z = (std::max)(vec_min.z, v_nearest_pos.z);
+	v_nearest_pos.z = (std::min)(vec_max.z, v_nearest_pos.z);
 
 	double v_dis = (double)(v_nearest_pos - in_pt).length();
 
@@ -447,14 +445,12 @@ vector3<real> axis_aligned_box<real>::nearest_point_to_point(vector3<real>& in_p
 
 	vector3<real> v_nearest_pos = in_pt;
 
-	v_nearest_pos.x = max(vec_min.x, v_nearest_pos.x);
-	v_nearest_pos.x = min(vec_max.x, v_nearest_pos.x);
-
-	v_nearest_pos.y = max(vec_min.y, v_nearest_pos.y);
-	v_nearest_pos.y = min(vec_max.y, v_nearest_pos.y);
-
-	v_nearest_pos.z = max(vec_min.z, v_nearest_pos.z);
-	v_nearest_pos.z = min(vec_max.z, v_nearest_pos.z);
+	v_nearest_pos.x = (std::max)(vec_min.x, v_nearest_pos.x);
+	v_nearest_pos.x = (std::min)(vec_max.x, v_nearest_pos.x);
+	v_nearest_pos.y = (std::max)(vec_min.y, v_nearest_pos.y);
+	v_nearest_pos.y = (std::min)(vec_max.y, v_nearest_pos.y);
+	v_nearest_pos.z = (std::max)(vec_min.z, v_nearest_pos.z);
+	v_nearest_pos.z = (std::min)(vec_max.z, v_nearest_pos.z);
 
 	return v_nearest_pos;
 }

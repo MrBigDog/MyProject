@@ -18,9 +18,11 @@
 
 #include <usCore\Export.h>
 #include <usUtil\us_common_file.h>
+#include <usCore\us_link_http.h>
+
+#include <windows.h>
 #include <wtypes.h>
 #include <string>
-#include <minwindef.h>
 
 using namespace std;
 
@@ -31,8 +33,6 @@ namespace uniscope_globe
 #define US_SERVER_TYPE_FILE			1
 
 	class raw_buffer;
-	class http_link_desc;
-	class http_link_handle;
 
 	class USCORE_EXPORT data_loader
 	{
@@ -63,7 +63,7 @@ namespace uniscope_globe
 		static bool get_data_from_local(IN LPCTSTR str_url, OUT byte* &v_buf, OUT int &v_size);
 
 	public:
-		raw_buffer* load(LPCTSTR str_url, int server_type = US_SERVER_TYPE_DEFAULT, LPCTSTR http_mode = /*L*/"GET");
+		raw_buffer* load(LPCTSTR str_url, int server_type = US_SERVER_TYPE_DEFAULT, LPCTSTR http_mode = L"GET");
 	protected:
 		void clear();
 

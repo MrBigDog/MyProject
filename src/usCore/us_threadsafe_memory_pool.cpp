@@ -17,7 +17,9 @@
 ///////////////////////////////////////////////////////////////////////////
 
 //#include "StdAfx.h"
+//#include <WinBase.h>
 #include "us_threadsafe_memory_pool.h"
+#include <windows.h>
 
 namespace uniscope_globe
 {

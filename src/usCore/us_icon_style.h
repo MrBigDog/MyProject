@@ -24,7 +24,6 @@
 namespace uniscope_globe
 {
 	class hardware_texture;
-	//class rect;
 
 	class USCORE_EXPORT icon_style : public style_base
 	{

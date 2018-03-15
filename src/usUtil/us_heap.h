@@ -17,6 +17,7 @@
 #define _US_HEAP_H_
 
 #include <usUtil/us_common_file.h>
+#include <assert.h>
 
 namespace uniscope_globe
 {

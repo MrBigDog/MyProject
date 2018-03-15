@@ -19,9 +19,18 @@
 //#include <usCore\Export.h>
 #include <usUtil\us_common_file.h>
 #include <usCore\us_resource_container.h>
+#include <usCore/us_mission_flow.h>
+#include <usCore/us_download_argument.h>
+#include <usCore/us_filter_manager.h>
+#include <usCore/us_download_mission.h>
+#include <usCore/us_downloader.h>
+//#include <usCore\us_downloader.h>
 
 namespace uniscope_globe
 {
+	class event_argument;
+	class raw_buffer;
+
 	template<typename KEY>
 	class common_resource_container : public resource_container<KEY>
 	{

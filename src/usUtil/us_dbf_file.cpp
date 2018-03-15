@@ -125,7 +125,7 @@ namespace uniscope_globe
 
 	bool dbf_file::create_dbf(LPCTSTR str_path)
 	{
-		m_h_dbf = DBFCreate(string(str_path).c_str()/*string_ext::from_wstring(wstring(str_path)).c_str()*/);
+		m_h_dbf = DBFCreate(string_ext::from_wstring(wstring(str_path)).c_str());
 
 		return true;
 	}

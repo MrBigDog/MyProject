@@ -23,6 +23,7 @@
 #include <usUtil\us_object_base.h>
 
 #include <unordered_map>
+#include <stdio.h>
 
 namespace uniscope_globe
 {
@@ -129,7 +130,7 @@ namespace uniscope_globe
 		bool get_map_render_mode(void) { return m_map_render_mode; }
 
 	public:
-		__declspec(thread) static document_base* s_document_ptr;
+		/*__declspec(thread)*/ static document_base* s_document_ptr;
 
 		object_map m_object_map;
 

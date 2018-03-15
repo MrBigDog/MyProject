@@ -19,7 +19,7 @@
 //#include <usCore\Export.h>
 #include <usUtil/us_object_base.h>
 #include <usCore/us_resource_container.h>
-
+#include <unordered_map>
 namespace uniscope_globe
 {
 	template<typename KEY>

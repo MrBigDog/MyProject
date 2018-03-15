@@ -291,7 +291,7 @@ namespace uniscope_globe
 			return itr->second;
 		}
 		
-		return /*L*/"";
+		return L"";
 	}
 
 	//void system_environment::update_frame_time( void )

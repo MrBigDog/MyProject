@@ -15,11 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 //#include "Stdafx.h"
 #include "us_icon_style.h"
-#include <usCore/us_downloader.h>
-#include <usUtil/us_common_file.h>
 #include <usCore/us_hardware_texture.h>
+#include <usCore/us_resource_manager.h>
 #include <usCore/us_common_manager_group.h>
-#include <WinUser.h>
+#include <usCore/us_downloader.h>
 
 namespace uniscope_globe
 {
@@ -29,7 +28,7 @@ namespace uniscope_globe
 		m_blend_color = 0xffffff55;
 		m_icon_scale = 1.0;
 		m_texture = NULL;
-		m_str_texture_url = /*L*/"";
+		m_str_texture_url = L"";
 		m_text_format = DT_LEFT | DT_VCENTER | DT_NOCLIP;
 	}
 
@@ -60,12 +59,12 @@ namespace uniscope_globe
 		if (m_str_texture_url.length() == 0) return NULL;
 		if (m_texture == NULL)
 		{
-			m_texture = (texture_resource_container*)singleton_common_manager_group::instance().get_texture_manager(/*L*/"icon")->get_resource(m_str_texture_url);
+			m_texture = (texture_resource_container*)singleton_common_manager_group::instance().get_texture_manager(L"icon")->get_resource(m_str_texture_url);
 			if (m_texture == NULL)
 			{
 				m_texture = new texture_resource_container(singleton_common_manager_group::instance().get_document(), m_str_texture_url, m_str_texture_url.c_str(), US_DOWNLOAD_IN_HEAP);
 				m_texture->add_ref();
-				singleton_common_manager_group::instance().get_texture_manager(/*L*/"icon")->add_resource(m_str_texture_url, m_texture);
+				singleton_common_manager_group::instance().get_texture_manager(L"icon")->add_resource(m_str_texture_url, m_texture);
 			}
 		}
 

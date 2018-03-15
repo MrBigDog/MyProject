@@ -21,6 +21,7 @@
 #include <usCore\Export.h>
 #include <usCore\us_function_base.h>
 #include <usCore\us_event_argument.h>
+#include <usCore\us_member_function.h>
 
 namespace uniscope_globe
 {

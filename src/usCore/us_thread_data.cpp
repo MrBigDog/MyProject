@@ -16,6 +16,7 @@
 //#include "Stdafx.h"
 #include "us_thread_data.h"
 #include <usUtil/us_common_file.h>
+#include <windows.h>
 
 namespace uniscope_globe
 {

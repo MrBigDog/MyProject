@@ -17,6 +17,7 @@
 #define _US_CURVE3_H_
 
 #include <usUtil/us_vector3.h>
+#include <sal.h>
 
 namespace uniscope_globe
 {
@@ -53,8 +54,8 @@ namespace uniscope_globe
 		vector3<real> get_tangent(real t) const;
 		vector3<real> get_normal(real t) const;
 		vector3<real> get_binormal(real t) const;
-		void get_frame(/*IN*/ real t, /*OUT*/ vector3<real>& position, /*OUT*/ vector3<real>& tangent,
-			/*OUT*/ vector3<real>& normal, /*OUT*/ vector3<real>& binormal) const;
+		void get_frame(IN real t, OUT vector3<real>& position, OUT vector3<real>& tangent,
+			OUT vector3<real>& normal, OUT vector3<real>& binormal) const;
 		real get_curvature(real t) const;
 		real get_torsion(real t) const;
 
@@ -62,8 +63,8 @@ namespace uniscope_globe
 		virtual real get_time(real length, int iterations = 32, real tolerance = (real)1e-06) const = 0;
 
 		// subdivision
-		void subdivide_by_time(int iNumPoints, /*OUT*/ vector3<real>*& out_point) const;
-		void subdivide_by_length(int iNumPoints, /*OUT*/ vector3<real>*& out_point) const;
+		void subdivide_by_time(int iNumPoints, OUT vector3<real>*& out_point) const;
+		void subdivide_by_length(int iNumPoints, OUT vector3<real>*& out_point) const;
 
 		// Subdivision by variation. The pointers pkP0 and pkP1 correspond to the
 		// curve points at fT0 and fT1.  If the pointer values are not null, the
@@ -71,8 +72,8 @@ namespace uniscope_globe
 		// Otherwise, the function computes the curve points.
 		virtual real get_variation(real t0, real t1,
 			const vector3<real>* p0 = 0, const vector3<real>* p1 = 0) const = 0;
-		void subdivide_by_variation(/*IN*/ real min_variation, /*IN*/ int max_level,
-			/*OUT*/ int& out_points_count, /*OUT*/ vector3<real>*& out_point_array) const;
+		void subdivide_by_variation(IN real min_variation, IN int max_level,
+			OUT int& out_points_count, OUT vector3<real>*& out_point_array) const;
 
 	protected:
 		// curve parameter is t where tmin <= t <= tmax

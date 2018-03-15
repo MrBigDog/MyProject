@@ -16,7 +16,7 @@
 //#include "Stdafx.h"
 #include "us_link_base.h"
 #include <usCore/us_system_environment.h>
-#include <wtypes.h>
+
 
 namespace uniscope_globe
 {

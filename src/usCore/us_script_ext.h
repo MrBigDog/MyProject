@@ -18,7 +18,13 @@
 #define _US_SCRIPT_EXT_H_
 //#include <usCore\Export.h>
 
+#include <usLua/LuaObject.h>
+#include <usLua/LuaState.h>
+#include <usUtil/us_common_file.h>
+
 #include <string>
+#include <vector>
+#include <basetsd.h>
 
 using namespace LuaPlus;
 

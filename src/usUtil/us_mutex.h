@@ -20,7 +20,6 @@
 
 #include <usUtil\Export.h>
 
-//#include <minwinbase.h>
 #include <list>
 #include <wtypes.h>
 

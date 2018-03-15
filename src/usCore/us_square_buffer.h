@@ -32,7 +32,7 @@ namespace uniscope_globe
 	public:
 		//square_buffer( byte* p_data, int data_size, interior_index index = 0, const LPCTSTR str_path = L"", double v_height = 0.0 );
 
-		square_buffer(document_base* in_doc, byte* p_data, int data_size, interior_index index = 0, const LPCTSTR str_path = /*L*/"", double v_height = 0.0);
+		square_buffer(document_base* in_doc, byte* p_data, int data_size, interior_index index = 0, const LPCTSTR str_path = L"", double v_height = 0.0);
 
 		virtual ~square_buffer(void);
 

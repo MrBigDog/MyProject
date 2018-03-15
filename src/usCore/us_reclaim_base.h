@@ -16,12 +16,13 @@
 #ifndef _US_RECLAIMER_BASE_H_
 #define _US_RECLAIMER_BASE_H_
 
-#include <usCore\Export.h>
-#include <usCore\us_shared_data.h>
-#include <usUtil\us_bidirectional_chain.h>
 
-#include <basetsd.h>
-#include <winnt.h>
+#include <usCore\Export.h>
+#include <usUtil\us_bidirectional_chain.h>
+#include <usCore\us_shared_data.h>
+#include <usCore/us_resource_reclaimer.h>
+#include <WinNT.h>
+
 
 namespace uniscope_globe
 {

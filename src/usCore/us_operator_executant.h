@@ -17,12 +17,14 @@
 #define _US_OPERATOR_EXECUTANT_H_
 
 #include <usCore\Export.h>
+#include <usUtil\us_common_file.h>
+#include <usCore\us_event_base.h>
 #include <deque>
 
 namespace uniscope_globe
 {
 	class operator_base;
-	class event_base;
+	//class event_base;
 
 	class USCORE_EXPORT operator_executant
 	{

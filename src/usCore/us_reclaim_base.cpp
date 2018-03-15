@@ -16,7 +16,7 @@
 //#include "Stdafx.h"
 #include "us_reclaim_base.h"
 #include <usCore/us_document_base.h>
-#include <usCore/us_resource_reclaimer.h>
+//#include <usCore/us_resource_reclaimer.h>
 #include <usCore/us_frame_counter.h>
 
 namespace uniscope_globe

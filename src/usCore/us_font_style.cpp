@@ -21,7 +21,7 @@ namespace uniscope_globe
 	font_style::font_style(void)
 	{
 		m_rtti = US_RTTI_FONT_STYLE;
-		m_face_name = /*L*/"Arial";
+		m_face_name = L"Arial";
 		m_font_color = 0xffffffff;
 		m_font_back_color = 0x00ffffff;
 		m_font_scale = 1.0;

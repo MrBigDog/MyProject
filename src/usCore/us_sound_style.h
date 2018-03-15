@@ -17,6 +17,7 @@
 #define _US_SOUND_STYLE_H_
 #include <usCore\Export.h>
 #include <usCore\us_style_base.h>
+#include <wtypes.h>
 namespace uniscope_globe
 {
 	class sound_base;

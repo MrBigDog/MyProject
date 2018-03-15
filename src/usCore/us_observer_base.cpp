@@ -16,6 +16,9 @@
 //#include "stdafx.h"
 #include "us_observer_base.h"
 #include <usCore/us_render_device.h>
+#include <usUtil/us_cartesian_coords.h>
+#include <usUtil/us_interior_index_factory.h>
+#include <usUtil/us_geocentric_coords.h>
 
 namespace uniscope_globe
 {

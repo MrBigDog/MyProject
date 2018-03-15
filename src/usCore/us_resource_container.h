@@ -19,6 +19,7 @@
 #include <usCore\Export.h>
 #include <usCore\us_reclaim_base.h>
 #include <usCore\us_resource_base.h>
+#include <usCore\us_resource_killer.h>
 
 namespace uniscope_globe
 {

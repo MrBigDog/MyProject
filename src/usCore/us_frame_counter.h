@@ -19,7 +19,7 @@
 #include <usCore\Export.h>
 #include <usUtil\us_common_file.h>
 #include <usCore\us_tls_singleton.h>
-#include <winnt.h>
+//#include <winnt.h>
 
 namespace uniscope_globe
 {
