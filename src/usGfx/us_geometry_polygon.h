@@ -15,32 +15,35 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_GEOMETRY_POLYGON_H_
 #define _US_GEOMETRY_POLYGON_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+#include <usCore/us_render_object.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API geometry_polygon
+	class USGFX_EXPORT geometry_polygon
 		: public render_object
 	{
 	public:
-		geometry_polygon( void );
+		geometry_polygon(void);
 
-		virtual ~geometry_polygon( void );
+		virtual ~geometry_polygon(void);
 
 		friend class geometry_factory;
 
 	public:
-		static geometry_polygon* create_shared_instance( void );
+		static geometry_polygon* create_shared_instance(void);
 
 		// override from render_object
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
 	public:
-		void set_matrix( matrix_4d& mat );
+		void set_matrix(matrix_4d& mat);
 
-		void set_collapse( matrix_4d& mat );
+		void set_collapse(matrix_4d& mat);
 
-		void clear( void );
+		void clear(void);
 
 		//void create_from_line_ring( vector_3d* v_src, int v_size, ulong v_line_color, ulong v_fill_color );
 
@@ -58,7 +61,7 @@ namespace uniscope_globe
 		vector_3d m_center;
 		matrix_4d m_trans_matrix;
 		matrix_4d m_collapse_matrix;
-		 
+
 	};
 }
 

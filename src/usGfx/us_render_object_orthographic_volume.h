@@ -16,17 +16,20 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RENDER_OBJECT_ORTHOGRAPHIC_VOLUME_H_
 #define _US_RENDER_OBJECT_ORTHOGRAPHIC_VOLUME_H_
-
+#include <usGfx/Export.h>
+#include <usCore/us_render_object.h>
+#include <usCore/us_shadow_volume_creator.h>
+//#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API render_object_orthographic_volume
+	class USGFX_EXPORT render_object_orthographic_volume
 		: public render_object
 		, public shadow_volume_creator
 	{
 	public:
-		render_object_orthographic_volume( void );
+		render_object_orthographic_volume(void);
 
-		virtual ~render_object_orthographic_volume( void );
+		virtual ~render_object_orthographic_volume(void);
 
 		friend class render_object_factory;
 
@@ -37,15 +40,15 @@ namespace uniscope_globe
 		static render_object_orthographic_volume* create_shared_instance();
 
 	public:
-		virtual render_object* get_shadow_object( void ) { return this; }
+		virtual render_object* get_shadow_object(void) { return this; }
 
-		virtual int get_pass1( void ) { return 8; }
+		virtual int get_pass1(void) { return 8; }
 
-		virtual int get_pass2( void ) { return 3; }
+		virtual int get_pass2(void) { return 3; }
 
 		// override from render_object
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 	};
 }
 

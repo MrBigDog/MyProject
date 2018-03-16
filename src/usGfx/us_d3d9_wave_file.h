@@ -16,33 +16,38 @@
 #ifndef _US_D3D9_WAVE_FILE_H_
 #define _US_D3D9_WAVE_FILE_H_
 
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
+
+#include <windows.h>
+
 #define WAVEFILE_READ   1
 #define WAVEFILE_WRITE  2
 #define DXTRACE_ERR(str, ret_val) ret_val
 
 namespace uniscope_globe
 {
-	class d3d9_wave_file
+	class USGFX_EXPORT d3d9_wave_file
 	{
 	public:
-		d3d9_wave_file( void );
+		d3d9_wave_file(void);
 
-		virtual ~d3d9_wave_file( void );
+		virtual ~d3d9_wave_file(void);
 
 	public:
 		HRESULT read_mmio();
 
-		HRESULT write_mmio( WAVEFORMATEX *pwfxDest );
+		HRESULT write_mmio(WAVEFORMATEX *pwfxDest);
 
-		HRESULT open( LPWSTR strFileName, WAVEFORMATEX* pwfx, DWORD dwFlags );
+		HRESULT open(LPWSTR strFileName, WAVEFORMATEX* pwfx, DWORD dwFlags);
 
-		HRESULT open_from_memory( BYTE* pbData, ULONG ulDataSize, WAVEFORMATEX* pwfx, DWORD dwFlags );
+		HRESULT open_from_memory(BYTE* pbData, ULONG ulDataSize, WAVEFORMATEX* pwfx, DWORD dwFlags);
 
 		HRESULT close();
 
-		HRESULT read( BYTE* pBuffer, DWORD dwSizeToRead, DWORD* pdwSizeRead );
+		HRESULT read(BYTE* pBuffer, DWORD dwSizeToRead, DWORD* pdwSizeRead);
 
-		HRESULT write( UINT nSizeToWrite, BYTE* pbData, UINT* pnSizeWrote );
+		HRESULT write(UINT nSizeToWrite, BYTE* pbData, UINT* pnSizeWrote);
 
 		DWORD   get_size();
 
@@ -76,7 +81,7 @@ namespace uniscope_globe
 		CHAR*         m_pResourceBuffer;
 
 
-		 
+
 	};
 }
 

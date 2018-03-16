@@ -15,10 +15,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_HARDWARE_MESH_BUFFER_FACTORY_H_
 #define _US_HARDWARE_MESH_BUFFER_FACTORY_H_
-
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class hardware_mesh_buffer_factory
+	class USGFX_EXPORT hardware_mesh_buffer_factory
 	{
 	public:
 		hardware_mesh_buffer_factory( void );

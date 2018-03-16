@@ -13,8 +13,15 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_render_object_polygon.h"
+#include <usCore/us_render_argument.h>
+#include <usCore/us_render_device.h>
+#include <usCore/us_render_state.h>
+
+#include <usUtil/us_cartesian_coords.h>
+
+#include <d3d9types.h>
 
 namespace uniscope_globe
 {

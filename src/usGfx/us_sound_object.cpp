@@ -13,7 +13,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+////#include "stdafx.h"
 #include "us_sound_object.h"
 
 namespace uniscope_globe

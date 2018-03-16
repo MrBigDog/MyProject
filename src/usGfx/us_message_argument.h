@@ -16,24 +16,28 @@
 #ifndef _US_MESSAGE_ARGUMENT_H_
 #define _US_MESSAGE_ARGUMENT_H_
 
+#include <usGfx/Export.h>
+#include <usGfx/us_input_argument.h>
+#include <usUtil/us_common_file.h>
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API message_argument
+	class USGFX_EXPORT message_argument
 		: public input_argument
 	{
 	public:
-		message_argument( void );
+		message_argument(void);
 
-		virtual ~message_argument( void );
+		virtual ~message_argument(void);
 
 	public:
-		virtual void reset( void );
+		virtual void reset(void);
 
 	public:
 		uint   m_message;
 		WPARAM m_w_param;
 		LPARAM m_l_param;
-		HHOOK  m_hook;		
+		HHOOK  m_hook;
 	};
 }
 

@@ -15,14 +15,24 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_KEYBOARD_DEVICE_IMPL_H_
 #define _US_KEYBOARD_DEVICE_IMPL_H_
+#include <usGfx/Export.h>
+#include <usGfx/us_input_device_base.h>
+#include <usUtil/us_common_file.h>
+
+#include <dinput.h>
+
 
 namespace uniscope_globe
 {
-	class LIB_GFX_API keyboard_device_impl
+	class input_device_argument;
+	//class IDirectInputDevice8;
+
+
+	class USGFX_EXPORT keyboard_device_impl
 		: public input_device_base
 	{
 	protected:
-		keyboard_device_impl(){}
+		keyboard_device_impl() {}
 
 	public:
 		keyboard_device_impl(IDirectInputDevice8* in_direct_keyboard);
@@ -30,16 +40,16 @@ namespace uniscope_globe
 		virtual ~keyboard_device_impl(void);
 
 	public:
-		bool create( input_device_argument* args );
+		bool create(input_device_argument* args);
 
-		virtual void destroy( void );
+		virtual void destroy(void);
 
-		virtual bool refresh( void );
+		virtual bool refresh(void);
 
 	protected:
-		void collect_keyboard_info( void );
+		void collect_keyboard_info(void);
 
-	private:     
+	private:
 		IDirectInputDevice8* m_direct_keyoboard;
 
 		input_device_argument* m_args;

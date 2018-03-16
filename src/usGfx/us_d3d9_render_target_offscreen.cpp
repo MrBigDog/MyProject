@@ -14,8 +14,11 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_d3d9_render_target_offscreen.h"
+#include <usGfx/us_d3d9_render_device_impl.h>
+#include <usCore/us_render_device.h>
+#include <usUtil/us_file_directory.h>
 
 namespace uniscope_globe
 {

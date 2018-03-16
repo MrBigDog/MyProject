@@ -15,14 +15,21 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_MOUSE_DEVICE_IMPL_H_
 #define _US_MOUSE_DEVICE_IMPL_H_
+#include <usGfx/Export.h>
+#include <usGfx/us_input_device_base.h>
+#include <usGfx/us_mouse_argument.h>
+#include <usUtil/us_common_file.h>
+#include <dinput.h>
 
 namespace uniscope_globe
 {
-	class LIB_GFX_API mouse_device_impl
+	//class mouse_argument;
+
+	class USGFX_EXPORT mouse_device_impl
 		: public input_device_base
 	{
 	public:
-		mouse_device_impl(){}
+		mouse_device_impl() {}
 
 	public:
 		mouse_device_impl(IDirectInputDevice8* in_direct_mouse);
@@ -30,14 +37,14 @@ namespace uniscope_globe
 		virtual ~mouse_device_impl(void);
 
 	public:
-		bool create( mouse_argument* args );
+		bool create(mouse_argument* args);
 
-		virtual void destroy( void );
+		virtual void destroy(void);
 
-		virtual bool refresh( void );
+		virtual bool refresh(void);
 
 	protected:
-		void collect_mouse_info( void );
+		void collect_mouse_info(void);
 
 	private:
 		IDirectInputDevice8*	m_direct_mouse;

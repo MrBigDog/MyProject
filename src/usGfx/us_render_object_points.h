@@ -15,10 +15,13 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RENDER_OBJECT_POINTS_H_
 #define _US_RENDER_OBJECT_POINTS_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+#include <usCore/us_render_object.h>
+//#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API render_object_points
+	class USGFX_EXPORT render_object_points
 		: public render_object
 	{
 	public:

@@ -16,10 +16,14 @@
 #ifndef _US_MOUSE_ARGUMENT_H_
 #define _US_MOUSE_ARGUMENT_H_
 
+#include <usGfx/Export.h>
+#include <usGfx/us_input_argument.h>
+#include <usUtil/us_common_file.h>
+
 namespace uniscope_globe
 {
 	// struct mouse_state
-	struct LIB_GFX_API mouse_state
+	struct USGFX_EXPORT mouse_state
 	{
 		long    l_x;
 		long    l_y;
@@ -28,16 +32,16 @@ namespace uniscope_globe
 	};
 
 	// class mouse_argument
-	class LIB_GFX_API mouse_argument
+	class USGFX_EXPORT mouse_argument
 		: public input_argument
 	{
 	public:
-		mouse_argument( void );
+		mouse_argument(void);
 
-		virtual ~mouse_argument( void );
+		virtual ~mouse_argument(void);
 
 	public:
-		virtual void reset( void );
+		virtual void reset(void);
 
 	public:
 		mouse_state m_state;

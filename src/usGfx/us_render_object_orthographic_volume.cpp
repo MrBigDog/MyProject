@@ -14,16 +14,21 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_render_object_orthographic_volume.h"
+#include <usGfx/us_d3d9_effect_common_mesh.h>
+#include <usGfx/us_render_helper.h>
+
+#include <usCore/us_render_argument.h>
+#include <usCore/us_render_device.h>
 
 namespace uniscope_globe
 {
-	render_object_orthographic_volume::render_object_orthographic_volume( void )
+	render_object_orthographic_volume::render_object_orthographic_volume(void)
 	{
 	}
 
-	render_object_orthographic_volume::~render_object_orthographic_volume( void )
+	render_object_orthographic_volume::~render_object_orthographic_volume(void)
 	{
 	}
 
@@ -34,16 +39,16 @@ namespace uniscope_globe
 		return v_geometry;
 	}
 
-	void render_object_orthographic_volume::draw( render_argument* args )
+	void render_object_orthographic_volume::draw(render_argument* args)
 	{
 		d3d9_effect_common_mesh* v_mesh_render = (d3d9_effect_common_mesh*)args->m_render;
 
 		matrix_4d v_mat = matrix_4d::s_identity;
 		v_mesh_render->push_transform();
-		v_mesh_render->multiply_transform( matrix_4f( v_mat.m ) );
+		v_mesh_render->multiply_transform(matrix_4f(v_mat.m));
 		v_mesh_render->commit_changes();
 
-		render_helper::draw_filled_frustum( args->m_device, args->m_observer, 0x99ff0000 );
+		render_helper::draw_filled_frustum(args->m_device, args->m_observer, 0x99ff0000);
 
 		//view_port v_view_port = args->m_device->get_view_port();
 		//vector3<float> vec1 = args->m_device->unprojection( vector3<float>(0, v_view_port.m_height * 0.5, 0));
@@ -55,7 +60,7 @@ namespace uniscope_globe
 		//frustum<double> m_frustum;
 		//m_frustum.update_ex( v_width, v_height, args->m_observer->get_near_plane(), args->get_far_plane(), args->m_observer->get_view_matrix() );
 
-		
+
 		//args->m_device->set_vertex_declaration( position_color::fvf );
 		//args->m_device->set_texture( 0, NULL );
 
@@ -72,5 +77,5 @@ namespace uniscope_globe
 		//args->m_device->pop_transform();
 
 		v_mesh_render->pop_transform();
-	}	
+	}
 }

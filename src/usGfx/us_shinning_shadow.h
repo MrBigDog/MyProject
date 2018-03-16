@@ -15,12 +15,19 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_SHINNING_SHADOW_H_
 #define _US_SHINNING_SHADOW_H_
+#include <usGfx/Export.h>
+#include <usCore/us_render_object.h>
+#include <usCore/us_hardware_mesh.h>
+#include <usUtil/us_common_file.h>
+
+#include <d3dx9mesh.h>
+#include <map>
 
 namespace uniscope_globe
 {
 	class building_usd_buffer;
 
-	class LIB_GFX_API shinning_shadow
+	class USGFX_EXPORT shinning_shadow
 		: public render_object
 		, public hardware_mesh
 	{
@@ -45,25 +52,25 @@ namespace uniscope_globe
 		virtual ~shinning_shadow();
 
 	public:
-		virtual long create( render_device* device );
-	
-		virtual bool destroy( void );
+		virtual long create(render_device* device);
 
-		virtual bool refresh( void );		
+		virtual bool destroy(void);
+
+		virtual bool refresh(void);
 
 	public:
-		virtual void draw( render_argument* args );
- 
-		void create_from_mesh( building_usd_buffer* parent_mesh, vector4<double>& in_light, ulong v_stamp);
+		virtual void draw(render_argument* args);
 
-		virtual void set_world_matrix( matrix4<double>& mat ) { m_world_matrix = mat; }
+		void create_from_mesh(building_usd_buffer* parent_mesh, vector4<double>& in_light, ulong v_stamp);
 
-		virtual matrix4<double> get_world_matrix( void ) { return m_world_matrix; }
+		virtual void set_world_matrix(matrix4<double>& mat) { m_world_matrix = mat; }
+
+		virtual matrix4<double> get_world_matrix(void) { return m_world_matrix; }
 
 	protected:
-		void generate_vertices( float* in_vertices, ulong num_of_vertices, long stride, vector4<double>& in_light );
+		void generate_vertices(float* in_vertices, ulong num_of_vertices, long stride, vector4<double>& in_light);
 
-		void generate_indices( face_normal_array& in_normal_array, edge_array& in_edge_array, ushort* triangle, ulong num_of_vertices, vector4<double>& in_light );
+		void generate_indices(face_normal_array& in_normal_array, edge_array& in_edge_array, ushort* triangle, ulong num_of_vertices, vector4<double>& in_light);
 
 	protected:
 		//virtual void create_facing_array( face_normal_array& in_normal_array, unsigned long in_num_of_triangles, vector4<double> in_light );
@@ -75,9 +82,9 @@ namespace uniscope_globe
 		//virtual void generate_volume(  float* in_vertices, long stride, vector4<double> in_light );
 
 	private:
-		int  get_new_index( int index );
+		int  get_new_index(int index);
 
-		void push_in_vertex_array( float* vertices, long stride, vector4<double> in_light, int old_index );
+		void push_in_vertex_array(float* vertices, long stride, vector4<double> in_light, int old_index);
 
 	protected:
 		vertex_array	m_vertex_array;

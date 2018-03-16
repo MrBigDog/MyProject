@@ -16,15 +16,21 @@
 #ifndef _US_GEOMETRY_LINE_H_
 #define _US_GEOMETRY_LINE_H_
 
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+#include <usCore/us_render_object.h>
+#include <usUtil/us_common_file.h>
+#include <usUtil/us_matrix4.h>
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API geometry_line
+	class USGFX_EXPORT geometry_line
 		: public render_object
 	{
 	public:
-		geometry_line( void );
+		geometry_line(void);
 
-		virtual ~geometry_line( void );
+		virtual ~geometry_line(void);
 
 		friend class geometry_factory;
 
@@ -34,18 +40,18 @@ namespace uniscope_globe
 	public:
 		static geometry_line* create_shared_instance();
 
-	// override from render_object
+		// override from render_object
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
 	public:
-		virtual void set_world_matrix( matrix4<double>& v_mat );
+		virtual void set_world_matrix(matrix4<double>& v_mat);
 
-		void set_collapse( matrix_4d& mat );
+		void set_collapse(matrix_4d& mat);
 
 		void clear();
 
-		void create_from_line_string( vector_3d* v_src, int v_size, ulong v_color );
+		void create_from_line_string(vector_3d* v_src, int v_size, ulong v_color);
 
 	protected:
 		std::vector<position_color> m_vertex_array;

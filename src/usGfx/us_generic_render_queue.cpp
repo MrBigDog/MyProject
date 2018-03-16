@@ -14,12 +14,19 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_generic_render_queue.h"
+#include <usCore/us_render_argument.h>
+#include <usCore/us_render_state.h>
+#include <usCore/us_system_environment.h>
+#include <usCore/us_texture_state.h>
+#include <usCore/us_spatial_object.h>
+
+#include <d3d9types.h>
 
 namespace uniscope_globe
 {
-	generic_render_queue::generic_render_queue( void )
+	generic_render_queue::generic_render_queue(void)
 	{
 		m_current_render_array = new render_object_array;
 
@@ -28,113 +35,113 @@ namespace uniscope_globe
 		m_qid = US_DEFAULT_RENDER_NODE;
 	}
 
-	generic_render_queue::~generic_render_queue( void )
+	generic_render_queue::~generic_render_queue(void)
 	{
 		clear();
 	}
 
-	void generic_render_queue::occlusion( render_argument* args )
+	void generic_render_queue::occlusion(render_argument* args)
 	{
-		for ( render_object_array::iterator itr = m_current_render_array->begin(); itr!= m_current_render_array->end(); itr++ )
+		for (render_object_array::iterator itr = m_current_render_array->begin(); itr != m_current_render_array->end(); itr++)
 		{
-			(*itr)->draw( args );
+			(*itr)->draw(args);
 		}
 
-		for ( render_object_array::iterator itr = m_current_render_array->begin(); itr!= m_current_render_array->end(); itr++ )
+		for (render_object_array::iterator itr = m_current_render_array->begin(); itr != m_current_render_array->end(); itr++)
 		{
-			(*itr)->occlusion( args );
+			(*itr)->occlusion(args);
 		}
 	}
 
-	void generic_render_queue::draw( render_argument* args )
+	void generic_render_queue::draw(render_argument* args)
 	{
-		
+
 		args->m_render_flag |= US_MATERIAL_TYPE_NORMAL | US_MATERIAL_TYPE_DYNAMIC;
 		{
 			US_LOCK_AUTO_MUTEX;
 
 			// set cur render state
-			render_state v_render_state( args->m_device );
+			render_state v_render_state(args->m_device);
 			//v_render_state.set_state( D3DRS_CULLMODE, D3DCULL_CCW );
 			//v_render_state.set_state( D3DRS_FILLMODE, D3DFILL_WIREFRAME );
-			if( system_environment::s_all_model_cull_none )
+			if (system_environment::s_all_model_cull_none)
 			{
-				v_render_state.set_state( D3DRS_CULLMODE, D3DCULL_NONE );
+				v_render_state.set_state(D3DRS_CULLMODE, D3DCULL_NONE);
 			}
 
-			v_render_state.set_state( D3DRS_ALPHATESTENABLE, TRUE );
-			v_render_state.set_state( D3DRS_ALPHAFUNC, D3DCMP_GREATER );
-			v_render_state.set_state( D3DRS_ALPHAREF, 15);
+			v_render_state.set_state(D3DRS_ALPHATESTENABLE, TRUE);
+			v_render_state.set_state(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+			v_render_state.set_state(D3DRS_ALPHAREF, 15);
 
-			v_render_state.set_state( D3DRS_ALPHABLENDENABLE, TRUE );
-			v_render_state.set_state( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-			v_render_state.set_state( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+			v_render_state.set_state(D3DRS_ALPHABLENDENABLE, TRUE);
+			v_render_state.set_state(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+			v_render_state.set_state(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
 			//float slopeScaleDepthBias = 0.0f;
 			//v_render_state.set_state( D3DRS_SLOPESCALEDEPTHBIAS, *((DWORD*)&slopeScaleDepthBias) );
 
-			texture_state v_ts( args->m_device );
-			v_ts.set_state( 0, D3DTSS_COLOROP, D3DTOP_MODULATE );
-			v_ts.set_state( 0, D3DTSS_COLORARG1, D3DTA_TEXTURE );
-			v_ts.set_state( 0, D3DTSS_COLORARG2, D3DTA_DIFFUSE );
+			texture_state v_ts(args->m_device);
+			v_ts.set_state(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
+			v_ts.set_state(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+			v_ts.set_state(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
 
-			v_ts.set_state( 1, D3DTSS_COLOROP, D3DTOP_MODULATE );
-			v_ts.set_state( 1, D3DTSS_COLORARG1, D3DTA_TEXTURE );
-			v_ts.set_state( 1, D3DTSS_COLORARG2, D3DTA_CURRENT );
+			v_ts.set_state(1, D3DTSS_COLOROP, D3DTOP_MODULATE);
+			v_ts.set_state(1, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+			v_ts.set_state(1, D3DTSS_COLORARG2, D3DTA_CURRENT);
 
-			v_ts.set_state( 0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1 );
-			v_ts.set_state( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
-			v_ts.set_state( 0, D3DTSS_ALPHAARG2, D3DTA_TFACTOR );
+			v_ts.set_state(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
+			v_ts.set_state(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+			v_ts.set_state(0, D3DTSS_ALPHAARG2, D3DTA_TFACTOR);
 
-			v_ts.set_state( 1, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
-			v_ts.set_state( 1, D3DTSS_ALPHAARG1, D3DTA_TFACTOR );
-			v_ts.set_state( 1, D3DTSS_ALPHAARG2, D3DTA_CURRENT );
+			v_ts.set_state(1, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+			v_ts.set_state(1, D3DTSS_ALPHAARG1, D3DTA_TFACTOR);
+			v_ts.set_state(1, D3DTSS_ALPHAARG2, D3DTA_CURRENT);
 
 			render_object_array::iterator itr = m_current_render_array->begin();
-			for( ; itr != m_current_render_array->end(); itr ++ )
+			for (; itr != m_current_render_array->end(); itr++)
 			{
 
-				if ( (*itr)->get_blend_color() != 0x00000000 )
+				if ((*itr)->get_blend_color() != 0x00000000)
 				{
-					render_state v_child_render_state( args->m_device );
-					v_child_render_state.set_state( D3DRS_TEXTUREFACTOR, (*itr)->get_blend_color() );	
+					render_state v_child_render_state(args->m_device);
+					v_child_render_state.set_state(D3DRS_TEXTUREFACTOR, (*itr)->get_blend_color());
 
-					texture_state v_child_ts( args->m_device );
-					v_child_ts.set_state( 0, D3DTSS_COLORARG2, D3DTA_TFACTOR );
+					texture_state v_child_ts(args->m_device);
+					v_child_ts.set_state(0, D3DTSS_COLORARG2, D3DTA_TFACTOR);
 
-					(*itr)->draw( args );
+					(*itr)->draw(args);
 				}
 				else
 				{
-					(*itr)->draw( args );
+					(*itr)->draw(args);
 				}
-				
+
 			}
 		}
-		render_node::draw( args );
+		render_node::draw(args);
 	}
 
-	void generic_render_queue::draw_alpha( render_argument* args )
+	void generic_render_queue::draw_alpha(render_argument* args)
 	{
-		draw_water( args );
+		draw_water(args);
 	}
 
-	void generic_render_queue::draw_water( render_argument* args )
+	void generic_render_queue::draw_water(render_argument* args)
 	{
 		US_LOCK_AUTO_MUTEX;
 
 		args->m_render_flag |= US_MATERIAL_TYPE_WATER;
 
 		render_object_array::iterator itr = m_current_render_array->begin();
-		for( ; itr != m_current_render_array->end(); itr ++ )
+		for (; itr != m_current_render_array->end(); itr++)
 		{
-			(*itr)->draw( args );
+			(*itr)->draw(args);
 		}
 		args->m_render_flag ^= US_MATERIAL_TYPE_WATER;
 
 	}
 
-	void generic_render_queue::flush( void )
+	void generic_render_queue::flush(void)
 	{
 		//US_RENDER_TRACE1( L"generic ro : %d\n", (int)m_background_render_array->size() );
 
@@ -152,50 +159,50 @@ namespace uniscope_globe
 		render_node::flush();
 	}
 
-	void generic_render_queue::push( render_object* in_object )
+	void generic_render_queue::push(render_object* in_object)
 	{
 		in_object->add_ref();
-		m_background_render_array->push_back( in_object );
+		m_background_render_array->push_back(in_object);
 	}
 
-	void generic_render_queue::clear_background( void )
+	void generic_render_queue::clear_background(void)
 	{
 		render_object_array::iterator itr = m_background_render_array->begin();
-		for( ; itr != m_background_render_array->end(); itr ++ )
+		for (; itr != m_background_render_array->end(); itr++)
 		{
-			AUTO_RELEASE_SHARED_DATA( *itr );
+			AUTO_RELEASE_SHARED_DATA(*itr);
 		}
 
 		m_background_render_array->clear();
 	}
 
-	void generic_render_queue::clear( void )
+	void generic_render_queue::clear(void)
 	{
 		render_object_array::iterator itr = m_current_render_array->begin();
-		for( ; itr != m_current_render_array->end(); itr ++ )
+		for (; itr != m_current_render_array->end(); itr++)
 		{
-			AUTO_RELEASE_SHARED_DATA( *itr );
+			AUTO_RELEASE_SHARED_DATA(*itr);
 		}
-		AUTO_DELETE( m_current_render_array );
+		AUTO_DELETE(m_current_render_array);
 
 		itr = m_background_render_array->begin();
-		for( ; itr != m_background_render_array->end(); itr ++ )
+		for (; itr != m_background_render_array->end(); itr++)
 		{
-			AUTO_RELEASE_SHARED_DATA( *itr );
+			AUTO_RELEASE_SHARED_DATA(*itr);
 		}
 
-		AUTO_DELETE( m_background_render_array );
+		AUTO_DELETE(m_background_render_array);
 	}
 
-	int generic_render_queue::get_count( void ) 
-	{ 
+	int generic_render_queue::get_count(void)
+	{
 		return m_current_render_array->size();
 	}
 
-	bool generic_render_queue::check_intersectable( spatial_object* v_so)
+	bool generic_render_queue::check_intersectable(spatial_object* v_so)
 	{
-		if(v_so == NULL) return true;
-		if( v_so->get_object_flags() == US_OBJECT_FLAGS_DUMMY_OBJECT)
+		if (v_so == NULL) return true;
+		if (v_so->get_object_flags() == US_OBJECT_FLAGS_DUMMY_OBJECT)
 		{
 			return v_so->is_intersectable();
 		}
@@ -205,38 +212,38 @@ namespace uniscope_globe
 		}
 	}
 
-	bool generic_render_queue::intersect( const ray<double>& in_ray, intersect_result& out_result )
+	bool generic_render_queue::intersect(const ray<double>& in_ray, intersect_result& out_result)
 	{
 		bool v_intersected = false;
 
 		US_LOCK_AUTO_MUTEX
 
-		for ( int ni = 0; ni < m_current_render_array->size(); ni++ )
-		{
-			render_object* v_ro = (*m_current_render_array)[ni];
+			for (int ni = 0; ni < m_current_render_array->size(); ni++)
+			{
+				render_object* v_ro = (*m_current_render_array)[ni];
 
-			if( !this->check_intersectable(dynamic_cast<spatial_object*>(v_ro))) continue;
+				if (!this->check_intersectable(dynamic_cast<spatial_object*>(v_ro))) continue;
 
-			v_intersected |= v_ro->intersect( in_ray, out_result );
-		}
+				v_intersected |= v_ro->intersect(in_ray, out_result);
+			}
 
 		return v_intersected;
 	}
 
-	bool generic_render_queue::intersect(  const ray<double>& in_ray, double v_range, intersect_result& out_result  )
+	bool generic_render_queue::intersect(const ray<double>& in_ray, double v_range, intersect_result& out_result)
 	{
 		bool v_intersected = false;
 
 		US_LOCK_AUTO_MUTEX
 
-		for ( int ni = 0; ni < m_current_render_array->size(); ni++ )
-		{
-			render_object* v_ro = (*m_current_render_array)[ni];
-			if( !this->check_intersectable(dynamic_cast<spatial_object*>(v_ro))) continue;
-			v_intersected |= v_ro->intersect( in_ray, v_range, out_result );
-		}
+			for (int ni = 0; ni < m_current_render_array->size(); ni++)
+			{
+				render_object* v_ro = (*m_current_render_array)[ni];
+				if (!this->check_intersectable(dynamic_cast<spatial_object*>(v_ro))) continue;
+				v_intersected |= v_ro->intersect(in_ray, v_range, out_result);
+			}
 
 		return v_intersected;
 	}
-	
+
 }

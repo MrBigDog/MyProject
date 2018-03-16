@@ -15,10 +15,14 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_JOYSTICK_ARGUMENT_H_
 #define _US_JOYSTICK_ARGUMENT_H_
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
+
+#include <windows.h>
 
 namespace uniscope_globe
 {
-	//struct LIB_GFX_API joystick_state
+	//struct USGFX_EXPORT joystick_state
 	//{
 	//	int		m_axis_x;
 	//	int		m_axis_y;
@@ -29,7 +33,7 @@ namespace uniscope_globe
 	//	byte    button[8];
 	//};
 
-	struct LIB_GFX_API joystick_state 
+	struct USGFX_EXPORT joystick_state
 	{
 		LONG    lX;                     /* x-axis position              */
 		LONG    lY;                     /* y-axis position              */

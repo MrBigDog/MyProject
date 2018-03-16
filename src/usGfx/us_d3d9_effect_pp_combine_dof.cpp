@@ -14,45 +14,46 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_d3d9_effect_pp_combine_dof.h"
+#include <usGfx/resource.h>
 
 namespace uniscope_globe
 {
-	d3d9_effect_pp_combine_dof::d3d9_effect_pp_combine_dof( render_device* device )
+	d3d9_effect_pp_combine_dof::d3d9_effect_pp_combine_dof(render_device* device)
 		:d3d9_effect_base(device)
 	{
 		//load_from_file(L"c:\\pp_hdr.fx");
 		load_from_module_resource(IDR_SHADER_PP_COMBINE_DOF);
 	}
 
-	d3d9_effect_pp_combine_dof::~d3d9_effect_pp_combine_dof( void )
+	d3d9_effect_pp_combine_dof::~d3d9_effect_pp_combine_dof(void)
 	{
 
 	}
 
-	bool d3d9_effect_pp_combine_dof::setup_handle( void )
+	bool d3d9_effect_pp_combine_dof::setup_handle(void)
 	{
 		if (m_d3dx_effect)
-		{	
-			m_technique						= m_d3dx_effect->GetTechniqueByName("PostProcess");
-			m_src_texture_handle			= m_d3dx_effect->GetParameterByName(0, "g_txSrcColor");
-			m_dest_texture_handle			= m_d3dx_effect->GetParameterByName(0, "g_txSceneColor");
+		{
+			m_technique = m_d3dx_effect->GetTechniqueByName("PostProcess");
+			m_src_texture_handle = m_d3dx_effect->GetParameterByName(0, "g_txSrcColor");
+			m_dest_texture_handle = m_d3dx_effect->GetParameterByName(0, "g_txSceneColor");
 		}
 		return true;
 	}
 
-	bool d3d9_effect_pp_combine_dof::set_src_texture( ULONG_PTR ht )
+	bool d3d9_effect_pp_combine_dof::set_src_texture(ULONG_PTR ht)
 	{
-		m_d3dx_effect->SetTexture( m_src_texture_handle, (LPDIRECT3DBASETEXTURE9)ht );
+		m_d3dx_effect->SetTexture(m_src_texture_handle, (LPDIRECT3DBASETEXTURE9)ht);
 		return true;
 	}
 
-	bool d3d9_effect_pp_combine_dof::set_dest_texture( ULONG_PTR ht )
+	bool d3d9_effect_pp_combine_dof::set_dest_texture(ULONG_PTR ht)
 	{
-		m_d3dx_effect->SetTexture( m_dest_texture_handle, (LPDIRECT3DBASETEXTURE9)ht );
+		m_d3dx_effect->SetTexture(m_dest_texture_handle, (LPDIRECT3DBASETEXTURE9)ht);
 		return true;
 	}
 
-	
+
 }

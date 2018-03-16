@@ -14,41 +14,46 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_render_object_line_flake.h"
-
+#include <usGfx/us_d3d9_effect_render_object_line_flake.h>
+#include <usGfx/us_d3d9_effect_manager.h>
+#include <usCore/us_render_state.h>
+#include <usCore/us_render_argument.h>
+#include <usCore/us_render_device.h>
+#include <usUtil/us_cartesian_coords.h>
 namespace uniscope_globe
 {
-	render_object_line_flake::render_object_line_flake( void )
+	render_object_line_flake::render_object_line_flake(void)
 	{
 		m_trans_matrix = matrix_4d::s_identity;
 		m_collapse_matrix = matrix_4d::s_identity;
 		m_depth_enable = false;
 	}
 
-	render_object_line_flake::~render_object_line_flake( void )
+	render_object_line_flake::~render_object_line_flake(void)
 	{
 		m_vertex_array.clear();
 	}
 
-	render_object_line_flake* render_object_line_flake::create_shared_instance( void )
+	render_object_line_flake* render_object_line_flake::create_shared_instance(void)
 	{
 		render_object_line_flake* v_geometry = new render_object_line_flake();
 		v_geometry->add_ref();
 		return v_geometry;
 	}
 
-	void render_object_line_flake::draw( render_argument* args )
+	void render_object_line_flake::draw(render_argument* args)
 	{
 		ulong vertices_count = m_vertex_array.size();
-		if ( vertices_count < 2 )
+		if (vertices_count < 2)
 			return;
 
-		render_state rs( args->m_device );
+		render_state rs(args->m_device);
 		rs.set_state(D3DRS_CULLMODE, D3DCULL_NONE);
-		if( !m_depth_enable )
+		if (!m_depth_enable)
 		{
-			rs.set_state(D3DRS_ZFUNC, D3DCMP_ALWAYS);	
+			rs.set_state(D3DRS_ZFUNC, D3DCMP_ALWAYS);
 		}
 
 
@@ -56,7 +61,7 @@ namespace uniscope_globe
 		v_world_mat_d.m41 = v_world_mat_d.m41 - cartesian_coords::s_reference_position_geo.x;
 		v_world_mat_d.m42 = v_world_mat_d.m42 - cartesian_coords::s_reference_position_geo.y;
 		v_world_mat_d.m43 = v_world_mat_d.m43 - cartesian_coords::s_reference_position_geo.z;
-		matrix_4f v_world_mat( (double*)(&v_world_mat_d) );
+		matrix_4f v_world_mat((double*)(&v_world_mat_d));
 
 		view_port v_view_port = args->m_device->get_view_port();
 
@@ -67,19 +72,19 @@ namespace uniscope_globe
 
 		args->m_device->set_vertex_declaration(position_normal_color::fvf);
 		d3d9_effect_render_object_line_flake* v_render = (d3d9_effect_render_object_line_flake*)args->m_device->get_effect(US_EFFECT_GEOMETRY_LINE_FLAKE);
-		if ( v_render == NULL )
+		if (v_render == NULL)
 			return;
 
 		v_render->set_technique();
-		v_render->begin(NULL,NULL);
+		v_render->begin(NULL, NULL);
 		{
 			v_render->begin_pass(0);
-			v_render->set_transform(v_world_mat * v_mat_view_project);	
+			v_render->set_transform(v_world_mat * v_mat_view_project);
 			v_render->set_view_proj_matrix(v_mat_view_project);
 			v_render->set_line_param(v_view_port.m_width, v_view_port.m_height, m_line_width);
 			//v_render->set_line_color()
 			v_render->commit_changes();
-			args->m_device->draw_triangle_strip( (void*)&m_vertex_array[0], vertices_count , sizeof(position_normal_color) );
+			args->m_device->draw_triangle_strip((void*)&m_vertex_array[0], vertices_count, sizeof(position_normal_color));
 			v_render->end_pass();
 		}
 		v_render->end();
@@ -483,5 +488,5 @@ namespace uniscope_globe
 	//}
 
 
-	
+
 }

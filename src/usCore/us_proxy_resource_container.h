@@ -19,9 +19,12 @@
 
 #include <usCore\Export.h>
 #include <usCore\us_resource_container.h>
+#include <usCore\us_square_buffer.h>
 
 namespace uniscope_globe
 {
+	class filter_base;
+
 	template<typename KEY>
 	class proxy_resource_container : public resource_container<KEY>
 	{

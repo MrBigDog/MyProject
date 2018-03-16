@@ -17,9 +17,12 @@
 #ifndef _US_D3D9_RENDER_TARGET_SHADOW_MAP_H_
 #define _US_D3D9_RENDER_TARGET_SHADOW_MAP_H_
 
+#include <usGfx/Export.h>
+//#include <usUtil/us_common_file.h>
+
 namespace uniscope_globe
 {
-	class d3d9_render_target_shadow_map
+	class USGFX_EXPORT d3d9_render_target_shadow_map
 	{
 	public:
 		d3d9_render_target_shadow_map( void );

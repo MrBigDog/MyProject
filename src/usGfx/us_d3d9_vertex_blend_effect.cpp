@@ -13,9 +13,10 @@
 //	Reference : Book "Advanced Animation With DirectX"
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_d3d9_vertex_blend_effect.h"
 #include "resource.h"
+#include <usCore/us_hardware_texture.h>
 
 namespace uniscope_globe
 {

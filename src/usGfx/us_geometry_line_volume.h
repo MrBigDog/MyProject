@@ -16,53 +16,58 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_GEOMETRY_LINE_VOLUME_H_
 #define _US_GEOMETRY_LINE_VOLUME_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+#include <usCore/us_render_object.h>
+#include <usCore/us_intersect_base.h>
+#include <usCore/us_shadow_volume_creator.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
 	class geometry_factory;
 
-	class LIB_GFX_API geometry_line_volume
+	class USGFX_EXPORT geometry_line_volume
 		: public render_object
 		, public shadow_volume_creator
 		, public intersect_base
 	{
 	public:
-		geometry_line_volume( void );
+		geometry_line_volume(void);
 
-		virtual ~geometry_line_volume( void );
+		virtual ~geometry_line_volume(void);
 
 		friend class geometry_line_factory;
 
 	public:
-		static geometry_line_volume* create_shared_instance( void );
+		static geometry_line_volume* create_shared_instance(void);
 		// override from render_object
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
 		// override from shadow_volume_creator
 	public:
-		virtual render_object* get_shadow_object( void ) { return this;  }
+		virtual render_object* get_shadow_object(void) { return this; }
 
-		virtual int get_pass1( void ) { return 5; }
+		virtual int get_pass1(void) { return 5; }
 
-		virtual int get_pass2( void ) { return 3; }
+		virtual int get_pass2(void) { return 3; }
 
 		// override from intersect_base
 	public:
-		virtual bool intersect( const ray<double>& a_ray, intersect_result& result );
+		virtual bool intersect(const ray<double>& a_ray, intersect_result& result);
 
 	public:
-		virtual void set_world_matrix( matrix4<double>& mat ) { m_trans_matrix = mat; }
+		virtual void set_world_matrix(matrix4<double>& mat) { m_trans_matrix = mat; }
 
-		virtual void set_collapse_matrix( matrix_4d& mat ) { m_collapse_matrix = m_collapse_matrix * mat; }
+		virtual void set_collapse_matrix(matrix_4d& mat) { m_collapse_matrix = m_collapse_matrix * mat; }
 
-		virtual void set_line_width( float line_width ) { m_line_width = line_width; }
+		virtual void set_line_width(float line_width) { m_line_width = line_width; }
 
-		virtual float get_line_width( void ) { return m_line_width; }
+		virtual float get_line_width(void) { return m_line_width; }
 
-		virtual void set_line_color( ulong line_color ) { m_line_color = line_color;}
+		virtual void set_line_color(ulong line_color) { m_line_color = line_color; }
 
-		virtual ulong get_line_color( void ) { return m_line_color; }
+		virtual ulong get_line_color(void) { return m_line_color; }
 
 	public:
 		void clear();

@@ -13,9 +13,9 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_d3d9_effect_common_mesh_fp.h"
-
+#include <usCore/us_render_device.h>
 namespace uniscope_globe
 {
 	d3d9_effect_common_mesh_fp::d3d9_effect_common_mesh_fp( render_device* device )

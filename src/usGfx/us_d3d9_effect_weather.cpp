@@ -1,7 +1,7 @@
 
 // us_d3d9_effect_weather.cpp
 
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_d3d9_effect_weather.h"
 
 namespace uniscope_globe

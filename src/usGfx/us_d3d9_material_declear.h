@@ -15,6 +15,13 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_MATERIAL_DECLEAR_H_
 #define _US_D3D9_MATERIAL_DECLEAR_H_
+#include <usGfx/Export.h>
+#include <usCore/us_extended_material.h>
+#include <usCore/us_render_argument.h>
+#include <usCore/us_resource_container.h>
+#include <usUtil/us_common_file.h>
+
+#include <windows.h>
 
 namespace uniscope_globe
 {
@@ -74,6 +81,8 @@ namespace uniscope_globe
 		}
 	};
 	typedef std::vector<material_index_entry> material_index_entry_array;
+
+	class hardware_texture;
 
 	struct render_texture_entry
 	{

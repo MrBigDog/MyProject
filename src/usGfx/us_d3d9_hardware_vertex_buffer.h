@@ -16,18 +16,26 @@
 #ifndef _US_D3D9_HARDWARE_VERTEX_BUFFER_H_
 #define _US_D3D9_HARDWARE_VERTEX_BUFFER_H_
 
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
+
+#include <d3d9.h>
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_hardware_vertex_buffer
+	class render_device;
+	class raw_buffer;
+
+	class USGFX_EXPORT d3d9_hardware_vertex_buffer
 	{
 	public:
-		d3d9_hardware_vertex_buffer( void );
+		d3d9_hardware_vertex_buffer(void);
 
-		virtual ~d3d9_hardware_vertex_buffer( void );
+		virtual ~d3d9_hardware_vertex_buffer(void);
 
-		virtual bool create( render_device* device, raw_buffer* vertices_buffer, ulong fvf );
+		virtual bool create(render_device* device, raw_buffer* vertices_buffer, ulong fvf);
 
-		virtual void* data( void );
+		virtual void* data(void);
 
 	protected:
 		LPDIRECT3DVERTEXBUFFER9	m_vertex_buffer;

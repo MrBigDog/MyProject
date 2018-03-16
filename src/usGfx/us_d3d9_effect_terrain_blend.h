@@ -15,28 +15,33 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_EFFECT_TERRAIN_BLEND_H_
 #define _US_D3D9_EFFECT_TERRAIN_BLEND_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_effect_base.h>
+#include <usUtil/us_matrix4.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_effect_terrain_blend : public d3d9_effect_base
+	class hardware_texture;
+
+	class USGFX_EXPORT d3d9_effect_terrain_blend : public d3d9_effect_base
 	{
 	protected:
-		d3d9_effect_terrain_blend(void){}
+		d3d9_effect_terrain_blend(void) {}
 
 	public:
-		d3d9_effect_terrain_blend(render_device* device);		
+		d3d9_effect_terrain_blend(render_device* device);
 
-		virtual ~d3d9_effect_terrain_blend( void );
+		virtual ~d3d9_effect_terrain_blend(void);
 
 	public:
-		bool set_transform( const matrix4<float>& wvp );
+		bool set_transform(const matrix4<float>& wvp);
 
-		bool set_texture_transform( const matrix4<float>& tm );
+		bool set_texture_transform(const matrix4<float>& tm);
 
-		bool set_texture( hardware_texture* ht );
+		bool set_texture(hardware_texture* ht);
 
 	protected:
-		virtual bool setup_handle( void );
+		virtual bool setup_handle(void);
 
 	protected:
 		D3DXHANDLE		m_transform_handle;
@@ -44,7 +49,7 @@ namespace uniscope_globe
 		D3DXHANDLE		m_texture_transform_handle;
 
 		D3DXHANDLE		m_texture_handle;
-		 
+
 	};
 }
 

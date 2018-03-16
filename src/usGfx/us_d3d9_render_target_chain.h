@@ -16,45 +16,54 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_RENDER_TARGET_CHAIN_H_
 #define _US_D3D9_RENDER_TARGET_CHAIN_H_
+#include <usGfx/Export.h>
+#include <usCore/us_render_target.h>
+#include <usUtil/us_common_file.h>
+
+#include <d3d9.h>
+
+#include <vector>
 
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_render_target_chain
+	class render_device;
+
+	class USGFX_EXPORT d3d9_render_target_chain
 		: public render_target
 	{
 	protected:
-		d3d9_render_target_chain( void ) {}
+		d3d9_render_target_chain(void) {}
 
 	public:
-		d3d9_render_target_chain( render_device* rd );
+		d3d9_render_target_chain(render_device* rd);
 
-		virtual ~d3d9_render_target_chain( void );
+		virtual ~d3d9_render_target_chain(void);
 
 	public:
-		bool create( uint width, uint height, int format, int multi_sample_type, ulong multi_sample_quality, bool lockable = false );
+		bool create(uint width, uint height, int format, int multi_sample_type, ulong multi_sample_quality, bool lockable = false);
 
 		//bool create_offline( uint width, uint height, int format, int multi_sample_type, ulong multi_sample_quality, bool lockable );
 
-		void destroy( void );
+		void destroy(void);
 
 	public:
-		virtual void on_lost_device( event_argument* args );
+		virtual void on_lost_device(event_argument* args);
 
-		virtual void on_reset_device( event_argument* args );
+		virtual void on_reset_device(event_argument* args);
 
-		virtual void begin( void );
+		virtual void begin(void);
 
-		virtual void end( void );
+		virtual void end(void);
 
-		virtual ULONG_PTR get_texture( void );
+		virtual ULONG_PTR get_texture(void);
 
-		virtual void draw_texture( int stage );
+		virtual void draw_texture(int stage);
 
 		//virtual void save_file( cpstr str_path, int width, int height );
 
-		virtual void flip( void );
+		virtual void flip(void);
 
-		virtual	void set_render_target( int n_stage );
+		virtual	void set_render_target(int n_stage);
 
 	public:
 		std::vector<LPDIRECT3DTEXTURE9>		m_texture_array;

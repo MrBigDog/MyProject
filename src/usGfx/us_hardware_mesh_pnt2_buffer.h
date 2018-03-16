@@ -15,7 +15,8 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_HARDWARE_MESH_PNT2_BUFFER_H_
 #define _US_HARDWARE_MESH_PNT2_BUFFER_H_
-
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {		
 	class degenerate_quad

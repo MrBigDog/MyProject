@@ -16,32 +16,40 @@
 #ifndef _US_D3D9_EFFECT_BASE_H_
 #define _US_D3D9_EFFECT_BASE_H_
 
+
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
+#include <usCore/us_render_effect.h>
+
+#include <d3dx9effect.h>
+#include <d3dx9shader.h>
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_effect_base : public render_effect
+	class USGFX_EXPORT d3d9_effect_base : public render_effect
 	{
 	protected:
-		d3d9_effect_base(void){}
+		d3d9_effect_base(void) {}
 
 	public:
-		d3d9_effect_base( render_device* rd );
+		d3d9_effect_base(render_device* rd);
 
-		virtual ~d3d9_effect_base( void );
+		virtual ~d3d9_effect_base(void);
 
 	public:
 		virtual bool load_from_file(const LPCTSTR technique_file);
 
-		virtual bool load_from_module_resource( ULONG_PTR resource_handle );
+		virtual bool load_from_module_resource(ULONG_PTR resource_handle);
 
-		virtual long on_lost_device( void );
+		virtual long on_lost_device(void);
 
-		virtual long on_reset_device( void );
+		virtual long on_reset_device(void);
 
-		virtual bool begin( uint* pass, ulong flags );
+		virtual bool begin(uint* pass, ulong flags);
 
-		virtual bool end( void );
+		virtual bool end(void);
 
-		virtual bool begin_pass( uint pass );
+		virtual bool begin_pass(uint pass);
 
 		virtual bool end_pass(void);
 
@@ -50,13 +58,13 @@ namespace uniscope_globe
 		virtual bool commit_changes(void);
 
 	protected:
-		virtual bool setup_handle( void );
+		virtual bool setup_handle(void);
 
 	protected:
 		ID3DXEffect*	m_d3dx_effect;
 
 		D3DXHANDLE		m_technique;
-		 
+
 	};
 }
 

@@ -15,38 +15,45 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_GEOMETRY_BILLBOARD_H_
 #define _US_GEOMETRY_BILLBOARD_H_
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+#include <usCore/us_render_object.h>
+#include <usCore/us_intersect_base.h>
+#include <usUtil/us_common_file.h>
 
 namespace uniscope_globe
 {
-	class LIB_GFX_API geometry_billboard
+	class hardware_texture;
+
+	class USGFX_EXPORT geometry_billboard
 		: public render_object
 		, public intersect_base
 	{
 	public:
-		geometry_billboard( void );
+		geometry_billboard(void);
 
-		virtual ~geometry_billboard( void );
+		virtual ~geometry_billboard(void);
 
 		// override from render_object
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
 	public:
-		void set_matrix( matrix_4d& mat );
+		void set_matrix(matrix_4d& mat);
 
-		void set_texture( hardware_texture* v_texture );
+		void set_texture(hardware_texture* v_texture);
 
-		void set_alpha_blend( bool v_alpha_blend )
+		void set_alpha_blend(bool v_alpha_blend)
 		{
 			m_alpha_blend = v_alpha_blend;
 		}
 
 	public:
 		// 创建一个billboard
-		void create_billboard( int bb_type, vector_3d v_locate, double v_width, double v_height );
+		void create_billboard(int bb_type, vector_3d v_locate, double v_width, double v_height);
 
 	public:
-		virtual bool intersect( const ray<double>& a_ray, intersect_result& result );
+		virtual bool intersect(const ray<double>& a_ray, intersect_result& result);
 
 	protected:
 		std::vector<position_texture> m_vertex_array;
@@ -60,7 +67,7 @@ namespace uniscope_globe
 		hardware_texture*			m_texture;
 
 		bool						m_alpha_blend;
-		 
+
 	};
 }
 

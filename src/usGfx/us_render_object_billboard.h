@@ -15,32 +15,37 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RENDER_OBJECT_BILLBOARD_H_
 #define _US_RENDER_OBJECT_BILLBOARD_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+#include <usCore/us_render_object.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API render_object_billboard
+	class hardware_texture;
+
+	class USGFX_EXPORT render_object_billboard
 		: public render_object
 	{
 	public:
-		render_object_billboard( void );
+		render_object_billboard(void);
 
-		virtual ~render_object_billboard( void );
+		virtual ~render_object_billboard(void);
 
 		// override from render_object
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
 	public:
-		void set_matrix( matrix_4d& mat );
+		void set_matrix(matrix_4d& mat);
 
-		void set_texture( hardware_texture* v_texture );
+		void set_texture(hardware_texture* v_texture);
 
 	public:
 		// 创建一个billboard
-		void create_billboard( int bb_type, vector_3d v_locate, double v_width, double v_height );
+		void create_billboard(int bb_type, vector_3d v_locate, double v_width, double v_height);
 
 	public:
-		virtual bool intersect( const ray<double>& a_ray, intersect_result& result );
+		virtual bool intersect(const ray<double>& a_ray, intersect_result& result);
 
 	protected:
 		std::vector<position_texture> m_vertex_array;
@@ -49,7 +54,7 @@ namespace uniscope_globe
 
 		vector_3d					m_center;
 
-		hardware_texture*			m_texture;		 
+		hardware_texture*			m_texture;
 	};
 }
 

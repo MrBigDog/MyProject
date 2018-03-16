@@ -15,30 +15,34 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_PACKET_TAKER_H_
 #define _US_PACKET_TAKER_H_
+#include <usGfx/Export.h>
+#include <usGfx/us_socket_client.h>
+#include <usGfx/us_network_argument.h>
 
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API packet_taker
+	class USGFX_EXPORT packet_taker
 	{
 	public:
-		packet_taker( void );
+		packet_taker(void);
 
-		virtual ~packet_taker( void );
+		virtual ~packet_taker(void);
 
 	public:
-		bool take( const packet& pck, network_argument& args );
+		bool take(const packet& pck, network_argument& args);
 
 	private:
-		bool case_login( const packet& pck, network_argument& args );
+		bool case_login(const packet& pck, network_argument& args);
 
-		bool case_logout( const packet& pck, network_argument& args );
+		bool case_logout(const packet& pck, network_argument& args);
 
-		bool case_enter( const packet& pck, network_argument& args );
+		bool case_enter(const packet& pck, network_argument& args);
 
-		bool case_leave( const packet& pck, network_argument& args );
+		bool case_leave(const packet& pck, network_argument& args);
 
-		bool case_change( const packet& pck, network_argument& args );
-		 
+		bool case_change(const packet& pck, network_argument& args);
+
 	};
 }
 

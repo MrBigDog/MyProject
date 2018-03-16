@@ -16,12 +16,21 @@
 #ifndef _US_BUILDING_USD_BUFFER_H_
 #define _US_BUILDING_USD_BUFFER_H_
 
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
+#include <usUtil/us_raw_buffer.h>
+#include <usUtil/us_object_base.h>
+#include <usUtil/us_vector3.h>
+#include <usUtil/us_axis_aligned_box.h>
+
+#include <usDotx/us_usc_declaration.h>
+
 namespace uniscope_globe
 {
 	struct indice_data
 	{
 		ushort a, b, c;
-		indice_data( ushort v_a = 0, short v_b = 0, short v_c = 0 )
+		indice_data(ushort v_a = 0, short v_b = 0, short v_c = 0)
 		{
 			a = v_a;
 			b = v_b;
@@ -35,7 +44,7 @@ namespace uniscope_globe
 		interior_index m_self_illuminant;
 		interior_index m_specular;
 		interior_index m_bump;
-		texture_index( void )
+		texture_index(void)
 		{
 			m_diffuse = 0;
 			m_self_illuminant = 0;
@@ -50,54 +59,57 @@ namespace uniscope_globe
 #define US_MESH_ALPHA_BLEND		0x0002
 
 
-	class LIB_GFX_API building_create_buffer : public raw_buffer
+	class USGFX_EXPORT building_create_buffer : public raw_buffer
 	{
 	protected:
-		building_create_buffer(){}
+		building_create_buffer() {}
 
 	public:
-		building_create_buffer( byte* p_data, int data_size )
-			: raw_buffer(p_data,data_size)
+		building_create_buffer(byte* p_data, int data_size)
+			: raw_buffer(p_data, data_size)
 		{
 
 		}
 
-		~building_create_buffer(){}
+		~building_create_buffer() {}
 
 	public:
 		double m_height;
 	};
 
+	class usx_material;
+	class position_color;
+	class material_set;
 
-	class LIB_GFX_API building_usd_buffer
+	class USGFX_EXPORT building_usd_buffer
 		: public object_base
 	{
 	protected:
-		building_usd_buffer( void ){}
+		building_usd_buffer(void) {}
 
 	public:
-		building_usd_buffer( raw_buffer* v_stream );
+		building_usd_buffer(raw_buffer* v_stream);
 
-		virtual ~building_usd_buffer( void );
+		virtual ~building_usd_buffer(void);
 
 		typedef std::vector<usx_material*> bldg_material_array;
 
 	protected:
-		bool parse_raw_buffer( raw_buffer* v_stream );
-		bool read_vertex( raw_buffer* v_stream );
-		bool read_indice( raw_buffer* v_stream );
-		bool read_aabb( raw_buffer* v_stream );
-		bool read_material( raw_buffer* v_stream );
-		bool read_figure( raw_buffer* v_stream );
-		bool read_topologic( raw_buffer* v_stream );
-		void* get_vertex_buffer( usc_vertex_head& vert_head );
-		face_normal	create_normal_f( vector_3f& vec0, vector_3f& vec1, vector_3f& vec2 );
+		bool parse_raw_buffer(raw_buffer* v_stream);
+		bool read_vertex(raw_buffer* v_stream);
+		bool read_indice(raw_buffer* v_stream);
+		bool read_aabb(raw_buffer* v_stream);
+		bool read_material(raw_buffer* v_stream);
+		bool read_figure(raw_buffer* v_stream);
+		bool read_topologic(raw_buffer* v_stream);
+		void* get_vertex_buffer(usc_vertex_head& vert_head);
+		face_normal	create_normal_f(vector_3f& vec0, vector_3f& vec1, vector_3f& vec2);
 
 	public:
-		virtual bool generate_topological( void );
-		virtual bool generate_normals( void );
-		virtual bool generate_mesh( void ) { return true; }
-		
+		virtual bool generate_topological(void);
+		virtual bool generate_normals(void);
+		virtual bool generate_mesh(void) { return true; }
+
 	public:
 		wstring				m_file_name;
 		wstring				m_name;

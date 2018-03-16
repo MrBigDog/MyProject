@@ -1,5 +1,6 @@
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "us_d3d9_effect_flow_direction.h"
+#include <usGfx/resource.h>
 
 namespace uniscope_globe
 {

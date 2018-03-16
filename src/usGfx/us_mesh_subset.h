@@ -17,17 +17,28 @@
 #ifndef _US_MESH_SUBSET_H_
 #define _US_MESH_SUBSET_H_
 
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_hardware_mesh_buffer.h>
+#include <usCore/us_event_argument.h>
+#include <usUtil/us_matrix4.h>
+#include <usUtil/us_common_file.h>
+#include <usCore/us_spatial_object.h>
+#include <usCore/us_editable_object.h>
+#include <usCore/us_shared_data.h>
+
 namespace uniscope_globe
 {
-	class material_changed_argument : public event_argument
+	struct material_entry;
+
+	class USGFX_EXPORT material_changed_argument : public event_argument
 	{
 	public:
-		material_changed_argument( void )
+		material_changed_argument(void)
 		{
 			m_material_entry = NULL;
 		}
 
-		material_changed_argument( material_entry* v_entry )
+		material_changed_argument(material_entry* v_entry)
 		{
 			m_material_entry = v_entry;
 		}
@@ -41,39 +52,42 @@ namespace uniscope_globe
 		material_entry* m_material_entry;
 	};
 
-	class mesh_subset
+	class render_argument;
+	class document_base;
+
+	class USGFX_EXPORT mesh_subset
 		: public d3d9_hardware_mesh_buffer
 		, public spatial_object
 		, public editable_object
 		, public shared_data
 	{
 	public:
-		mesh_subset( void );
+		mesh_subset(void);
 
-		virtual ~mesh_subset( void );
-
-	public:
-		virtual void initialize( document_base* v_doc ) {}
-
-		virtual void draw( render_argument* args );
-
-		virtual vector_3f get_center( void ){ return m_center; }
-
-		virtual d3d9_hardware_mesh_buffer* get_parent_mesh_buffer( void ){ return m_parent_mesh_buffer; }
-
-		virtual void set_parent_mesh_buffer( d3d9_hardware_mesh_buffer* v_parent_mesh_buffer ){ m_parent_mesh_buffer = v_parent_mesh_buffer; }
-
-		virtual int get_material_index( void ) { return m_material_index; }	
-
-		virtual material_entry* get_material_entry( void );
+		virtual ~mesh_subset(void);
 
 	public:
-		virtual void translate_object( vector_3d& vec_offset_cart );
+		virtual void initialize(document_base* v_doc) {}
 
-		virtual void transform_uv( matrix_4f& mat_uv );
+		virtual void draw(render_argument* args);
+
+		virtual vector_3f get_center(void) { return m_center; }
+
+		virtual d3d9_hardware_mesh_buffer* get_parent_mesh_buffer(void) { return m_parent_mesh_buffer; }
+
+		virtual void set_parent_mesh_buffer(d3d9_hardware_mesh_buffer* v_parent_mesh_buffer) { m_parent_mesh_buffer = v_parent_mesh_buffer; }
+
+		virtual int get_material_index(void) { return m_material_index; }
+
+		virtual material_entry* get_material_entry(void);
+
+	public:
+		virtual void translate_object(vector_3d& vec_offset_cart);
+
+		virtual void transform_uv(matrix_4f& mat_uv);
 
 	protected:
-		virtual void update_center( void );
+		virtual void update_center(void);
 
 	public:
 		std::vector<ulong>				m_face_index_array;
@@ -84,8 +98,8 @@ namespace uniscope_globe
 		d3d9_hardware_mesh_buffer*		m_parent_mesh_buffer;
 
 		uint							m_material_index;
-	
-		vector_3f						m_center; 
+
+		vector_3f						m_center;
 	};
 }
 

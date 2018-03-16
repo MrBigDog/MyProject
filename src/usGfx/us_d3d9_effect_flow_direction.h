@@ -1,9 +1,12 @@
 #pragma once
-//#include "stdafx.h"
-
+////#include "stdafx.h"
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_effect_base.h>
+#include <usUtil/us_matrix4.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class d3d9_effect_flow_direction :
+	class USGFX_EXPORT d3d9_effect_flow_direction :
 		public d3d9_effect_base
 	{
 	public:

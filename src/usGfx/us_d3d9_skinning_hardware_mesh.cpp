@@ -13,8 +13,15 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_d3d9_skinning_hardware_mesh.h"
+#include <usGfx/us_d3d9_render_device_impl.h>
+#include <usGfx/us_d3d9_effect_vertex_blend.h>
+#include <usCore/us_render_device.h>
+#include <usUtil/us_file_directory.h>
+#include <usCore/us_frame_counter.h>
+#include <usDotx/us_usx_frame.h>
+#include <usCore/us_hardware_texture.h>
 
 namespace uniscope_globe
 {
@@ -26,18 +33,18 @@ namespace uniscope_globe
 
 		m_num_of_bones = 0;
 
-		m_frame_array.resize( 48 );
-		memset( (void*)&m_frame_array[0], 0, 48 * 4 );
+		m_frame_array.resize(48);
+		memset((void*)&m_frame_array[0], 0, 48 * 4);
 
 		m_final_matrix_array.resize(48);
-		memset( (void*)&m_final_matrix_array[0], 0, 48 * sizeof(matrix4<float>) );
+		memset((void*)&m_final_matrix_array[0], 0, 48 * sizeof(matrix4<float>));
 
-		m_offset_matrix_array.resize( 48 );
-		memset( (void*)&m_offset_matrix_array[0], 0, 48 * sizeof(matrix4<double>) );
+		m_offset_matrix_array.resize(48);
+		memset((void*)&m_offset_matrix_array[0], 0, 48 * sizeof(matrix4<double>));
 
 		//
-		m_original_matrix_array.resize( 48 );
-		memset( (void*)&m_original_matrix_array[0], 0, 48 * sizeof(matrix4<float>) );		
+		m_original_matrix_array.resize(48);
+		memset((void*)&m_original_matrix_array[0], 0, 48 * sizeof(matrix4<float>));
 	}
 
 	//d3d9_skinning_hardware_mesh::d3d9_skinning_hardware_mesh( d3d9_hardware_mesh_buffer* in_buffer )
@@ -58,43 +65,43 @@ namespace uniscope_globe
 	//	m_final_matrix_array.resize( m_offset_matrix_array.size() );
 	//}
 
-	d3d9_skinning_hardware_mesh::~d3d9_skinning_hardware_mesh( void )
+	d3d9_skinning_hardware_mesh::~d3d9_skinning_hardware_mesh(void)
 	{
 
 	}
 
-	hardware_mesh* d3d9_skinning_hardware_mesh::clone( void )
+	hardware_mesh* d3d9_skinning_hardware_mesh::clone(void)
 	{
 		d3d9_skinning_hardware_mesh* v_new_mesh = new d3d9_skinning_hardware_mesh();
 
-		v_new_mesh->copy_buffer_from( this );
+		v_new_mesh->copy_buffer_from(this);
 
-		v_new_mesh->m_root_frame		= this->m_root_frame->clone();
-		v_new_mesh->m_num_of_bones		= this->m_num_of_bones;
+		v_new_mesh->m_root_frame = this->m_root_frame->clone();
+		v_new_mesh->m_num_of_bones = this->m_num_of_bones;
 
-		v_new_mesh->m_frame_array.resize( 48 );
-		memset( &v_new_mesh->m_frame_array[0], 0, 48 * 4 );
+		v_new_mesh->m_frame_array.resize(48);
+		memset(&v_new_mesh->m_frame_array[0], 0, 48 * 4);
 
-		for ( int i = 0; i < this->m_frame_array.size(); i++ )
+		for (int i = 0; i < this->m_frame_array.size(); i++)
 		{
-			v_new_mesh->m_frame_array[i] = v_new_mesh->m_root_frame->find_frame( this->m_frame_array[i]->m_name.c_str() );
+			v_new_mesh->m_frame_array[i] = v_new_mesh->m_root_frame->find_frame(this->m_frame_array[i]->m_name.c_str());
 		}
 
-		v_new_mesh->m_original_matrix_array.resize( 48 );
-		memset( &v_new_mesh->m_original_matrix_array[0], 0, 48 * sizeof( matrix4<float> ) );
+		v_new_mesh->m_original_matrix_array.resize(48);
+		memset(&v_new_mesh->m_original_matrix_array[0], 0, 48 * sizeof(matrix4<float>));
 
-		v_new_mesh->m_offset_matrix_array.resize( 48 );
-		memset( &v_new_mesh->m_offset_matrix_array[0], 0, 48 * sizeof( matrix4<double> ) );
-		
+		v_new_mesh->m_offset_matrix_array.resize(48);
+		memset(&v_new_mesh->m_offset_matrix_array[0], 0, 48 * sizeof(matrix4<double>));
+
 		v_new_mesh->m_original_matrix_array = this->m_original_matrix_array;
-		v_new_mesh->m_offset_matrix_array   = this->m_offset_matrix_array;
+		v_new_mesh->m_offset_matrix_array = this->m_offset_matrix_array;
 
 		return NULL;
 	}
 
-	long d3d9_skinning_hardware_mesh::create( render_device* in_device )
+	long d3d9_skinning_hardware_mesh::create(render_device* in_device)
 	{
-		if ( m_valid )
+		if (m_valid)
 			return 0;
 
 		d3d9_hardware_mesh_buffer* v_buffer = dynamic_cast<d3d9_hardware_mesh_buffer*>(this);
@@ -111,43 +118,43 @@ namespace uniscope_globe
 		//	D3DDECL_END()
 		//};
 
-		HRESULT hr = D3DXCreateMeshFVF(	v_buffer->m_num_of_triangles,
-										v_buffer->m_num_of_vertices,
-										D3DXMESH_MANAGED | (v_buffer->m_32bit_index?D3DXMESH_32BIT:0x000),
-										v_buffer->m_fvf,
-										(LPDIRECT3DDEVICE9)in_device->get_device(),
-										&m_d3d_mesh );
+		HRESULT hr = D3DXCreateMeshFVF(v_buffer->m_num_of_triangles,
+			v_buffer->m_num_of_vertices,
+			D3DXMESH_MANAGED | (v_buffer->m_32bit_index ? D3DXMESH_32BIT : 0x000),
+			v_buffer->m_fvf,
+			(LPDIRECT3DDEVICE9)in_device->get_device(),
+			&m_d3d_mesh);
 
 		m_mem_size = 0;
 
 		//vertex
 		void* v_vertices = NULL;
-		hr = m_d3d_mesh->LockVertexBuffer( 0, (void**)&v_vertices );
+		hr = m_d3d_mesh->LockVertexBuffer(0, (void**)&v_vertices);
 		{
-			memcpy( (byte*)v_vertices, v_buffer->m_vertex_buffer, v_buffer->m_vertex_buffer_size );			
+			memcpy((byte*)v_vertices, v_buffer->m_vertex_buffer, v_buffer->m_vertex_buffer_size);
 		}
 		hr = m_d3d_mesh->UnlockVertexBuffer();
 		m_mem_size += v_buffer->m_vertex_buffer_size;
 
 		void* v_indices = NULL;
-		hr = m_d3d_mesh->LockIndexBuffer( 0, (void**)&v_indices );
+		hr = m_d3d_mesh->LockIndexBuffer(0, (void**)&v_indices);
 		{
-			memcpy( (byte*)v_indices, v_buffer->m_index_buffer, v_buffer->m_index_buffer_size );			
+			memcpy((byte*)v_indices, v_buffer->m_index_buffer, v_buffer->m_index_buffer_size);
 		}
 		hr = m_d3d_mesh->UnlockIndexBuffer();
 		m_mem_size += v_buffer->m_index_buffer_size;
 
 
 		DWORD* v_attribute;
-		hr = m_d3d_mesh->LockAttributeBuffer( 0, &v_attribute );
+		hr = m_d3d_mesh->LockAttributeBuffer(0, &v_attribute);
 		{
-			memcpy( (byte*)v_attribute, v_buffer->m_attribute_buffer, v_buffer->m_attribute_buffer_size );
+			memcpy((byte*)v_attribute, v_buffer->m_attribute_buffer, v_buffer->m_attribute_buffer_size);
 		}
 		hr = m_d3d_mesh->UnlockAttributeBuffer();
 
 		m_mem_size += v_buffer->m_attribute_buffer_size;
 
-		m_d3d_mesh->OptimizeInplace( D3DXMESHOPT_COMPACT | D3DXMESHOPT_ATTRSORT, NULL, NULL, NULL, NULL );
+		m_d3d_mesh->OptimizeInplace(D3DXMESHOPT_COMPACT | D3DXMESHOPT_ATTRSORT, NULL, NULL, NULL, NULL);
 
 		//update_bound_box();
 
@@ -158,13 +165,13 @@ namespace uniscope_globe
 		return m_mem_size;
 	}
 
-	void d3d9_skinning_hardware_mesh::draw( render_argument* args )
+	void d3d9_skinning_hardware_mesh::draw(render_argument* args)
 	{
 		// 更新矩阵列表		
-		for ( int i = 0; i < (int)m_num_of_bones; i ++ )
+		for (int i = 0; i < (int)m_num_of_bones; i++)
 		{
 			//m_final_matrix_array[i] = matrix4<double>::s_identity;
-			m_final_matrix_array[i] = matrix4<float>( ( m_offset_matrix_array[i] * m_frame_array[i]->m_combined_mat ).m ) ;
+			m_final_matrix_array[i] = matrix4<float>((m_offset_matrix_array[i] * m_frame_array[i]->m_combined_mat).m);
 		}
 
 		//////////////////////////////////////////////////////////////////////////
@@ -176,7 +183,7 @@ namespace uniscope_globe
 		LPDIRECT3DDEVICE9 d3d_device = (LPDIRECT3DDEVICE9) device->get_device();
 
 		// clone mesh
-		D3DVERTEXELEMENT9 decl[] = 
+		D3DVERTEXELEMENT9 decl[] =
 		{
 			{ 0, 0,     D3DDECLTYPE_FLOAT3,     D3DDECLMETHOD_DEFAULT,  D3DDECLUSAGE_POSITION,  0 },
 			{ 0, 3*4,   D3DDECLTYPE_FLOAT4,     D3DDECLMETHOD_DEFAULT,  D3DDECLUSAGE_BLENDWEIGHT,    0 },
@@ -207,7 +214,7 @@ namespace uniscope_globe
 				float weight = v_vertex_buffer[ti].weight[bi];
 
 				lastweight += weight;
-				
+
 				output_vec = output_vec + weight * ( input_vec * m_final_matrix_array[index] );
 			}
 
@@ -220,7 +227,7 @@ namespace uniscope_globe
 		}
 		m_d3d_mesh_clone->UnlockVertexBuffer();
 
-		
+
 
 		d3d9_effect_vertex_blend* effect = (d3d9_effect_vertex_blend* )device->get_effect(US_EFFECT_VERTEX_BLEND);
 
@@ -256,7 +263,7 @@ namespace uniscope_globe
 						{
 							effect->set_texture( m_texture_array[j].m_diffuse );
 						}
-						else 
+						else
 						{
 							effect->set_texture( NULL );
 						}
@@ -264,7 +271,7 @@ namespace uniscope_globe
 					else
 					{
 						effect->set_texture( NULL );
-					}					
+					}
 
 					effect->commit_changes();
 
@@ -276,7 +283,7 @@ namespace uniscope_globe
 			effect->end_pass();
 		}
 
-		effect->end();	
+		effect->end();
 
 		AUTO_RELEASE( m_d3d_mesh_clone );
 
@@ -289,36 +296,36 @@ namespace uniscope_globe
 		d3d9_effect_vertex_blend* m_render = (d3d9_effect_vertex_blend*)args->m_render;
 		//args->m_device->set_vertex_declaration( m_d3d_mesh->GetFVF())
 
-		m_render->set_matrix_array( &m_final_matrix_array[0], m_final_matrix_array.size() );
+		m_render->set_matrix_array(&m_final_matrix_array[0], m_final_matrix_array.size());
 
-		for ( int j = 0; j < (int)m_texture_array.size() ; j++ )
+		for (int j = 0; j < (int)m_texture_array.size(); j++)
 		{
-			if ( m_texture_array[j].m_diffuse )
+			if (m_texture_array[j].m_diffuse)
 			{
-				if ( m_texture_array[j].m_diffuse->is_valid() )
+				if (m_texture_array[j].m_diffuse->is_valid())
 				{
-					m_render->set_texture( 0, m_texture_array[j].m_diffuse->get_handle() );
+					m_render->set_texture(0, m_texture_array[j].m_diffuse->get_handle());
 				}
-				else 
+				else
 				{
-					m_render->set_texture( 0, NULL );
+					m_render->set_texture(0, NULL);
 				}
 			}
 			else
 			{
-				m_render->set_texture( 0, NULL );
-			}					
+				m_render->set_texture(0, NULL);
+			}
 
 			m_render->commit_changes();
 
-			m_d3d_mesh->DrawSubset( j );
-		}				
-		
+			m_d3d_mesh->DrawSubset(j);
+		}
+
 		//*/
 
 	}
 
-	bool d3d9_skinning_hardware_mesh::intersect( const ray<double>& in_ray, intersect_result& out_result )
+	bool d3d9_skinning_hardware_mesh::intersect(const ray<double>& in_ray, intersect_result& out_result)
 	{
 		return false;
 	}

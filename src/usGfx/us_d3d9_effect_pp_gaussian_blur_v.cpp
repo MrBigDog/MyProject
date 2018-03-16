@@ -14,8 +14,9 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_d3d9_effect_pp_gaussian_blur_v.h"
+#include <usGfx/resource.h>
 
 namespace uniscope_globe
 {

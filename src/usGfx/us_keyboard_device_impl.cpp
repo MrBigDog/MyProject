@@ -13,29 +13,32 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_keyboard_device_impl.h"
+#include <usGfx/us_keyboard_argument.h>
+
+
 
 namespace uniscope_globe
 {
-	keyboard_device_impl::keyboard_device_impl( IDirectInputDevice8* in_direct_keyboard )
+	keyboard_device_impl::keyboard_device_impl(IDirectInputDevice8* in_direct_keyboard)
 	{
-		m_direct_keyoboard	 = in_direct_keyboard;
+		m_direct_keyoboard = in_direct_keyboard;
 	}
 
-	keyboard_device_impl::~keyboard_device_impl( void )
+	keyboard_device_impl::~keyboard_device_impl(void)
 	{
 		destroy();
 	}
 
-	bool keyboard_device_impl::create( input_device_argument* args )
+	bool keyboard_device_impl::create(input_device_argument* args)
 	{
 		HRESULT hr;
-		if( FAILED( hr = m_direct_keyoboard->SetDataFormat( &c_dfDIKeyboard ) ) )
+		if (FAILED(hr = m_direct_keyoboard->SetDataFormat(&c_dfDIKeyboard)))
 			return false;
 
-//		if( FAILED(hr = m_direct_keyoboard->SetCooperativeLevel( hwnd, DISCL_NONEXCLUSIVE |  DISCL_FOREGROUND )) )
-//			return false;	
+		//		if( FAILED(hr = m_direct_keyoboard->SetCooperativeLevel( hwnd, DISCL_NONEXCLUSIVE |  DISCL_FOREGROUND )) )
+		//			return false;	
 
 		hr = m_direct_keyoboard->Acquire();
 
@@ -44,24 +47,24 @@ namespace uniscope_globe
 		return true;
 	}
 
-	void keyboard_device_impl::destroy( void )
+	void keyboard_device_impl::destroy(void)
 	{
-		if( m_direct_keyoboard ) 
+		if (m_direct_keyoboard)
 		{
 			m_direct_keyoboard->Unacquire();
 		}
 
-		AUTO_RELEASE( m_direct_keyoboard );
+		AUTO_RELEASE(m_direct_keyoboard);
 	}
 
-	void keyboard_device_impl::collect_keyboard_info( void )
+	void keyboard_device_impl::collect_keyboard_info(void)
 	{
 		HRESULT hr;
-		hr = m_direct_keyoboard->GetDeviceState( US_KEYBOARD_BUFFER_SIZE, (LPVOID)&m_args->m_state.keys );
-		if( FAILED(hr) ) // if get device false
+		hr = m_direct_keyoboard->GetDeviceState(US_KEYBOARD_BUFFER_SIZE, (LPVOID)&m_args->m_state.keys);
+		if (FAILED(hr)) // if get device false
 		{
 			hr = m_direct_keyoboard->Acquire();
-			while( hr == DIERR_INPUTLOST )  // if lost input device
+			while (hr == DIERR_INPUTLOST)  // if lost input device
 			{
 				hr = m_direct_keyoboard->Acquire();
 			}
@@ -70,12 +73,12 @@ namespace uniscope_globe
 		}
 	}
 
-	bool keyboard_device_impl::refresh( void )
+	bool keyboard_device_impl::refresh(void)
 	{
 		collect_keyboard_info();
 
 		return true;
 	}
 
-	
+
 }

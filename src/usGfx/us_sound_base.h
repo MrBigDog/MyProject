@@ -16,17 +16,22 @@
 #ifndef _US_SOUND_BASE_H_
 #define _US_SOUND_BASE_H_
 
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
+
+#include <windows.h>
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API sound_base
+	class USGFX_EXPORT sound_base
 	{
 	public:
-		sound_base( void );
+		sound_base(void);
 
-		virtual ~sound_base( void );
+		virtual ~sound_base(void);
 
 	public:
-		virtual long play( DWORD dwPriority = 0, DWORD dwFlags = 0, LONG lVolume = 0, LONG lFrequency = -1, LONG lPan = 0 ) { return false; }
+		virtual long play(DWORD dwPriority = 0, DWORD dwFlags = 0, LONG lVolume = 0, LONG lFrequency = -1, LONG lPan = 0) { return false; }
 
 		//virtual long play3d( LPDS3DBUFFER p3DBuffer, DWORD dwPriority = 0, DWORD dwFlags = 0, LONG lFrequency = 0 ) { return false; } 
 

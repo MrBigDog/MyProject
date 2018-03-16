@@ -14,7 +14,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_shadow_map_render.h"
 
 #define  SHADOW_MAP_SIZE 1024

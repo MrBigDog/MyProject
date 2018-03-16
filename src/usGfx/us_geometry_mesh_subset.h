@@ -16,10 +16,15 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_GEOMETRY_MESH_SUBSET_H_
 #define _US_GEOMETRY_MESH_SUBSET_H_
+#include <usGfx/Export.h>
+#include <usGfx/us_mesh_subset.h>
+#include <usGfx/us_d3d9_material_declear.h>
+#include <usCore/us_texture_map_description.h>
+#include <usUtil/us_common_file.h>
 
 namespace uniscope_globe
 {
-	class geometry_mesh_subset 
+	class USGFX_EXPORT geometry_mesh_subset
 		: public mesh_subset
 		, public texture_map_description
 	{
@@ -27,25 +32,25 @@ namespace uniscope_globe
 		typedef std::pair<ulong, ulong> mesh_subset_info;
 
 	public:
-		geometry_mesh_subset( void );
+		geometry_mesh_subset(void);
 
-		virtual ~geometry_mesh_subset( void );
+		virtual ~geometry_mesh_subset(void);
 
 	public:
-		void create( d3d9_hardware_mesh_buffer* in_parent_mesh_buffer, int mat_index );
+		void create(d3d9_hardware_mesh_buffer* in_parent_mesh_buffer, int mat_index);
 
 	public:
 		virtual void lock();
 
 		virtual void unlock();
 
-		virtual void update( void );
+		virtual void update(void);
 
 	public:
-		void copy_from( geometry_mesh_subset* v_src_data );
+		void copy_from(geometry_mesh_subset* v_src_data);
 
 	public:
-		virtual material_entry* get_material_entry( void );
+		virtual material_entry* get_material_entry(void);
 
 	protected:
 		material_entry m_material_entry;

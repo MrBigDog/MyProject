@@ -16,23 +16,32 @@
 #ifndef _US_GEOMETRY_MARK_H_
 #define _US_GEOMETRY_MARK_H_
 
+#include <usGfx/Export.h>
+#include <usUtil/us_rect.h>
+#include <usUtil/us_matrix4.h>
+#include <usUtil/us_common_file.h>
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API geometry_mark
+	class observer_base;
+	class render_device;
+	class hardware_texture;
+
+	class USGFX_EXPORT geometry_mark
 	{
 	public:
-		geometry_mark( void );
+		geometry_mark(void);
 
-		virtual ~geometry_mark( void );
+		virtual ~geometry_mark(void);
 
-	// override from render_object
+		// override from render_object
 	public:
-		virtual void draw( observer_base* v_obsr , render_device* device );
+		virtual void draw(observer_base* v_obsr, render_device* device);
 
 	public:
-		void set_texture( hardware_texture* v_texture );
-		void set_mark_info( matrix_4f& v_mat, vector_3f& v_pos, vector_3f& v_cen, ulong v_color );
-		void set_font_info( const LPCTSTR str_text, matrix_4f& v_mat, rect& v_rect, ulong v_color );
+		void set_texture(hardware_texture* v_texture);
+		void set_mark_info(matrix_4f& v_mat, vector_3f& v_pos, vector_3f& v_cen, ulong v_color);
+		void set_font_info(const LPCTSTR str_text, matrix_4f& v_mat, rect& v_rect, ulong v_color);
 
 	protected:
 		hardware_texture* m_texture;
@@ -46,7 +55,7 @@ namespace uniscope_globe
 		matrix_4f	m_font_matrix;
 		rect		m_font_rect;
 		ulong		m_font_color;
-		 
+
 	};
 }
 

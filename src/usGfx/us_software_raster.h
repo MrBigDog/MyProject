@@ -16,45 +16,48 @@
 #ifndef _US_SOFTWARE_RASTER_H_
 #define _US_SOFTWARE_RASTER_H_
 
+#include <usGfx/Export.h>
+#include <usUtil/us_matrix4.h>
+
 namespace uniscope_globe
 {
-	struct LIB_GFX_API query_result
+	struct USGFX_EXPORT query_result
 	{
 		vector3<float>	m_face_vertex[3];
 		float			m_depth;
 
-		void set_default( void )
+		void set_default(void)
 		{
-			memset( m_face_vertex, 0, sizeof(vector3<float>) * 3 );
+			memset(m_face_vertex, 0, sizeof(vector3<float>) * 3);
 			m_depth = 1.0;
 		}
 	};
 
-	class LIB_GFX_API software_raster
+	class USGFX_EXPORT software_raster
 	{
 	public:
-		software_raster( void );
+		software_raster(void);
 
-		virtual ~software_raster( void );
+		virtual ~software_raster(void);
 
 	public:
-		void set_world_matrix( matrix4<float>& mat );
+		void set_world_matrix(matrix4<float>& mat);
 
-		void set_view_matrix( matrix4<float>& mat );
+		void set_view_matrix(matrix4<float>& mat);
 
-		void set_projection_matrix( matrix4<float>& mat );
+		void set_projection_matrix(matrix4<float>& mat);
 
-		void update_matrix( void );
+		void update_matrix(void);
 
-		void begin( void );
+		void begin(void);
 
-		bool raster( vector3<float>* face_vertex1, vector3<float>* face_vertex2, vector3<float>* face_vertex3 );
+		bool raster(vector3<float>* face_vertex1, vector3<float>* face_vertex2, vector3<float>* face_vertex3);
 
-		void end( void ); 
+		void end(void);
 
-		void clear( void );
+		void clear(void);
 
-		bool get_query( query_result& in_result );
+		bool get_query(query_result& in_result);
 
 	private:
 		matrix4<float>	m_world_matrix;
@@ -67,7 +70,7 @@ namespace uniscope_globe
 
 		query_result	m_query_result;
 
-		bool			m_is_quary;		 
+		bool			m_is_quary;
 	};
 }
 

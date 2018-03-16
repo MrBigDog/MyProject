@@ -13,8 +13,19 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_render_object_line.h"
+#include <usCore/us_render_argument.h>
+#include <usCore/us_render_device.h>
+#include <usCore/us_render_target.h>
+#include <usCore/us_system_environment.h>
+#include <usCore/us_observer_base.h>
+#include <usCore/us_render_state.h>
+#include <usCore/us_frame_counter.h>
+
+#include <usUtil/us_spherical_coords.h>
+#include <usUtil/us_cartesian_coords.h>
+#include <usUtil/us_geocentric_coords.h>
 
 namespace uniscope_globe
 {

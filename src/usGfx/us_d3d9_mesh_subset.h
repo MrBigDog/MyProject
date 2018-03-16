@@ -16,31 +16,39 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_MESH_SUBSET_H_
 #define _US_D3D9_MESH_SUBSET_H_
+#include <usGfx/Export.h>
+#include <usGfx/us_mesh_subset.h>
+#include <usUtil/us_common_file.h>
+
+#include <vector>
 
 namespace uniscope_globe
 {
-	class d3d9_mesh_subset : public mesh_subset
+	struct material_entry;
+	class d3d9_hardware_mesh_buffer;
+
+	class USGFX_EXPORT d3d9_mesh_subset : public mesh_subset
 	{
 	public:
-		d3d9_mesh_subset( void );
+		d3d9_mesh_subset(void);
 
-		virtual ~d3d9_mesh_subset( void );
+		virtual ~d3d9_mesh_subset(void);
 
 	public:
-		void create( d3d9_hardware_mesh_buffer* in_parent_mesh_buffer, int mat_index, std::vector<ulong>& in_tri_array );
+		void create(d3d9_hardware_mesh_buffer* in_parent_mesh_buffer, int mat_index, std::vector<ulong>& in_tri_array);
 
 	public:
 		virtual void lock();
 
 		virtual void unlock();
 
-		virtual void update( void );
+		virtual void update(void);
 
 	public:
-		virtual material_entry* get_material_entry( void );
+		virtual material_entry* get_material_entry(void);
 
 	protected:
-		void update_compact_map( void );	
+		void update_compact_map(void);
 	};
 }
 

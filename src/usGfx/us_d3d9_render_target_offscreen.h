@@ -16,47 +16,54 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_RENDER_TARGET_OFFSCREEN_H_
 #define _US_D3D9_RENDER_TARGET_OFFSCREEN_H_
+#include <usGfx/Export.h>
+#include <usCore/us_render_target.h>
+#include <usUtil/us_common_file.h>
+
+#include <d3d9.h>
 
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_render_target_offscreen
+	class render_device;
+
+	class USGFX_EXPORT d3d9_render_target_offscreen
 		: public render_target
 	{
 	protected:
-		d3d9_render_target_offscreen( void );
+		d3d9_render_target_offscreen(void);
 
 	public:
-		d3d9_render_target_offscreen( render_device* rd );
+		d3d9_render_target_offscreen(render_device* rd);
 
-		virtual ~d3d9_render_target_offscreen( void );
-
-	public:
-		bool create( uint width, uint height, int format, int multi_sample_type, ulong multi_sample_quality, bool lockable = false );
-
-		void destroy( void );
+		virtual ~d3d9_render_target_offscreen(void);
 
 	public:
-		virtual void on_lost_device( event_argument* args );
+		bool create(uint width, uint height, int format, int multi_sample_type, ulong multi_sample_quality, bool lockable = false);
 
-		virtual void on_reset_device( event_argument* args );
+		void destroy(void);
 
-		virtual void begin( void );
+	public:
+		virtual void on_lost_device(event_argument* args);
 
-		virtual void end( void );
+		virtual void on_reset_device(event_argument* args);
 
-		virtual ULONG_PTR get_texture( void );
+		virtual void begin(void);
 
-		virtual void draw_texture( int stage );
+		virtual void end(void);
 
-		virtual void get_surface_bits( LPVOID pBits );
+		virtual ULONG_PTR get_texture(void);
 
-		virtual void save_file( cpstr str_path, int width, int height );
+		virtual void draw_texture(int stage);
+
+		virtual void get_surface_bits(LPVOID pBits);
+
+		virtual void save_file(cpstr str_path, int width, int height);
 
 	protected:
 		// Returns BitsPerPixel form D3DFORMAT
 		inline int BPPFromD3DFormat(D3DFORMAT fmt)
 		{
-			switch(fmt)
+			switch (fmt)
 			{
 			case D3DFMT_A2R10G10B10: return 32;
 			case D3DFMT_A8R8G8B8: return 32;

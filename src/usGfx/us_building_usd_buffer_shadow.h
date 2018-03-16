@@ -16,19 +16,28 @@
 #ifndef _US_BUILDING_USD_BUFFER_SHADOW_H_
 #define _US_BUILDING_USD_BUFFER_SHADOW_H_
 
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
+#include <usGfx/us_building_usd_buffer.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+#include <usDotx/us_usx_data_struct.h>
+
+#include <map>
+
 namespace uniscope_globe
 {
 	struct  usx_tri_face_index_ushort
 	{
-		ushort a, b, c ;
+		ushort a, b, c;
 		usx_tri_face_index_ushort()
 		{
 			a = b = c = 0;
 		}
 	};
 
+	class raw_buffer;
 
-	class LIB_GFX_API building_usd_buffer_shadow
+	class USGFX_EXPORT building_usd_buffer_shadow
 		: public building_usd_buffer
 	{
 	public:
@@ -41,24 +50,24 @@ namespace uniscope_globe
 		typedef std::map< ulong, vector3<float> > triangle_normal_map;
 
 	protected:
-		building_usd_buffer_shadow( void ){}
+		building_usd_buffer_shadow(void) {}
 
 	public:
-		building_usd_buffer_shadow( raw_buffer* v_stream );
+		building_usd_buffer_shadow(raw_buffer* v_stream);
 
-		virtual ~building_usd_buffer_shadow( void );
+		virtual ~building_usd_buffer_shadow(void);
 
 	public:
-		virtual bool generate_mesh( void );
+		virtual bool generate_mesh(void);
 
 	protected:
-		bool generate_mesh_pos_tex( void );
-		bool generate_mesh_pos_tex2( void );
-		bool generate_mesh_pos_dif_tex( void );
+		bool generate_mesh_pos_tex(void);
+		bool generate_mesh_pos_tex2(void);
+		bool generate_mesh_pos_dif_tex(void);
 
-		position_normal_texture2 read_vertex( ulong index, vector3<float>& in_normal );
-		void insert_triangle( edge old_e, edge new_e, edge_map& in_edge_map, std::vector<usx_tri_face_index>& in_index_array, std::vector<ulong>& in_attribute_array );
-		vector3<float> compute_normal( usx_tri_face_index& in_triangle );
+		position_normal_texture2 read_vertex(ulong index, vector3<float>& in_normal);
+		void insert_triangle(edge old_e, edge new_e, edge_map& in_edge_map, std::vector<usx_tri_face_index>& in_index_array, std::vector<ulong>& in_attribute_array);
+		vector3<float> compute_normal(usx_tri_face_index& in_triangle);
 
 	};
 }

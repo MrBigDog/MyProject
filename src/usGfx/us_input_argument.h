@@ -15,6 +15,11 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_INPUT_ARGUMENT_H_
 #define _US_INPUT_ARGUMENT_H_
+#include <usGfx/Export.h>
+#include <usCore/us_event_argument.h>
+#include <usUtil/us_common_file.h>
+
+#include <windows.h>
 
 namespace uniscope_globe
 {
@@ -31,13 +36,13 @@ namespace uniscope_globe
 	} input_argument_type;
 
 
-	class LIB_GFX_API input_argument
+	class USGFX_EXPORT input_argument
 		: public event_argument
 	{
 	public:
-		input_argument( void );
+		input_argument(void);
 
-		virtual ~input_argument( void );
+		virtual ~input_argument(void);
 
 	public:
 		virtual void reset(void) = 0;

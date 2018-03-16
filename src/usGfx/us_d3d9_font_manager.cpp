@@ -13,12 +13,14 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_d3d9_font_manager.h"
+
+#include <windows.h>
 
 namespace uniscope_globe
 {
-	d3d9_font_manager::d3d9_font_manager( render_device* rd )
+	d3d9_font_manager::d3d9_font_manager(render_device* rd)
 	{
 		d3d9_render_font* v_font = NULL;
 		v_font = new d3d9_render_font();
@@ -29,40 +31,40 @@ namespace uniscope_globe
 		m_font_array.push_back(v_font);
 	}
 
-	d3d9_font_manager::~d3d9_font_manager( void )
+	d3d9_font_manager::~d3d9_font_manager(void)
 	{
 		render_font_array::iterator itr = m_font_array.begin();
-		for( ; itr != m_font_array.end(); itr++ )
+		for (; itr != m_font_array.end(); itr++)
 		{
-			AUTO_DELETE( *itr );
+			AUTO_DELETE(*itr);
 		}
 		m_font_array.clear();
 	}
 
-	ULONG_PTR d3d9_font_manager::get_font( long font_handle )
+	ULONG_PTR d3d9_font_manager::get_font(long font_handle)
 	{
 		return (ULONG_PTR)(m_font_array[font_handle]);
 	}
 
-	long d3d9_font_manager::on_lost_device( void )
+	long d3d9_font_manager::on_lost_device(void)
 	{
 		render_font_array::iterator itr = m_font_array.begin();
-		for( ; itr != m_font_array.end(); itr++ )
+		for (; itr != m_font_array.end(); itr++)
 		{
 			(*itr)->on_lost_device();
 		}
 		return S_OK;
 	}
 
-	long d3d9_font_manager::on_reset_device( void )
+	long d3d9_font_manager::on_reset_device(void)
 	{
 		render_font_array::iterator itr = m_font_array.begin();
-		for( ; itr != m_font_array.end(); itr++ )
+		for (; itr != m_font_array.end(); itr++)
 		{
 			(*itr)->on_reset_device();
 		}
 		return S_OK;
 	}
 
-	
+
 }

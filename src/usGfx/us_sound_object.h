@@ -16,20 +16,25 @@
 #ifndef _US_SOUND_OBJECT_H_
 #define _US_SOUND_OBJECT_H_
 
+#include <usGfx/Export.h>
+#include <usUtil/us_matrix4.h>
+
 namespace uniscope_globe
 {
-	class sound_object
+	class render_argument;
+
+	class USGFX_EXPORT sound_object
 	{
 	public:
-		sound_object( void );
+		sound_object(void);
 
-		virtual ~sound_object( void );
+		virtual ~sound_object(void);
 
 	public:
-		void set_transform( matrix4<double> tnb_transform );
+		void set_transform(matrix4<double> tnb_transform);
 
-		void draw( render_argument* args );
-		 
+		void draw(render_argument* args);
+
 	};
 }
 

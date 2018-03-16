@@ -13,9 +13,10 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_joystick_device_impl.h"
-
+#include <usUtil/us_math.h>
+#include <dinput.h>
 namespace uniscope_globe
 {
 	//struct XINPUT_DEVICE_NODE
@@ -32,7 +33,7 @@ namespace uniscope_globe
 
 	joystick_device_impl::joystick_device_impl(IDirectInputDevice8* in_direct_joystick)
 	{
-// 		m_direct_input = NULL;
+		// 		m_direct_input = NULL;
 		m_direct_joystick = in_direct_joystick;
 	}
 
@@ -41,18 +42,18 @@ namespace uniscope_globe
 		destroy();
 	}
 
-	bool joystick_device_impl::create( input_device_argument* args )
+	bool joystick_device_impl::create(input_device_argument* args)
 	{
 		HRESULT hr;
 
-		
+
 
 		//Set the data format to "simple joystick" - a predefined data format 
 
 		//A data format specifies which controls on a device we are interested in,
 		//and how they should be reported. This tells DInput that we will be
 		//passing a DIJOYSTATE2 structure to IDirectInputDevice::GetDeviceState().
-		if( FAILED( hr = m_direct_joystick->SetDataFormat( &c_dfDIJoystick2 ) ) )
+		if (FAILED(hr = m_direct_joystick->SetDataFormat(&c_dfDIJoystick2)))
 			return false;//???????
 
 		//Set the cooperative level to let DInput know how this device should
@@ -64,7 +65,7 @@ namespace uniscope_globe
 		//Enumerate the joystick objects. The callback function enabled user
 		//interface elements for objects that are found, and sets the min/max
 		//values property for discovered axes.
-		if( FAILED( hr = m_direct_joystick->EnumObjects( enum_objects_callback, (VOID*)this, DIDFT_ALL ) ) )
+		if (FAILED(hr = m_direct_joystick->EnumObjects(enum_objects_callback, (VOID*)this, DIDFT_ALL)))
 			return false;//???????????
 
 		//hr = m_lpDI->CreateDevice(JoystickGUID,&m_lpDIDevice,NULL);
@@ -80,40 +81,40 @@ namespace uniscope_globe
 
 		m_args = args;
 
-		memset( (void*)&m_cur_state, 0, sizeof(joystick_state) );
+		memset((void*)&m_cur_state, 0, sizeof(joystick_state));
 
 		//joystick_argument* v_joystick_args	= new joystick_argument;
 		//v_joystick_args->m_vid = vid;
 		return true;
 	}
 
-	void joystick_device_impl::destroy( void )
+	void joystick_device_impl::destroy(void)
 	{
 		if (m_direct_joystick)
 		{
 			m_direct_joystick->Unacquire();
 		}
 
-		AUTO_RELEASE( m_direct_joystick );
+		AUTO_RELEASE(m_direct_joystick);
 	}
 
-	void joystick_device_impl::collect_joystick_info( void )
+	void joystick_device_impl::collect_joystick_info(void)
 	{
 		HRESULT     hr;
 		//DIJOYSTATE2 js;					// DInput joystick state 
 
-		if( NULL == m_direct_joystick ) return;
+		if (NULL == m_direct_joystick) return;
 
 		// Poll the device to read the current state
-		hr = m_direct_joystick->Poll(); 
-		if( FAILED(hr) )  
+		hr = m_direct_joystick->Poll();
+		if (FAILED(hr))
 		{
-			if( hr == DIERR_NOTACQUIRED )
+			if (hr == DIERR_NOTACQUIRED)
 			{
 				m_direct_joystick->Unacquire();
 				m_direct_joystick->Acquire();
 			}
-			else if ( hr == DIERR_INPUTLOST )
+			else if (hr == DIERR_INPUTLOST)
 			{
 				m_direct_joystick->Acquire();
 			}
@@ -130,16 +131,16 @@ namespace uniscope_globe
 			// hr may be DIERR_OTHERAPPHASPRIO or other errors.  This
 			// may occur when the app is minimized or in the process of 
 			// switching, so just try again later 
-			return; 
+			return;
 		}
 
 		// Get the input's device state
-		if( FAILED( hr = m_direct_joystick->GetDeviceState( sizeof(DIJOYSTATE2),(DIJOYSTATE2*)&m_cur_state ) ) )
+		if (FAILED(hr = m_direct_joystick->GetDeviceState(sizeof(DIJOYSTATE2), (DIJOYSTATE2*)&m_cur_state)))
 			return; // The device should have been acquired during the Poll()
 
 
 
-		
+
 		//args->m_joystick_state.m_axis_x = js.lX;
 		//args->m_joystick_state.m_axis_y = js.lY;
 		//args->m_joystick_state.m_axis_z = js.lZ;
@@ -152,7 +153,7 @@ namespace uniscope_globe
 	}
 
 	// refresh
-	bool joystick_device_impl::refresh( void )
+	bool joystick_device_impl::refresh(void)
 	{
 		//return true;
 		collect_joystick_info();
@@ -164,41 +165,41 @@ namespace uniscope_globe
 		//
 		// 速度因子
 		//
-		double v_speed_factor = (double)( 1000 - m_cur_state.rglSlider[0] ) / 2000.0;
+		double v_speed_factor = (double)(1000 - m_cur_state.rglSlider[0]) / 2000.0;
 		v_speed_factor = CLAMP(v_speed_factor, 0.1, 1);
 
 		m_args->m_state.x_move = m_cur_state.lX * v_speed_factor * 0.01;
 		m_args->m_state.y_move = m_cur_state.lY * v_speed_factor * 0.01;
 		m_args->m_state.z_move = 0.0;
 
-		if( m_cur_state.rgbButtons[10] > 0 || m_cur_state.rgbButtons[2] > 0 )
+		if (m_cur_state.rgbButtons[10] > 0 || m_cur_state.rgbButtons[2] > 0)
 		{
 			m_args->m_state.z_move = -0.01 * v_speed_factor;
 		}
-		else if(m_cur_state.rgbButtons[11] > 0 || m_cur_state.rgbButtons[3] > 0)
+		else if (m_cur_state.rgbButtons[11] > 0 || m_cur_state.rgbButtons[3] > 0)
 		{
 			m_args->m_state.z_move = 0.01 * v_speed_factor;
 		}
 
-		if( math<double>::fabs_( m_args->m_state.x_move ) < 1.0 ) m_args->m_state.x_move = 0.0;
-		if( math<double>::fabs_( m_args->m_state.y_move ) < 1.0 ) m_args->m_state.y_move = 0.0;
+		if (math<double>::fabs_(m_args->m_state.x_move) < 1.0) m_args->m_state.x_move = 0.0;
+		if (math<double>::fabs_(m_args->m_state.y_move) < 1.0) m_args->m_state.y_move = 0.0;
 
 		m_args->m_state.y_rot = 0.0;
 
 		m_args->m_state.z_rot = m_cur_state.lRz * 0.02 / 1000;
 
 		ulong v_pov = m_cur_state.rgdwPOV[0];
-		if( v_pov != -1 )
+		if (v_pov != -1)
 		{
 			m_args->m_state.z_rot = math<double>::sin_(v_pov * 0.01 * RADIAN) * 0.02;
 			m_args->m_state.x_rot = math<double>::cos_(v_pov * 0.01 * RADIAN) * 0.02;
 		}
 
-		if(m_cur_state.rgbButtons[8] > 0)
+		if (m_cur_state.rgbButtons[8] > 0)
 		{
 			m_args->m_state.x_rot = -0.02;
 		}
-		else if(m_cur_state.rgbButtons[9] > 0)
+		else if (m_cur_state.rgbButtons[9] > 0)
 		{
 			m_args->m_state.x_rot = 0.02;
 		}
@@ -206,11 +207,11 @@ namespace uniscope_globe
 		NORMALIZE_RADIAN(m_args->m_state.x_rot);
 		NORMALIZE_RADIAN(m_args->m_state.z_rot);
 
-		memcpy( (void*)m_args->m_state.stick_buttons, (void*)m_cur_state.rgbButtons, 128 );
+		memcpy((void*)m_args->m_state.stick_buttons, (void*)m_cur_state.rgbButtons, 128);
 
 
 		return true;
-	}	
+	}
 
 	//-----------------------------------------------------------------------------
 	// Name: EnumObjectsCallback()
@@ -218,7 +219,7 @@ namespace uniscope_globe
 	//       joystick. This function enables user interface elements for objects
 	//       that are found to exist, and scales axes min/max values.
 	//-----------------------------------------------------------------------------
-	BOOL joystick_device_impl::enum_objects_callback( const DIDEVICEOBJECTINSTANCE* pdidoi, VOID* pContext )
+	BOOL joystick_device_impl::enum_objects_callback(const DIDEVICEOBJECTINSTANCE* pdidoi, VOID* pContext)
 	{
 		HWND hDlg = (HWND)pContext;
 
@@ -229,18 +230,18 @@ namespace uniscope_globe
 
 		// For axes that are returned, set the DIPROP_RANGE property for the
 		// enumerated axis in order to scale min/max values.
-		if( pdidoi->dwType & DIDFT_AXIS )
+		if (pdidoi->dwType & DIDFT_AXIS)
 		{
-			DIPROPRANGE diprg; 
-			diprg.diph.dwSize       = sizeof(DIPROPRANGE); 
-			diprg.diph.dwHeaderSize = sizeof(DIPROPHEADER); 
-			diprg.diph.dwHow        = DIPH_BYID; 
-			diprg.diph.dwObj        = pdidoi->dwType; // Specify the enumerated axis
-			diprg.lMin              = -1000; 
-			diprg.lMax              = +1000; 
+			DIPROPRANGE diprg;
+			diprg.diph.dwSize = sizeof(DIPROPRANGE);
+			diprg.diph.dwHeaderSize = sizeof(DIPROPHEADER);
+			diprg.diph.dwHow = DIPH_BYID;
+			diprg.diph.dwObj = pdidoi->dwType; // Specify the enumerated axis
+			diprg.lMin = -1000;
+			diprg.lMax = +1000;
 
 			// Set the range for the axis
-			if( FAILED( v_joystick->m_direct_joystick->SetProperty( DIPROP_RANGE, &diprg.diph ) ) ) 
+			if (FAILED(v_joystick->m_direct_joystick->SetProperty(DIPROP_RANGE, &diprg.diph)))
 				return DIENUM_STOP;
 
 		}

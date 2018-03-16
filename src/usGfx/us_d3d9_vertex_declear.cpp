@@ -13,8 +13,9 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+////#include "stdafx.h"
 #include "us_d3d9_vertex_declear.h"
+#include <d3d9types.h>
 
 namespace uniscope_globe
 {
@@ -72,7 +73,7 @@ namespace uniscope_globe
 	//////////////////////////////////////////////////////////////////////////
 	// Position Texture4
 	//////////////////////////////////////////////////////////////////////////
-	
+
 	const ulong position_texture4::fvf = D3DFVF_XYZ | D3DFVF_TEX4;
 	const ulong position_texture4::stride = 44;
 
@@ -135,5 +136,5 @@ namespace uniscope_globe
 	const ulong transformed_color_texture::fvf = D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1;
 	const ulong transformed_color_texture::stride = 28;
 
-	
+
 }

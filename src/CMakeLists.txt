@@ -28,6 +28,7 @@ FOREACH( uniscope
 		usLua
 		usDotx
 		usMeshop
+		usGfx
 		 )
 ADD_SUBDIRECTORY(${uniscope})
 SET_PROPERTY(TARGET ${uniscope} PROPERTY FOLDER "Uniscope")

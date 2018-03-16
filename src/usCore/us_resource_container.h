@@ -20,6 +20,7 @@
 #include <usCore\us_reclaim_base.h>
 #include <usCore\us_resource_base.h>
 #include <usCore\us_resource_killer.h>
+//#include <usCore\us_resource_manager.h>
 
 namespace uniscope_globe
 {

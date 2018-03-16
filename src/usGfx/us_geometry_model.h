@@ -15,30 +15,36 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_GEOMETRY_MODEL_H_
 #define _US_GEOMETRY_MODEL_H_
-
+#include <usGfx/Export.h>
+#include <usCore/us_render_object.h>
+#include <usCore/us_common_resource_container.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API geometry_render_model
+	class hardware_mesh;
+	class d3d9_hardware_mesh;
+
+	class USGFX_EXPORT geometry_render_model
 		: public render_object
 	{
 	protected:
-		geometry_render_model( void ) { }
+		geometry_render_model(void) { }
 
 	public:
-		geometry_render_model( d3d9_hardware_mesh* v_mesh );
+		geometry_render_model(d3d9_hardware_mesh* v_mesh);
 
-		~geometry_render_model( void );
+		~geometry_render_model(void);
 
 	public:
-		void set_render_mesh( hardware_mesh* v_mesh );
+		void set_render_mesh(hardware_mesh* v_mesh);
 
-		void set_matrix( matrix_4d& v_mat );
+		void set_matrix(matrix_4d& v_mat);
 
-		void update( void );
+		void update(void);
 
-	// override from render_object
+		// override from render_object
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
 	public:
 		matrix_4d m_mat;
@@ -51,39 +57,40 @@ namespace uniscope_globe
 
 	};
 
+	class event_argument;
 
-	class LIB_GFX_API geometry_model
+	class USGFX_EXPORT geometry_model
 		: public common_resource_container<ustring>
 	{
 	protected:
-		geometry_model( void ){}
+		geometry_model(void) {}
 
 	public:
-		geometry_model( LPCTSTR str_link );
+		geometry_model(LPCTSTR str_link);
 
-		virtual ~geometry_model( void );
+		virtual ~geometry_model(void);
 
 	public:
 		// override from reclaim_base
-		virtual void destroy( void )
+		virtual void destroy(void)
 		{
 			m_mission_flow->reset();
 
-			DEFERRED_RELEASE( m_resource );
-			AUTO_DELETE( m_render_model );
+			DEFERRED_RELEASE(m_resource);
+			AUTO_DELETE(m_render_model);
 
 			reclaim_base::destroy();
 		}
 
 
-	public:		
-		geometry_render_model* get_render_model( void );
+	public:
+		geometry_render_model* get_render_model(void);
 
-		bool intersect( const ray<double>& a_ray, intersect_result& result );
+		bool intersect(const ray<double>& a_ray, intersect_result& result);
 
 		// download mission
 	protected:
-		virtual void on_download_finish( event_argument* args );
+		virtual void on_download_finish(event_argument* args);
 
 	protected:
 		ustring m_link;

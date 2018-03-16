@@ -15,22 +15,29 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_HARDWARE_INDEX_BUFFER_H_
 #define _US_D3D9_HARDWARE_INDEX_BUFFER_H_
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
+
+#include <d3d9.h>
 
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_hardware_index_buffer
+	class raw_buffer;
+	class render_device;
+
+	class USGFX_EXPORT d3d9_hardware_index_buffer
 	{
 	public:
-		d3d9_hardware_index_buffer( void );
+		d3d9_hardware_index_buffer(void);
 
-		virtual ~d3d9_hardware_index_buffer( void );
+		virtual ~d3d9_hardware_index_buffer(void);
 
-		virtual bool create( render_device* device, raw_buffer* vertices_buffer );
+		virtual bool create(render_device* device, raw_buffer* vertices_buffer);
 
-		virtual void* data( void );
+		virtual void* data(void);
 
 	protected:
-		LPDIRECT3DINDEXBUFFER9	m_index_buffer;		 
+		LPDIRECT3DINDEXBUFFER9	m_index_buffer;
 	};
 }
 

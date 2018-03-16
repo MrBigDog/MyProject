@@ -100,7 +100,7 @@ private:
 int main()
 {
 	DirectoryVisitor dv;
-	dv.traverse("E:\\000\\gwEarth\\src\\usMeshop");
+	dv.traverse("D:\\000\\gwEarth\\src\\usGfx");
 	dv.writeToLocal("filename_list.txt");
 
 	//osg::ref_ptr<osg::Node> node1 = osgDB::readNodeFile("E:/DATA/GeoData/ALLmodel/5dxq_171110_dxf/dxq_dxf_171110/1.dxf");

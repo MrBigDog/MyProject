@@ -20,8 +20,13 @@
 #include <usUtil/us_object_base.h>
 #include <usCore/us_resource_container.h>
 #include <unordered_map>
+
+
 namespace uniscope_globe
 {
+	template<typename KEY>
+	class resource_container;
+
 	template<typename KEY>
 	class resource_manager : public object_base
 	{

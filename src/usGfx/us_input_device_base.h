@@ -15,7 +15,9 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_INPUT_DEVICE_BASE_H_
 #define _US_INPUT_DEVICE_BASE_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_input_argument.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
 	class input_impl;
@@ -46,39 +48,39 @@ namespace uniscope_globe
 			y_rot = 0.0;
 			z_rot = 0.0;
 
-			memset( (void*)keys, 0, 256 );
+			memset((void*)keys, 0, 256);
 
-			memset( (void*)stick_buttons, 0, 128 );
+			memset((void*)stick_buttons, 0, 128);
 		}
 	};
 
-	class LIB_GFX_API input_device_argument
+	class USGFX_EXPORT input_device_argument
 		: public input_argument
 	{
 	public:
-		input_device_argument( void );
+		input_device_argument(void);
 
-		virtual ~input_device_argument( void );
+		virtual ~input_device_argument(void);
 
 	public:
 		virtual void reset(void);
 
 	public:
-		input_device_state m_state;		 
+		input_device_state m_state;
 	};
 
-	class LIB_GFX_API input_device_base
+	class USGFX_EXPORT input_device_base
 	{
 	public:
-		input_device_base( void );
+		input_device_base(void);
 
-		virtual ~input_device_base( void );
-
-	public:
-		virtual bool refresh( void ) = 0;
+		virtual ~input_device_base(void);
 
 	public:
-		void set_enable( bool enable_value ){ m_enable = enable_value; }
+		virtual bool refresh(void) = 0;
+
+	public:
+		void set_enable(bool enable_value) { m_enable = enable_value; }
 
 	protected:
 		bool			m_enable;

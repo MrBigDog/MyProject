@@ -15,6 +15,15 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_SOCKET_CLIENT_H_
 #define _US_SOCKET_CLIENT_H_
+#include <usGfx/Export.h>
+#include <usGfx/us_socket.h>
+#include <usCore/us_thread_data.h>
+#include <usUtil/us_common_file.h>
+#include <usUtil/us_mutex.h>
+
+#include <string>
+
+using namespace std;
 
 namespace uniscope_globe
 {
@@ -35,19 +44,19 @@ namespace uniscope_globe
 		char		v_stream[1024];
 		packet()
 		{
-			memset( v_stream ,0, 1024 );
+			memset(v_stream, 0, 1024);
 		}
 	};
 
 	class server_linker;
 
-	class LIB_GFX_API socket_client
+	class USGFX_EXPORT socket_client
 	{
 	protected:
 		socket_client();
 	public:
-		socket_client( server_linker* linker );
-		virtual ~socket_client( void );
+		socket_client(server_linker* linker);
+		virtual ~socket_client(void);
 
 		friend class server_linker;
 
@@ -68,26 +77,26 @@ namespace uniscope_globe
 
 	public:
 		// con & close
-		bool connect( string host, int port );
-		void reconnect( string host, int port );
-		void close_con( void );
+		bool connect(string host, int port);
+		void reconnect(string host, int port);
+		void close_con(void);
 
 	public:
-		bool recv( void );
-		bool send( const packet& pck );
+		bool recv(void);
+		bool send(const packet& pck);
 
 		//	listener
-		static unsigned long __stdcall listening( void* param );
+		static unsigned long __stdcall listening(void* param);
 
 	protected:
-		void init_thread( void );
-		void fina_thread( void );
+		void init_thread(void);
+		void fina_thread(void);
 
 		// start & end
-		void start( void );
-		void end( void );
-		void waiting( void );
-	 
+		void start(void);
+		void end(void);
+		void waiting(void);
+
 	};
 }
 

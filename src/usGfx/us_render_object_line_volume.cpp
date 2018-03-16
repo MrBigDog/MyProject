@@ -14,18 +14,24 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_render_object_line_volume.h"
+#include <usGfx/us_d3d9_effect_shadow_volume.h>
+#include <usCore/us_shadow_style.h>
+#include <usCore/us_render_argument.h>
+#include <usCore/us_render_device.h>
+#include <usCore/us_observer_base.h>
 
+#include <usUtil/us_cartesian_coords.h>
 namespace uniscope_globe
 {
-	render_object_line_volume::render_object_line_volume( void )
+	render_object_line_volume::render_object_line_volume(void)
 	{
 		m_shadow_type = US_SHADOW_NONE;
 
 
 
-		
+
 		m_collapse_matrix = matrix_4d::s_identity;
 
 		m_trans_matrix = matrix_4d::s_identity;
@@ -33,44 +39,44 @@ namespace uniscope_globe
 		m_depth_enable = false;
 	}
 
-	render_object_line_volume::~render_object_line_volume( void )
+	render_object_line_volume::~render_object_line_volume(void)
 	{
 		m_vertex_array.clear();
 		m_index_array.clear();
 	}
-	
-	render_object_line_volume* render_object_line_volume::create_shared_instance( void )
+
+	render_object_line_volume* render_object_line_volume::create_shared_instance(void)
 	{
 		render_object_line_volume* v_geometry = new render_object_line_volume();
 		v_geometry->add_ref();
 		return v_geometry;
 	}
 
-	void render_object_line_volume::draw( render_argument* args )
+	void render_object_line_volume::draw(render_argument* args)
 	{
 		ulong vertices_count = m_vertex_array.size();
-		if ( vertices_count < 2 ) return;
+		if (vertices_count < 2) return;
 
 		matrix_4d v_world_mat = m_collapse_matrix * m_trans_matrix;
 		v_world_mat.m41 = v_world_mat.m41 - cartesian_coords::s_reference_position_geo.x;
 		v_world_mat.m42 = v_world_mat.m42 - cartesian_coords::s_reference_position_geo.y;
 		v_world_mat.m43 = v_world_mat.m43 - cartesian_coords::s_reference_position_geo.z;
 
-		double v_sin_tilt = math<double>::fabs_(math<double>::sin_(args->m_observer->get_tilt())); 
-		if( v_sin_tilt < 0.1) v_sin_tilt = 0.1;
+		double v_sin_tilt = math<double>::fabs_(math<double>::sin_(args->m_observer->get_tilt()));
+		if (v_sin_tilt < 0.1) v_sin_tilt = 0.1;
 		double v_line_width = args->m_observer->get_pixel_to_geo_scale_by_height() * m_line_width / v_sin_tilt;
-		
+
 		////////////////////////////////////////////////////////////////////////////////
 		d3d9_effect_shadow_volume* v_render = (d3d9_effect_shadow_volume*)args->m_render;
 		v_render->push_transform();
-		v_render->multiply_transform( matrix_4f( v_world_mat.m ) );
+		v_render->multiply_transform(matrix_4f(v_world_mat.m));
 
 		//v_render->set_world_matrix(v_world_mat);	
 		v_render->set_line_width(v_line_width * 0.5);
 		v_render->commit_changes();
 		args->m_device->set_vertex_declaration(position_normal_color::fvf);
-		args->m_device->draw_indexed_triangle_list(D3DFMT_INDEX16, (void*)&m_vertex_array[0], vertices_count , (void*)&m_index_array[0], m_index_array.size(), sizeof(position_normal_color) );
-		
+		args->m_device->draw_indexed_triangle_list(D3DFMT_INDEX16, (void*)&m_vertex_array[0], vertices_count, (void*)&m_index_array[0], m_index_array.size(), sizeof(position_normal_color));
+
 		v_render->pop_transform();
 		//d3d9_effect_render_object_line_volume* v_render = (d3d9_effect_render_object_line_volume*)args->m_device->get_effect(US_EFFECT_GEOMETRY_LINE_VOLUME);
 		//
@@ -111,18 +117,18 @@ namespace uniscope_globe
 	//										m_index_array[0], m_index_array.size(), position_color::stride );	
 	//	v_mesh_render->pop_transform();
 	//}
-	
+
 	void render_object_line_volume::clear()
 	{
 		m_vertex_array.clear();
 		m_index_array.clear();
 
 		m_collapse_matrix = matrix_4d::s_identity;
-		
+
 		m_render_aabb.make_invalid();
 	}
 
-	bool render_object_line_volume::intersect( const ray<double>& a_ray, intersect_result& result )
+	bool render_object_line_volume::intersect(const ray<double>& a_ray, intersect_result& result)
 	{
 		bool b_ret = false;
 		//ray<double> in_ray = a_ray;

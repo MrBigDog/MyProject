@@ -16,10 +16,13 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_EFFECT_RENDER_OBJECT_LINE_FLAKE_H_
 #define _US_D3D9_EFFECT_RENDER_OBJECT_LINE_FLAKE_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_effect_base.h>
+#include <usUtil/us_matrix4.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_effect_render_object_line_flake : public d3d9_effect_base
+	class USGFX_EXPORT d3d9_effect_render_object_line_flake : public d3d9_effect_base
 	{
 	protected:
 		d3d9_effect_render_object_line_flake(void){}

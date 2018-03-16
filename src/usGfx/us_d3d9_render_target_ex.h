@@ -16,41 +16,48 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_RENDER_TARGET_EX_H_
 #define _US_D3D9_RENDER_TARGET_EX_H_
+#include <usGfx/Export.h>
+#include <usCore/us_render_target.h>
+#include <usUtil/us_common_file.h>
+
+#include <d3d9.h>
 
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_render_target_ex
+	class render_device;
+
+	class USGFX_EXPORT d3d9_render_target_ex
 		: public render_target
 	{
 	protected:
-		d3d9_render_target_ex( void );
+		d3d9_render_target_ex(void);
 
 	public:
-		d3d9_render_target_ex( render_device* rd );
+		d3d9_render_target_ex(render_device* rd);
 
-		virtual ~d3d9_render_target_ex( void );
+		virtual ~d3d9_render_target_ex(void);
 
 	public:
-		bool create( uint width, uint height, int format, int multi_sample_type, ulong multi_sample_quality, bool lockable = false );
+		bool create(uint width, uint height, int format, int multi_sample_type, ulong multi_sample_quality, bool lockable = false);
 
 		//bool create_offline( uint width, uint height, int format, int multi_sample_type, ulong multi_sample_quality, bool lockable );
 
-		void destroy( void );
+		void destroy(void);
 
 	public:
-		virtual void on_lost_device( event_argument* args );
+		virtual void on_lost_device(event_argument* args);
 
-		virtual void on_reset_device( event_argument* args );
+		virtual void on_reset_device(event_argument* args);
 
-		virtual void begin( void );
+		virtual void begin(void);
 
-		virtual void end( void );
+		virtual void end(void);
 
-		virtual ULONG_PTR get_texture( void );
+		virtual ULONG_PTR get_texture(void);
 
-		virtual void draw_texture( int stage );
+		virtual void draw_texture(int stage);
 
-		virtual void save_file( cpstr str_path, int width, int height );
+		virtual void save_file(cpstr str_path, int width, int height);
 
 	public:
 		LPDIRECT3DTEXTURE9		m_backbuffer_texture;

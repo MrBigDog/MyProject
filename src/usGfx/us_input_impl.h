@@ -15,53 +15,64 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_INPUT_IMPL_H_
 #define _US_INPUT_IMPL_H_
+#include <usGfx/Export.h>
+#include <usGfx/us_mouse_argument.h>
+#include <usGfx/us_input_device_base.h>
+#include <usCore/us_event_base.h>
+#include <usUtil/us_common_file.h>
+#include <usUtil/us_singleton.h>
+
+#include <dinput.h>
+#include <map>
 
 namespace uniscope_globe
 {
-	class LIB_GFX_API input_impl 
-//#ifdef WIN64
-//		: public input_base
-//#endif
+	class input_device_base;
+
+	class USGFX_EXPORT input_impl
+		//#ifdef WIN64
+		//		: public input_base
+		//#endif
 	{
 		typedef std::map<ustring, input_device_base*> input_device_map;
 	public:
-		input_impl( void );
+		input_impl(void);
 
-		virtual ~input_impl( void );
-
-	public:
-		void create( HWND hwnd, HWND hwnd_parent, HINSTANCE hinstance );
-
-		void destroy( void );	
+		virtual ~input_impl(void);
 
 	public:
-		static BOOL CALLBACK enum_joysticks_callback( const DIDEVICEINSTANCE* pdidInstance, VOID* pContext );
+		void create(HWND hwnd, HWND hwnd_parent, HINSTANCE hinstance);
+
+		void destroy(void);
 
 	public:
-		virtual void update( HWND hwnd );
+		static BOOL CALLBACK enum_joysticks_callback(const DIDEVICEINSTANCE* pdidInstance, VOID* pContext);
+
+	public:
+		virtual void update(HWND hwnd);
 
 		//virtual void set_exclusive_mode( bool enable );
 
-		void refresh_device( void );
+		void refresh_device(void);
 
-		bool is_exist( cpstr device_name );
+		bool is_exist(cpstr device_name);
 
-		virtual bool register_input_device( const LPCTSTR device_name, input_device_base* input_device );
+		virtual bool register_input_device(const LPCTSTR device_name, input_device_base* input_device);
 
-		virtual void unregister_input_device( const LPCTSTR device_name );
+		virtual void unregister_input_device(const LPCTSTR device_name);
 
-		void unregister_all_device( void );
+		void unregister_all_device(void);
 
-		static LRESULT CALLBACK get_windows_procedure(int code, WPARAM w_param, LPARAM l_param );
+		static LRESULT CALLBACK get_windows_procedure(int code, WPARAM w_param, LPARAM l_param);
 
 	protected:
-		void probe_device( void );
+		void probe_device(void);
 
-		void probe_keyboard( void );
+		void probe_keyboard(void);
 
-		void probe_mouse( void );
+		void probe_mouse(void);
 
-		void probe_joystick( void );
+		void probe_joystick(void);
 
 	public:
 		event_base	m_input_event;
@@ -74,7 +85,7 @@ namespace uniscope_globe
 		HWND	  m_parent_window_handle;
 
 		HHOOK     m_hook_handle;
-		
+
 
 		IDirectInput8*			m_direct_input;
 
@@ -97,23 +108,23 @@ namespace uniscope_globe
 		bool  m_pending_refresh;
 	};
 
-	class LIB_GFX_API singleton_input_impl
+	class USGFX_EXPORT singleton_input_impl
 		: public singleton<input_impl>
 	{
 	public:
-		singleton_input_impl( void )
+		singleton_input_impl(void)
 		{
 		}
 
-		virtual ~singleton_input_impl( void )
+		virtual ~singleton_input_impl(void)
 		{
 		}
 	};
 
 #ifdef WIN64
 	///add by felix
-	class LIB_GFX_API tls_singleton_input_impl: public tls_singleton<input_impl>
-	{		
+	class USGFX_EXPORT tls_singleton_input_impl : public tls_singleton<input_impl>
+	{
 	};
 
 #endif

@@ -16,16 +16,23 @@
 #ifndef _US_GEOMETRY_SHADOW_MESH_H_
 #define _US_GEOMETRY_SHADOW_MESH_H_
 
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+
+#include <usCore/us_render_object.h>
+#include <usUtil/us_common_file.h>
+
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API geometry_shadow_mesh
+	class USGFX_EXPORT geometry_shadow_mesh
 		: public render_object
 		, public intersect_base
 	{
 	public:
-		geometry_shadow_mesh( void );
+		geometry_shadow_mesh(void);
 
-		virtual ~geometry_shadow_mesh( void );
+		virtual ~geometry_shadow_mesh(void);
 
 		friend class geometry_shadow_factory;
 
@@ -34,20 +41,20 @@ namespace uniscope_globe
 
 		// override from render_object
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
-		virtual void set_world_matrix( matrix4<double>& v_mat ) { m_trans_matrix = v_mat; }
+		virtual void set_world_matrix(matrix4<double>& v_mat) { m_trans_matrix = v_mat; }
 
-		virtual matrix4<double> get_world_matrix( void ) { return m_trans_matrix; }
+		virtual matrix4<double> get_world_matrix(void) { return m_trans_matrix; }
 
 		// override from intersect_base
 	public:
-		virtual bool intersect( const ray<double>& a_ray, intersect_result& result );
-		
+		virtual bool intersect(const ray<double>& a_ray, intersect_result& result);
+
 	public:
 		void clear();
 
-		void set_collapse( matrix_4d& mat );
+		void set_collapse(matrix_4d& mat);
 
 	public:
 		ulong m_fvf;

@@ -15,23 +15,27 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_SHADOW_RENDER_QUEUE_H_
 #define _US_SHADOW_RENDER_QUEUE_H_
+#include <usGfx/Export.h>
+#include <vector>
 
 namespace uniscope_globe
 {
-	class LIB_GFX_API shadow_render_queue
-	{
-	public :
-		shadow_render_queue( void );
+	class render_object;
 
-		~shadow_render_queue( void );
-	
+	class USGFX_EXPORT shadow_render_queue
+	{
+	public:
+		shadow_render_queue(void);
+
+		~shadow_render_queue(void);
+
 		typedef std::vector<render_object*> render_object_array;
 
 	public:
-		void push( render_object* v_ro );
-		
+		void push(render_object* v_ro);
+
 		void clear();
-		
+
 	public:
 		render_object_array m_render_object_queue;
 	};

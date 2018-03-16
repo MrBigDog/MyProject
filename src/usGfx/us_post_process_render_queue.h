@@ -25,23 +25,29 @@ public:
 #ifndef _US_POST_PROCESS_RENDER_QUEUE_H_
 #define _US_POST_PROCESS_RENDER_QUEUE_H_
 
+#include <usGfx/Export.h>
+#include <usCore/us_common_render.h>
+#include <usUtil/us_common_file.h>
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API post_process_render_queue : public common_render
+	class d3d9_render_target_chain;
+
+	class USGFX_EXPORT post_process_render_queue : public common_render
 	{
 	protected:
-		post_process_render_queue( void ) {}
+		post_process_render_queue(void) {}
 
 	public:
-		post_process_render_queue( render_device* device ); 
+		post_process_render_queue(render_device* device);
 
-		virtual ~post_process_render_queue( void );
+		virtual ~post_process_render_queue(void);
 
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
 	protected:
-		void draw_hsl( render_argument* args );
+		void draw_hsl(render_argument* args);
 
 	protected:
 		//d3d9_effect_pp_hdr* m_render_effect;

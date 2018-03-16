@@ -16,31 +16,33 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_SORTED_RENDER_QUEUE_H_
 #define _US_SORTED_RENDER_QUEUE_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_generic_render_queue.h>
+//#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	bool render_object_compare_function( render_object* ro1, render_object* ro2 );
+	bool render_object_compare_function(render_object* ro1, render_object* ro2);
 
-	bool render_object_compare_function_ex( render_object* ro1, render_object* ro2 );
+	bool render_object_compare_function_ex(render_object* ro1, render_object* ro2);
 
-	class sorted_render_queue : public generic_render_queue
+	class USGFX_EXPORT sorted_render_queue : public generic_render_queue
 	{
 	public:
-		sorted_render_queue( void );
+		sorted_render_queue(void);
 
-		virtual ~sorted_render_queue( void );
+		virtual ~sorted_render_queue(void);
 
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
-		virtual void draw_alpha( render_argument* args );
+		virtual void draw_alpha(render_argument* args);
 
-		virtual void flush( void );	
+		virtual void flush(void);
 
 	protected:
-		void draw_alpha_test( render_argument* args );
+		void draw_alpha_test(render_argument* args);
 
-		void draw_alpha_blend( render_argument* args );
+		void draw_alpha_blend(render_argument* args);
 	};
 
 	typedef sorted_render_queue alphe_blend_model_render_queue;

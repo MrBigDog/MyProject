@@ -15,10 +15,13 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_EFFECT_VERTEX_BLEND_H_
 #define _US_D3D9_EFFECT_VERTEX_BLEND_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_effect_common_mesh.h>
+#include <usUtil/us_matrix4.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_effect_vertex_blend
+	class USGFX_EXPORT d3d9_effect_vertex_blend
 		: public d3d9_effect_common_mesh
 	{
 	protected:

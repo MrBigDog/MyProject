@@ -15,7 +15,10 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_VERTEX_DECLEAR_H_
 #define _US_D3D9_VERTEX_DECLEAR_H_
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
 
+#include <windows.h>
 //////////////////////////////////////////////////////////////////////////
 // custom_vertex
 //////////////////////////////////////////////////////////////////////////
@@ -45,12 +48,12 @@ namespace uniscope_globe
 		static const ulong stride;
 	};
 
-//	const ulong position_color::fvf = D3DFVF_XYZ | D3DFVF_DIFFUSE;
-//	const ulong position_color::stride = 16;
+	//	const ulong position_color::fvf = D3DFVF_XYZ | D3DFVF_DIFFUSE;
+	//	const ulong position_color::stride = 16;
 
-	//////////////////////////////////////////////////////////////////////////
-	// Position Normal
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Position Normal
+		//////////////////////////////////////////////////////////////////////////
 	struct position_normal
 	{
 		float x, y, z;
@@ -58,7 +61,7 @@ namespace uniscope_globe
 		static const ulong fvf;
 		static const ulong stride;
 	};
-	
+
 	//	const ulong position_normal::fvf = D3DFVF_XYZ | D3DFVF_NORMAL;
 	//	const ulong position_normal::stride = 24;
 
@@ -74,13 +77,13 @@ namespace uniscope_globe
 		static const ulong stride;
 	};
 
-//	const ulong position_color_texture::fvf = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1;
-//	const ulong position_color_texture::stride = 24;
+	//	const ulong position_color_texture::fvf = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1;
+	//	const ulong position_color_texture::stride = 24;
 
 
-	//////////////////////////////////////////////////////////////////////////
-	// Position Color Texture2
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Position Color Texture2
+		//////////////////////////////////////////////////////////////////////////
 	struct position_color_texture2
 	{
 		float x, y, z;
@@ -91,13 +94,13 @@ namespace uniscope_globe
 		static const ulong stride;
 	};
 
-//	const ulong position_color_texture2::fvf = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX2;
-//	const ulong position_color_texture2::stride = 32;
+	//	const ulong position_color_texture2::fvf = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX2;
+	//	const ulong position_color_texture2::stride = 32;
 
 
-	//////////////////////////////////////////////////////////////////////////
-	// Position Texture
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Position Texture
+		//////////////////////////////////////////////////////////////////////////
 	struct position_texture
 	{
 		float x, y, z;
@@ -106,12 +109,12 @@ namespace uniscope_globe
 		static const ulong stride;
 	};
 
-//	const ulong position_texture::fvf = D3DFVF_XYZ | D3DFVF_TEX1;
-//	const ulong position_texture::stride = 20;
+	//	const ulong position_texture::fvf = D3DFVF_XYZ | D3DFVF_TEX1;
+	//	const ulong position_texture::stride = 20;
 
-	//////////////////////////////////////////////////////////////////////////
-	// Position Texture2
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Position Texture2
+		//////////////////////////////////////////////////////////////////////////
 	struct position_texture2
 	{
 		float x, y, z;
@@ -121,12 +124,12 @@ namespace uniscope_globe
 		static const ulong stride;
 	};
 
-//	const ulong position_texture2::fvf = D3DFVF_XYZ | D3DFVF_TEX2;
-//	const ulong position_texture2::stride = 28;
+	//	const ulong position_texture2::fvf = D3DFVF_XYZ | D3DFVF_TEX2;
+	//	const ulong position_texture2::stride = 28;
 
-	//////////////////////////////////////////////////////////////////////////
-	// Position Texture3
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Position Texture3
+		//////////////////////////////////////////////////////////////////////////
 	struct position_texture3
 	{
 		float x, y, z;
@@ -187,71 +190,71 @@ namespace uniscope_globe
 	//////////////////////////////////////////////////////////////////////////
 	struct position_normal_texture
 	{
-		float		x,y,z;
-		float       nx,ny,nz;
+		float		x, y, z;
+		float       nx, ny, nz;
 		float       tu1, tv1;
 		static const ulong fvf;
 		static const ulong stride;
 	};
 
-//	const ulong position_normal_texture::fvf = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
-//	const ulong position_normal_texture::stride = 32;
+	//	const ulong position_normal_texture::fvf = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
+	//	const ulong position_normal_texture::stride = 32;
 
-	//////////////////////////////////////////////////////////////////////////
-	// Position Normal Texture2
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Position Normal Texture2
+		//////////////////////////////////////////////////////////////////////////
 	struct position_normal_texture2
 	{
-		float		x,y,z;
-		float       nx,ny,nz;
+		float		x, y, z;
+		float       nx, ny, nz;
 		float       tu1, tv1;
 		float       tu2, tv2;
 		static const ulong fvf;
 		static const ulong stride;
 	};
 
-//	const ulong position_normal_texture2::fvf = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX2;
-//	const ulong position_normal_texture2::stride = 40;
+	//	const ulong position_normal_texture2::fvf = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX2;
+	//	const ulong position_normal_texture2::stride = 40;
 
-	//////////////////////////////////////////////////////////////////////////
-	// Position Normal Color
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Position Normal Color
+		//////////////////////////////////////////////////////////////////////////
 	struct position_normal_color
 	{
-		float		x,y,z;
-		float		nx,ny,nz;
+		float		x, y, z;
+		float		nx, ny, nz;
 		ulong		color;
 		static const ulong fvf;
 		static const ulong stride;
 	};
 
-//	const ulong position_normal_color::fvf = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE;
-//	const ulong position_normal_color::stride = 28;
+	//	const ulong position_normal_color::fvf = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE;
+	//	const ulong position_normal_color::stride = 28;
 
 
-	//////////////////////////////////////////////////////////////////////////
-	// Position Normal Color Texture
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Position Normal Color Texture
+		//////////////////////////////////////////////////////////////////////////
 	struct position_normal_color_texture
 	{
-		float		x,y,z;
-		float       nx,ny,nz;
+		float		x, y, z;
+		float       nx, ny, nz;
 		ulong		color;
 		float       tu1, tv1;
 		static const ulong fvf;
 		static const ulong stride;
 	};
 
-//	const ulong position_normal_color_texture::fvf = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX1;
-//	const ulong position_normal_color_texture::stride = 36;
+	//	const ulong position_normal_color_texture::fvf = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX1;
+	//	const ulong position_normal_color_texture::stride = 36;
 
-	//////////////////////////////////////////////////////////////////////////
-	// Position Normal Color Texture2
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Position Normal Color Texture2
+		//////////////////////////////////////////////////////////////////////////
 	struct position_normal_color_texture2
 	{
-		float		x,y,z;
-		float       nx,ny,nz;
+		float		x, y, z;
+		float       nx, ny, nz;
 		ulong		color;
 		float       tu1, tv1;
 		float       tu2, tv2;
@@ -259,12 +262,12 @@ namespace uniscope_globe
 		static const ulong stride;
 	};
 
-//	const ulong position_normal_color_texture2::fvf = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX2;
-//	const ulong position_normal_color_texture2::stride = 44;
+	//	const ulong position_normal_color_texture2::fvf = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX2;
+	//	const ulong position_normal_color_texture2::stride = 44;
 
-	//////////////////////////////////////////////////////////////////////////
-	// Transformed Position Color
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Transformed Position Color
+		//////////////////////////////////////////////////////////////////////////
 	struct transformed_color
 	{
 		float x, y, z, rhw;
@@ -273,12 +276,12 @@ namespace uniscope_globe
 		static const ulong stride;
 	};
 
-//	const ulong transformed_color::fvf = D3DFVF_XYZRHW | D3DFVF_DIFFUSE;
-//	const ulong transformed_color::stride = 20;
+	//	const ulong transformed_color::fvf = D3DFVF_XYZRHW | D3DFVF_DIFFUSE;
+	//	const ulong transformed_color::stride = 20;
 
-	//////////////////////////////////////////////////////////////////////////
-	// Transformed Position Texture
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Transformed Position Texture
+		//////////////////////////////////////////////////////////////////////////
 	struct transformed_texture
 	{
 		float x, y, z, rhw;
@@ -287,12 +290,12 @@ namespace uniscope_globe
 		static const ulong stride;
 	};
 
-//	const ulong transformed_texture::fvf = D3DFVF_XYZRHW | D3DFVF_TEX1;
-//	const ulong transformed_texture::stride = 24;
+	//	const ulong transformed_texture::fvf = D3DFVF_XYZRHW | D3DFVF_TEX1;
+	//	const ulong transformed_texture::stride = 24;
 
-	//////////////////////////////////////////////////////////////////////////
-	// Transformed Position Color Texture
-	//////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////
+		// Transformed Position Color Texture
+		//////////////////////////////////////////////////////////////////////////
 	struct transformed_color_texture
 	{
 		float x, y, z, rhw;
@@ -302,8 +305,8 @@ namespace uniscope_globe
 		static const ulong stride;
 	};
 
-//	const ulong transformed_color_texture::fvf = D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1;
-//	const ulong transformed_color_texture::stride = 28;
+	//	const ulong transformed_color_texture::fvf = D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1;
+	//	const ulong transformed_color_texture::stride = 28;
 
 	class degenerate_quad
 	{

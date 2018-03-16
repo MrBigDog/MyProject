@@ -16,20 +16,23 @@
 #ifndef _US_D3D9_RENDER_FONT_H_
 #define _US_D3D9_RENDER_FONT_H_
 
+#include <usGfx/Export.h>
+//#include <usUtil/us_common_file.h>
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_render_font
+	class USGFX_EXPORT d3d9_render_font
 	{
 	public:
-		d3d9_render_font( void );
+		d3d9_render_font(void);
 
-		virtual ~d3d9_render_font( void );
+		virtual ~d3d9_render_font(void);
 
 	public:
-		long on_lost_device( void );
+		long on_lost_device(void);
 
-		long on_reset_device( void );
-		 
+		long on_reset_device(void);
+
 	};
 }
 

@@ -14,32 +14,34 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_d3d9_mesh_subset.h"
+#include <usGfx/us_d3d9_hardware_mesh.h>
+#include <usUtil/us_object_base.h>
 
 namespace uniscope_globe
 {
-	d3d9_mesh_subset::d3d9_mesh_subset( void )
+	d3d9_mesh_subset::d3d9_mesh_subset(void)
 	{
 		m_rtti = US_RTTI_D3D9_MESH_SUBSET;
 	}
 
-	d3d9_mesh_subset::~d3d9_mesh_subset( void )
+	d3d9_mesh_subset::~d3d9_mesh_subset(void)
 	{
 	}
 
-	void d3d9_mesh_subset::create( d3d9_hardware_mesh_buffer* in_parent_mesh_buffer, int mat_index, std::vector<ulong>& in_tri_array )
+	void d3d9_mesh_subset::create(d3d9_hardware_mesh_buffer* in_parent_mesh_buffer, int mat_index, std::vector<ulong>& in_tri_array)
 	{
 		m_parent_mesh_buffer = in_parent_mesh_buffer;
 		m_material_index = mat_index;
 		m_face_index_array = in_tri_array;
 	}
 
-	void d3d9_mesh_subset::lock( void )
+	void d3d9_mesh_subset::lock(void)
 	{
 		m_parent_mesh_buffer->lock();
 
-		this->attach_buffer_from( m_parent_mesh_buffer );
+		this->attach_buffer_from(m_parent_mesh_buffer);
 	}
 
 	void d3d9_mesh_subset::unlock()
@@ -52,29 +54,29 @@ namespace uniscope_globe
 		this->detach_buffer();
 	}
 
-	material_entry* d3d9_mesh_subset::get_material_entry( void )
+	material_entry* d3d9_mesh_subset::get_material_entry(void)
 	{
 		d3d9_hardware_mesh* v_mesh = dynamic_cast<d3d9_hardware_mesh*>(m_parent_mesh_buffer);
-		if(v_mesh == NULL ) return NULL;
+		if (v_mesh == NULL) return NULL;
 		return &(v_mesh->m_material_entry_array[m_material_index]);
 	}
 
-	void d3d9_mesh_subset::update( void )
+	void d3d9_mesh_subset::update(void)
 	{
 		update_compact_map();
 
 		update_center();
 	}
 
-	void d3d9_mesh_subset::update_compact_map( void )
+	void d3d9_mesh_subset::update_compact_map(void)
 	{
 		m_compact_index_map.clear();
 
 		d3d9_hardware_mesh_buffer* v_mesh_buffer = m_parent_mesh_buffer;
 
-		if( v_mesh_buffer->m_32bit_index )
+		if (v_mesh_buffer->m_32bit_index)
 		{
-			for(int ni = 0; ni < m_face_index_array.size(); ni++ )
+			for (int ni = 0; ni < m_face_index_array.size(); ni++)
 			{
 				ulong face_index = m_face_index_array[ni];
 				ulong* p_v1_indx = (ulong*)v_mesh_buffer->m_index_buffer + 3 * face_index;
@@ -86,7 +88,7 @@ namespace uniscope_globe
 		}
 		else
 		{
-			for(int ni = 0; ni < m_face_index_array.size(); ni++ )
+			for (int ni = 0; ni < m_face_index_array.size(); ni++)
 			{
 				ushort face_index = m_face_index_array[ni];
 				ushort* p_v1_indx = (ushort*)v_mesh_buffer->m_index_buffer + 3 * face_index;

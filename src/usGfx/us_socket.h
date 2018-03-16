@@ -15,26 +15,28 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_WIN_SOCKET_H_
 #define _US_WIN_SOCKET_H_
-
+#include <usGfx/Export.h>
+#include <winsock.h>
+//#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API us_socket
+	class USGFX_EXPORT us_socket
 	{
 	public:
-		us_socket( void );
+		us_socket(void);
 		~us_socket();
 
 	public:
-		bool connect( const char * addr, int port );
+		bool connect(const char * addr, int port);
 		void close();
 
-		bool receive( char* stream, int size ) volatile;
-		bool send ( char* stream, int size ) volatile;
+		bool receive(char* stream, int size) volatile;
+		bool send(char* stream, int size) volatile;
 
 	private:
 		void start();
 		void end();
-	
+
 	private:
 		SOCKET m_s;
 	};

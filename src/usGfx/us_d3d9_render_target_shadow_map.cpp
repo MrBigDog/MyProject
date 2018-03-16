@@ -14,7 +14,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+////#include "stdafx.h"
 #include "us_d3d9_render_target_shadow_map.h"
 
 namespace uniscope_globe

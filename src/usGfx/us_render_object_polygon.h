@@ -15,35 +15,38 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RENDER_OBJECT_POLYGON_H_
 #define _US_RENDER_OBJECT_POLYGON_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+#include <usCore/us_render_object.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API render_object_polygon
+	class USGFX_EXPORT render_object_polygon
 		: public render_object
 	{
 	public:
-		render_object_polygon( void );
+		render_object_polygon(void);
 
-		virtual ~render_object_polygon( void );
+		virtual ~render_object_polygon(void);
 
 		friend class render_object_factory;
 		friend class render_object_polygon_factory;
 
 	public:
-		static render_object_polygon* create_shared_instance( void );
+		static render_object_polygon* create_shared_instance(void);
 
 		// override from render_object
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
 	public:
-		virtual void set_world_matrix( matrix4<double>& v_mat ) {  m_trans_matrix = v_mat; }
+		virtual void set_world_matrix(matrix4<double>& v_mat) { m_trans_matrix = v_mat; }
 
-		virtual matrix4<double> get_world_matrix( void ) { return m_trans_matrix; }
+		virtual matrix4<double> get_world_matrix(void) { return m_trans_matrix; }
 
-		void set_collapse( matrix_4d& mat );
+		void set_collapse(matrix_4d& mat);
 
-		void clear( void );
+		void clear(void);
 
 	public:
 		std::vector<position_color> m_vertex_array;
@@ -54,7 +57,7 @@ namespace uniscope_globe
 		vector_3d m_center;
 		matrix_4d m_trans_matrix;
 		matrix_4d m_collapse_matrix;
-		 
+
 	};
 }
 

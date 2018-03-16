@@ -15,35 +15,40 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_SKINNING_HARDWARE_MESH_H_
 #define _US_D3D9_SKINNING_HARDWARE_MESH_H_
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_hardware_mesh.h>
+#include <usUtil/us_matrix4.h>
+
+#include <vector>
 
 namespace uniscope_globe
 {
-	class d3d9_skinning_hardware_mesh
+	class USGFX_EXPORT d3d9_skinning_hardware_mesh
 		: public d3d9_hardware_mesh
 	{
 	public:
-		d3d9_skinning_hardware_mesh( void );
+		d3d9_skinning_hardware_mesh(void);
 
 	public:
 		//d3d9_skinning_hardware_mesh( hardware_mesh_buffer* in_buffer );
 
-		virtual ~d3d9_skinning_hardware_mesh( void );
+		virtual ~d3d9_skinning_hardware_mesh(void);
 
 	public:
-		virtual long create( render_device* device );
+		virtual long create(render_device* device);
 
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
-		virtual bool intersect( const ray<double>& in_ray, intersect_result& out_result );
+		virtual bool intersect(const ray<double>& in_ray, intersect_result& out_result);
 
 		// override hardware_mesh
 	public:
-		virtual hardware_mesh* clone( void );
+		virtual hardware_mesh* clone(void);
 
 	public:
-		usx_frame* get_root_frame( void ) { return m_root_frame; }
+		usx_frame* get_root_frame(void) { return m_root_frame; }
 
-		void set_root_frame( usx_frame* v_root_frame ) { m_root_frame = v_root_frame; }
+		void set_root_frame(usx_frame* v_root_frame) { m_root_frame = v_root_frame; }
 
 	public:
 		usx_frame* m_root_frame;

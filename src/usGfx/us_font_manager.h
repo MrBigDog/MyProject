@@ -15,10 +15,19 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_FONT_MANAGER_H_
 #define _US_FONT_MANAGER_H_
+#include <usGfx/Export.h>
+#include <usUtil/us_common_file.h>
+#include <usUtil/us_singleton.h>
+
+#include <unordered_map>
+#include <d3dx9core.h>
+#include <windows.h>
 
 namespace uniscope_globe
 {
-	struct LIB_GFX_API font_description
+	class render_device;
+
+	struct USGFX_EXPORT font_description
 	{
 		int  height;
 		uint width;
@@ -30,31 +39,31 @@ namespace uniscope_globe
 		uint quality;
 		uint pitch_family;
 		ustring face_name;
-		font_description( void )
+		font_description(void)
 		{
 			height = 20;
-			width  = 0;
+			width = 0;
 			weight = 700,
-			mip	   = 5;
+				mip = 5;
 			italic = false;
 
-			char_set		 = DEFAULT_CHARSET;
+			char_set = DEFAULT_CHARSET;
 			output_precision = OUT_OUTLINE_PRECIS;
-			quality			 = DEFAULT_QUALITY;
-			pitch_family	 = DEFAULT_PITCH;
-			face_name		 = L"Arial";
+			quality = DEFAULT_QUALITY;
+			pitch_family = DEFAULT_PITCH;
+			face_name = L"Arial";
 		}
 	};
 
-	class LIB_GFX_API font_manager
+	class USGFX_EXPORT font_manager
 	{
 	public:
-		font_manager( void );
+		font_manager(void);
 
 	public:
-		font_manager( render_device* device );
+		font_manager(render_device* device);
 
-		virtual ~font_manager( void );
+		virtual ~font_manager(void);
 #if _MSC_VER >= 1900
 		typedef std::unordered_map<ustring, LPD3DXFONT> font_map;
 #else
@@ -63,28 +72,28 @@ namespace uniscope_globe
 
 
 	public:
-		void create(  render_device* device  );
+		void create(render_device* device);
 
-		void destroy( void );
+		void destroy(void);
 
-		void* get_font( font_description& font_desp );
+		void* get_font(font_description& font_desp);
 
 	private:
 		render_device* m_device;
 
 		font_map m_font_map;
-		 
+
 	};
 
-	class LIB_GFX_API singleton_font_manager
+	class USGFX_EXPORT singleton_font_manager
 		: public singleton<font_manager>
 	{
 	public:
-		singleton_font_manager( void )
+		singleton_font_manager(void)
 		{
 		}
 
-		virtual ~singleton_font_manager( void )
+		virtual ~singleton_font_manager(void)
 		{
 		}
 	};

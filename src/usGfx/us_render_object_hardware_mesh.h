@@ -16,31 +16,42 @@
 #ifndef _US_RENDER_OBJECT_HARDWARE_MESH_H_
 #define _US_RENDER_OBJECT_HARDWARE_MESH_H_
 
+#include <usGfx/Export.h>
+#include <usGfx/us_render_object_geometry_mesh.h>
+#include <usCore/us_hardware_base.h>
+#include <usUtil/us_common_file.h>
+
+#include <d3d9.h>
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API render_object_hardware_mesh
+	class render_device;
+	class hardware_creator;
+	class render_argument;
+
+	class USGFX_EXPORT render_object_hardware_mesh
 		: public render_object_geometry_mesh
 		, public hardware_base
 	{
 	protected:
-		render_object_hardware_mesh( void ){}
+		render_object_hardware_mesh(void) {}
 
 	public:
-		render_object_hardware_mesh( hardware_creator* in_creator );
+		render_object_hardware_mesh(hardware_creator* in_creator);
 
-		render_object_hardware_mesh( const render_object_hardware_mesh& v_mesh );
+		render_object_hardware_mesh(const render_object_hardware_mesh& v_mesh);
 
-		virtual ~render_object_hardware_mesh( void );
+		virtual ~render_object_hardware_mesh(void);
 
 		// override from hardware_base
 	public:
-		virtual long create( render_device* device );
+		virtual long create(render_device* device);
 
-		virtual bool destroy( void );
+		virtual bool destroy(void);
 
 		// override from render_object
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
 	protected:
 		IDirect3DVertexBuffer9*			m_vertex_buffer;
@@ -49,7 +60,7 @@ namespace uniscope_globe
 
 		IDirect3DIndexBuffer9*			m_index_buffer;
 
-		ulong							m_num_of_indices;		 
+		ulong							m_num_of_indices;
 
 		hardware_creator*				m_mesh_creator;
 	};

@@ -16,32 +16,39 @@
 #ifndef _US_D3D9_HARDWARE_OCCLUSION_QUERY_H_
 #define _US_D3D9_HARDWARE_OCCLUSION_QUERY_H_
 
+#include <usGfx/Export.h>
+#include <usCore/us_hardware_occlusion_query.h>
+#include <usUtil/us_common_file.h>
+
+#include <d3d9.h>
+#include <d3dx9core.h>
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_hardware_occlusion_query : public hardware_occlusion_query
+	class USGFX_EXPORT d3d9_hardware_occlusion_query : public hardware_occlusion_query
 	{
 	public:
-		d3d9_hardware_occlusion_query( IDirect3DDevice9* device );
+		d3d9_hardware_occlusion_query(IDirect3DDevice9* device);
 
-		virtual ~d3d9_hardware_occlusion_query( void );
+		virtual ~d3d9_hardware_occlusion_query(void);
 
 	public:
-		virtual void begin_occlusion_query( void );
+		virtual void begin_occlusion_query(void);
 
-		virtual void end_occlusion_query( void );
+		virtual void end_occlusion_query(void);
 
-		virtual void issue_begin( void );
+		virtual void issue_begin(void);
 
-		virtual void issue_end( void );
+		virtual void issue_end(void);
 
 		virtual bool pull_occlusion_query(uint* num_of_fragments);
 
-		virtual bool is_still_outstanding( void );
+		virtual bool is_still_outstanding(void);
 
 	public:
-		virtual long on_lost_device( void );
+		virtual long on_lost_device(void);
 
-		virtual long on_reset_device( void );
+		virtual long on_reset_device(void);
 
 	public:
 		IDirect3DDevice9*		m_device;
@@ -54,7 +61,7 @@ namespace uniscope_globe
 
 		LPDIRECT3DTEXTURE9		m_occlusion_texture;   // Texture to get surface fro
 
-		
+
 	};
 }
 

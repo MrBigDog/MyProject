@@ -13,12 +13,18 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+////#include "stdafx.h"
 #include "us_d3d9_complex_hardware_mesh.h"
+#include <usGfx/us_d3d9_hardware_mesh.h>
+#include <usGfx/us_d3d9_effect_common_mesh.h>
+#include <usDotx/us_usx_animation_set.h>
+#include <usDotx/us_usx_frame.h>
+
+#include <windows.h>
 
 namespace uniscope_globe
 {
-	simple_animation_player::simple_animation_player( usx_animation_set* in_anim_set )
+	simple_animation_player::simple_animation_player(usx_animation_set* in_anim_set)
 	{
 		m_animation_set = in_anim_set;
 
@@ -29,15 +35,15 @@ namespace uniscope_globe
 
 	simple_animation_player::~simple_animation_player(void)
 	{
-		AUTO_DELETE( m_animation_set );
+		AUTO_DELETE(m_animation_set);
 	}
 
-	void simple_animation_player::attach( usx_frame* in_frame )
+	void simple_animation_player::attach(usx_frame* in_frame)
 	{
-		m_animation_set->attach_to_frame( in_frame );
+		m_animation_set->attach_to_frame(in_frame);
 	}
 
-	void simple_animation_player::update( void )
+	void simple_animation_player::update(void)
 	{
 		//ulong cur_time_tick = timeGetTime();
 
@@ -57,19 +63,19 @@ namespace uniscope_globe
 		ulong cur_time_tick = timeGetTime();
 		m_current_time = m_current_time + cur_time_tick - m_last_time_tick;
 
-		if ( m_current_time > m_animation_set->m_time_length )
+		if (m_current_time > m_animation_set->m_time_length)
 		{
 			m_current_time = m_current_time % m_animation_set->m_time_length;
 		}
 
-		m_animation_set->update( m_current_time );
-		
+		m_animation_set->update(m_current_time);
+
 		m_last_time_tick = cur_time_tick;
 	}
 
 
 	//////////////////////////////////////////////////////////////////////////
-	d3d9_complex_hardware_mesh::d3d9_complex_hardware_mesh( void )
+	d3d9_complex_hardware_mesh::d3d9_complex_hardware_mesh(void)
 	{
 		m_rtti = US_RTTI_D3D9_COMPLEX_HARDWARE_MESH;
 
@@ -123,29 +129,29 @@ namespace uniscope_globe
 	//	}		
 	//}
 
-	d3d9_complex_hardware_mesh::~d3d9_complex_hardware_mesh( void )
+	d3d9_complex_hardware_mesh::~d3d9_complex_hardware_mesh(void)
 	{
 		destroy();
 	}
 
-	void d3d9_complex_hardware_mesh::generate_topological_data( void )
+	void d3d9_complex_hardware_mesh::generate_topological_data(void)
 	{
 		mesh_frame_map::iterator itr = m_mesh_frame_map.begin();
-		for( ; itr != m_mesh_frame_map.end(); itr ++ )
+		for (; itr != m_mesh_frame_map.end(); itr++)
 		{
 			itr->first->generate_topological_data();
 		}
 	}
 
-	void d3d9_complex_hardware_mesh::update_bound_box( void )
+	void d3d9_complex_hardware_mesh::update_bound_box(void)
 	{
 		m_bound_box.make_invalid();
 
 		mesh_frame_map::iterator itr = m_mesh_frame_map.begin();
-		for( ; itr != m_mesh_frame_map.end(); itr ++ )
+		for (; itr != m_mesh_frame_map.end(); itr++)
 		{
 			itr->first->update_bound_box();
-			m_bound_box.combine( itr->first->get_bound_box() );
+			m_bound_box.combine(itr->first->get_bound_box());
 		}
 	}
 
@@ -158,14 +164,14 @@ namespace uniscope_globe
 	//	}
 	//}
 
-	hardware_mesh* d3d9_complex_hardware_mesh::clone( void )
+	hardware_mesh* d3d9_complex_hardware_mesh::clone(void)
 	{
 		d3d9_complex_hardware_mesh* v_cloned_mesh = new d3d9_complex_hardware_mesh();
-		
+
 		mesh_frame_map::iterator itr = m_mesh_frame_map.begin();
-		for( ; itr != m_mesh_frame_map.end(); itr ++ )
+		for (; itr != m_mesh_frame_map.end(); itr++)
 		{
-			v_cloned_mesh->m_mesh_frame_map.insert( make_pair( dynamic_cast<d3d9_hardware_mesh*>( itr->first->clone() ), itr->second->clone() ) );
+			v_cloned_mesh->m_mesh_frame_map.insert(std::make_pair(dynamic_cast<d3d9_hardware_mesh*>(itr->first->clone()), itr->second->clone()));
 		}
 
 		v_cloned_mesh->m_root_frame = this->m_root_frame->clone();
@@ -178,37 +184,37 @@ namespace uniscope_globe
 	}
 
 	// create synchronously
-	long d3d9_complex_hardware_mesh::create( render_device* device )
+	long d3d9_complex_hardware_mesh::create(render_device* device)
 	{
 		mesh_frame_map::iterator itr = m_mesh_frame_map.begin();
-		for( ; itr != m_mesh_frame_map.end(); itr ++ )
+		for (; itr != m_mesh_frame_map.end(); itr++)
 		{
 			d3d9_hardware_mesh* v_mesh = itr->first;
 
-			v_mesh->create( device );
+			v_mesh->create(device);
 		}
 
 		return 0;
 	}
 
-	bool d3d9_complex_hardware_mesh::destroy( void )
+	bool d3d9_complex_hardware_mesh::destroy(void)
 	{
-		AUTO_DELETE( m_root_frame );
+		AUTO_DELETE(m_root_frame);
 
 		mesh_frame_map::iterator itr = m_mesh_frame_map.begin();
-		for( ; itr != m_mesh_frame_map.end(); itr ++ )
+		for (; itr != m_mesh_frame_map.end(); itr++)
 		{
 			d3d9_hardware_mesh* v_mesh = itr->first;
-			AUTO_DELETE( v_mesh );
+			AUTO_DELETE(v_mesh);
 		}
 
 		m_mesh_frame_map.clear();
 
 		animation_player_map::iterator itr2 = m_animation_player_map.begin();
-		for ( ; itr2 != m_animation_player_map.end(); itr2++ )
+		for (; itr2 != m_animation_player_map.end(); itr2++)
 		{
 			simple_animation_player* anim_player = itr2->second;
-			AUTO_DELETE( anim_player );
+			AUTO_DELETE(anim_player);
 		}
 
 		m_animation_player_map.clear();
@@ -216,45 +222,45 @@ namespace uniscope_globe
 		return true;
 	}
 
-	bool d3d9_complex_hardware_mesh::refresh( void )
+	bool d3d9_complex_hardware_mesh::refresh(void)
 	{
 		mesh_frame_map::iterator itr = m_mesh_frame_map.begin();
-		for( ; itr != m_mesh_frame_map.end(); itr ++ )
+		for (; itr != m_mesh_frame_map.end(); itr++)
 		{
 			d3d9_hardware_mesh* v_mesh = itr->first;
-			if( !v_mesh->refresh() )
+			if (!v_mesh->refresh())
 				return false;
 		}
 
 		return true;
 	}
 
-	void d3d9_complex_hardware_mesh::update_animation( void )
+	void d3d9_complex_hardware_mesh::update_animation(void)
 	{
-		if( m_root_frame == NULL ) return;
-		if( m_animation_player_map.size() == 0 ) return;
+		if (m_root_frame == NULL) return;
+		if (m_animation_player_map.size() == 0) return;
 
 		m_root_frame->reset();
 
 		animation_player_map::iterator itr = m_animation_player_map.begin();
-		if( itr != m_animation_player_map.end() )
+		if (itr != m_animation_player_map.end())
 		{
 			simple_animation_player* player = itr->second;
 
 			player->update();
 		}
 
-		m_root_frame->update_hierarchy( matrix4<double>::s_identity );
+		m_root_frame->update_hierarchy(matrix4<double>::s_identity);
 	}
 
-	void d3d9_complex_hardware_mesh::draw( render_argument* args )
+	void d3d9_complex_hardware_mesh::draw(render_argument* args)
 	{
 		update_animation();
 
 		d3d9_effect_common_mesh* v_render = (d3d9_effect_common_mesh*)(args->m_render);
 
 		mesh_frame_map::iterator itr = m_mesh_frame_map.begin();
-		for( ; itr != m_mesh_frame_map.end(); itr ++ )
+		for (; itr != m_mesh_frame_map.end(); itr++)
 		{
 			d3d9_hardware_mesh* v_mesh = itr->first;
 			usx_frame* v_frame = itr->second;
@@ -262,7 +268,7 @@ namespace uniscope_globe
 			v_render->push_transform();
 
 			matrix4<float> mat = matrix4<float>::s_identity;
-			if( v_frame != NULL )
+			if (v_frame != NULL)
 			{
 				//std::vector<usx_frame*> usx_frame_array;
 				//usx_frame* cyc_frame = v_frame;
@@ -355,51 +361,51 @@ namespace uniscope_globe
 				//}
 				//mat = matrix4<float>( v_trans_mat.m );
 
-				mat = matrix4<float>( v_frame->m_combined_mat.m );
-				
+				mat = matrix4<float>(v_frame->m_combined_mat.m);
+
 			}
-			
-			v_render->multiply_transform( mat );
 
-			v_mesh->draw( args );
+			v_render->multiply_transform(mat);
 
-			v_render->pop_transform();			
+			v_mesh->draw(args);
+
+			v_render->pop_transform();
 		}
 
 	}
 
-	bool d3d9_complex_hardware_mesh::intersect( const ray<double>& in_ray, intersect_result& out_result )
+	bool d3d9_complex_hardware_mesh::intersect(const ray<double>& in_ray, intersect_result& out_result)
 	{
 		bool is_intersected = false;
 
 		mesh_frame_map::iterator itr = m_mesh_frame_map.begin();
-		for( ; itr != m_mesh_frame_map.end(); itr ++ )
+		for (; itr != m_mesh_frame_map.end(); itr++)
 		{
 			d3d9_hardware_mesh* v_mesh = itr->first;
 			usx_frame* v_frame = itr->second;
 
 			matrix4<double> mat = matrix4<double>::s_identity;
 			matrix4<double> mat_inv = matrix4<double>::s_identity;
-			if( v_frame != NULL )
+			if (v_frame != NULL)
 			{
 				mat = v_frame->m_combined_mat;
-				mat_inv = matrix4<double>::inverse( v_frame->m_combined_mat );
+				mat_inv = matrix4<double>::inverse(v_frame->m_combined_mat);
 			}
 
 			ray<double> v_ray;
 			v_ray.ray_origin = in_ray.ray_origin * mat_inv;
-			v_ray.ray_direction = matrix4<double>::rotate_normal( in_ray.ray_direction, mat_inv );
+			v_ray.ray_direction = matrix4<double>::rotate_normal(in_ray.ray_direction, mat_inv);
 			v_ray.ray_direction.normalize();
 
 			intersect_result result;
-			if( v_mesh->intersect( v_ray, result ) )
+			if (v_mesh->intersect(v_ray, result))
 			{
-				if( out_result.m_distance > result.m_distance )
+				if (out_result.m_distance > result.m_distance)
 				{
 					out_result.m_distance = result.m_distance;
 					out_result.m_position = result.m_position * mat;
 					out_result.m_inner_mesh = v_mesh;
-					out_result.m_face_index = result.m_face_index; 
+					out_result.m_face_index = result.m_face_index;
 					is_intersected = true;
 				}
 			}
@@ -408,17 +414,17 @@ namespace uniscope_globe
 		return is_intersected;
 	}
 
-	vector3<double> d3d9_complex_hardware_mesh::get_lowest_point( matrix4<double>& in_mat )
+	vector3<double> d3d9_complex_hardware_mesh::get_lowest_point(matrix4<double>& in_mat)
 	{
 		vector3<double> v_lowest_point;
 
 		mesh_frame_map::iterator itr = m_mesh_frame_map.begin();
-		for( ; itr != m_mesh_frame_map.end(); itr ++ )
+		for (; itr != m_mesh_frame_map.end(); itr++)
 		{
 			d3d9_hardware_mesh* v_mesh = itr->first;
-			
-			vector3<double> v_point = v_mesh->get_lowest_point( in_mat );
-			if( v_lowest_point.y > v_point.y )
+
+			vector3<double> v_point = v_mesh->get_lowest_point(in_mat);
+			if (v_lowest_point.y > v_point.y)
 			{
 				v_lowest_point = v_point;
 			}

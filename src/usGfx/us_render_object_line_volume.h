@@ -17,11 +17,17 @@
 #ifndef _US_RENDER_OBJECT_LINE_VOLUME_H_
 #define _US_RENDER_OBJECT_LINE_VOLUME_H_
 
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+#include <usCore/us_render_object.h>
+#include <usCore/us_shadow_volume_creator.h>
+//#include <usUtil/us_common_file.h>
+
 namespace uniscope_globe
 {
 	class render_object_factory;
 
-	class LIB_GFX_API render_object_line_volume
+	class USGFX_EXPORT render_object_line_volume
 		: public render_object
 		, public shadow_volume_creator
 		//, public intersect_base

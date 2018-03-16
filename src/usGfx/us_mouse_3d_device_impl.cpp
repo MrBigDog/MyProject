@@ -13,8 +13,9 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_mouse_3d_device_impl.h"
+#include <usUtil/us_math.h>
 
 namespace uniscope_globe
 {

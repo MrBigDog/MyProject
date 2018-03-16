@@ -16,10 +16,13 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_SHADOW_MAP_RENDER_H_
 #define _US_SHADOW_MAP_RENDER_H_
-
+#include <usGfx/Export.h>
+#include <usCore/us_render_node.h>
+//#include <usUtil/us_common_file.h>
+#include <d3d9.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API shadow_map_render : public render_node
+	class USGFX_EXPORT shadow_map_render : public render_node
 	{
 	public:
 		shadow_map_render( render_device* v_device );

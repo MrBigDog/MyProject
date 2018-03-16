@@ -15,6 +15,14 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_NETWORK_ARGUMENT_H_
 #define _US_NETWORK_ARGUMENT_H_
+#include <usGfx/Export.h>
+#include <usCore/us_event_argument.h>
+#include <usUtil/us_common_file.h>
+#include <usUtil/us_vector3.h>
+#include <usUtil/us_quaternion.h>
+#include <string>
+
+using namespace std;
 
 namespace uniscope_globe
 {
@@ -25,15 +33,15 @@ namespace uniscope_globe
 #define		US_NETWORK_LEAVE		4
 #define		US_NETWORK_CHANGE		5
 
-	class LIB_GFX_API network_argument
+	class USGFX_EXPORT network_argument
 		: public event_argument
 	{
 	public:
-		network_argument( void );
+		network_argument(void);
 
-		network_argument( int msg_id, string scene_name );
+		network_argument(int msg_id, string scene_name);
 
-		virtual ~network_argument( void );
+		virtual ~network_argument(void);
 
 	public:
 		int		m_msg_id;
@@ -52,7 +60,7 @@ namespace uniscope_globe
 		vector_3f		m_ahead;
 
 		float			m_rotate_speed;
-		quaternion_4f	m_rotate_dir;		 
+		quaternion_4f	m_rotate_dir;
 	};
 }
 

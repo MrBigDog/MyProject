@@ -14,7 +14,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "resource.h"
 #include "us_d3d9_effect_render_object_line_flake.h"
 

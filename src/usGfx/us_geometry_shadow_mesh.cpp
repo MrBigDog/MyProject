@@ -13,7 +13,7 @@
 //	Reference : 
 //
 ///////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "us_geometry_shadow_mesh.h"
 
 namespace uniscope_globe
@@ -54,14 +54,14 @@ namespace uniscope_globe
 		v_mesh_render->commit_changes();
 
 		args->m_device->set_vertex_declaration( m_fvf );
-		args->m_device->draw_indexed_triangle_list( D3DFMT_INDEX32, m_vertex_array.begin()._Myptr, (ulong)m_vertex_array.size(),
-													m_index_array.begin()._Myptr, (ulong)m_index_array.size(), m_stride );
+		args->m_device->draw_indexed_triangle_list( D3DFMT_INDEX32, m_vertex_array.begin()._Ptr, (ulong)m_vertex_array.size(),
+													m_index_array.begin()._Ptr, (ulong)m_index_array.size(), m_stride );
 
 		if ( m_frame_index_array.size() > 0 && m_frame_vertex_array.size() > 0 )
 		{
 			args->m_device->set_vertex_declaration( position_color::fvf );
 			render_helper::draw_indexed_primitive_up (  args->m_device, D3DPT_LINELIST, 0, 
-				m_frame_vertex_array.begin()._Myptr, m_frame_index_array.begin()._Myptr, 
+				m_frame_vertex_array.begin()._Ptr, m_frame_index_array.begin()._Ptr, 
 				m_frame_vertex_array.size(), m_frame_index_array.size() / 2, position_color::stride );
 		}
 

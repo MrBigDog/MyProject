@@ -15,12 +15,18 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_RENDER_OBJECT_GEOMETRY_MESH_H_
 #define _US_RENDER_OBJECT_GEOMETRY_MESH_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_hardware_mesh_buffer.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+#include <usCore/us_render_object.h>
+//#include <usCore/us_hardware_mesh.h>
+#include <usCore/us_shadow_volume_creator.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
 	class render_object_factory;
 
-	class LIB_GFX_API render_object_geometry_mesh
+	class USGFX_EXPORT render_object_geometry_mesh
 		: public render_object
 		, public shadow_volume_creator
 		//, public intersect_base

@@ -16,10 +16,13 @@
 ///////////////////////////////////////////////////////////////////////////
 #ifndef _US_D3D9_EFFECT_PP_TONE_MAP_H_
 #define _US_D3D9_EFFECT_PP_TONE_MAP_H_
-
+#include <usGfx/Export.h>
+#include <usGfx/us_d3d9_effect_pp.h>
+#include <usUtil/us_matrix4.h>
+#include <usUtil/us_common_file.h>
 namespace uniscope_globe
 {
-	class LIB_GFX_API d3d9_effect_pp_tone_map : public d3d9_effect_pp
+	class USGFX_EXPORT d3d9_effect_pp_tone_map : public d3d9_effect_pp
 	{
 	protected:
 		d3d9_effect_pp_tone_map(void){}

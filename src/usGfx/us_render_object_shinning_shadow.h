@@ -16,9 +16,22 @@
 #ifndef _US_RENDER_OBJECT_SHINNING_SHADOW_H_
 #define _US_RENDER_OBJECT_SHINNING_SHADOW_H_
 
+#include <usGfx/Export.h>
+#include <usDotx/us_usc_declaration.h>
+#include <usGfx/us_d3d9_vertex_declear.h>
+#include <usCore/us_render_object.h>
+#include <usCore/us_hardware_mesh.h>
+#include <usCore/us_shadow_volume_creator.h>
+#include <usUtil/us_common_file.h>
+#include <usDotx/us_usx_data_struct.h>
+#include <map>
+#include <d3dx9mesh.h>
+
 namespace uniscope_globe
 {
-	class LIB_GFX_API render_object_shinning_shadow
+	class d3d9_hardware_mesh_buffer;
+
+	class USGFX_EXPORT render_object_shinning_shadow
 		: public render_object
 		, public hardware_mesh
 		, public shadow_volume_creator
@@ -39,47 +52,47 @@ namespace uniscope_globe
 		typedef std::map< int, int > reorder_map;
 
 	protected:
-		render_object_shinning_shadow(){ }
+		render_object_shinning_shadow() { }
 
 	public:
-		render_object_shinning_shadow( d3d9_hardware_mesh_buffer* v_mesh );
+		render_object_shinning_shadow(d3d9_hardware_mesh_buffer* v_mesh);
 
 		virtual ~render_object_shinning_shadow();
 
 	public:
-		static render_object_shinning_shadow* create_shared_instance( d3d9_hardware_mesh_buffer* v_mesh );
+		static render_object_shinning_shadow* create_shared_instance(d3d9_hardware_mesh_buffer* v_mesh);
 
 	public:
-		virtual long create( render_device* device );
+		virtual long create(render_device* device);
 
-		virtual bool destroy( void );
+		virtual bool destroy(void);
 
-		virtual bool refresh( void );		
+		virtual bool refresh(void);
 
 	public:
-		virtual void draw( render_argument* args );
+		virtual void draw(render_argument* args);
 
 		//void create_from_mesh( d3d9_hardware_mesh_buffer* parent_mesh, vector4<double>& in_light, ulong v_stamp);
 
-		virtual void set_world_matrix( matrix4<double>& mat ) { m_world_matrix = mat; }
+		virtual void set_world_matrix(matrix4<double>& mat) { m_world_matrix = mat; }
 
-		virtual matrix4<double> get_world_matrix( void ) { return m_world_matrix; }
+		virtual matrix4<double> get_world_matrix(void) { return m_world_matrix; }
 
-		void set_height_offset( double v_height_offset ) { m_height_offset = v_height_offset; }
+		void set_height_offset(double v_height_offset) { m_height_offset = v_height_offset; }
 
 	protected:
-		void generate_vertices( float* in_vertices, ulong num_of_vertices, long stride, vector4<double>& in_light );
+		void generate_vertices(float* in_vertices, ulong num_of_vertices, long stride, vector4<double>& in_light);
 
-		void generate_indices( face_normal_array& in_normal_array, edge_array& in_edge_array, void* v_triangle, ulong num_of_vertices, vector4<double>& in_light );
+		void generate_indices(face_normal_array& in_normal_array, edge_array& in_edge_array, void* v_triangle, ulong num_of_vertices, vector4<double>& in_light);
 
 	private:
-		int  get_new_index( int index );
+		int  get_new_index(int index);
 
 		// override from shadow volume creator
-	public:	
-		virtual bool create_shadow_object( render_argument* args  );
+	public:
+		virtual bool create_shadow_object(render_argument* args);
 
-		virtual void clear_shadow_object( void ) { }
+		virtual void clear_shadow_object(void) { }
 
 		//virtual int get_pass1( void ) { return 6; }
 
