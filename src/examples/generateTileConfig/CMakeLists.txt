@@ -23,6 +23,10 @@ SET(TARGET_H
 	us/us_ray.h
 	us/us_vector4.h
 	us/string_util.h
+	us/us_utm_projection.h
+	us/us_projection.h
+	#StringUtils.h
+	#FileUtils.h
 	)
 SET(TARGET_SRC  
 	us/us_square_description.cpp
@@ -41,7 +45,12 @@ SET(TARGET_SRC
 	us/us_lon_lat_geometry.cpp
 	us/us_transform_base.cpp
 	us/us_vector4.cpp
-	main.cpp)
+	us/us_utm_projection.cpp
+	us/us_projection.cpp
+	main.cpp
+	#StringUtils.cpp
+	#FileUtils.cpp
+	)
 
 INCLUDE_DIRECTORIES( ${OSGEARTH_INCLUDE_DIR} ${OSG_INCLUDE_DIR})
 

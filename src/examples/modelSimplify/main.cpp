@@ -97,8 +97,30 @@ private:
 	std::vector< std::string > filenames;
 };
 
+class mynodevisitor:public osg::NodeVisitor
+{
+public:
+	mynodevisitor() :osg::NodeVisitor(osg::NodeVisitor::TRAVERSE_ALL_CHILDREN) {}
+
+
+	void apply(osg::Geode& geode)
+	{
+		std::cout << "got it" << std::endl;
+		//traverse(geode);
+	}
+protected:
+private:
+};
+
 int main()
 {
+	osg::ref_ptr<osg::Node> node = osgDB::readNodeFile("G:\\SuZhou\\SuZhou-osgb\\Data\\Tile_132102312012332011\\Tile_132102312012332011_L22_0030000.osgb");
+
+	mynodevisitor mnv;
+	node->accept(mnv);
+
+
+
 	DirectoryVisitor dv;
 	dv.traverse("D:\\000\\gwEarth\\src\\usGfx");
 	dv.writeToLocal("filename_list.txt");

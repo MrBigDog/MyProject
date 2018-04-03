@@ -8,7 +8,7 @@
 #include <cstring>
 #include <iomanip>
 
-#include "us_vector2.h"
+//#include "us_vector2.h"
 #include "us_vector3.h"
 
 namespace uniscope_globe
@@ -30,22 +30,22 @@ namespace uniscope_globe
 		return out;
 	}
 
-	static vector_2d string_to_vec2d(const std::string& str, const vector_2d& default_value)
-	{
-		std::stringstream buf(str);
-		vector_2d out = default_value;
-		buf >> out.x;
-		if (!buf.eof())
-		{
-			buf >> out.y/* >> out.z*/;
-		}
-		else
-		{
-			out.y = out.x;
-			//out.z = out.x;
-		}
-		return out;
-	}
+	//static vector_2d string_to_vec2d(const std::string& str, const vector_2d& default_value)
+	//{
+	//	std::stringstream buf(str);
+	//	vector_2d out = default_value;
+	//	buf >> out.x;
+	//	if (!buf.eof())
+	//	{
+	//		buf >> out.y/* >> out.z*/;
+	//	}
+	//	else
+	//	{
+	//		out.y = out.x;
+	//		//out.z = out.x;
+	//	}
+	//	return out;
+	//}
 
 	static vector_3f string_to_vec3f(const std::string& str, const vector_3f& default_value)
 	{

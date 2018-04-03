@@ -143,11 +143,14 @@ private:
 
 class DirectoryVisitor
 {
+private:
+	bool _isonlysm1;
 public:
-	DirectoryVisitor::DirectoryVisitor(const std::string& inPath, const std::string& outPath, const std::string& ext, int lodLevel, int maxDirNum)
+	DirectoryVisitor::DirectoryVisitor(const std::string& inPath, const std::string& outPath, const std::string& ext, int lodLevel, int maxDirNum, bool isonlysm1)
 		: _inPath(inPath)
 		, _outPath(outPath)
 		, _ext(ext)
+		, _isonlysm1(isonlysm1)
 	{
 		if (!gwUtil::startsWith(_ext, "."))
 		{
@@ -188,63 +191,73 @@ private:
 				std::string fullname = osgDB::concatPaths(filepath, *f + ".osgb");
 
 				//写出最粗糙级别sm1
-				std::string sm1path = osgDB::concatPaths(_outPath, "sm1");
-				writeToLocal(fullname, sm1path, _ext);
-
-				st_tree::tree<std::string> tree;
-				tree.insert(fullname);
-				CreatTileTree(tree.root(), filepath);
-
-				//遍历树，写出相应模型;
-				if (_ext == ".3ds")
+				if (_isSm1)
 				{
-					osg::ref_ptr<osg::Group> cmRoot = new osg::Group;
-					osg::ref_ptr<osg::Group> smRoot = new osg::Group;
-					for (st_tree::tree<std::string>::df_pre_iterator j(tree.df_pre_begin()); j != tree.df_pre_end(); ++j)
+					std::string sm1path = osgDB::concatPaths(_outPath, "sm1");
+					writeToLocal(fullname, sm1path, _ext);
+				}
+				if (_isSm || _isCm)
+				{
+					st_tree::tree<std::string> tree;
+					tree.insert(fullname);
+					CreatTileTree(tree.root(), filepath);
+
+					//遍历树，写出相应模型;
+					if (_ext == ".3ds")
 					{
-						if (j->depth() == 3)
+						osg::ref_ptr<osg::Group> cmRoot = new osg::Group;
+						osg::ref_ptr<osg::Group> smRoot = new osg::Group;
+						for (st_tree::tree<std::string>::df_pre_iterator j(tree.df_pre_begin()); j != tree.df_pre_end(); ++j)
 						{
-							//第二级sm;
-							osg::ref_ptr<osg::Node> node = osgDB::readNodeFile(j->data());
-							if (node.valid()) smRoot->addChild(node);
+							if (j->depth() == 3 && _isSm)
+							{
+								//第二级sm;
+								osg::ref_ptr<osg::Node> node = osgDB::readNodeFile(j->data());
+								if (node.valid()) smRoot->addChild(node);
+							}
+							else if (j->depth() == 1 && _isCm)
+							{
+								//写出到最高级别cm;
+								osg::ref_ptr<osg::Node> node = osgDB::readNodeFile(j->data());
+								if (node.valid()) cmRoot->addChild(node);
+							}
 						}
-						else if (j->depth() == 1)
+						if (_isSm)
 						{
-							//写出到最高级别cm;
-							osg::ref_ptr<osg::Node> node = osgDB::readNodeFile(j->data());
-							if (node.valid()) cmRoot->addChild(node);
+							std::string smrelpath = osgDB::concatPaths("sm", *f);
+							std::string smpath = osgDB::concatPaths(_outPath, smrelpath);
+							//std::string smname = osgDB::concatPaths(smpath, *f + _ext);
+							writeToLocal(smRoot, smpath, *f, _ext);
+						}
+						if (_isCm)
+						{
+							std::string cmrelpath = osgDB::concatPaths("cm", *f);
+							std::string cmpath = osgDB::concatPaths(_outPath, cmrelpath);
+							//std::string cmname = osgDB::concatPaths(cmpath, *f + _ext);
+							writeToLocal(cmRoot, cmpath, *f, _ext);
 						}
 					}
-					std::string smrelpath = osgDB::concatPaths("sm", *f);
-					std::string smpath = osgDB::concatPaths(_outPath, smrelpath);
-					//std::string smname = osgDB::concatPaths(smpath, *f + _ext);
-					writeToLocal(smRoot, smpath, *f, _ext);
-
-					std::string cmrelpath = osgDB::concatPaths("cm", *f);
-					std::string cmpath = osgDB::concatPaths(_outPath, cmrelpath);
-					//std::string cmname = osgDB::concatPaths(cmpath, *f + _ext);
-					writeToLocal(cmRoot, cmpath, *f, _ext);
-				}
-				else if (_ext == ".obj")
-				{
-					std::string smpath = osgDB::concatPaths(_outPath, "sm");
-					std::string cmpath = osgDB::concatPaths(_outPath, "cm");
-					for (st_tree::tree<std::string>::df_pre_iterator j(tree.df_pre_begin()); j != tree.df_pre_end(); ++j)
+					else if (_ext == ".obj")
 					{
-						if (j->depth() == 3)
+						std::string smpath = osgDB::concatPaths(_outPath, "sm");
+						std::string cmpath = osgDB::concatPaths(_outPath, "cm");
+						for (st_tree::tree<std::string>::df_pre_iterator j(tree.df_pre_begin()); j != tree.df_pre_end(); ++j)
 						{
-							//第二级sm;
-							writeToLocal(j->data(), smpath, _ext);
-						}
-						else if (j->depth() == 1)
-						{
-							//写出到最高级别cm;
-							writeToLocal(j->data(), cmpath, _ext);
+							if (j->depth() == 3 && _isSm)
+							{
+								//第二级sm;
+								writeToLocal(j->data(), smpath, _ext);
+							}
+							else if (j->depth() == 1 && _isCm)
+							{
+								//写出到最高级别cm;
+								writeToLocal(j->data(), cmpath, _ext);
+							}
 						}
 					}
-				}
 
-				tree.clear();
+					tree.clear();
+				}
 			}
 		}
 	}
@@ -296,7 +309,7 @@ private:
 		osg::ref_ptr<osgDB::Options> opts = 0L;
 		if (ext == "3ds" || ext == ".3ds")
 		{
-			//opts = new osgDB::Options("extended3dsFilePaths");
+			opts = new osgDB::Options("extended3dsFilePaths");
 		}
 		if (ext == ".obj" || ext == "obj")
 		{
@@ -310,6 +323,10 @@ private:
 	std::string _inPath;
 	std::string _outPath;
 	std::string _ext;
+
+	bool _isSm1;
+	bool _isSm;
+	bool _isCm;
 	//bool _isCombine;
 };
 
@@ -326,7 +343,7 @@ int main(int argc, char ** argv)
 	gwUtil::StringVector paras;
 	gwUtil::StringTokenizer stk(parasStr, paras, ",");
 
-	if (paras.size() < 3)
+	if (paras.size() < 4)
 	{
 		MessageBox(NULL, "参数的数量不对, 请检查输入的参数", "错误", 1);
 		return 0;
@@ -335,10 +352,16 @@ int main(int argc, char ** argv)
 	std::string inPath = paras[0];
 	std::string outPath = paras[1];
 	std::string outExt = osgDB::convertToLowerCase(paras[2]);
+	std::string only = paras[5];
+
+
+	int isonlysm1 = atoi(only.c_str());
+	bool isonly = isonlysm1 ? true : false;
+
 	int lodLevel = 0;
 	int maxDirNum = 1;
 
-	DirectoryVisitor dv(inPath, outPath, outExt, lodLevel, maxDirNum);
+	DirectoryVisitor dv(inPath, outPath, outExt, lodLevel, maxDirNum, isonly);
 
 	//DirectoryVisitor dv("E:/DATA/qstt", "E:/DATA/qxmx/qxmx/test111/ttt/tt", "3ds", 22, 1);
 	//system("pause");
